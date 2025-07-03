@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ufo Material
+  m_Name: Saturation Glow Material
   m_Shader: {fileID: -6465566751694194690, guid: 49c08d8d94af04d499a893672b08be10, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
