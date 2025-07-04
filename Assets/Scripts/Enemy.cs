@@ -4,18 +4,18 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
-    public Transform target;
+    public Transform Target { get; set; }
 
-    private NavMeshAgent agent;
+    private NavMeshAgent _agent;
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        _agent = GetComponent<NavMeshAgent>();
         Invoke("GoTo", 1f);
     }
 
     void GoTo()
     {
-        agent.SetDestination(target.position);
+        _agent.SetDestination(Target.position);
     }
 }

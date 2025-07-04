@@ -3,9 +3,14 @@ using UnityEngine.InputSystem;
 
 public class GridSelection : MonoBehaviour
 {
-    public Transform selectionIndicator;
-    public float gridSize = 1f;
-    public float yOffset = .2f;
+    [SerializeField]
+    private Transform _selectionIndicator;
+
+    [SerializeField]
+    private float _gridSize = 1f;
+
+    [SerializeField]
+    private float _yOffset = .2f;
 
     void Update()
     {
@@ -20,11 +25,11 @@ public class GridSelection : MonoBehaviour
         {
             Vector3 hitPoint = ray.GetPoint(enter);
 
-            float x = Mathf.Round(hitPoint.x / gridSize) * gridSize;
-            float z = Mathf.Round(hitPoint.z / gridSize) * gridSize;
+            float x = Mathf.Round(hitPoint.x / _gridSize) * _gridSize;
+            float z = Mathf.Round(hitPoint.z / _gridSize) * _gridSize;
 
-            Vector3 gridPosition = new Vector3(x, yOffset, z);
-            selectionIndicator.position = gridPosition;
+            Vector3 gridPosition = new Vector3(x, _yOffset, z);
+            _selectionIndicator.position = gridPosition;
         }
     }
 }
