@@ -1,6 +1,15 @@
 using UnityEngine;
 
-public abstract class Spawn : MonoBehaviour
+public class Spawn : MonoBehaviour
 {
-    public abstract void DoSpawn();
+    public void DoSpawn()
+    {
+        
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, .5f);
+    }
 }
