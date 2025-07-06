@@ -5,10 +5,10 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    public Transform _target;
+    private Transform _target;
 
     [SerializeField]
-    public Weapon _weapon;
+    private Weapon _weapon;
 
     private NavMeshAgent _agent;
 
