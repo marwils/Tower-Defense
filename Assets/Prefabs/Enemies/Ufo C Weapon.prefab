@@ -59,6 +59,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f77fefa8db5b5e4a939de14f56b9e53, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1261659713481326239}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f77fefa8db5b5e4a939de14f56b9e53, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2673396062297603616}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f77fefa8db5b5e4a939de14f56b9e53, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5900531864626904425}
   m_SourcePrefab: {fileID: 100100000, guid: 5f77fefa8db5b5e4a939de14f56b9e53, type: 3}
 --- !u!1 &7811576078447491839 stripped
 GameObject:
@@ -80,6 +86,40 @@ MonoBehaviour:
   _range: 5
   _turret: {fileID: 8851241215243672065}
   _targetTag: Tower
+--- !u!195 &2673396062297603616
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7811576078447491839}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.15
+  m_Speed: 0.7
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.37
+  m_BaseOffset: 0.67
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &5900531864626904425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7811576078447491839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6777fa633f24a4f47bec45cf8c92c2d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8851241215243672065 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7314745045437555281, guid: 5f77fefa8db5b5e4a939de14f56b9e53, type: 3}

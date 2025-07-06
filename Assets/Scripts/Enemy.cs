@@ -4,7 +4,11 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
-    public Transform Target { get; set; }
+    [SerializeField]
+    public Transform _target;
+
+    [SerializeField]
+    public Weapon _weapon;
 
     private NavMeshAgent _agent;
 
@@ -16,6 +20,9 @@ public class Enemy : MonoBehaviour
 
     void GoTo()
     {
-        _agent.SetDestination(Target.position);
+        if (_target != null)
+        {
+            _agent.SetDestination(_target.position);
+        }
     }
 }
