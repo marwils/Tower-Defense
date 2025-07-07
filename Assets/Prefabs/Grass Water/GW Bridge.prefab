@@ -50,7 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bd2b7b828b484bb4fa254e4f46d660ff, type: 3}
       propertyPath: m_Name
-      value: River Bridge
+      value: GW Bridge
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bd2b7b828b484bb4fa254e4f46d660ff, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
