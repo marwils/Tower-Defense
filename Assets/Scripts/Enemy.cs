@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     {
         if (_target != null)
         {
+            Debug.Log("Go to " + _target.name);
             _agent.SetDestination(_target.position);
         }
     }
