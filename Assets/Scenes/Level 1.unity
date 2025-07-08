@@ -8501,6 +8501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea90e00ee395214fa41deef39cb863c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveVelocity: 10
   minPositionY: 15
   maxPositionY: 3
   minRotationX: 73
