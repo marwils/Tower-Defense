@@ -3,43 +3,85 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField]
-    private float moveVelocity = 10f;
+    [SerializeField, Range(0f, 1f)]
+    private float _zoomAmount = 0.5f;
+
+    [SerializeField] private float _zoomScrollSpeed = 20f;
+    [SerializeField] private float _zoomSmoothTime = 0.15f;
+
+    [Header("References")]
+    [SerializeField] private Transform _cameraTransform;
 
     [Header("Zoom")]
-    [SerializeField]
-    private float minPositionY;
+    [SerializeField] private float _minZoomZ = 5f;
+    [SerializeField] private float _maxZoomZ = 14f;
 
-    [SerializeField]
-    private float maxPositionY;
+    [Header("Pitch")]
+    [SerializeField] private float _minPitch = -25f;
+    [SerializeField] private float _maxPitch = -70f;
 
-    [SerializeField]
-    private float minRotationX;
+    [Header("Movement")]
+    [SerializeField] private float _moveSpeed = 10f;
 
-    [SerializeField]
-    private float maxRotationX;
+    [Header("Input")]
+    [SerializeField] private InputActionReference _moveAction;
+    [SerializeField] private InputActionReference _zoomAction;
 
-    [SerializeField]
-    private float zoomVelocity = 10f;
+    private float _currentZoomAmount = 0.5f;
+    private float _zoomVelocity = 0f;
 
-    private float zoom = 0;
+    void Start()
+    {
+        _currentZoomAmount = _zoomAmount;
+    }
+
+    private void OnEnable()
+    {
+        _moveAction.action.Enable();
+        _zoomAction.action.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _moveAction.action.Disable();
+        _zoomAction.action.Disable();
+    }
 
     void Update()
     {
-        Vector2 direction = Vector2.zero;
+        HandleMovement();
+        HandleZoom();
+    }
 
-        if (Keyboard.current.wKey.isPressed) direction.y -= 1;
-        if (Keyboard.current.sKey.isPressed) direction.y += 1;
-        if (Keyboard.current.aKey.isPressed) direction.x += 1;
-        if (Keyboard.current.dKey.isPressed) direction.x -= 1;
+    void HandleMovement()
+    {
+        Vector2 input = _moveAction.action.ReadValue<Vector2>();
 
-        direction *= moveVelocity;
+        Vector3 right = -transform.right;
+        Vector3 forward = -Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
 
-        Vector2 scrollValue = Mouse.current.scroll.ReadValue();
+        Vector3 move = (right * input.x + forward * input.y) * _moveSpeed * Time.deltaTime;
+        transform.position += move;
+    }
 
-        zoom += scrollValue.y * zoomVelocity * Time.deltaTime;
-        zoom = Mathf.Clamp(zoom, 0f, 1f);
-        transform.position = new Vector3(transform.position.x + direction.x * Time.deltaTime, Mathf.Lerp(minPositionY, maxPositionY, zoom), transform.position.z + direction.y * Time.deltaTime);
-        transform.localEulerAngles = new Vector3(Mathf.Lerp(minRotationX, maxRotationX, zoom), transform.localEulerAngles.y, transform.localEulerAngles.z);
+    void HandleZoom()
+    {
+        float scroll = -_zoomAction.action.ReadValue<Vector2>().y;
+        if (!Mathf.Approximately(scroll, 0f))
+        {
+            _zoomAmount = Mathf.Clamp01(_zoomAmount + scroll * _zoomScrollSpeed * Time.deltaTime);
+        }
+
+        _currentZoomAmount = Mathf.SmoothDamp(_currentZoomAmount, _zoomAmount, ref _zoomVelocity, _zoomSmoothTime);
+
+        float cameraZ = Mathf.Lerp(_minZoomZ, _maxZoomZ, _currentZoomAmount);
+        Vector3 camLocalPos = _cameraTransform.localPosition;
+        camLocalPos.z = cameraZ;
+        _cameraTransform.localPosition = camLocalPos;
+
+        float pitch = Mathf.Lerp(_minPitch, _maxPitch, _currentZoomAmount);
+        Vector3 euler = transform.localEulerAngles;
+        euler.x = pitch;
+        transform.localEulerAngles = euler;
     }
 }
