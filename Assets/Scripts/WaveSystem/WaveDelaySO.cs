@@ -4,7 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "WaveSystem/WaveDelay")]
 public class WaveDelaySO : WaveElementBase
 {
-    public float delayTime = 1f;
+    [SerializeField]
+    private float _delayTime = 1f;
 
     public override void StartElement()
     {
@@ -13,7 +14,7 @@ public class WaveDelaySO : WaveElementBase
 
     private IEnumerator DelayCoroutine()
     {
-        yield return new WaitForSeconds(delayTime);
+        yield return new WaitForSeconds(_delayTime);
         onComplete?.Invoke();
     }
 }

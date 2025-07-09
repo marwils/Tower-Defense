@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class SpawnWaveRunner : MonoBehaviour
 {
-    public SpawnPoint assignedSpawnPoint;
+    [SerializeField]
+    private SpawnPoint _assignedSpawnPoint;
 
-    private Queue<WaveElementBase> queue = new();
+    [SerializeField]
+    private Transform _assignedTarget;
+
+    private Queue<WaveElementBase> _queue = new();
 
     private bool running = false;
 
-    public Transform Target;
 
     public void Enqueue(WaveElementBase element)
     {
-        queue.Enqueue(element);
+        _queue.Enqueue(element);
         if (!running) StartCoroutine(Run());
     }
 
@@ -22,13 +25,13 @@ public class SpawnWaveRunner : MonoBehaviour
     {
         running = true;
 
-        while (queue.Count > 0)
+        while (_queue.Count > 0)
         {
-            var element = queue.Dequeue();
+            var element = _queue.Dequeue();
             if (element is IRouteAware aware)
             {
-                aware.AssignSpawnPoint(assignedSpawnPoint);
-                aware.AssignTarget(Target);
+                aware.AssignSpawnPoint(_assignedSpawnPoint);
+                aware.AssignTarget(_assignedTarget);
             }
 
             bool done = false;

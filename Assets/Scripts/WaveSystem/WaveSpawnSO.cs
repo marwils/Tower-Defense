@@ -6,9 +6,10 @@ using UnityEngine;
 public class WaveSpawnSO : WaveElementBase, IRouteAware
 {
     [SerializeField]
-    public List<Enemy> _enemies;
+    private List<Enemy> _enemies;
+
     [SerializeField]
-    public float _spawnInterval = 0.5f;
+    private float _spawnInterval = 0.5f;
 
     [System.NonSerialized] private SpawnPoint _assignedSpawn;
     [System.NonSerialized] private Transform _target;

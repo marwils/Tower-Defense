@@ -15010,7 +15010,6 @@ MonoBehaviour:
   _waveRoutes:
   - runner: {fileID: 1782590400}
     wave: {fileID: 11400000, guid: 4b7a0b65e1afcd74eb589e194aad81d2, type: 2}
-  _target: {fileID: 812419948}
 --- !u!4 &1424789959
 Transform:
   m_ObjectHideFlags: 0
@@ -19345,8 +19344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964829a516aee804bbf694e8991f8578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedSpawnPoint: {fileID: 1782590399}
-  Target: {fileID: 0}
+  _assignedSpawnPoint: {fileID: 1782590399}
+  _assignedTarget: {fileID: 812419948}
 --- !u!1001 &1793450932
 PrefabInstance:
   m_ObjectHideFlags: 0
