@@ -1,0 +1,110 @@
+
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!11400000 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f43c9bb9d2e4d74a8dfd9b0cc64268e, type: 3}
+  m_Name: HighlightYProgress
+  m_EditorClassIdentifier: 
+  serializedVersion: 10
+  m_Graph:
+    m_Properties:
+    - m_Name: _Progress
+      m_ReferenceName: _Progress
+      m_OverrideReferenceName: 
+      m_Guid: b6c1bb7e9e2e4e4c96a9c9dfe01ecb1d
+      m_Type: 1
+      m_DefaultFloat: 0.0
+      m_Attributes: []
+      m_Hidden: 0
+    m_Keywords: []
+    m_Nodes:
+    - type: UnityEngine.MaterialGraph.PositionNode
+      name: Position
+      id: 1
+      position:
+        x: -300
+        y: 0
+      inputs: []
+      outputs: []
+      data:
+        Space: 1 # Object space
+    - type: UnityEngine.MaterialGraph.SplitNode
+      name: Split
+      id: 2
+      position:
+        x: -100
+        y: 0
+    - type: UnityEngine.MaterialGraph.PropertyNode
+      name: _Progress
+      id: 3
+      position:
+        x: -100
+        y: -100
+      data:
+        propertyGuid: b6c1bb7e9e2e4e4c96a9c9dfe01ecb1d
+    - type: UnityEngine.MaterialGraph.SubtractNode
+      name: Subtract
+      id: 4
+      position:
+        x: 100
+        y: 0
+    - type: UnityEngine.MaterialGraph.AbsNode
+      name: Abs
+      id: 5
+      position:
+        x: 300
+        y: 0
+    - type: UnityEngine.MaterialGraph.Vector1Node
+      name: Width
+      id: 6
+      position:
+        x: 300
+        y: -100
+      data:
+        value: 0.1
+    - type: UnityEngine.MaterialGraph.LessThanNode
+      name: LessThan
+      id: 7
+      position:
+        x: 500
+        y: 0
+    - type: UnityEngine.MaterialGraph.LerpNode
+      name: Lerp
+      id: 8
+      position:
+        x: 700
+        y: 0
+    - type: UnityEngine.MaterialGraph.ColorNode
+      name: BaseColor
+      id: 9
+      position:
+        x: 500
+        y: -150
+      data:
+        color: {r: 1, g: 1, b: 1, a: 1}
+    - type: UnityEngine.MaterialGraph.ColorNode
+      name: HighlightColor
+      id: 10
+      position:
+        x: 500
+        y: 100
+      data:
+        color: {r: 5, g: 5, b: 5, a: 1}
+    - type: UnityEngine.MaterialGraph.MasterNode
+      name: Master
+      id: 11
+      position:
+        x: 900
+        y: 0
+      data:
+        material: HDRP/Lit
+        baseColorSlot: 0
+    m_Edges: []
