@@ -1030,6 +1030,45 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Gameplay",
+            "id": "85582b56-c913-464e-a1b4-f759dd3193bd",
+            "actions": [
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "8d7b9550-913c-41cc-9c1b-b44640fc5901",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e1b6f99a-f1cb-48bf-82b9-7aebeac3abe7",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "645f2741-31b0-4013-9b2c-b3d9a0c000bf",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

@@ -1,8 +1,6 @@
-using UnityEngine.InputSystem;
-
 using UnityEngine;
 
-public class CrystalBreeder : MonoBehaviour
+public class CrystalBreeder : MonoBehaviour, ISelectable
 {
     [Header("Breeding")]
 
@@ -44,18 +42,6 @@ public class CrystalBreeder : MonoBehaviour
 
     private void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                if (hit.collider is BoxCollider)
-                {
-                    FarmCrystals();
-                }
-            }
-        }
         transform.RotateAround(transform.position, Vector3.up, _spinningVelocity);
     }
 
@@ -93,6 +79,11 @@ public class CrystalBreeder : MonoBehaviour
     {
         Instantiate(_largeCrystalPrefab, _largeCrystalPrefab.transform.position, _largeCrystalPrefab.transform.rotation, transform);
         StopBreeding();
+    }
+
+    public void OnSelect()
+    {
+        FarmCrystals();
     }
 
     private void FarmCrystals()
