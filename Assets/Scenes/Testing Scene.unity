@@ -269,6 +269,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3871138409283339304, guid: 9f9f7aae15f020e49bf9c6afde7cf52d, type: 3}
   m_PrefabInstance: {fileID: 2951714619942813915}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &93023721 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d56ce79eb0b8dc44aa39c124457eb9ef, type: 3}
+  m_PrefabInstance: {fileID: 298231484}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &93023725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93023721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0316d5a512ac904aab1d674644dc4ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _randomOffsetRange: 10
+--- !u!114 &93023726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93023721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6777fa633f24a4f47bec45cf8c92c2d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weapon: {fileID: 0}
+--- !u!195 &93023727
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93023721}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.15
+  m_Speed: 0.7
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.37
+  m_BaseOffset: 0.67
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!4 &135170853 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5389057409476003867, guid: 1484fddc5ca31254fb961aab0004981a, type: 3}
@@ -590,7 +643,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d56ce79eb0b8dc44aa39c124457eb9ef, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 93023727}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d56ce79eb0b8dc44aa39c124457eb9ef, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 93023726}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d56ce79eb0b8dc44aa39c124457eb9ef, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 93023725}
   m_SourcePrefab: {fileID: 100100000, guid: d56ce79eb0b8dc44aa39c124457eb9ef, type: 3}
 --- !u!4 &304781725 stripped
 Transform:
