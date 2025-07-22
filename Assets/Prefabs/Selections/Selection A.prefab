@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 47e7d387daebac8459cc1bce15b469a3, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 2384fb47fadc88345bb8c6e9f9265d42, type: 2}
+      objectReference: {fileID: 2100000, guid: 6f999c589f17b1a43b8cb83e67846da7, type: 2}
     - target: {fileID: 919132149155446097, guid: 47e7d387daebac8459cc1bce15b469a3, type: 3}
       propertyPath: m_Name
       value: Selection A

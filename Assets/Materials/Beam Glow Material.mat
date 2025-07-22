@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Default Glow Material
+  m_Name: Beam Glow Material
   m_Shader: {fileID: -6465566751694194690, guid: 094f4ecb1ce29b942b95a76e3e817b3a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -91,7 +91,7 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _BloomIntensy: 7
+    - _BloomIntensy: 5
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -108,10 +108,11 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _PulseFrequency: 4
+    - _PulseFrequency: 60
     - _PulseStrength: 3
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _RandomOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.3
     - _SmoothnessTextureChannel: 0

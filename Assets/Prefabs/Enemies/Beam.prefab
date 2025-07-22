@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 429c19a9bafdce447833516e0c1edd5a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 487c029c139fed64d83f5e544c8728d4, type: 2}
+      objectReference: {fileID: 2100000, guid: 6c09bcbdc5fbded4d85fd1b325e53dd4, type: 2}
     - target: {fileID: 919132149155446097, guid: 429c19a9bafdce447833516e0c1edd5a, type: 3}
       propertyPath: m_Name
       value: Beam
@@ -59,5 +59,26 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 429c19a9bafdce447833516e0c1edd5a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6036831704427545530}
   m_SourcePrefab: {fileID: 100100000, guid: 429c19a9bafdce447833516e0c1edd5a, type: 3}
+--- !u!1 &1293253244016287619 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 429c19a9bafdce447833516e0c1edd5a, type: 3}
+  m_PrefabInstance: {fileID: 2104279613423968978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6036831704427545530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293253244016287619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0316d5a512ac904aab1d674644dc4ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _randomOffsetRange: 10

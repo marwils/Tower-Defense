@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: ff65bdcb791dd5142bd680a609730dcd, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 2384fb47fadc88345bb8c6e9f9265d42, type: 2}
+      objectReference: {fileID: 2100000, guid: 487c029c139fed64d83f5e544c8728d4, type: 2}
     - target: {fileID: 919132149155446097, guid: ff65bdcb791dd5142bd680a609730dcd, type: 3}
       propertyPath: m_Name
       value: Ufo B Weapon
@@ -69,6 +69,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ff65bdcb791dd5142bd680a609730dcd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2604784319642149069}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ff65bdcb791dd5142bd680a609730dcd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6928941795250923935}
   m_SourcePrefab: {fileID: 100100000, guid: ff65bdcb791dd5142bd680a609730dcd, type: 3}
 --- !u!1 &1286666496129638565 stripped
 GameObject:
@@ -124,8 +127,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6777fa633f24a4f47bec45cf8c92c2d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 0}
   _weapon: {fileID: 0}
+--- !u!114 &6928941795250923935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286666496129638565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0316d5a512ac904aab1d674644dc4ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _randomOffsetRange: 10
 --- !u!4 &6396169849714795769 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5033198208762345741, guid: ff65bdcb791dd5142bd680a609730dcd, type: 3}

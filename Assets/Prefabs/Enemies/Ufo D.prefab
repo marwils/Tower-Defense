@@ -51,7 +51,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 117f2c717436bfa4e9d8bcf301bc9c76, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 2384fb47fadc88345bb8c6e9f9265d42, type: 2}
+      objectReference: {fileID: 2100000, guid: 487c029c139fed64d83f5e544c8728d4, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 117f2c717436bfa4e9d8bcf301bc9c76, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 26ef8cee3ea0edb42804688e509062b3, type: 2}
     - target: {fileID: 919132149155446097, guid: 117f2c717436bfa4e9d8bcf301bc9c76, type: 3}
       propertyPath: m_Name
       value: Ufo D
@@ -66,6 +70,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 117f2c717436bfa4e9d8bcf301bc9c76, type: 3}
       insertIndex: -1
       addedObject: {fileID: 855047829453677156}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 117f2c717436bfa4e9d8bcf301bc9c76, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7911547737453905510}
   m_SourcePrefab: {fileID: 100100000, guid: 117f2c717436bfa4e9d8bcf301bc9c76, type: 3}
 --- !u!1 &6049461128904677784 stripped
 GameObject:
@@ -106,5 +113,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6777fa633f24a4f47bec45cf8c92c2d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 0}
   _weapon: {fileID: 0}
+--- !u!114 &7911547737453905510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6049461128904677784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0316d5a512ac904aab1d674644dc4ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _randomOffsetRange: 10
