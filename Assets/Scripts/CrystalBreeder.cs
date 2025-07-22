@@ -1,24 +1,24 @@
-using UnityEngine.InputSystem;
-
 using UnityEngine;
 
-public class CrystalBreeder : MonoBehaviour
+public class CrystalBreeder : MonoBehaviour, ISelectable
 {
     [Header("Breeding")]
+
     [SerializeField]
-    [Tooltip("The interval in seconds between breedings")]
+    [Tooltip("Initial delay (in seconds) before breeding starts.")]
     private float _delay = 1f;
 
     [SerializeField]
-    [Tooltip("The interval in seconds between breedings")]
+    [Tooltip("Time interval (in seconds) between consecutive breeding attempts.")]
     [Min(0f)]
     private float _interval = 5f;
 
     [SerializeField]
-    [Tooltip("The amount of how many small crystals to breed before the large one")]
+    [Tooltip("Number of small crystals to spawn before creating the large one.")]
     private int _smallCrystalAmount = 4;
 
     [Header("Prefabs")]
+
     [SerializeField]
     private GameObject _largeCrystalPrefab;
 
@@ -26,7 +26,9 @@ public class CrystalBreeder : MonoBehaviour
     private GameObject _smallCrystalPrefab;
 
     [Space]
+
     [SerializeField]
+    [Tooltip("Rotation speed (degrees per frame) of the breeder object.")]
     private float _spinningVelocity = .2f;
 
     private const float Radius = .25f;
@@ -40,18 +42,6 @@ public class CrystalBreeder : MonoBehaviour
 
     private void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                if (hit.collider is BoxCollider)
-                {
-                    FarmCrystals();
-                }
-            }
-        }
         transform.RotateAround(transform.position, Vector3.up, _spinningVelocity);
     }
 
@@ -91,8 +81,12 @@ public class CrystalBreeder : MonoBehaviour
         StopBreeding();
     }
 
-    // Update is called once per frame
-    public void FarmCrystals()
+    public void OnSelect()
+    {
+        FarmCrystals();
+    }
+
+    private void FarmCrystals()
     {
         if (_smallCrystalCount == 0)
         {
