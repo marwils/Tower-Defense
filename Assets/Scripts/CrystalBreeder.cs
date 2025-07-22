@@ -2,23 +2,40 @@ using UnityEngine.InputSystem;
 
 using UnityEngine;
 
-public class Crystals : MonoBehaviour
+public class CrystalBreeder : MonoBehaviour
 {
+    [Header("Breeding")]
+    [SerializeField]
+    [Tooltip("The interval in seconds between breedings")]
+    private float _delay = 1f;
 
+    [SerializeField]
+    [Tooltip("The interval in seconds between breedings")]
+    [Min(0f)]
+    private float _interval = 5f;
+
+    [SerializeField]
+    [Tooltip("The amount of how many small crystals to breed before the large one")]
+    private int _smallCrystalAmount = 4;
+
+    [Header("Prefabs")]
     [SerializeField]
     private GameObject _largeCrystalPrefab;
+
     [SerializeField]
     private GameObject _smallCrystalPrefab;
+
+    [Space]
     [SerializeField]
-    private int _smallCrystalCapacity = 4;
+    private float _spinningVelocity = .2f;
 
-    private float _radius = .25f;
+    private const float Radius = .25f;
 
-    private int _crystalCount = 0;
+    private int _smallCrystalCount = 0;
 
-    void Start()
+    private void Start()
     {
-        InvokeRepeating("CreateNew", 1f, 5f);
+        StartBreeding();
     }
 
     private void Update()
@@ -35,12 +52,12 @@ public class Crystals : MonoBehaviour
                 }
             }
         }
-        transform.RotateAround(transform.position, Vector3.up, .2f);
+        transform.RotateAround(transform.position, Vector3.up, _spinningVelocity);
     }
 
-    void CreateNew()
+    private void Breed()
     {
-        if (_crystalCount < _smallCrystalCapacity)
+        if (_smallCrystalCount < _smallCrystalAmount)
         {
             CreateSmallCrystal();
         }
@@ -52,15 +69,15 @@ public class Crystals : MonoBehaviour
 
     private void CreateSmallCrystal()
     {
-        float angleStep = 360f / _smallCrystalCapacity;
+        float angleStep = 360f / _smallCrystalAmount;
 
-        float angle = _crystalCount++ * angleStep;
+        float angle = _smallCrystalCount++ * angleStep;
         float rad = angle * Mathf.Deg2Rad;
 
         Vector3 localOffset = new Vector3(
-            Mathf.Cos(rad) * _radius,
+            Mathf.Cos(rad) * Radius,
             0.44375f,
-            Mathf.Sin(rad) * _radius
+            Mathf.Sin(rad) * Radius
         );
 
         Vector3 spawnPosition = transform.TransformPoint(localOffset);
@@ -71,23 +88,36 @@ public class Crystals : MonoBehaviour
     private void CreateLargeCrystal()
     {
         Instantiate(_largeCrystalPrefab, _largeCrystalPrefab.transform.position, _largeCrystalPrefab.transform.rotation, transform);
-        CancelInvoke("CreateNew");
+        StopBreeding();
     }
 
     // Update is called once per frame
     public void FarmCrystals()
     {
-        if (_crystalCount == 0)
+        if (_smallCrystalCount == 0)
         {
             return;
         }
-        CancelInvoke("CreateNew");
+
+        StopBreeding();
+
         CrystalAnimator[] crystalAnimators = gameObject.GetComponentsInChildren<CrystalAnimator>();
         foreach (CrystalAnimator crystalAnimator in crystalAnimators)
         {
             crystalAnimator.StartDestroy();
-            _crystalCount = 0;
+            _smallCrystalCount = 0;
         }
-        InvokeRepeating("CreateNew", 5f, 5f);
+
+        StartBreeding();
+    }
+
+    private void StartBreeding()
+    {
+        InvokeRepeating("Breed", _delay, _interval);
+    }
+
+    private void StopBreeding()
+    {
+        CancelInvoke("Breed");
     }
 }

@@ -130,7 +130,7 @@ Material:
     - _Parallax: 0.005
     - _PositionOffset: 0.2
     - _PositionOffsetTimeFactor: 1
-    - _PositionOffsetVelocity: 2
+    - _PositionOffsetVelocity: 5.5
     - _PositionTimeFactor: 1
     - _Progress: 0
     - _QueueControl: 0
