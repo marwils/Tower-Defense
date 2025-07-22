@@ -48,9 +48,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ff4793344f9a81c46a0b321b99788fd7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 487c029c139fed64d83f5e544c8728d4, type: 2}
     - target: {fileID: 919132149155446097, guid: ff4793344f9a81c46a0b321b99788fd7, type: 3}
       propertyPath: m_Name
-      value: River Straight
+      value: GW Straight
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

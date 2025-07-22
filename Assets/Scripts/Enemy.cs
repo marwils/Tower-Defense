@@ -4,26 +4,25 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
-    [SerializeField]
-    private Transform _target;
+    public Transform Target { get; set; }
 
     [SerializeField]
     private Weapon _weapon;
 
     private NavMeshAgent _agent;
 
-    void Start()
+    void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
-        Invoke("GoTo", 1f);
     }
 
-    void GoTo()
+    public void FindTarget()
     {
-        if (_target != null)
+        Debug.Log("Finding target...");
+        if (Target != null)
         {
-            Debug.Log("Go to " + _target.name);
-            _agent.SetDestination(_target.position);
+            Debug.Log("Go to " + Target.name);
+            _agent.SetDestination(Target.position);
         }
     }
 }

@@ -48,9 +48,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 86f5c0d5e47f79a49ad25ca46d1a0f31, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 487c029c139fed64d83f5e544c8728d4, type: 2}
     - target: {fileID: 919132149155446097, guid: 86f5c0d5e47f79a49ad25ca46d1a0f31, type: 3}
       propertyPath: m_Name
-      value: Tower Round Bottom A
+      value: TR Bottom A
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
