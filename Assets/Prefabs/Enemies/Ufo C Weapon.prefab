@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 5f77fefa8db5b5e4a939de14f56b9e53, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5f77fefa8db5b5e4a939de14f56b9e53, type: 3}
       propertyPath: m_LocalPosition.y
@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ufo C Weapon
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5f77fefa8db5b5e4a939de14f56b9e53, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -100,7 +104,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7811576078447491839}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.15
   m_Speed: 0.7
