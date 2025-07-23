@@ -37,8 +37,9 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        Vector2 move = InputManager.Instance.CameraMove;
-        HandleMovement(move);
+        Vector2 movement = InputManager.Instance.CameraMovementVector;
+        if (movement != Vector2.zero)
+            HandleMovement(movement);
 
         UpdateZoomSmooth();
     }
@@ -75,26 +76,12 @@ public class CameraController : MonoBehaviour
 
     void OnEnable()
     {
-        InputManager.TryRegister(new CameraInputListener(this));
+        InputManager.TryRegister(input => input.OnCameraZoom += HandleZoomImpulse);
     }
 
     void OnDisable()
     {
-        InputManager.Instance.OnCameraZoom -= HandleZoomImpulse;
-    }
-
-    private class CameraInputListener : IInputListener
-    {
-        private readonly CameraController _controller;
-
-        public CameraInputListener(CameraController controller)
-        {
-            _controller = controller;
-        }
-
-        public void RegisterInput(InputManager input)
-        {
-            input.OnCameraZoom += _controller.HandleZoomImpulse;
-        }
+        if (InputManager.Instance != null)
+            InputManager.Instance.OnCameraZoom -= HandleZoomImpulse;
     }
 }

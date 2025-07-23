@@ -6,6 +6,15 @@
             "id": "1f9e8b14-7bf3-4cc4-825c-6a7a21cdb5b6",
             "actions": [
                 {
+                    "name": "PointAt",
+                    "type": "Value",
+                    "id": "635542bd-538f-4501-af61-f5e2b344be23",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Select",
                     "type": "Button",
                     "id": "09193a32-9fd4-4e54-a737-0b0e22e289ba",
@@ -46,6 +55,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a0524752-3567-4de8-9cfe-2924dcce8bfd",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PointAt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e3309273-d22f-46e4-885b-4da711cc471e",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PointAt",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

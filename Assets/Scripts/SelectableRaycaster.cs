@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InputRaycaster : MonoBehaviour, IInputListener
+public class SelectableRaycaster : MonoBehaviour
 {
     private Camera _camera;
 
@@ -12,29 +12,22 @@ public class InputRaycaster : MonoBehaviour, IInputListener
 
     private void OnEnable()
     {
-        InputManager.TryRegister(this);
+        InputManager.TryRegister(input => input.OnSelect += HandleSelect);
     }
 
     private void OnDisable()
     {
         if (InputManager.Instance != null)
         {
-            InputManager.Instance.OnSelect -= HandleSelection;
+            InputManager.Instance.OnSelect -= HandleSelect;
         }
     }
 
-    public void RegisterInput(InputManager input)
-    {
-        input.OnSelect += HandleSelection;
-    }
-
-    private void HandleSelection()
+    private void HandleSelect(Vector2 screenPosition)
     {
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
             return;
 
-        Vector2 screenPosition = InputManager.Instance.GetPointerScreenPosition();
-        Debug.Log(screenPosition);
         Ray ray = _camera.ScreenPointToRay(screenPosition);
 
         if (Physics.Raycast(ray, out RaycastHit hit))

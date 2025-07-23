@@ -357,7 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc5523489156b3439a53feaf386379f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selectionIndicator: {fileID: 3913496502446396655}
+  _selectionPrefab: {fileID: 0}
   _gridSize: 1
   _yOffset: 0.2
 --- !u!4 &182562080
@@ -1711,6 +1711,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6385129794499101086, guid: 5dd9a556b537ae745998ded980c0e830, type: 3}
   m_PrefabInstance: {fileID: 7518706514449620680}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1127192392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1127192393}
+  - component: {fileID: 1127192394}
+  m_Layer: 0
+  m_Name: Cursor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1127192393
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127192392}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587467924}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1127192394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127192392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc5523489156b3439a53feaf386379f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectionPrefab: {fileID: 2401322750987171106, guid: 4ae720cc1644e4840bd898e9d5ba8ed5, type: 3}
+  _gridSize: 1
+  _yOffset: 0.2
 --- !u!4 &1134256147 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8234490560765102251, guid: 7c2bd81d1b9587040b1ba578ef916a51, type: 3}
@@ -2015,6 +2062,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 260320714}
+  - {fileID: 1127192393}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1607206442 stripped
