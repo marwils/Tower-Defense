@@ -11,13 +11,13 @@ public class CameraController : MonoBehaviour
 
     [Header("Zoom")]
 
-    [SerializeField] private float _minZoomZ = 5f;
-    [SerializeField] private float _maxZoomZ = 14f;
+    [SerializeField] private float _minZoomZ = -5f;
+    [SerializeField] private float _maxZoomZ = -14f;
 
     [Header("Pitch")]
 
-    [SerializeField] private float _minPitch = -25f;
-    [SerializeField] private float _maxPitch = -70f;
+    [SerializeField] private float _minPitch = 25f;
+    [SerializeField] private float _maxPitch = 70f;
 
     [Header("Movement")]
 
@@ -45,8 +45,8 @@ public class CameraController : MonoBehaviour
 
     void HandleMovement(Vector2 input)
     {
-        Vector3 right = -transform.right;
-        Vector3 forward = -Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
+        Vector3 right = transform.right;
+        Vector3 forward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
         Vector3 move = (right * input.x + forward * input.y) * _moveSpeed * Time.deltaTime;
         transform.position += move;
     }
