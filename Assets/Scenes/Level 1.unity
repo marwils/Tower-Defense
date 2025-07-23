@@ -10696,7 +10696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6805979900825965309, guid: 37841d091d9809840b993edf87597999, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.2
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6805979900825965309, guid: 37841d091d9809840b993edf87597999, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12672,16 +12672,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _zoomAmount: 1
-  _zoomScrollSpeed: 20
+  _zoomScrollSensitivity: 0.05
   _zoomSmoothTime: 0.15
-  _cameraTransform: {fileID: 779195055}
   _minZoomZ: 5
   _maxZoomZ: 14
   _minPitch: -25
   _maxPitch: -70
   _moveSpeed: 10
-  _moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  _zoomAction: {fileID: 6846388977644991927, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!4 &1171152922
 Transform:
   m_ObjectHideFlags: 0
@@ -18428,6 +18425,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1698240637}
+  - component: {fileID: 1698240640}
   - component: {fileID: 1698240639}
   - component: {fileID: 1698240638}
   m_Layer: 0
@@ -18476,6 +18474,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d285ba7870a210e4d8ced0ee9987905f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1698240640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698240636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 9a2354f064b00714c965c9b0cb8b0e94, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 09193a32-9fd4-4e54-a737-0b0e22e289ba
+    m_ActionName: 'Gameplay/Select[/Mouse/press]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 364ed23c-a3b7-439c-a360-acfe755fe405
+    m_ActionName: 'Camera/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0f13543e-98f6-482f-a430-4af43f78ed49
+    m_ActionName: 'Camera/Zoom[/Keyboard/pageUp,/Keyboard/pageDown,/Mouse/scroll]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 99b581d0-69ee-406c-ba32-ae968f0170dd
+    m_ActionName: 'UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 81b84913-38df-4a5a-a372-b0c4026c0294
+    m_ActionName: 'UI/Submit[/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dc2333bc-e8d6-4e2e-abd7-ebd4c8a55b5e
+    m_ActionName: 'UI/Cancel[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f66be50f-2198-4d32-bc8f-004e047fd93b
+    m_ActionName: 'UI/Point[/Mouse/position]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 64b82c1d-386a-4f67-b4dc-72d416b24f94
+    m_ActionName: 'UI/Click[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6c14ba81-bb84-476b-8464-0fa454f7269e
+    m_ActionName: 'UI/RightClick[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 07827690-9d8c-4850-8788-544cbd424ecd
+    m_ActionName: 'UI/MiddleClick[/Mouse/middleButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c43addb0-ab11-4f97-bcb6-cf6bace2ed26
+    m_ActionName: 'UI/ScrollWheel[/Mouse/scroll]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fa5ca1c3-ace8-4226-87e2-304fe11ec8a3
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: db550806-cb87-40c2-851f-36af8410b619
+    m_ActionName: UI/TrackedDeviceOrientation
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Gameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 779195054}
 --- !u!1 &1703971557
 GameObject:
   m_ObjectHideFlags: 0
