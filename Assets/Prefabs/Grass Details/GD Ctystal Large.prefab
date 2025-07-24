@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 9a33d2ebe8e6a4a458a9550d7dfbc30e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9a33d2ebe8e6a4a458a9550d7dfbc30e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -55,6 +55,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9a33d2ebe8e6a4a458a9550d7dfbc30e, type: 3}
       propertyPath: m_Name
       value: GD Ctystal Large
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9a33d2ebe8e6a4a458a9550d7dfbc30e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

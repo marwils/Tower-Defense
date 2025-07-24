@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 
+using NUnit.Framework.Interfaces;
+
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
@@ -15,6 +18,8 @@ public class InputManager : MonoBehaviour
     public Vector2 CameraMovementVector => _input.Camera.Move.ReadValue<Vector2>();
 
     private PlayerInputActions _input;
+
+    private Camera _camera;
 
     private static readonly List<IInputListener> _pendingListeners = new();
 
@@ -40,6 +45,11 @@ public class InputManager : MonoBehaviour
         _pendingListeners.Clear();
     }
 
+    private void Start()
+    {
+        _camera = Camera.main;
+    }
+
     private void SelectActionPerformed(InputAction.CallbackContext ctx)
     {
         OnSelect?.Invoke(GetPointerScreenPosition());
@@ -63,6 +73,24 @@ public class InputManager : MonoBehaviour
             return Touchscreen.current.primaryTouch.position.ReadValue();
 
         return Mouse.current?.position.ReadValue() ?? Vector2.zero;
+    }
+
+    public bool RaycastFromScreenPosition(out RaycastHit hit)
+    {
+        int groundLayer = LayerMask.NameToLayer("Ground");
+        int mask = ~(1 << groundLayer); // alles außer Ground
+
+        Vector2 screenPosition = GetPointerScreenPosition();
+
+        Ray ray = _camera.ScreenPointToRay(screenPosition);
+
+        bool result = Physics.Raycast(ray, out RaycastHit hitInfo, 100f, mask);
+        hit = hitInfo;
+
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            return false;
+
+        return result;
     }
 
     public static void TryRegister(IInputListener listener)

@@ -328,53 +328,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6270586687345579457, guid: 22c19a0b59b71584e945cc6f8f69f708, type: 3}
   m_PrefabInstance: {fileID: 4033787229673047509}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &182562078
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 182562080}
-  - component: {fileID: 182562079}
-  m_Layer: 0
-  m_Name: Controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &182562079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182562078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adc5523489156b3439a53feaf386379f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _selectionPrefab: {fileID: 0}
-  _gridSize: 1
-  _yOffset: 0.2
---- !u!4 &182562080
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182562078}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &183076155 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3176538272575695294, guid: 3bb0b6e251b6f8b43911630298bcd29c, type: 3}
@@ -555,6 +508,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: db550806-cb87-40c2-851f-36af8410b619
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 635542bd-538f-4501-af61-f5e2b344be23
+    m_ActionName: 'Gameplay/PointAt[/Mouse/position]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Camera
@@ -1335,7 +1292,6 @@ Transform:
   - {fileID: 1267804864}
   - {fileID: 74504274}
   - {fileID: 823734391}
-  - {fileID: 9134454740469359012}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &869706092 stripped
@@ -2919,6 +2875,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 159177561}
     m_Modifications:
+    - target: {fileID: 108475733118698796, guid: 63ec2218c9dac1e49b0858d20a539ce9, type: 3}
+      propertyPath: m_Radius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 108475733118698796, guid: 63ec2218c9dac1e49b0858d20a539ce9, type: 3}
+      propertyPath: m_Center.y
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 1286666496129638565, guid: 63ec2218c9dac1e49b0858d20a539ce9, type: 3}
       propertyPath: m_Name
       value: Ufo B Weapon
@@ -2961,6 +2925,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1914303555276405279, guid: 63ec2218c9dac1e49b0858d20a539ce9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4169688064200356664, guid: 63ec2218c9dac1e49b0858d20a539ce9, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -6225,6 +6193,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 159177561}
     m_Modifications:
+    - target: {fileID: 1368856216254255562, guid: 4ab031f941f53ab4b96bee3ae9b81739, type: 3}
+      propertyPath: m_Radius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368856216254255562, guid: 4ab031f941f53ab4b96bee3ae9b81739, type: 3}
+      propertyPath: m_Center.y
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2350398693792737475, guid: 4ab031f941f53ab4b96bee3ae9b81739, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2532120806780691815, guid: 4ab031f941f53ab4b96bee3ae9b81739, type: 3}
       propertyPath: m_Name
       value: Ufo B
@@ -6458,6 +6438,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 159177561}
     m_Modifications:
+    - target: {fileID: 2092258279306728430, guid: a5d20f76cc0c66e4a89d5187748eae33, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180365502675017307, guid: a5d20f76cc0c66e4a89d5187748eae33, type: 3}
+      propertyPath: m_Radius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180365502675017307, guid: a5d20f76cc0c66e4a89d5187748eae33, type: 3}
+      propertyPath: m_Center.y
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 7320434026170845557, guid: a5d20f76cc0c66e4a89d5187748eae33, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7
@@ -6800,6 +6792,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 159177561}
     m_Modifications:
+    - target: {fileID: 2673396062297603616, guid: 6cfa5976dc9a5d04d9ad2bfdd643a4db, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290604729148458320, guid: 6cfa5976dc9a5d04d9ad2bfdd643a4db, type: 3}
+      propertyPath: m_Radius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290604729148458320, guid: 6cfa5976dc9a5d04d9ad2bfdd643a4db, type: 3}
+      propertyPath: m_Center.y
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 7431954933693112389, guid: 6cfa5976dc9a5d04d9ad2bfdd643a4db, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5
@@ -7313,6 +7317,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 159177561}
     m_Modifications:
+    - target: {fileID: 2565859590267391884, guid: 8a6753ae2a167ae4a999d46abe35f565, type: 3}
+      propertyPath: m_Radius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2565859590267391884, guid: 8a6753ae2a167ae4a999d46abe35f565, type: 3}
+      propertyPath: m_Center.y
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3035147917372414212, guid: 8a6753ae2a167ae4a999d46abe35f565, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6049461128904677784, guid: 8a6753ae2a167ae4a999d46abe35f565, type: 3}
       propertyPath: m_Name
       value: Ufo D
@@ -7774,9 +7790,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 159177561}
     m_Modifications:
+    - target: {fileID: 3635576517599399451, guid: 9bca0be9967e1dc42ab2d6f487d7ce5d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5849500558241972304, guid: 9bca0be9967e1dc42ab2d6f487d7ce5d, type: 3}
       propertyPath: m_Name
       value: Ufo C
+      objectReference: {fileID: 0}
+    - target: {fileID: 6206134126436267180, guid: 9bca0be9967e1dc42ab2d6f487d7ce5d, type: 3}
+      propertyPath: m_Radius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6206134126436267180, guid: 9bca0be9967e1dc42ab2d6f487d7ce5d, type: 3}
+      propertyPath: m_Center.y
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 6513974624710433514, guid: 9bca0be9967e1dc42ab2d6f487d7ce5d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8800,6 +8828,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 159177561}
     m_Modifications:
+    - target: {fileID: 434922881640570973, guid: f4f21577fa570db4ba75c4a8aeb2c61f, type: 3}
+      propertyPath: m_Radius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 434922881640570973, guid: f4f21577fa570db4ba75c4a8aeb2c61f, type: 3}
+      propertyPath: m_Center.y
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 2454799368675816026, guid: f4f21577fa570db4ba75c4a8aeb2c61f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8843,6 +8879,10 @@ PrefabInstance:
     - target: {fileID: 2979944420972308704, guid: f4f21577fa570db4ba75c4a8aeb2c61f, type: 3}
       propertyPath: m_Name
       value: Ufo A
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746649841378975795, guid: f4f21577fa570db4ba75c4a8aeb2c61f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9484,6 +9524,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 159177561}
     m_Modifications:
+    - target: {fileID: 1266438290383290458, guid: 06baa35e32b57414a9cfcc535de1b242, type: 3}
+      propertyPath: m_Radius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266438290383290458, guid: 06baa35e32b57414a9cfcc535de1b242, type: 3}
+      propertyPath: m_Center.y
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6407855621938764873, guid: 06baa35e32b57414a9cfcc535de1b242, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8504640309649053183, guid: 06baa35e32b57414a9cfcc535de1b242, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1
@@ -9758,7 +9810,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4513902630931773671, guid: ec71e5f625f86e44598a2c0253ac3780, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9134454740469359012}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec71e5f625f86e44598a2c0253ac3780, type: 3}
 --- !u!1001 &7518706514449620680
@@ -11477,27 +11532,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 866895390}
+    m_TransformParent: {fileID: 823734391}
     m_Modifications:
     - target: {fileID: 2024561168604478740, guid: 37841d091d9809840b993edf87597999, type: 3}
       propertyPath: m_Name
       value: Crystals
       objectReference: {fileID: 0}
-    - target: {fileID: 6495969086955981108, guid: 37841d091d9809840b993edf87597999, type: 3}
-      propertyPath: _delay
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6495969086955981108, guid: 37841d091d9809840b993edf87597999, type: 3}
-      propertyPath: _interval
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6495969086955981108, guid: 37841d091d9809840b993edf87597999, type: 3}
-      propertyPath: _smallCrystalAmount
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 6805979900825965309, guid: 37841d091d9809840b993edf87597999, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6805979900825965309, guid: 37841d091d9809840b993edf87597999, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11610,5 +11653,4 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1587467924}
-  - {fileID: 182562080}
   - {fileID: 866895390}

@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 293eaeceec9395d47a59a64e80ea32b4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 293eaeceec9395d47a59a64e80ea32b4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -55,6 +55,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 293eaeceec9395d47a59a64e80ea32b4, type: 3}
       propertyPath: m_Name
       value: GD Tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 293eaeceec9395d47a59a64e80ea32b4, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,3 +1,7 @@
+using System;
+
+using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +23,8 @@ public class Cursor : MonoBehaviour
         if (_selectionPrefab == null)
         {
             Debug.LogError($"No Selection Prefab set for cursor in scene: {SceneManager.GetActiveScene().name}");
+            Destroy(gameObject);
+            return;
         }
         _selectionInstance = Instantiate(_selectionPrefab, transform.position, _selectionPrefab.transform.rotation, transform);
     }
@@ -35,19 +41,63 @@ public class Cursor : MonoBehaviour
 
     private void OnCursorMoved(Vector2 screenPosition)
     {
-        Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+        UpdateCursorPosition();
+    }
 
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-
-        if (groundPlane.Raycast(ray, out float enter))
+    public void UpdateCursorPosition()
+    {
+        if (InputManager.Instance.RaycastFromScreenPosition(out RaycastHit hit))
         {
-            Vector3 hitPoint = ray.GetPoint(enter);
+            if (hit.collider.CompareTag("Enemy"))
+                return;
 
-            float x = Mathf.Round(hitPoint.x / _gridSize) * _gridSize;
-            float z = Mathf.Round(hitPoint.z / _gridSize) * _gridSize;
+            Bounds bounds = hit.collider.bounds;
 
-            Vector3 gridPosition = new Vector3(x, _yOffset, z);
-            _selectionInstance.transform.position = gridPosition;
+            Vector3 hitPoint = hit.point;
+
+            float x, y, z;
+
+            if (IsTransformRotated(hit.collider.transform))
+            {
+                x = hit.collider.transform.position.x;
+                z = hit.collider.transform.position.z;
+            }
+            else
+            {
+                float minX = bounds.min.x;
+                float maxX = bounds.max.x;
+                float minZ = bounds.min.z;
+                float maxZ = bounds.max.z;
+
+                x = Mathf.Round(hitPoint.x / _gridSize) * _gridSize;
+                z = Mathf.Round(hitPoint.z / _gridSize) * _gridSize;
+
+                x = Mathf.Clamp(x, Mathf.Floor(minX / _gridSize) * _gridSize, Mathf.Floor(maxX / _gridSize) * _gridSize);
+                z = Mathf.Clamp(z, Mathf.Floor(minZ / _gridSize) * _gridSize, Mathf.Floor(maxZ / _gridSize) * _gridSize);
+            }
+
+            if (hit.collider.CompareTag("Building") && hit.collider.transform.parent != null)
+            {
+                Collider parentCollider = hit.collider.transform.parent.GetComponent<Collider>();
+                y = parentCollider != null ? parentCollider.bounds.max.y : bounds.max.y;
+            }
+            else
+            {
+                y = bounds.min.y + bounds.size.y;
+                _selectionInstance.transform.localRotation = hit.collider.transform.localRotation;
+            }
+
+            _selectionInstance.transform.position = new Vector3(x, y, z);
+            _selectionInstance.SetActive(true);
         }
+        else
+        {
+            _selectionInstance.SetActive(false);
+        }
+    }
+
+    private static bool IsTransformRotated(Transform transform)
+    {
+        return Mathf.Round(transform.localEulerAngles.y) % 90 != 0;
     }
 }
