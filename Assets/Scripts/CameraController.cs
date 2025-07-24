@@ -1,3 +1,5 @@
+using System;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,6 +24,8 @@ public class CameraController : MonoBehaviour
     [Header("Movement")]
 
     [SerializeField] private float _moveSpeed = 10f;
+
+    public event Action OnCameraMove;
 
     private float _currentZoomAmount;
     private float _targetZoomAmount;
@@ -50,6 +54,7 @@ public class CameraController : MonoBehaviour
         Vector3 forward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
         Vector3 move = (right * input.x + forward * input.y) * _moveSpeed * Time.deltaTime;
         transform.position += move;
+        OnCameraMove?.Invoke();
     }
 
     void HandleZoomImpulse(float input)
@@ -66,6 +71,11 @@ public class CameraController : MonoBehaviour
         float cameraZ = Mathf.Lerp(_minZoomZ, _maxZoomZ, _currentZoomAmount);
         Vector3 camLocalPos = _cameraTransform.localPosition;
         camLocalPos.z = cameraZ;
+
+        if (_cameraTransform.localPosition != camLocalPos)
+        {
+            OnCameraMove?.Invoke();
+        }
         _cameraTransform.localPosition = camLocalPos;
 
         float pitch = Mathf.Lerp(_minPitch, _maxPitch, _currentZoomAmount);

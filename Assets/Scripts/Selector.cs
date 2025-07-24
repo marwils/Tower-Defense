@@ -15,7 +15,7 @@ public class Selector : MonoBehaviour
         }
     }
 
-    private void HandleSelect(Vector2 screenPosition)
+    private void HandleSelect()
     {
         if (InputManager.Instance.RaycastFromScreenPosition(out RaycastHit hit))
         {

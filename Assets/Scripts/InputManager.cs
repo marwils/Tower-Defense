@@ -11,8 +11,8 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
 
-    public event Action<Vector2> OnPointAt;
-    public event Action<Vector2> OnSelect;
+    public event Action OnPointAt;
+    public event Action OnSelect;
     public event Action<float> OnCameraZoom;
 
     public Vector2 CameraMovementVector => _input.Camera.Move.ReadValue<Vector2>();
@@ -33,8 +33,8 @@ public class InputManager : MonoBehaviour
         Instance = this;
 
         _input = new PlayerInputActions();
-        _input.Gameplay.PointAt.performed += PointAtActionPerformed;
-        _input.Gameplay.Select.performed += SelectActionPerformed;
+        _input.Gameplay.PointAt.performed += ctx => OnPointAt?.Invoke();
+        _input.Gameplay.Select.performed += ctx => OnSelect?.Invoke();
         _input.Camera.Zoom.performed += ZoomActionPerformed;
         _input.Enable();
 
@@ -48,17 +48,6 @@ public class InputManager : MonoBehaviour
     private void Start()
     {
         _camera = Camera.main;
-    }
-
-    private void SelectActionPerformed(InputAction.CallbackContext ctx)
-    {
-        OnSelect?.Invoke(GetPointerScreenPosition());
-    }
-
-    private void PointAtActionPerformed(InputAction.CallbackContext ctx)
-    {
-        Vector2 screenPosition = ctx.ReadValue<Vector2>();
-        OnPointAt?.Invoke(screenPosition);
     }
 
     private void ZoomActionPerformed(InputAction.CallbackContext ctx)

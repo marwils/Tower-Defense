@@ -1,7 +1,10 @@
+using System;
+using System.Linq;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Cursor : MonoBehaviour
+public class CursorMovement : MonoBehaviour
 {
     [SerializeField]
     private GameObject _selectionPrefab;
@@ -11,7 +14,11 @@ public class Cursor : MonoBehaviour
 
     private GameObject _selectionInstance;
 
-    void Start()
+    private CameraController _cameraController;
+
+    private bool _cameraEventRegistered = false;
+
+    private void Start()
     {
         if (_selectionPrefab == null)
         {
@@ -20,21 +27,8 @@ public class Cursor : MonoBehaviour
             return;
         }
         _selectionInstance = Instantiate(_selectionPrefab, transform.position, _selectionPrefab.transform.rotation, transform);
-    }
 
-    void OnEnable()
-    {
-        InputManager.TryRegister(input => input.OnPointAt += OnCursorMoved);
-    }
-
-    void OnDisable()
-    {
-        InputManager.Instance.OnPointAt -= OnCursorMoved;
-    }
-
-    private void OnCursorMoved(Vector2 screenPosition)
-    {
-        UpdateCursorPosition();
+        TryRegisterEvents();
     }
 
     public void UpdateCursorPosition()
@@ -92,5 +86,33 @@ public class Cursor : MonoBehaviour
     private static bool IsTransformRotated(Transform transform)
     {
         return Mathf.Round(transform.localEulerAngles.y) % 90 != 0;
+    }
+
+    private void OnEnable()
+    {
+        TryRegisterEvents();
+    }
+
+    private void OnDisable()
+    {
+        _cameraEventRegistered = false;
+
+        if (InputManager.Instance != null)
+        {
+            InputManager.Instance.OnPointAt -= UpdateCursorPosition;
+        }
+
+        _cameraController.OnCameraMove -= UpdateCursorPosition;
+    }
+
+    private void TryRegisterEvents()
+    {
+        if (!_cameraEventRegistered)
+        {
+            InputManager.TryRegister(input => input.OnPointAt += UpdateCursorPosition);
+            _cameraController = FindFirstObjectByType<CameraController>();
+            _cameraController.OnCameraMove += UpdateCursorPosition;
+            _cameraEventRegistered = true;
+        }
     }
 }

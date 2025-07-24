@@ -1131,6 +1131,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2454799368675816026, guid: f4f21577fa570db4ba75c4a8aeb2c61f, type: 3}
   m_PrefabInstance: {fileID: 6188247399946081378}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &728129397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 728129399}
+  - component: {fileID: 728129398}
+  m_Layer: 0
+  m_Name: Color Switch Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &728129398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728129397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53892d546d6257547a436af3f8a0f471, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 487c029c139fed64d83f5e544c8728d4, type: 2}
+  texture1: {fileID: 2800000, guid: 1023bfeb8b5d94e4c9d0fdcceac4af9c, type: 3}
+  texture2: {fileID: 2800000, guid: e0724560146a1bb4db2c57d62744c83a, type: 3}
+--- !u!4 &728129399
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728129397}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &733769064 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8165400461150382424, guid: a46596a7add0f5441b8d0f7088316193, type: 3}
@@ -1713,7 +1760,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _selectionPrefab: {fileID: 2401322750987171106, guid: 4ae720cc1644e4840bd898e9d5ba8ed5, type: 3}
   _gridSize: 1
-  _yOffset: 0.2
 --- !u!4 &1134256147 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8234490560765102251, guid: 7c2bd81d1b9587040b1ba578ef916a51, type: 3}
@@ -11654,3 +11700,4 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1587467924}
   - {fileID: 866895390}
+  - {fileID: 728129399}
