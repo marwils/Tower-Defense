@@ -6,11 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class CursorMovement : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _selectionPrefab;
+    private const float GridSize = 1f;
 
     [SerializeField]
-    private float _gridSize = 1f;
+    private GameObject _selectionPrefab;
 
     private GameObject _selectionInstance;
 
@@ -56,11 +55,11 @@ public class CursorMovement : MonoBehaviour
                 float minZ = bounds.min.z;
                 float maxZ = bounds.max.z;
 
-                x = Mathf.Round(hitPoint.x / _gridSize) * _gridSize;
-                z = Mathf.Round(hitPoint.z / _gridSize) * _gridSize;
+                x = Mathf.Round(hitPoint.x / GridSize) * GridSize;
+                z = Mathf.Round(hitPoint.z / GridSize) * GridSize;
 
-                x = Mathf.Clamp(x, Mathf.Floor(minX / _gridSize) * _gridSize, Mathf.Floor(maxX / _gridSize) * _gridSize);
-                z = Mathf.Clamp(z, Mathf.Floor(minZ / _gridSize) * _gridSize, Mathf.Floor(maxZ / _gridSize) * _gridSize);
+                x = Mathf.Clamp(x, Mathf.Floor(minX / GridSize) * GridSize, Mathf.Floor(maxX / GridSize) * GridSize);
+                z = Mathf.Clamp(z, Mathf.Floor(minZ / GridSize) * GridSize, Mathf.Floor(maxZ / GridSize) * GridSize);
             }
 
             if (hit.collider.CompareTag("Building") && hit.collider.transform.parent != null)
