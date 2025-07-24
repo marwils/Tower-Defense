@@ -1518,7 +1518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea90e00ee395214fa41deef39cb863c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zoomAmount: 0.5
+  _initialZoomAmount: 0.5
   _zoomScrollSensitivity: 0.05
   _zoomSmoothTime: 0.15
   _minZoomZ: -5
@@ -1759,7 +1759,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectionPrefab: {fileID: 2401322750987171106, guid: 4ae720cc1644e4840bd898e9d5ba8ed5, type: 3}
-  _gridSize: 1
 --- !u!4 &1134256147 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8234490560765102251, guid: 7c2bd81d1b9587040b1ba578ef916a51, type: 3}
@@ -11590,7 +11589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6805979900825965309, guid: 37841d091d9809840b993edf87597999, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6805979900825965309, guid: 37841d091d9809840b993edf87597999, type: 3}
       propertyPath: m_LocalPosition.z
