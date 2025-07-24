@@ -1,7 +1,3 @@
-using System;
-
-using Unity.VisualScripting;
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,9 +8,6 @@ public class Cursor : MonoBehaviour
 
     [SerializeField]
     private float _gridSize = 1f;
-
-    [SerializeField]
-    private float _yOffset = .2f;
 
     private GameObject _selectionInstance;
 
