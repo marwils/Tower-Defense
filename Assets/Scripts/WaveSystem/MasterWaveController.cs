@@ -7,8 +7,11 @@ public class MasterWaveController : MonoBehaviour
     [System.Serializable]
     public class WaveRoute
     {
-        public SpawnWaveRunner spawner;
-        public WaveDefinitionSO wave;
+        [Tooltip("Spawner that runs the wave sequence.")]
+        public SpawnWaveRunner Spawner;
+
+        [Tooltip("The wave definition to spawn.")]
+        public WaveDefinitionSO Wave;
     }
 
     [SerializeField]
@@ -18,9 +21,9 @@ public class MasterWaveController : MonoBehaviour
     {
         foreach (WaveRoute route in _waveRoutes)
         {
-            foreach (WaveElementBase element in route.wave.sequence)
+            foreach (WaveElementBase element in route.Wave.Sequence)
             {
-                route.spawner.Enqueue(element);
+                route.Spawner.Enqueue(element);
             }
         }
     }

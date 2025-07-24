@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f6a0a054959f1419d5d488eeb3b908, type: 3}
   m_Name: Wave Definition Spawn A
   m_EditorClassIdentifier: 
-  sequence:
+  Sequence:
   - {fileID: 11400000, guid: a7fe4330b3137a4469b2ee5ce33a3408, type: 2}
+  - {fileID: 11400000, guid: e05265db43486fb4eb631508ef83c12d, type: 2}
+  - {fileID: 11400000, guid: d83f1905330fd5a419617b59406cd2a0, type: 2}
   - {fileID: 11400000, guid: e05265db43486fb4eb631508ef83c12d, type: 2}

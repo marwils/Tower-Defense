@@ -18,10 +18,8 @@ public class Enemy : MonoBehaviour
 
     public void FindTarget()
     {
-        Debug.Log("Finding target...");
         if (Target != null)
         {
-            Debug.Log("Go to " + Target.name);
             _agent.SetDestination(Target.position);
         }
     }

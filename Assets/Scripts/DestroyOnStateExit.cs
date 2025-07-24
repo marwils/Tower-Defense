@@ -1,6 +1,7 @@
 using UnityEngine;
 
-/** When an animation state has ended it destroys its game object.
+/*
+ * When an animation state has ended it destroys its game object.
  */
 public class DestroyOnStateExit : StateMachineBehaviour
 {

@@ -5,5 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "WaveSystem/WaveDefinition")]
 public class WaveDefinitionSO : ScriptableObject
 {
-    public List<WaveElementBase> sequence;
+    [SerializeField]
+    public List<WaveElementBase> Sequence;
 }

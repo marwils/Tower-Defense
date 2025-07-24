@@ -3,9 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class CrystalAnimator : MonoBehaviour
 {
-    Animator _animator;
+    private Animator _animator;
 
-    void Awake()
+    private void Awake()
     {
         _animator = GetComponent<Animator>();
     }

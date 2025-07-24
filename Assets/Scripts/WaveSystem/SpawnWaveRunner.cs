@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class SpawnWaveRunner : MonoBehaviour
@@ -12,18 +13,18 @@ public class SpawnWaveRunner : MonoBehaviour
 
     private Queue<WaveElementBase> _queue = new();
 
-    private bool running = false;
+    private bool _running = false;
 
 
     public void Enqueue(WaveElementBase element)
     {
         _queue.Enqueue(element);
-        if (!running) StartCoroutine(Run());
+        if (!_running) StartCoroutine(Run());
     }
 
     private IEnumerator Run()
     {
-        running = true;
+        _running = true;
 
         while (_queue.Count > 0)
         {
@@ -41,6 +42,6 @@ public class SpawnWaveRunner : MonoBehaviour
             element.OnComplete.RemoveAllListeners(); // cleanup
         }
 
-        running = false;
+        _running = false;
     }
 }

@@ -1,25 +1,25 @@
 using System;
 
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField, Range(0f, 1f)]
-    private float _zoomAmount = 0.5f;
-
-    [SerializeField] private float _zoomScrollSensitivity = 0.05f;
-    [SerializeField] private float _zoomSmoothTime = 0.15f;
-
     [Header("Zoom")]
 
-    [SerializeField] private float _minZoomZ = -5f;
-    [SerializeField] private float _maxZoomZ = -14f;
-
-    [Header("Pitch")]
-
-    [SerializeField] private float _minPitch = 25f;
-    [SerializeField] private float _maxPitch = 70f;
+    [SerializeField, Range(0f, 1f)]
+    private float _initialZoomAmount = 0.5f;
+    [SerializeField]
+    private float _zoomScrollSensitivity = 0.05f;
+    [SerializeField]
+    private float _zoomSmoothTime = 0.15f;
+    [SerializeField]
+    private float _minZoomZ = -5f;
+    [SerializeField]
+    private float _maxZoomZ = -14f;
+    [SerializeField]
+    private float _minPitch = 25f;
+    [SerializeField]
+    private float _maxPitch = 70f;
 
     [Header("Movement")]
 
@@ -32,14 +32,14 @@ public class CameraController : MonoBehaviour
     private float _zoomVelocity = 0f;
     private Transform _cameraTransform;
 
-    void Start()
+    private void Start()
     {
         _cameraTransform = GetComponentInChildren<Camera>().transform;
-        _currentZoomAmount = _zoomAmount;
-        _targetZoomAmount = _zoomAmount;
+        _currentZoomAmount = _initialZoomAmount;
+        _targetZoomAmount = _initialZoomAmount;
     }
 
-    void Update()
+    private void Update()
     {
         Vector2 movement = InputManager.Instance.CameraMovementVector;
         if (movement != Vector2.zero)
@@ -48,7 +48,7 @@ public class CameraController : MonoBehaviour
         UpdateZoomSmooth();
     }
 
-    void HandleMovement(Vector2 input)
+    private void HandleMovement(Vector2 input)
     {
         Vector3 right = transform.right;
         Vector3 forward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
@@ -57,14 +57,14 @@ public class CameraController : MonoBehaviour
         OnCameraMove?.Invoke();
     }
 
-    void HandleZoomImpulse(float input)
+    private void HandleZoomImpulse(float input)
     {
         if (Mathf.Approximately(input, 0f)) return;
 
         _targetZoomAmount = Mathf.Clamp01(_targetZoomAmount + input * _zoomScrollSensitivity);
     }
 
-    void UpdateZoomSmooth()
+    private void UpdateZoomSmooth()
     {
         _currentZoomAmount = Mathf.SmoothDamp(_currentZoomAmount, _targetZoomAmount, ref _zoomVelocity, _zoomSmoothTime);
 
@@ -84,12 +84,12 @@ public class CameraController : MonoBehaviour
         transform.localEulerAngles = euler;
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         InputManager.TryRegister(input => input.OnCameraZoom += HandleZoomImpulse);
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         if (InputManager.Instance != null)
             InputManager.Instance.OnCameraZoom -= HandleZoomImpulse;

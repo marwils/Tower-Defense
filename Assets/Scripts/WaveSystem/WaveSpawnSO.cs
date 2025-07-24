@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "WaveSystem/WaveSpawn")]
@@ -37,6 +38,6 @@ public class WaveSpawnSO : WaveElementBase, IRouteAware
             yield return new WaitForSeconds(_spawnInterval);
         }
 
-        onComplete?.Invoke();
+        OnComplete?.Invoke();
     }
 }

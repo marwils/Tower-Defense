@@ -4,9 +4,9 @@ using UnityEngine.Events;
 public abstract class WaveElementBase : ScriptableObject, IWaveElement
 {
     [HideInInspector]
-    public UnityEvent onComplete = new UnityEvent();
+    private UnityEvent _onComplete = new UnityEvent();
 
-    public UnityEvent OnComplete => onComplete;
+    public UnityEvent OnComplete => _onComplete;
 
     public abstract void StartElement();
 }

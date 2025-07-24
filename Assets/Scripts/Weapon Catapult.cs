@@ -1,13 +1,9 @@
-using UnityEngine;
+using System;
 
 public class WeaponCatapult : Weapon
 {
-    public override void Attack() {
-
-    }
-
-    void Update()
+    public override void Attack()
     {
-        
+        throw new NotImplementedException();
     }
 }

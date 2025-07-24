@@ -12637,7 +12637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea90e00ee395214fa41deef39cb863c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zoomAmount: 1
+  _initialZoomAmount: 0.5
   _zoomScrollSensitivity: 0.05
   _zoomSmoothTime: 0.15
   _minZoomZ: -5
@@ -15099,8 +15099,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _waveRoutes:
-  - spawner: {fileID: 1782590400}
-    wave: {fileID: 11400000, guid: 4b7a0b65e1afcd74eb589e194aad81d2, type: 2}
+  - Spawner: {fileID: 1782590400}
+    Wave: {fileID: 11400000, guid: 4b7a0b65e1afcd74eb589e194aad81d2, type: 2}
 --- !u!4 &1424789959
 Transform:
   m_ObjectHideFlags: 0

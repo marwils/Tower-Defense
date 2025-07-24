@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -30,7 +27,7 @@ public class CursorMovement : MonoBehaviour
         TryRegisterEvents();
     }
 
-    public void UpdateCursorPosition()
+    private void UpdateCursorPosition()
     {
         if (InputManager.Instance.RaycastFromScreenPosition(out RaycastHit hit))
         {

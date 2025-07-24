@@ -1,4 +1,5 @@
 using System.Collections;
+
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "WaveSystem/WaveDelay")]
@@ -15,6 +16,6 @@ public class WaveDelaySO : WaveElementBase
     private IEnumerator DelayCoroutine()
     {
         yield return new WaitForSeconds(_delayTime);
-        onComplete?.Invoke();
+        OnComplete?.Invoke();
     }
 }
