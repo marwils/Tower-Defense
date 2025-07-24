@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class MasterWaveController : MonoBehaviour
@@ -6,7 +7,7 @@ public class MasterWaveController : MonoBehaviour
     [System.Serializable]
     public class WaveRoute
     {
-        public SpawnWaveRunner runner;
+        public SpawnWaveRunner spawner;
         public WaveDefinitionSO wave;
     }
 
@@ -19,7 +20,7 @@ public class MasterWaveController : MonoBehaviour
         {
             foreach (WaveElementBase element in route.wave.sequence)
             {
-                route.runner.Enqueue(element);
+                route.spawner.Enqueue(element);
             }
         }
     }
