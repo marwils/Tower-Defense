@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+
+using Helper;
+
 using UnityEngine;
 
 public class CrystalBreeder : MonoBehaviour, ISelectable
@@ -33,35 +37,83 @@ public class CrystalBreeder : MonoBehaviour, ISelectable
 
     private const float Radius = .25f;
 
-    private int _smallCrystalCount = 0;
+    private int _crystalCount = -1;
 
-    private void Start()
+    private int _currentSmallCrystalAmount;
+
+    private List<GameObject> _smallCrystalInstances = new();
+    private GameObject _largeCrystalInstance;
+
+    private void CollectCrystals()
     {
+        if (_crystalCount == 0)
+        {
+            return;
+        }
+
+        StopBreeding();
+
+        CrystalAnimator[] crystalAnimators = gameObject.GetComponentsInChildren<CrystalAnimator>();
+        foreach (CrystalAnimator crystalAnimator in crystalAnimators)
+        {
+            if (crystalAnimator != null)
+            {
+                crystalAnimator.StartDestroy();
+            }
+        }
+
+        // Note: Instances are disabled when their animation state exits.
+
+        _crystalCount = 0;
+
         StartBreeding();
-    }
-
-    private void Update()
-    {
-        transform.RotateAround(transform.position, Vector3.up, _spinningVelocity);
     }
 
     private void Breed()
     {
-        if (_smallCrystalCount < _smallCrystalAmount)
+        if (_crystalCount < _currentSmallCrystalAmount)
         {
-            CreateSmallCrystal();
+            BreedSmallCrystal(_crystalCount);
         }
         else
         {
-            CreateLargeCrystal();
+            BreedLargeCrystal();
+            StopBreeding();
         }
+        _crystalCount++;
     }
 
-    private void CreateSmallCrystal()
+    private void BreedSmallCrystal(int crystalCount)
     {
-        float angleStep = 360f / _smallCrystalAmount;
+        GameObject smallCrystal = _smallCrystalInstances[crystalCount];
+        TransformHelper.SetTransformation(smallCrystal.transform, _smallCrystalPrefab.transform, TransformHelper.TransformationType.Rotation, TransformHelper.TransformationType.Scale);
+        smallCrystal.SetActive(true);
+    }
 
-        float angle = _smallCrystalCount++ * angleStep;
+    private void BreedLargeCrystal()
+    {
+        GameObject largeCrystal = _largeCrystalInstance;
+        TransformHelper.SetTransformation(largeCrystal.transform, _largeCrystalPrefab.transform);
+        largeCrystal.SetActive(true);
+    }
+
+    private void InstantiateCrystals()
+    {
+        for (int crystalIndex = 0; crystalIndex < _currentSmallCrystalAmount; crystalIndex++)
+        {
+            GameObject smallCrystal = InstanciateSmallCrystal(crystalIndex);
+            _smallCrystalInstances.Add(smallCrystal);
+            smallCrystal.SetActive(false);
+        }
+        _largeCrystalInstance = InstanciateLargeCrystal();
+        _largeCrystalInstance.SetActive(false);
+    }
+
+    private GameObject InstanciateSmallCrystal(int crystalIndex)
+    {
+        float angleStep = 360f / _currentSmallCrystalAmount;
+
+        float angle = crystalIndex * angleStep;
         float rad = angle * Mathf.Deg2Rad;
 
         Vector3 localOffset = new Vector3(
@@ -72,46 +124,77 @@ public class CrystalBreeder : MonoBehaviour, ISelectable
 
         Vector3 spawnPosition = transform.TransformPoint(localOffset);
 
-        Instantiate(_smallCrystalPrefab, spawnPosition, _smallCrystalPrefab.transform.rotation, transform);
+        return Instantiate(_smallCrystalPrefab, spawnPosition, _smallCrystalPrefab.transform.rotation, transform);
     }
 
-    private void CreateLargeCrystal()
+    private GameObject InstanciateLargeCrystal()
     {
-        Instantiate(_largeCrystalPrefab, _largeCrystalPrefab.transform.position, _largeCrystalPrefab.transform.rotation, transform);
-        StopBreeding();
+        return Instantiate(_largeCrystalPrefab, _largeCrystalPrefab.transform.position, _largeCrystalPrefab.transform.rotation, transform);
+    }
+
+    private void DestroyCrystals()
+    {
+        foreach (GameObject smallCrystal in _smallCrystalInstances)
+        {
+            if (smallCrystal != null)
+            {
+                Destroy(smallCrystal);
+            }
+        }
+        if (_largeCrystalInstance != null)
+        {
+            Destroy(_largeCrystalInstance);
+        }
     }
 
     public void OnSelect()
     {
-        FarmCrystals();
+        CollectCrystals();
     }
 
-    private void FarmCrystals()
+    private void Update()
     {
-        if (_smallCrystalCount == 0)
+        CheckCrystalAmountChange();
+        SpinAround();
+    }
+
+    private void CheckCrystalAmountChange()
+    {
+        if (HasCurrentAmountChanged || IsInitialState)
         {
-            return;
+            _currentSmallCrystalAmount = _smallCrystalAmount < 0 ? 0 : _smallCrystalAmount;
+            StopBreeding();
+            DestroyCrystals();
+            _crystalCount = 0;
+            _smallCrystalInstances.Clear();
+            InstantiateCrystals();
+            StartBreeding();
         }
+    }
 
-        StopBreeding();
+    private bool HasCurrentAmountChanged { get { return _currentSmallCrystalAmount != _smallCrystalAmount; } }
+    private bool IsInitialState { get { return _crystalCount == -1; } }
 
-        CrystalAnimator[] crystalAnimators = gameObject.GetComponentsInChildren<CrystalAnimator>();
-        foreach (CrystalAnimator crystalAnimator in crystalAnimators)
-        {
-            crystalAnimator.StartDestroy();
-            _smallCrystalCount = 0;
-        }
-
-        StartBreeding();
+    private void SpinAround()
+    {
+        transform.RotateAround(transform.position, Vector3.up, _spinningVelocity);
     }
 
     private void StartBreeding()
     {
-        InvokeRepeating("Breed", _delay, _interval);
+        var animator = _largeCrystalInstance.GetComponent<Animator>();
+        InvokeRepeating(nameof(Breed), _delay, _interval);
     }
 
     private void StopBreeding()
     {
-        CancelInvoke("Breed");
+        CancelInvoke(nameof(Breed));
+    }
+
+
+    private void OnDestroy()
+    {
+        StopBreeding();
+        DestroyCrystals();
     }
 }
