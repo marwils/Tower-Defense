@@ -30,9 +30,11 @@ public class CrystalBreeder : MonoBehaviour, ISelectable
     [Header("Prefabs")]
 
     [SerializeField]
+    [Tooltip("Prefab for the large crystal that will be spawned after breeding small crystals.")]
     private GameObject _largeCrystalPrefab;
 
     [SerializeField]
+    [Tooltip("Prefab for the small crystal that will be spawned during the breeding process.")]
     private GameObject _smallCrystalPrefab;
 
     [Space]
@@ -40,6 +42,12 @@ public class CrystalBreeder : MonoBehaviour, ISelectable
     [SerializeField]
     [Tooltip("Rotation speed (degrees per frame) of the breeder object.")]
     private float _spinningVelocity = .2f;
+
+    public int SmallCrystalAmount
+    {
+        get { return _smallCrystalAmount; }
+        set { _smallCrystalAmount = value < 0 ? 0 : value; }
+    }
 
     private const float Radius = .25f;
 
