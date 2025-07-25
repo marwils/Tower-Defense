@@ -19,7 +19,13 @@ public class CrystalBreeder : MonoBehaviour, ISelectable
 
     [SerializeField]
     [Tooltip("Number of small crystals to spawn before creating the large one.")]
+    [Range(0, 10)]
     private int _smallCrystalAmount = 4;
+
+    [SerializeField]
+    [Tooltip("Maximum time offset (in seconds) for the crystal collection animation.")]
+    [Range(0f, 0.5f)]
+    private float _maxTimeOffset = 0.2f;
 
     [Header("Prefabs")]
 
@@ -52,17 +58,9 @@ public class CrystalBreeder : MonoBehaviour, ISelectable
         }
 
         StopBreeding();
+        StartCollectAnimations();
 
-        CrystalAnimator[] crystalAnimators = gameObject.GetComponentsInChildren<CrystalAnimator>();
-        foreach (CrystalAnimator crystalAnimator in crystalAnimators)
-        {
-            if (crystalAnimator != null)
-            {
-                crystalAnimator.StartDestroy();
-            }
-        }
-
-        // Note: Instances are disabled when their animation state exits.
+        // Note: Instances were disabled when their animation state exits
 
         _crystalCount = 0;
 
@@ -130,6 +128,25 @@ public class CrystalBreeder : MonoBehaviour, ISelectable
     private GameObject InstanciateLargeCrystal()
     {
         return Instantiate(_largeCrystalPrefab, _largeCrystalPrefab.transform.position, _largeCrystalPrefab.transform.rotation, transform);
+    }
+
+    private void StartCollectAnimations()
+    {
+        CrystalAnimator[] crystalAnimators = gameObject.GetComponentsInChildren<CrystalAnimator>();
+        for (int i = 0; i < crystalAnimators.Length; i++)
+        {
+            if (crystalAnimators[i] != null)
+            {
+                if (i == 0)
+                {
+                    crystalAnimators[i].StartCollect();
+                }
+                else
+                {
+                    crystalAnimators[i].StartCollect(Random.Range(0.0f, _maxTimeOffset));
+                }
+            }
+        }
     }
 
     private void DestroyCrystals()

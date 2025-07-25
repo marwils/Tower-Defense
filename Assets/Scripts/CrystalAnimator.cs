@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class CrystalAnimator : MonoBehaviour
 {
-    private const string DestroyTrigger = "Destroy";
+    private const string CollectTrigger = "Collect";
 
     private Animator _animator;
 
@@ -18,14 +18,19 @@ public class CrystalAnimator : MonoBehaviour
         }
     }
 
-    public void StartDestroy()
+    public void StartCollect()
     {
-        Invoke("SetDestroyTrigger", Random.Range(0.0f, 0.2f));
+        StartCollect(0f);
     }
 
-    private void SetDestroyTrigger()
+    public void StartCollect(float timeOffset)
     {
-        SetTrigger(DestroyTrigger);
+        Invoke(nameof(SetCollectTrigger), timeOffset);
+    }
+
+    private void SetCollectTrigger()
+    {
+        SetTrigger(CollectTrigger);
     }
 
     private void SetTrigger(string triggerName)
