@@ -6,4 +6,14 @@ public class WeaponCatapult : Weapon
     {
         throw new NotImplementedException();
     }
+
+    public override void Reload()
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void SeekTarget()
+    {
+        throw new NotImplementedException();
+    }
 }

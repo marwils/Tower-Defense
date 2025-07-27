@@ -193,9 +193,6 @@
             "m_Id": "eb94bc9055fc413bbf34502baebc451e"
         },
         {
-            "m_Id": "e09684a90c414923be86e712906513e8"
-        },
-        {
             "m_Id": "f99b77e64cf54911bb3c3ab0565b7622"
         },
         {
@@ -4106,29 +4103,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
-    "m_ObjectId": "81bc727595664ba3bf4db72e339bf3c5",
-    "m_Id": 0,
-    "m_DisplayName": "Out",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Out",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "81be2445c0ed4ca4b29b71837bf0ec28",
     "m_Id": 1,
@@ -5322,8 +5296,8 @@
     "m_ObjectId": "bfd6f01827b74e55a9a2c294e74e77b9",
     "m_Title": "Rotation",
     "m_Position": {
-        "x": -3246.000244140625,
-        "y": 72.99998474121094
+        "x": -3246.0,
+        "y": 73.0
     }
 }
 
@@ -6099,43 +6073,6 @@
     "m_SupportsLODCrossFade": false,
     "m_CustomEditorGUI": "",
     "m_SupportVFX": false
-}
-
-{
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.PositionNode",
-    "m_ObjectId": "e09684a90c414923be86e712906513e8",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "Position",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": -1131.000244140625,
-            "y": 763.0000610351563,
-            "width": 208.00006103515626,
-            "height": 313.99993896484377
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "81bc727595664ba3bf4db72e339bf3c5"
-        }
-    ],
-    "synonyms": [
-        "location"
-    ],
-    "m_Precision": 1,
-    "m_PreviewExpanded": true,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 2,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_Space": 0,
-    "m_PositionSource": 0
 }
 
 {

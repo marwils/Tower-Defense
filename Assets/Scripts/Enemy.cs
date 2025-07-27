@@ -4,10 +4,17 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
-    public Transform Target { get; set; }
+    [SerializeField]
+    private float _health = 100f;
+    public float Health { get { return _health; } }
 
     [SerializeField]
     private Weapon _weapon;
+    public Weapon Weapon { get { return _weapon; } }
+
+    public Transform Destination { get; set; }
+
+    private Transform _target;
 
     private NavMeshAgent _agent;
 
@@ -16,11 +23,14 @@ public class Enemy : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
     }
 
-    public void FindTarget()
+    public void FindDestination()
     {
-        if (Target != null)
+        if (Destination == null)
         {
-            _agent.SetDestination(Target.position);
+            Debug.LogError("Destination is not set for the enemy.");
+            return;
         }
+
+        _agent.SetDestination(Destination.position);
     }
 }

@@ -1,5 +1,7 @@
 using System.Collections;
 
+using Helper;
+
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "WaveSystem/WaveDelay")]
@@ -10,7 +12,7 @@ public class WaveDelaySO : WaveElementBase
 
     public override void StartElement()
     {
-        CoroutineRunner.Instance.StartCoroutine(DelayCoroutine());
+        CoroutineRunner.Start(DelayCoroutine());
     }
 
     private IEnumerator DelayCoroutine()

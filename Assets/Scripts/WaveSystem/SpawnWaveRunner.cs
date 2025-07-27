@@ -15,7 +15,6 @@ public class SpawnWaveRunner : MonoBehaviour
 
     private bool _running = false;
 
-
     public void Enqueue(WaveElementBase element)
     {
         _queue.Enqueue(element);

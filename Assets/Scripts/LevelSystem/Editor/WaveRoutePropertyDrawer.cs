@@ -1,0 +1,233 @@
+using UnityEditor;
+using UnityEngine;
+using System;
+using System.Linq;
+
+namespace LevelSystem
+{
+    [CustomPropertyDrawer(typeof(WaveRoute))]
+    public class WaveRoutePropertyDrawer : PropertyDrawer
+    {
+        private Type[] _sequenceElementTypes;
+        private string[] _sequenceElementTypeNames;
+
+        private void InitializeTypes()
+        {
+            if (_sequenceElementTypes == null)
+            {
+                _sequenceElementTypes = AppDomain.CurrentDomain.GetAssemblies()
+                    .SelectMany(asm => asm.GetTypes())
+                    .Where(t => t.IsSubclassOf(typeof(AbstractSequenceElement)) && !t.IsAbstract)
+                    .ToArray();
+
+                _sequenceElementTypeNames = _sequenceElementTypes
+                    .Select(t => ObjectNames.NicifyVariableName(t.Name))
+                    .ToArray();
+            }
+        }
+
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            InitializeTypes();
+
+            EditorGUI.BeginProperty(position, label, property);
+
+            var waveRoute = property.objectReferenceValue as WaveRoute;
+            if (waveRoute == null)
+            {
+                EditorGUI.PropertyField(position, property, label);
+                EditorGUI.EndProperty();
+                return;
+            }
+
+            // Foldout
+            var foldoutRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
+            property.isExpanded = EditorGUI.Foldout(foldoutRect, property.isExpanded, label, true);
+
+            if (property.isExpanded)
+            {
+                EditorGUI.indentLevel++;
+
+                var waveRouteSO = new SerializedObject(waveRoute);
+                waveRouteSO.Update();
+
+                var currentY = position.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+
+                // Draw WaveRoute properties
+                var spawnPointProp = waveRouteSO.FindProperty("_spawnPoint");
+                var targetPointProp = waveRouteSO.FindProperty("_targetPoint");
+                var sequenceElementsProp = waveRouteSO.FindProperty("_sequenceElements");
+
+                // Spawn Point
+                if (spawnPointProp != null)
+                {
+                    var spawnPointRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
+                    EditorGUI.PropertyField(spawnPointRect, spawnPointProp, new GUIContent("Spawn Point"));
+                    currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                }
+
+                // Target Point
+                if (targetPointProp != null)
+                {
+                    var targetPointRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
+                    EditorGUI.PropertyField(targetPointRect, targetPointProp, new GUIContent("Target Point"));
+                    currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                }
+
+                // Sequence Elements Section
+                DrawSequenceElementsSection(position, waveRouteSO, sequenceElementsProp, ref currentY, waveRoute);
+
+                if (waveRouteSO.hasModifiedProperties)
+                {
+                    waveRouteSO.ApplyModifiedProperties();
+                    EditorUtility.SetDirty(waveRoute);
+                }
+
+                EditorGUI.indentLevel--;
+            }
+
+            EditorGUI.EndProperty();
+        }
+
+        private void DrawSequenceElementsSection(Rect position, SerializedObject routeSO, SerializedProperty sequenceElementsProp, ref float currentY, WaveRoute route)
+        {
+            // Sequence Elements Header
+            var headerRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
+            EditorGUI.LabelField(headerRect, "Sequence Elements", EditorStyles.boldLabel);
+            currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+
+            if (sequenceElementsProp != null)
+            {
+                // Draw each sequence element
+                for (int i = 0; i < sequenceElementsProp.arraySize; i++)
+                {
+                    var elementProp = sequenceElementsProp.GetArrayElementAtIndex(i);
+                    var element = elementProp.objectReferenceValue as AbstractSequenceElement;
+
+                    string elementLabel = element != null ?
+                        $"{ObjectNames.NicifyVariableName(element.GetType().Name)} {i + 1}" :
+                        $"Element {i + 1} (Missing)";
+
+                    var elementHeight = ElementDrawerHelper.GetSequenceElementHeight(elementProp, new GUIContent(elementLabel), element);
+                    var elementRect = new Rect(position.x, currentY, position.width - 25, elementHeight);
+                    var deleteRect = new Rect(position.x + position.width - 20, currentY, 20, EditorGUIUtility.singleLineHeight);
+
+                    // Draw the sequence element with inline properties
+                    ElementDrawerHelper.DrawSequenceElement(elementRect, elementProp, new GUIContent(elementLabel), element);
+
+                    // Delete button
+                    if (GUI.Button(deleteRect, "-"))
+                    {
+                        if (element != null)
+                        {
+                            AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(element));
+                        }
+                        sequenceElementsProp.DeleteArrayElementAtIndex(i);
+                        routeSO.ApplyModifiedProperties();
+                        EditorUtility.SetDirty(route);
+                        break;
+                    }
+
+                    currentY += elementHeight + EditorGUIUtility.standardVerticalSpacing;
+                }
+
+                // Show message if no elements
+                if (sequenceElementsProp.arraySize == 0)
+                {
+                    var noElementsRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
+                    var oldColor = GUI.color;
+                    GUI.color = new Color(1f, 1f, 0.8f); // Light yellow background
+                    GUI.Box(noElementsRect, "", EditorStyles.helpBox);
+                    GUI.color = oldColor;
+
+                    var labelStyle = new GUIStyle(EditorStyles.label);
+                    labelStyle.fontStyle = FontStyle.Italic;
+                    EditorGUI.LabelField(noElementsRect, "No Sequence Elements assigned", labelStyle);
+                    currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                }
+
+                // Add Element Button
+                var addButtonRect = new Rect(position.x, currentY, 150, EditorGUIUtility.singleLineHeight);
+                if (GUI.Button(addButtonRect, "Add Element"))
+                {
+                    ShowAddElementMenu(sequenceElementsProp, route);
+                }
+            }
+        }
+
+        private void ShowAddElementMenu(SerializedProperty sequenceElementsProp, WaveRoute waveRoute)
+        {
+            var menu = new GenericMenu();
+
+            for (int i = 0; i < _sequenceElementTypes.Length; i++)
+            {
+                var elementType = _sequenceElementTypes[i];
+                var typeName = _sequenceElementTypeNames[i];
+
+                menu.AddItem(new GUIContent(typeName), false, () =>
+                {
+                    var element = LevelAssetFactory.CreateSequenceElement(elementType, waveRoute);
+
+                    // Add to array
+                    sequenceElementsProp.arraySize++;
+                    var newElementProp = sequenceElementsProp.GetArrayElementAtIndex(sequenceElementsProp.arraySize - 1);
+                    newElementProp.objectReferenceValue = element;
+
+                    sequenceElementsProp.serializedObject.ApplyModifiedProperties();
+                    EditorUtility.SetDirty(waveRoute);
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
+                });
+            }
+
+            menu.ShowAsContext();
+        }
+
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            if (!property.isExpanded || property.objectReferenceValue == null)
+            {
+                return EditorGUIUtility.singleLineHeight;
+            }
+
+            var waveRoute = property.objectReferenceValue as WaveRoute;
+            if (waveRoute == null) return EditorGUIUtility.singleLineHeight;
+
+            var waveRouteSO = new SerializedObject(waveRoute);
+            var sequenceElementsProp = waveRouteSO.FindProperty("_sequenceElements");
+
+            float height = EditorGUIUtility.singleLineHeight; // Foldout
+            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Spawn Point
+            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Target Point
+            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Elements Header
+
+            if (sequenceElementsProp != null)
+            {
+                if (sequenceElementsProp.arraySize == 0)
+                {
+                    // Height for "No elements" message
+                    height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                }
+                else
+                {
+                    // Height for all sequence elements
+                    for (int i = 0; i < sequenceElementsProp.arraySize; i++)
+                    {
+                        var elementProp = sequenceElementsProp.GetArrayElementAtIndex(i);
+                        var element = elementProp.objectReferenceValue as AbstractSequenceElement;
+                        string elementLabel = element != null ?
+                            $"{ObjectNames.NicifyVariableName(element.GetType().Name)} {i + 1}" :
+                            $"Element {i + 1} (Missing)";
+
+                        height += ElementDrawerHelper.GetSequenceElementHeight(elementProp, new GUIContent(elementLabel), element) + EditorGUIUtility.standardVerticalSpacing;
+                    }
+                }
+
+                // Add button height
+                height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+            }
+
+            return height;
+        }
+    }
+}

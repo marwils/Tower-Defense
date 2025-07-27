@@ -3,7 +3,6 @@ using UnityEngine.Events;
 
 public abstract class WaveElementBase : ScriptableObject, IWaveElement
 {
-    [HideInInspector]
     private UnityEvent _onComplete = new UnityEvent();
 
     public UnityEvent OnComplete => _onComplete;

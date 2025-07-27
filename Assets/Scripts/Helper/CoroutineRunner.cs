@@ -1,16 +1,41 @@
+using System.Collections;
+
 using UnityEngine;
 
-public class CoroutineRunner : MonoBehaviour
+namespace Helper
 {
-    public static CoroutineRunner Instance { get; private set; }
-
-    private void Awake()
+    public class CoroutineRunner : MonoBehaviour
     {
-        if (Instance != null && Instance != this)
+        private static CoroutineRunner Instance;
+
+        private void Awake()
         {
-            Destroy(gameObject);
-            return;
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
         }
-        Instance = this;
+
+        public static Coroutine Start(IEnumerator routine)
+        {
+            return Instance.StartCoroutine(routine);
+        }
+
+        public static void Stop(Coroutine routine)
+        {
+            Instance.StopCoroutine(routine);
+        }
+
+        public static void StopAll()
+        {
+            Instance.StopAllCoroutines();
+        }
+
+        private void OnDestroy()
+        {
+            StopAll();
+        }
     }
 }

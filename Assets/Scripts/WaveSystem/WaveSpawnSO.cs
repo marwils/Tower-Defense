@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+using Helper;
+
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "WaveSystem/WaveSpawn")]
@@ -27,7 +29,7 @@ public class WaveSpawnSO : WaveElementBase, IRouteAware
 
     public override void StartElement()
     {
-        CoroutineRunner.Instance.StartCoroutine(SpawnCoroutine());
+        CoroutineRunner.Start(SpawnCoroutine());
     }
 
     private IEnumerator SpawnCoroutine()

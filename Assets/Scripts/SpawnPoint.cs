@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
-    public void DoSpawn(Enemy enemy, Transform target)
+    public void DoSpawn(Enemy enemy, Transform destination)
     {
         GameObject enemyInstance = Instantiate(enemy.gameObject, transform.position, enemy.transform.rotation);
-        enemyInstance.GetComponent<Enemy>().Target = target;
-        enemyInstance.GetComponent<Enemy>().FindTarget();
+        enemyInstance.GetComponent<Enemy>().Destination = destination;
+        enemyInstance.GetComponent<Enemy>().FindDestination();
     }
 
     private void OnDrawGizmosSelected()
