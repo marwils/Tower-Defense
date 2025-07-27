@@ -7,12 +7,15 @@ using UnityEngine;
 namespace LevelSystem
 {
     [CreateAssetMenu(fileName = "SequenceSpawner", menuName = "Game/Sequence/Spawner")]
-    public class SequenceSpawner : AbstractSequenceElement
+    public class SequenceSpawner : AbstractSequenceElement, IRouteAware
     {
         [SerializeField]
         [Tooltip("List of enemy prefabs to spawn")]
         private List<global::Enemy> _enemyPrefabs = new();
         public IReadOnlyList<global::Enemy> EnemyPrefabs => _enemyPrefabs;
+
+        public Transform SpawnTransform { get; set; }
+        public Transform TargetTransform { get; set; }
 
         [SerializeField]
         [Tooltip("Randomize the spawn order?")]
@@ -33,11 +36,10 @@ namespace LevelSystem
 
         private int _currentIndex;
 
-        protected override IEnumerator Coroutine(Vector3 spawnPoint, Action onComplete)
+        protected override IEnumerator Coroutine()
         {
             if (!ValidateSettings())
             {
-                onComplete?.Invoke();
                 yield break;
             }
 
@@ -46,8 +48,7 @@ namespace LevelSystem
                 ShuffleEnemies();
             }
 
-            yield return SpawnEnemies(spawnPoint);
-            onComplete?.Invoke();
+            yield return SpawnEnemies();
         }
 
         private bool ValidateSettings()
@@ -60,14 +61,14 @@ namespace LevelSystem
             return true;
         }
 
-        private IEnumerator SpawnEnemies(Vector3 spawnPoint)
+        private IEnumerator SpawnEnemies()
         {
             var wait = new WaitForSeconds(_interval);
             var lastIndex = _spawnAmount - 1;
 
             for (int i = 0; i < _spawnAmount; i++)
             {
-                SpawnEnemy(spawnPoint);
+                SpawnEnemy();
                 if (i < lastIndex)
                 {
                     yield return wait;
@@ -75,10 +76,11 @@ namespace LevelSystem
             }
         }
 
-        private void SpawnEnemy(Vector3 spawnPoint)
+        private void SpawnEnemy()
         {
             var prefab = _enemyPrefabs[_currentIndex];
-            Instantiate(prefab, spawnPoint, prefab.transform.rotation);
+            var instance = Instantiate(prefab, SpawnTransform.position, prefab.transform.rotation);
+            instance.GetComponent<global::Enemy>().Destination = TargetTransform.position;
 
             _currentIndex = (_currentIndex + 1) % _enemyPrefabs.Count;
         }

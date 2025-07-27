@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a349cefd3e854e047b0dbe02aa61afa3, type: 3}
   m_Name: WaveRoute_20250727_040119
   m_EditorClassIdentifier: 
-  _spawnPoint: {fileID: 0}
-  _targetPoint: {fileID: 0}
+  _spawnPointId: GR Spawn End Round 2
+  _targetPointId: GR End
   _sequenceElements:
   - {fileID: 11400000, guid: 77299cc94514ca048879fba23dbe78bf, type: 2}
   - {fileID: 11400000, guid: 6637d0cdd9b60a046a89f2a6b99dadbf, type: 2}

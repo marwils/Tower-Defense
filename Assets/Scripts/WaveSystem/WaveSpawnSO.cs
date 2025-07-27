@@ -36,7 +36,7 @@ public class WaveSpawnSO : WaveElementBase, IRouteAware
     {
         foreach (var enemy in _enemies)
         {
-            _assignedSpawn.DoSpawn(enemy, _target);
+            _assignedSpawn.DoSpawn(enemy, _target.position);
             yield return new WaitForSeconds(_spawnInterval);
         }
 

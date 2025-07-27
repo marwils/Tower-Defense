@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     private Weapon _weapon;
     public Weapon Weapon { get { return _weapon; } }
 
-    public Transform Destination { get; set; }
+    public Vector3 Destination { get; set; }
 
     private Transform _target;
 
@@ -31,6 +31,6 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        _agent.SetDestination(Destination.position);
+        _agent.SetDestination(Destination);
     }
 }

@@ -12,14 +12,13 @@ namespace LevelSystem
     public class SequenceDelay : AbstractSequenceElement
     {
         [Tooltip("Delay in seconds")]
-        [Range(0f, 5f)]
+        [Range(0f, 10f)]
         [SerializeField]
         private float _delayTime = 1f;
 
-        protected override IEnumerator Coroutine(Vector3 spawnPoint, Action onComplete)
+        protected override IEnumerator Coroutine()
         {
             yield return new WaitForSeconds(_delayTime);
-            onComplete?.Invoke();
         }
     }
 }

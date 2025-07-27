@@ -9161,13 +9161,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4720361222869963425, guid: 1484fddc5ca31254fb961aab0004981a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 812419950}
   m_SourcePrefab: {fileID: 100100000, guid: 1484fddc5ca31254fb961aab0004981a, type: 3}
 --- !u!4 &812419948 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5389057409476003867, guid: 1484fddc5ca31254fb961aab0004981a, type: 3}
   m_PrefabInstance: {fileID: 812419947}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &812419949 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4720361222869963425, guid: 1484fddc5ca31254fb961aab0004981a, type: 3}
+  m_PrefabInstance: {fileID: 812419947}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &812419950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812419949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2028d2cd04a192e4e926473ec8afad1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &814019585
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10698,6 +10718,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crystals
       objectReference: {fileID: 0}
+    - target: {fileID: 6495969086955981108, guid: 37841d091d9809840b993edf87597999, type: 3}
+      propertyPath: _metadata
+      value: 
+      objectReference: {fileID: 11400000, guid: 98bc695b80edaaf469ae285cd4cc9f4b, type: 2}
     - target: {fileID: 6495969086955981108, guid: 37841d091d9809840b993edf87597999, type: 3}
       propertyPath: _smallCrystalAmount
       value: 4
@@ -15081,7 +15105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waveRoutes:
   - Spawner: {fileID: 1782590400}
-    Wave: {fileID: 11400000, guid: 4b7a0b65e1afcd74eb589e194aad81d2, type: 2}
+    Wave: {fileID: 11400000, guid: 74f2c78d60ba68447be7e6997bbbf2dd, type: 2}
 --- !u!4 &1424789959
 Transform:
   m_ObjectHideFlags: 0
@@ -19487,7 +19511,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6310712514099685880, guid: c582a00f04d23f743a91007c1a4837dd, type: 3}
       propertyPath: m_Name
-      value: GR Spawn End Round
+      value: GR Spawn End Round 2
       objectReference: {fileID: 0}
     - target: {fileID: 6310712514099685880, guid: c582a00f04d23f743a91007c1a4837dd, type: 3}
       propertyPath: m_StaticEditorFlags

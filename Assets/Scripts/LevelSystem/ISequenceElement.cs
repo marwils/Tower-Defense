@@ -1,11 +1,10 @@
-using UnityEngine;
 using UnityEngine.Events;
 
 namespace LevelSystem
 {
     public interface ISequenceElement
     {
-        void StartElement(Vector3 spawnPoint);
+        void StartElement();
 
         UnityEvent OnComplete { get; }
     }

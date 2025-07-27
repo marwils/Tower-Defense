@@ -54,23 +54,32 @@ namespace LevelSystem
                 var currentY = position.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 
                 // Draw WaveRoute properties
-                var spawnPointProp = waveRouteSO.FindProperty("_spawnPoint");
-                var targetPointProp = waveRouteSO.FindProperty("_targetPoint");
+                var spawnPointIdProp = waveRouteSO.FindProperty("_spawnPointId");
+                var targetPointIdProp = waveRouteSO.FindProperty("_targetPointId");
                 var sequenceElementsProp = waveRouteSO.FindProperty("_sequenceElements");
 
-                // Spawn Point
-                if (spawnPointProp != null)
+                // Spawn Point ID Dropdown
+                if (spawnPointIdProp != null)
                 {
+                    if (string.IsNullOrEmpty(spawnPointIdProp.stringValue) || spawnPointIdProp.stringValue == "None")
+                    {
+                        GUIHelper.DrawWarning("No Spawn Point assigned", position, ref currentY);
+                    }
+
                     var spawnPointRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
-                    EditorGUI.PropertyField(spawnPointRect, spawnPointProp, new GUIContent("Spawn Point"));
+                    DrawSpawnNameDropdown(spawnPointRect, spawnPointIdProp);
                     currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                 }
 
-                // Target Point
-                if (targetPointProp != null)
+                // Target Point ID Dropdown
+                if (targetPointIdProp != null)
                 {
+                    if (string.IsNullOrEmpty(targetPointIdProp.stringValue) || targetPointIdProp.stringValue == "None")
+                    {
+                        GUIHelper.DrawWarning("No Target Point assigned", position, ref currentY);
+                    }
                     var targetPointRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
-                    EditorGUI.PropertyField(targetPointRect, targetPointProp, new GUIContent("Target Point"));
+                    DrawTargetNameDropdown(targetPointRect, targetPointIdProp);
                     currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                 }
 
@@ -87,6 +96,106 @@ namespace LevelSystem
             }
 
             EditorGUI.EndProperty();
+        }
+
+        private void DrawSpawnNameDropdown(Rect position, SerializedProperty spawnPointIdProp)
+        {
+            // Hole alle verfügbaren Spawn Point IDs
+            var availableIds = GetAvailableSpawnPointNames();
+            var currentId = spawnPointIdProp.stringValue;
+            var currentIndex = System.Array.IndexOf(availableIds, currentId);
+
+            // Füge "None" Option hinzu
+            var displayOptions = new string[availableIds.Length + 1];
+            displayOptions[0] = "None";
+            System.Array.Copy(availableIds, 0, displayOptions, 1, availableIds.Length);
+
+            // Adjustiere Index für "None" Option
+            var displayIndex = currentIndex >= 0 ? currentIndex + 1 : 0;
+
+            EditorGUI.BeginChangeCheck();
+            displayIndex = EditorGUI.Popup(position, "Spawn Point", displayIndex, displayOptions);
+            if (EditorGUI.EndChangeCheck())
+            {
+                if (displayIndex == 0)
+                {
+                    spawnPointIdProp.stringValue = "";
+                }
+                else if (displayIndex > 0 && displayIndex <= availableIds.Length)
+                {
+                    spawnPointIdProp.stringValue = availableIds[displayIndex - 1];
+                }
+            }
+
+            // Zeige Warnung wenn ID nicht existiert
+            if (!string.IsNullOrEmpty(currentId) && currentIndex < 0)
+            {
+                var warningRect = new Rect(position.x + position.width - 20, position.y, 20, position.height);
+                var oldColor = GUI.color;
+                GUI.color = Color.yellow;
+                EditorGUI.LabelField(warningRect, "⚠", EditorStyles.boldLabel);
+                GUI.color = oldColor;
+            }
+        }
+
+        private void DrawTargetNameDropdown(Rect position, SerializedProperty targetPointIdProp)
+        {
+            // Hole alle verfügbaren Target Point IDs
+            var availableIds = GetAvailableTargetPointNames();
+            var currentId = targetPointIdProp.stringValue;
+            var currentIndex = System.Array.IndexOf(availableIds, currentId);
+
+            // Füge "None" Option hinzu
+            var displayOptions = new string[availableIds.Length + 1];
+            displayOptions[0] = "None";
+            System.Array.Copy(availableIds, 0, displayOptions, 1, availableIds.Length);
+
+            // Adjustiere Index für "None" Option
+            var displayIndex = currentIndex >= 0 ? currentIndex + 1 : 0;
+
+            EditorGUI.BeginChangeCheck();
+            displayIndex = EditorGUI.Popup(position, "Target Point", displayIndex, displayOptions);
+            if (EditorGUI.EndChangeCheck())
+            {
+                if (displayIndex == 0)
+                {
+                    targetPointIdProp.stringValue = "";
+                }
+                else if (displayIndex > 0 && displayIndex <= availableIds.Length)
+                {
+                    targetPointIdProp.stringValue = availableIds[displayIndex - 1];
+                }
+            }
+
+            // Zeige Warnung wenn ID nicht existiert
+            if (!string.IsNullOrEmpty(currentId) && currentIndex < 0)
+            {
+                var warningRect = new Rect(position.x + position.width - 20, position.y, 20, position.height);
+                var oldColor = GUI.color;
+                GUI.color = Color.yellow;
+                EditorGUI.LabelField(warningRect, "⚠", EditorStyles.boldLabel);
+                GUI.color = oldColor;
+            }
+        }
+
+        private string[] GetAvailableSpawnPointNames()
+        {
+            var spawnPoints = UnityEngine.Object.FindObjectsByType<SpawnPoint>(FindObjectsSortMode.None);
+            return spawnPoints.Where(sp => !string.IsNullOrEmpty(sp.gameObject.name))
+                              .Select(sp => sp.gameObject.name)
+                              .Distinct()
+                              .OrderBy(id => id)
+                              .ToArray();
+        }
+
+        private string[] GetAvailableTargetPointNames()
+        {
+            var targetPoints = UnityEngine.Object.FindObjectsByType<TargetPoint>(FindObjectsSortMode.None);
+            return targetPoints.Where(tp => !string.IsNullOrEmpty(tp.gameObject.name))
+                               .Select(tp => tp.gameObject.name)
+                               .Distinct()
+                               .OrderBy(id => id)
+                               .ToArray();
         }
 
         private void DrawSequenceElementsSection(Rect position, SerializedObject routeSO, SerializedProperty sequenceElementsProp, ref float currentY, WaveRoute route)
@@ -134,16 +243,7 @@ namespace LevelSystem
                 // Show message if no elements
                 if (sequenceElementsProp.arraySize == 0)
                 {
-                    var noElementsRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
-                    var oldColor = GUI.color;
-                    GUI.color = new Color(1f, 1f, 0.8f); // Light yellow background
-                    GUI.Box(noElementsRect, "", EditorStyles.helpBox);
-                    GUI.color = oldColor;
-
-                    var labelStyle = new GUIStyle(EditorStyles.label);
-                    labelStyle.fontStyle = FontStyle.Italic;
-                    EditorGUI.LabelField(noElementsRect, "No Sequence Elements assigned", labelStyle);
-                    currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                    GUIHelper.DrawWarning("No Sequence Elements assigned", position, ref currentY);
                 }
 
                 // Add Element Button
@@ -194,11 +294,22 @@ namespace LevelSystem
             if (waveRoute == null) return EditorGUIUtility.singleLineHeight;
 
             var waveRouteSO = new SerializedObject(waveRoute);
+
+            var spawnPointIdProp = waveRouteSO.FindProperty("_spawnPointId");
+            var targetPointIdProp = waveRouteSO.FindProperty("_targetPointId");
             var sequenceElementsProp = waveRouteSO.FindProperty("_sequenceElements");
 
             float height = EditorGUIUtility.singleLineHeight; // Foldout
-            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Spawn Point
-            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Target Point
+            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Spawn Point ID
+            if (string.IsNullOrEmpty(spawnPointIdProp.stringValue) || spawnPointIdProp.stringValue == "None")
+            {
+                height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+            }
+            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Target Point ID
+            if (string.IsNullOrEmpty(targetPointIdProp.stringValue) || targetPointIdProp.stringValue == "None")
+            {
+                height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+            }
             height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Elements Header
 
             if (sequenceElementsProp != null)

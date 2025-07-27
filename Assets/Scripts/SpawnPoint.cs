@@ -1,17 +1,16 @@
 using UnityEngine;
 
-public class SpawnPoint : MonoBehaviour
+public class SpawnPoint : AbstractPoint
 {
-    public void DoSpawn(Enemy enemy, Transform destination)
+    public void DoSpawn(Enemy enemy, Vector3 destination)
     {
         GameObject enemyInstance = Instantiate(enemy.gameObject, transform.position, enemy.transform.rotation);
         enemyInstance.GetComponent<Enemy>().Destination = destination;
         enemyInstance.GetComponent<Enemy>().FindDestination();
     }
 
-    private void OnDrawGizmosSelected()
+    protected override Color GetGizmoColor()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, .5f);
+        return Color.green;
     }
 }

@@ -7,8 +7,8 @@ namespace LevelSystem
     public static class ElementDrawerHelper
     {
         private static WaveRoutesPropertyDrawer _waveRoutesDrawer;
+        private static SequenceSpawnerPropertyDrawer _sequenceSpawnerDrawer;
 
-        // Einmalige Initialisierung beim ersten Zugriff
         private static WaveRoutesPropertyDrawer WaveRoutesDrawer
         {
             get
@@ -16,6 +16,16 @@ namespace LevelSystem
                 if (_waveRoutesDrawer == null)
                     _waveRoutesDrawer = new WaveRoutesPropertyDrawer();
                 return _waveRoutesDrawer;
+            }
+        }
+
+        private static SequenceSpawnerPropertyDrawer SequenceSpawnerDrawer
+        {
+            get
+            {
+                if (_sequenceSpawnerDrawer == null)
+                    _sequenceSpawnerDrawer = new SequenceSpawnerPropertyDrawer();
+                return _sequenceSpawnerDrawer;
             }
         }
 
@@ -53,11 +63,17 @@ namespace LevelSystem
             }
         }
 
-        // Bestehende Methoden bleiben unverändert...
+        // NEUE METHODE: Nutze spezialisierte PropertyDrawer für SequenceElements
         public static void DrawSequenceElement(Rect position, SerializedProperty elementProp, GUIContent label, AbstractSequenceElement element)
         {
-            if (element != null)
+            if (element is SequenceSpawner)
             {
+                // Nutze SequenceSpawnerPropertyDrawer
+                SequenceSpawnerDrawer.OnGUI(position, elementProp, label);
+            }
+            else if (element != null)
+            {
+                // Fallback auf generische Darstellung
                 DrawInlineSequenceProperties(position, elementProp, label, element);
             }
             else
@@ -68,7 +84,12 @@ namespace LevelSystem
 
         public static float GetSequenceElementHeight(SerializedProperty elementProp, GUIContent label, AbstractSequenceElement element)
         {
-            if (element != null)
+            if (element is SequenceSpawner)
+            {
+                // Nutze SequenceSpawnerPropertyDrawer für Höhenberechnung
+                return SequenceSpawnerDrawer.GetPropertyHeight(elementProp, label);
+            }
+            else if (element != null)
             {
                 return GetInlineSequencePropertiesHeight(elementProp, label, element);
             }

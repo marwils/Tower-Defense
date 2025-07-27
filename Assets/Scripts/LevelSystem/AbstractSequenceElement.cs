@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 
 using Helper;
@@ -8,22 +7,27 @@ using UnityEngine.Events;
 
 namespace LevelSystem
 {
-    [Serializable]
+    [System.Serializable]
     public abstract class AbstractSequenceElement : ScriptableObject, ISequenceElement
     {
         private UnityEvent _onComplete = new UnityEvent();
-
         public UnityEvent OnComplete => _onComplete;
 
         [System.NonSerialized]
         private Coroutine _coroutine;
 
-        public void StartElement(Vector3 spawnPoint)
+        public void StartElement()
         {
-            _coroutine = CoroutineRunner.Start(Coroutine(spawnPoint, () => Complete()));
+            _coroutine = CoroutineRunner.Start(ExecuteWithCompletion());
         }
 
-        protected abstract IEnumerator Coroutine(Vector3 spawnPoint, Action onComplete);
+        private IEnumerator ExecuteWithCompletion()
+        {
+            yield return Coroutine();
+            Complete();
+        }
+
+        protected abstract IEnumerator Coroutine();
 
         private void Complete()
         {

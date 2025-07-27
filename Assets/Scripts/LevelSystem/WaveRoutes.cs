@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace LevelSystem
@@ -14,19 +15,17 @@ namespace LevelSystem
         private List<WaveRoute> _routes = new();
         public IReadOnlyList<WaveRoute> Routes => _routes;
 
-        protected override IEnumerator Coroutine(Action onComplete)
+        protected override IEnumerator Coroutine()
         {
             if (_routes == null || _routes.Count == 0)
             {
                 Debug.LogWarning($"No routes defined in {name}");
-                onComplete?.Invoke();
                 yield break;
             }
 
             // TODO: Implement logic to execute all routes simultaneously
             // For now, just complete immediately
             yield return null;
-            onComplete?.Invoke();
         }
 
         public void AddRoute(WaveRoute route)

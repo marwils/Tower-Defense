@@ -15,10 +15,9 @@ namespace LevelSystem
         private float _delayTime = 1f;
         public float DelayTime => _delayTime;
 
-        protected override IEnumerator Coroutine(Action onComplete)
+        protected override IEnumerator Coroutine()
         {
             yield return new WaitForSeconds(_delayTime);
-            onComplete?.Invoke();
         }
     }
 }

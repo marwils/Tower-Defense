@@ -14,7 +14,6 @@ namespace LevelSystem
         [SerializeField, HideInInspector]
         private UnityEvent _onComplete = new();
 
-        // Public property to satisfy interface
         public UnityEvent OnComplete => _onComplete;
 
         [System.NonSerialized]
@@ -22,10 +21,16 @@ namespace LevelSystem
 
         public void StartElement()
         {
-            _coroutine = CoroutineRunner.Start(Coroutine(Complete));
+            _coroutine = CoroutineRunner.Start(ExecuteWithCompletion());
         }
 
-        protected abstract IEnumerator Coroutine(Action onComplete);
+        private IEnumerator ExecuteWithCompletion()
+        {
+            yield return Coroutine();
+            Complete();
+        }
+
+        protected abstract IEnumerator Coroutine();
 
         private void Complete()
         {
