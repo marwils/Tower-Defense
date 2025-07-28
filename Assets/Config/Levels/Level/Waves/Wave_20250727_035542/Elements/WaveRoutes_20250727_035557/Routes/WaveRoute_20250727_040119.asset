@@ -15,5 +15,5 @@ MonoBehaviour:
   _spawnPointId: GR Spawn End Round 2
   _targetPointId: GR End
   _sequenceElements:
-  - {fileID: 11400000, guid: 77299cc94514ca048879fba23dbe78bf, type: 2}
   - {fileID: 11400000, guid: 6637d0cdd9b60a046a89f2a6b99dadbf, type: 2}
+  - {fileID: 11400000, guid: 3d69a33e7e41fdf448f4361cbe368723, type: 2}
