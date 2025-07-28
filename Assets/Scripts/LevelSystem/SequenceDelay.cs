@@ -1,5 +1,3 @@
-
-
 namespace LevelSystem
 {
     using System;

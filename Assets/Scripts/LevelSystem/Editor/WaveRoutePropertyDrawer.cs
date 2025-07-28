@@ -125,6 +125,9 @@ namespace LevelSystem
                 {
                     spawnPointIdProp.stringValue = availableIds[displayIndex - 1];
                 }
+
+                // UPDATE: Scene-Kontext aktualisieren bei Änderungen
+                UpdateLevelSceneContext(spawnPointIdProp);
             }
 
             // Zeige Warnung wenn ID nicht existiert
@@ -165,6 +168,9 @@ namespace LevelSystem
                 {
                     targetPointIdProp.stringValue = availableIds[displayIndex - 1];
                 }
+
+                // UPDATE: Scene-Kontext aktualisieren bei Änderungen
+                UpdateLevelSceneContext(targetPointIdProp);
             }
 
             // Zeige Warnung wenn ID nicht existiert
@@ -300,28 +306,26 @@ namespace LevelSystem
             var sequenceElementsProp = waveRouteSO.FindProperty("_sequenceElements");
 
             float height = EditorGUIUtility.singleLineHeight; // Foldout
-            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Spawn Point ID
+            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             if (string.IsNullOrEmpty(spawnPointIdProp.stringValue) || spawnPointIdProp.stringValue == "None")
             {
                 height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             }
-            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Target Point ID
+            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             if (string.IsNullOrEmpty(targetPointIdProp.stringValue) || targetPointIdProp.stringValue == "None")
             {
                 height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             }
-            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Elements Header
+            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 
             if (sequenceElementsProp != null)
             {
                 if (sequenceElementsProp.arraySize == 0)
                 {
-                    // Height for "No elements" message
                     height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                 }
                 else
                 {
-                    // Height for all sequence elements
                     for (int i = 0; i < sequenceElementsProp.arraySize; i++)
                     {
                         var elementProp = sequenceElementsProp.GetArrayElementAtIndex(i);
@@ -339,6 +343,17 @@ namespace LevelSystem
             }
 
             return height;
+        }
+
+        private void UpdateLevelSceneContext(SerializedProperty anyPropertyFromWaveRoute)
+        {
+            var currentObject = anyPropertyFromWaveRoute.serializedObject.targetObject;
+
+            foreach (var level in LevelEditorHelper.FindLevelsContaining(currentObject))
+            {
+                level.UpdateSceneContext();
+                EditorUtility.SetDirty(level);
+            }
         }
     }
 }

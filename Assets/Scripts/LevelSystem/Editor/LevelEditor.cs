@@ -1,6 +1,7 @@
 using UnityEditor;
+
 using UnityEngine;
-using System.Linq;
+using UnityEngine.SceneManagement;
 
 namespace LevelSystem
 {
@@ -20,12 +21,25 @@ namespace LevelSystem
 
         public override void OnInspectorGUI()
         {
+            var level = target as Level;
+
+            // Block serialization if scene context is invalid
+            if (level.IsSerializationBlocked && level.IsInDifferentScene())
+            {
+                DrawBlockedSerializationWarning(level);
+                return;
+            }
+
             serializedObject.Update();
 
-            // Title
+            // Show scene context warning if needed
+            if (level.IsInDifferentScene())
+            {
+                DrawSceneWarning(level);
+            }
+
             EditorGUILayout.PropertyField(_titleProperty);
 
-            // Waves Header
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Waves", EditorStyles.boldLabel);
 
@@ -33,22 +47,18 @@ namespace LevelSystem
             {
                 EditorGUI.indentLevel++;
 
-                // Draw existing waves using PropertyDrawer
                 for (int i = 0; i < _wavesProperty.arraySize; i++)
                 {
                     var waveProperty = _wavesProperty.GetArrayElementAtIndex(i);
 
-                    // Berechne Höhe und Rect für den PropertyDrawer + Box
                     var height = _waveDrawer.GetPropertyHeight(waveProperty, new GUIContent($"Wave {i + 1}"));
                     const float marginVertical = 8f;
-                    var totalHeight = height + marginVertical * 2; // Box-Margins
+                    var totalHeight = height + marginVertical * 2;
                     var rect = GUILayoutUtility.GetRect(0, totalHeight);
 
-                    // Draw background box
                     var boxRect = new Rect(rect.x, rect.y, rect.width, totalHeight);
                     GUI.Box(boxRect, "", EditorStyles.helpBox);
 
-                    // Wave header mit Minus-Button
                     var headerRect = new Rect(rect.x, rect.y + marginVertical, rect.width, EditorGUIUtility.singleLineHeight);
                     var deleteRect = new Rect(rect.x + rect.width - 20, rect.y + marginVertical, 20, EditorGUIUtility.singleLineHeight);
 
@@ -56,7 +66,6 @@ namespace LevelSystem
                     headerStyle.fontSize = 14;
                     EditorGUI.LabelField(headerRect, $"Wave {i + 1}", headerStyle);
 
-                    // Delete Button in der Header-Zeile
                     if (GUI.Button(deleteRect, "-"))
                     {
                         var wave = waveProperty.objectReferenceValue as Wave;
@@ -69,17 +78,14 @@ namespace LevelSystem
                         break;
                     }
 
-                    // Content area für PropertyDrawer (unter dem Header)
                     var contentY = rect.y + marginVertical * 2 + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                     var contentHeight = height - EditorGUIUtility.singleLineHeight - EditorGUIUtility.standardVerticalSpacing;
                     float marginLeft = 0;
                     var contentRect = new Rect(rect.x + marginLeft, contentY, rect.width - marginLeft * 2, contentHeight);
 
-                    // Nutze WavePropertyDrawer für den Wave-Inhalt
                     DrawWaveContentUsingPropertyDrawer(contentRect, waveProperty);
                 }
 
-                // Add Wave Button
                 EditorGUILayout.Space();
                 if (GUILayout.Button("Add Wave", GUILayout.Height(30)))
                 {
@@ -87,6 +93,9 @@ namespace LevelSystem
                     _wavesProperty.arraySize++;
                     var newWaveProp = _wavesProperty.GetArrayElementAtIndex(_wavesProperty.arraySize - 1);
                     newWaveProp.objectReferenceValue = wave;
+
+                    level.UpdateSceneContext();
+
                     serializedObject.ApplyModifiedProperties();
                     AssetDatabase.SaveAssets();
                     AssetDatabase.Refresh();
@@ -95,7 +104,186 @@ namespace LevelSystem
                 EditorGUI.indentLevel--;
             }
 
-            serializedObject.ApplyModifiedProperties();
+            if (GUI.changed && !level.IsSerializationBlocked)
+            {
+                level.UpdateSceneContext();
+            }
+
+            if (!level.IsSerializationBlocked)
+            {
+                serializedObject.ApplyModifiedProperties();
+            }
+        }
+
+        private void DrawBlockedSerializationWarning(Level level)
+        {
+            var currentScene = SceneManager.GetActiveScene().name;
+
+            EditorGUILayout.Space();
+
+            var oldColor = GUI.backgroundColor;
+            GUI.backgroundColor = new Color(0.8f, 0.1f, 0.1f, 0.9f);
+
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+
+            var headerStyle = new GUIStyle(EditorStyles.boldLabel);
+            headerStyle.fontSize = 16;
+            headerStyle.normal.textColor = Color.white;
+
+            EditorGUILayout.LabelField("🚫 SERIALIZATION BLOCKED", headerStyle);
+
+            var warningStyle = new GUIStyle(EditorStyles.label);
+            warningStyle.wordWrap = true;
+            warningStyle.fontSize = 12;
+            warningStyle.normal.textColor = Color.white;
+
+            EditorGUILayout.LabelField(
+                $"This Level cannot be modified or saved because it was created in scene " +
+                $"'{level.LastModifiedBySceneName}' but you are currently in scene '{currentScene}'.\n\n" +
+                $"Scene-specific references (Spawn/Target Points) would be invalid. " +
+                $"Please choose an action below to continue:",
+                warningStyle
+            );
+
+            EditorGUILayout.Space(10);
+
+            EditorGUILayout.BeginVertical();
+
+            var oldBgColor = GUI.backgroundColor;
+            GUI.backgroundColor = new Color(0.2f, 0.8f, 0.2f, 1f);
+            if (GUILayout.Button("UPDATE TO CURRENT SCENE", GUILayout.Height(35)))
+            {
+                level.UpdateSceneContext();
+                EditorUtility.SetDirty(level);
+                AssetDatabase.SaveAssets();
+                Debug.Log($"Level '{level.name}' updated to scene '{currentScene}'");
+            }
+            GUI.backgroundColor = oldBgColor;
+
+            EditorGUILayout.Space(5);
+
+            GUI.backgroundColor = new Color(0.3f, 0.6f, 0.9f, 1f);
+            if (GUILayout.Button($"SWITCH TO SCENE '{level.LastModifiedBySceneName}'", GUILayout.Height(30)))
+            {
+                if (EditorApplication.isPlaying)
+                {
+                    EditorUtility.DisplayDialog("Cannot Switch Scene",
+                        "Cannot switch scenes while in Play Mode.", "OK");
+                }
+                else
+                {
+                    var scenePath = GetScenePath(level.LastModifiedBySceneName);
+                    if (!string.IsNullOrEmpty(scenePath))
+                    {
+                        if (UnityEditor.SceneManagement.EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+                        {
+                            UnityEditor.SceneManagement.EditorSceneManager.OpenScene(scenePath);
+                        }
+                    }
+                    else
+                    {
+                        EditorUtility.DisplayDialog("Scene Not Found",
+                            $"Could not find scene '{level.LastModifiedBySceneName}' in build settings.", "OK");
+                    }
+                }
+            }
+            GUI.backgroundColor = oldBgColor;
+
+            EditorGUILayout.EndVertical();
+            EditorGUILayout.EndVertical();
+
+            GUI.backgroundColor = oldColor;
+
+            EditorGUILayout.Space();
+
+            GUI.enabled = false;
+            EditorGUILayout.LabelField("All other controls are disabled until scene context is resolved.", EditorStyles.helpBox);
+            GUI.enabled = true;
+        }
+
+        private void DrawSceneWarning(Level level)
+        {
+            var currentScene = SceneManager.GetActiveScene().name;
+
+            EditorGUILayout.Space();
+
+            var oldColor = GUI.backgroundColor;
+            GUI.backgroundColor = new Color(1f, 0.3f, 0.3f, 0.8f);
+
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+
+            var headerStyle = new GUIStyle(EditorStyles.boldLabel);
+            headerStyle.fontSize = 14;
+            headerStyle.normal.textColor = Color.white;
+
+            EditorGUILayout.LabelField("⚠ SCENE CONTEXT WARNING", headerStyle);
+
+            var warningStyle = new GUIStyle(EditorStyles.label);
+            warningStyle.wordWrap = true;
+            warningStyle.normal.textColor = Color.white;
+
+            EditorGUILayout.LabelField(
+                $"This Level was last modified in scene '{level.LastModifiedBySceneName}', " +
+                $"but you are currently in scene '{currentScene}'. " +
+                $"Spawn/Target Point assignments may not work correctly since these points " +
+                $"are scene-specific objects.",
+                warningStyle
+            );
+
+            EditorGUILayout.Space(5);
+
+            EditorGUILayout.BeginHorizontal();
+
+            if (GUILayout.Button("Update to Current Scene", GUILayout.Height(25)))
+            {
+                level.UpdateSceneContext();
+                EditorUtility.SetDirty(level);
+            }
+
+            if (GUILayout.Button($"Switch to '{level.LastModifiedBySceneName}'", GUILayout.Height(25)))
+            {
+                if (EditorApplication.isPlaying)
+                {
+                    EditorUtility.DisplayDialog("Cannot Switch Scene",
+                        "Cannot switch scenes while in Play Mode.", "OK");
+                }
+                else
+                {
+                    var scenePath = GetScenePath(level.LastModifiedBySceneName);
+                    if (!string.IsNullOrEmpty(scenePath))
+                    {
+                        if (UnityEditor.SceneManagement.EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+                        {
+                            UnityEditor.SceneManagement.EditorSceneManager.OpenScene(scenePath);
+                        }
+                    }
+                    else
+                    {
+                        EditorUtility.DisplayDialog("Scene Not Found",
+                            $"Could not find scene '{level.LastModifiedBySceneName}' in build settings.", "OK");
+                    }
+                }
+            }
+
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndVertical();
+
+            GUI.backgroundColor = oldColor;
+
+            EditorGUILayout.Space();
+        }
+
+        private string GetScenePath(string sceneName)
+        {
+            for (int i = 0; i < EditorBuildSettings.scenes.Length; i++)
+            {
+                var scene = EditorBuildSettings.scenes[i];
+                if (scene.path.Contains(sceneName))
+                {
+                    return scene.path;
+                }
+            }
+            return null;
         }
 
         private void DrawWaveContentUsingPropertyDrawer(Rect position, SerializedProperty waveProperty)
@@ -104,6 +292,12 @@ namespace LevelSystem
             if (wave == null) return;
 
             _waveDrawer.DrawWaveContent(position, waveProperty, wave);
+        }
+
+        public override bool HasPreviewGUI()
+        {
+            var level = target as Level;
+            return !level.IsSerializationBlocked && base.HasPreviewGUI();
         }
     }
 }
