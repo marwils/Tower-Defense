@@ -22,11 +22,11 @@ namespace LevelSystem
         public IReadOnlyList<AbstractSequenceElement> SequenceElements => _sequenceElements;
 
         // Runtime Properties
-        public Transform SpawnPoint => RouteRegistry.GetSpawnPoint(_spawnPointId);
-        public Transform TargetPoint => RouteRegistry.GetTargetPoint(_targetPointId);
+        public Transform SpawnTransform => RouteRegistry.GetSpawnPoint(_spawnPointId);
+        public Transform TargetTransform => RouteRegistry.GetTargetPoint(_targetPointId);
 
         // Validation
-        public bool IsValid => SpawnPoint != null && TargetPoint != null;
+        public bool IsValid => SpawnTransform != null && TargetTransform != null;
 
         public IEnumerator StartRoute()
         {
@@ -37,6 +37,11 @@ namespace LevelSystem
                 {
                     Debug.LogError($"Null element in route '{name}'");
                     continue;
+                }
+                if (element is SequenceSpawner spawner)
+                {
+                    spawner.SpawnTransform = SpawnTransform;
+                    spawner.TargetTransform = TargetTransform;
                 }
                 yield return element.Run();
             }
