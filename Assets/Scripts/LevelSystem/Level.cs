@@ -12,5 +12,14 @@ namespace LevelSystem
 
         [SerializeField] private List<Wave> _waves = new();
         public List<Wave> Waves => _waves;
+
+        public void StartLevel()
+        {
+            Debug.Log($"Starting level: {_title}");
+            foreach (var wave in _waves)
+            {
+                wave.StartWave();
+            }
+        }
     }
 }

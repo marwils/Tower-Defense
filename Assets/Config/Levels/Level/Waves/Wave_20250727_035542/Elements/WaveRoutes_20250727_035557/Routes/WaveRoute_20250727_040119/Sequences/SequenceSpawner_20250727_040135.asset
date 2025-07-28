@@ -16,4 +16,4 @@ MonoBehaviour:
   - {fileID: 1914639867709745187, guid: f4f21577fa570db4ba75c4a8aeb2c61f, type: 3}
   _shuffleSpawnOrder: 0
   _spawnAmount: 10
-  _interval: 2
+  _interval: 1

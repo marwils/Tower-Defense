@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+using Helper;
+
 using UnityEngine;
 
 namespace LevelSystem
@@ -15,7 +17,7 @@ namespace LevelSystem
         private List<WaveRoute> _routes = new();
         public IReadOnlyList<WaveRoute> Routes => _routes;
 
-        protected override IEnumerator Coroutine()
+        public override IEnumerator Run()
         {
             if (_routes == null || _routes.Count == 0)
             {
@@ -23,8 +25,17 @@ namespace LevelSystem
                 yield break;
             }
 
-            // TODO: Implement logic to execute all routes simultaneously
-            // For now, just complete immediately
+            foreach (var route in _routes)
+            {
+                Debug.Log($"Route {route.name} is starting...");
+                if (!route.IsValid)
+                {
+                    Debug.LogError($"Invalid route in {name}: {route.name}");
+                    continue;
+                }
+
+                yield return route.StartRoute();
+            }
             yield return null;
         }
 

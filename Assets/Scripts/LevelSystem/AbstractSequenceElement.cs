@@ -1,38 +1,16 @@
 using System.Collections;
 
-using Helper;
-
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace LevelSystem
 {
     [System.Serializable]
     public abstract class AbstractSequenceElement : ScriptableObject, ISequenceElement
     {
-        private UnityEvent _onComplete = new UnityEvent();
-        public UnityEvent OnComplete => _onComplete;
+        public float Duration => throw new System.NotImplementedException();
 
-        [System.NonSerialized]
-        private Coroutine _coroutine;
+        public bool IsRunning => throw new System.NotImplementedException();
 
-        public void StartElement()
-        {
-            _coroutine = CoroutineRunner.Start(ExecuteWithCompletion());
-        }
-
-        private IEnumerator ExecuteWithCompletion()
-        {
-            yield return Coroutine();
-            Complete();
-        }
-
-        protected abstract IEnumerator Coroutine();
-
-        private void Complete()
-        {
-            OnComplete?.Invoke();
-            CoroutineRunner.Stop(_coroutine);
-        }
+        public abstract IEnumerator Run();
     }
 }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-public static class SpawnPointRegistry
+public static class RouteRegistry
 {
     private static Dictionary<string, Transform> _spawnPoints = new();
     private static Dictionary<string, Transform> _targetPoints = new();

@@ -36,7 +36,7 @@ namespace LevelSystem
 
         private int _currentIndex;
 
-        protected override IEnumerator Coroutine()
+        public override IEnumerator Run()
         {
             if (!ValidateSettings())
             {
@@ -78,9 +78,10 @@ namespace LevelSystem
 
         private void SpawnEnemy()
         {
-            var prefab = _enemyPrefabs[_currentIndex];
-            var instance = Instantiate(prefab, SpawnTransform.position, prefab.transform.rotation);
-            instance.GetComponent<global::Enemy>().Destination = TargetTransform.position;
+            SpawnTransform.gameObject.GetComponent<SpawnPoint>().DoSpawn(
+                _enemyPrefabs[_currentIndex],
+                TargetTransform.position
+            );
 
             _currentIndex = (_currentIndex + 1) % _enemyPrefabs.Count;
         }

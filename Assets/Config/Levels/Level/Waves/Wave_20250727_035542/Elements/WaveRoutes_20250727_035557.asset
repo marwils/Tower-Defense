@@ -12,9 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f5b8b407db47eb4da0732c2acef7d1f, type: 3}
   m_Name: WaveRoutes_20250727_035557
   m_EditorClassIdentifier: 
-  _onComplete:
-    m_PersistentCalls:
-      m_Calls: []
   _routes:
   - {fileID: 11400000, guid: fa18cf70645caf64d8eb5324c2619473, type: 2}
-  - {fileID: 11400000, guid: 33d92d764a62690458602b61c002f917, type: 2}

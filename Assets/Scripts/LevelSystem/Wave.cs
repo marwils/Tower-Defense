@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+
+using Helper;
 
 using UnityEditor;
 
@@ -61,6 +64,20 @@ namespace LevelSystem
             }
 
             _waveElements.RemoveAll(element => element == null);
+        }
+
+        public void StartWave()
+        {
+            Debug.Log($"Starting wave: {_title}");
+            CoroutineRunner.Start(RunWave());
+        }
+
+        private IEnumerator RunWave()
+        {
+            foreach (var element in _waveElements)
+            {
+                yield return element.Run();
+            }
         }
     }
 }

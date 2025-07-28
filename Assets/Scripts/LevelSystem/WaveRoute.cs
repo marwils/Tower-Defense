@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -21,16 +22,24 @@ namespace LevelSystem
         public IReadOnlyList<AbstractSequenceElement> SequenceElements => _sequenceElements;
 
         // Runtime Properties
-        public Transform SpawnPoint => SpawnPointRegistry.GetSpawnPoint(_spawnPointId);
-        public Transform TargetPoint => SpawnPointRegistry.GetTargetPoint(_targetPointId);
+        public Transform SpawnPoint => RouteRegistry.GetSpawnPoint(_spawnPointId);
+        public Transform TargetPoint => RouteRegistry.GetTargetPoint(_targetPointId);
 
         // Validation
         public bool IsValid => SpawnPoint != null && TargetPoint != null;
 
-        void Start()
+        public IEnumerator StartRoute()
         {
-            Debug.Log(SpawnPoint?.gameObject.name);
-            Debug.Log(TargetPoint?.gameObject.name);
+            Debug.Log($"Starting route: {name}");
+            foreach (var element in _sequenceElements)
+            {
+                if (element == null)
+                {
+                    Debug.LogError($"Null element in route '{name}'");
+                    continue;
+                }
+                yield return element.Run();
+            }
         }
     }
 }

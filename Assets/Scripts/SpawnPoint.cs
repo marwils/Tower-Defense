@@ -2,6 +2,16 @@ using UnityEngine;
 
 public class SpawnPoint : AbstractPoint
 {
+    private void Start()
+    {
+        RouteRegistry.RegisterSpawnPoint(transform);
+    }
+
+    private void OnDestroy()
+    {
+        RouteRegistry.UnregisterSpawnPoint(transform);
+    }
+
     public void DoSpawn(Enemy enemy, Vector3 destination)
     {
         GameObject enemyInstance = Instantiate(enemy.gameObject, transform.position, enemy.transform.rotation);

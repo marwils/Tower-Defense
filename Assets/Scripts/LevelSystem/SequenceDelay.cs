@@ -16,8 +16,9 @@ namespace LevelSystem
         [SerializeField]
         private float _delayTime = 1f;
 
-        protected override IEnumerator Coroutine()
+        public override IEnumerator Run()
         {
+            Debug.Log($"Sequence delay for {_delayTime} seconds in {name}");
             yield return new WaitForSeconds(_delayTime);
         }
     }
