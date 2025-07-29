@@ -25,3 +25,7 @@ dotnet_separate_import_directive_groups = true
 
 csharp_preferred_modifier_order = public, protected, private, internal, static, readonly, const, abstract, virtual, override, async
 csharp_preferred_modifier_order_severity = suggestion
+
+dotnet_diagnostic.RCS1110.severity = none
+dotnet_diagnostic.RCS1169.severity = none
+dotnet_diagnostic.IDE0044.severity = none

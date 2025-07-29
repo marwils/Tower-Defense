@@ -2,43 +2,10 @@ using System.Collections.Generic;
 
 using Helper;
 
-using LevelSystem;
-
 using UnityEngine;
 
-public class CrystalBreeder : MonoBehaviour, ISelectable
+public class CrystalBreeder : EntityBase, ISelectable
 {
-    [Header("Breeding")]
-
-    [SerializeField]
-    private LevelSystem.CrystalBreeder _metadata;
-
-    private int _smallCrystalAmount = -1;
-    public int SmallCrystalAmount
-    {
-        get
-        {
-            if (_metadata == null)
-            {
-                Debug.LogError("CrystalBreederMetadata is not set in CrystalBreeder.");
-                Destroy(gameObject);
-                return 0;
-            }
-
-            if (_smallCrystalAmount < 0 && _smallCrystalAmount != _metadata.MaxCrystals - 1)
-            {
-                _smallCrystalAmount = _metadata.MaxCrystals - 1;
-            }
-            return _smallCrystalAmount;
-        }
-        set { _smallCrystalAmount = value < 0 ? 0 : value; }
-    }
-
-    [SerializeField]
-    [Tooltip("Maximum time offset (in seconds) for the crystal collection animation.")]
-    [Range(0f, 0.5f)]
-    private float _maxTimeOffset = 0.2f;
-
     [Header("Prefabs")]
 
     [SerializeField]
@@ -49,20 +16,38 @@ public class CrystalBreeder : MonoBehaviour, ISelectable
     [Tooltip("Prefab for the small crystal that will be spawned during the breeding process.")]
     private GameObject _smallCrystalPrefab;
 
-    [Space]
+    [Header("Animation")]
+
+    [SerializeField]
+    [Tooltip("Maximum time offset (in seconds) for the crystal collection animation.")]
+    [Range(0f, 0.5f)]
+    private float _maxTimeOffset = 0.2f;
 
     [SerializeField]
     [Tooltip("Rotation speed (degrees per frame) of the breeder object.")]
     private float _spinningVelocity = .2f;
 
-    private int _crystalCount = -1;
+    private const float SmallCrystalSpawnRadius = .25f;
 
-    private int _currentSmallCrystalAmount;
+    private float _breedingTime = 1f;
+
+    private int _smallCrystalAmount;
+
+    private int _crystalCount;
 
     private List<GameObject> _smallCrystalInstances = new();
     private GameObject _largeCrystalInstance;
 
-    private const float SmallCrystalSpawnRadius = .25f;
+    protected void Start()
+    {
+        InstantiateCrystals();
+        StartBreeding();
+    }
+
+    private void Update()
+    {
+        SpinAround();
+    }
 
     private void CollectCrystals()
     {
@@ -74,16 +59,14 @@ public class CrystalBreeder : MonoBehaviour, ISelectable
         StopBreeding();
         StartCollectAnimations();
 
-        // Note: Instances were disabled when their animation state exits
-
-        _crystalCount = 0;
+        // FYI: Instances were disabled when their animation state exits
 
         StartBreeding();
     }
 
     private void Breed()
     {
-        if (_crystalCount < _currentSmallCrystalAmount)
+        if (_crystalCount < _smallCrystalAmount)
         {
             BreedSmallCrystal(_crystalCount);
         }
@@ -111,7 +94,7 @@ public class CrystalBreeder : MonoBehaviour, ISelectable
 
     private void InstantiateCrystals()
     {
-        for (int crystalIndex = 0; crystalIndex < _currentSmallCrystalAmount; crystalIndex++)
+        for (int crystalIndex = 0; crystalIndex < _smallCrystalAmount; crystalIndex++)
         {
             GameObject smallCrystal = InstanciateSmallCrystal(crystalIndex);
             _smallCrystalInstances.Add(smallCrystal);
@@ -123,12 +106,12 @@ public class CrystalBreeder : MonoBehaviour, ISelectable
 
     private GameObject InstanciateSmallCrystal(int crystalIndex)
     {
-        float angleStep = 360f / _currentSmallCrystalAmount;
+        float angleStep = 360f / _smallCrystalAmount;
 
         float angle = crystalIndex * angleStep;
         float rad = angle * Mathf.Deg2Rad;
 
-        Vector3 localOffset = new Vector3(
+        Vector3 localOffset = new(
             Mathf.Cos(rad) * SmallCrystalSpawnRadius,
             0.44375f,
             Mathf.Sin(rad) * SmallCrystalSpawnRadius
@@ -178,33 +161,10 @@ public class CrystalBreeder : MonoBehaviour, ISelectable
         }
     }
 
-    public void OnSelect()
+    public override void OnSelect()
     {
         CollectCrystals();
     }
-
-    private void Update()
-    {
-        CheckCrystalAmountChange();
-        SpinAround();
-    }
-
-    private void CheckCrystalAmountChange()
-    {
-        if (HasCurrentAmountChanged || IsInitialState)
-        {
-            _currentSmallCrystalAmount = _smallCrystalAmount < 0 ? 0 : _smallCrystalAmount;
-            StopBreeding();
-            DestroyCrystals();
-            _crystalCount = 0;
-            _smallCrystalInstances.Clear();
-            InstantiateCrystals();
-            StartBreeding();
-        }
-    }
-
-    private bool HasCurrentAmountChanged { get { return _currentSmallCrystalAmount != _smallCrystalAmount; } }
-    private bool IsInitialState { get { return _crystalCount == -1; } }
 
     private void SpinAround()
     {
@@ -213,13 +173,14 @@ public class CrystalBreeder : MonoBehaviour, ISelectable
 
     private void StartBreeding()
     {
-        var animator = _largeCrystalInstance.GetComponent<Animator>();
-        InvokeRepeating(nameof(Breed), _metadata.BreedingTime, _metadata.BreedingTime);
+        Debug.Log("Starting crystal breeding");
+        _crystalCount = 0;
+        InvokeRepeating("Breed", _breedingTime, _breedingTime);
     }
 
     private void StopBreeding()
     {
-        CancelInvoke(nameof(Breed));
+        CancelInvoke("Breed");
     }
 
 
@@ -228,4 +189,11 @@ public class CrystalBreeder : MonoBehaviour, ISelectable
         StopBreeding();
         DestroyCrystals();
     }
+
+    protected override void InitState()
+    {
+        _breedingTime = GetSettings<LevelSystem.CrystalBreeder>().BreedingTime;
+        _smallCrystalAmount = GetSettings<LevelSystem.CrystalBreeder>().MaxCrystals - 1;
+    }
+
 }

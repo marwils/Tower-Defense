@@ -11,6 +11,7 @@ namespace LevelSystem
         public float Duration => throw new NotImplementedException();
 
         public bool IsRunning => throw new NotImplementedException();
+
         public abstract IEnumerator Run();
     }
 }

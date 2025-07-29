@@ -1,4 +1,5 @@
 using UnityEditor;
+
 using UnityEngine;
 
 namespace LevelSystem
@@ -15,7 +16,7 @@ namespace LevelSystem
                     if (level != null && level.IsSerializationBlocked)
                     {
                         Debug.LogWarning($"Level '{level.name}' has serialization blocked due to scene context mismatch. " +
-                                       $"Please update scene context before making changes.");
+                                         $"Please update scene context before making changes.");
                     }
                 }
             }

@@ -1,10 +1,10 @@
 using UnityEngine;
 
-/*
- * Set this script on an Animator state to automatically disable the GameObject
- * when the state exits. This is useful for cleanup after animations that
- * should result in the GameObject being removed from the scene.
- */
+/// <summary>
+/// Attach this script to an Animator state to automatically disable the GameObject
+/// when the state exits. Useful for cleaning up objects after an animation completes,
+/// such as removing effects or temporary objects from the scene.
+/// </summary>
 public class DisableOnStateExit : StateMachineBehaviour
 {
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

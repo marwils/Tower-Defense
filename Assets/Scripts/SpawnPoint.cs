@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpawnPoint : AbstractPoint
+public class SpawnPoint : GizmoBehaviour
 {
     private void Start()
     {
@@ -12,15 +12,14 @@ public class SpawnPoint : AbstractPoint
         RouteRegistry.UnregisterSpawnPoint(transform);
     }
 
-    public void DoSpawn(Enemy enemy, Vector3 destination)
-    {
-        GameObject enemyInstance = Instantiate(enemy.gameObject, transform.position, enemy.transform.rotation);
-        enemyInstance.GetComponent<Enemy>().Destination = destination;
-        enemyInstance.GetComponent<Enemy>().FindDestination();
-    }
-
     protected override Color GetGizmoColor()
     {
         return Color.green;
+    }
+
+    public void DoSpawn(EnemyControl enemyPrefab, Transform destination)
+    {
+        EnemyControl enemyInstance = Instantiate(enemyPrefab, transform.position, enemyPrefab.transform.rotation);
+        enemyInstance.SetDestination(destination);
     }
 }

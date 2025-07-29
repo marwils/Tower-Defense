@@ -13,9 +13,7 @@ namespace LevelSystem
         {
             get
             {
-                if (_waveRoutesDrawer == null)
-                    _waveRoutesDrawer = new WaveRoutesPropertyDrawer();
-                return _waveRoutesDrawer;
+                return _waveRoutesDrawer ??= new WaveRoutesPropertyDrawer();
             }
         }
 
@@ -23,9 +21,7 @@ namespace LevelSystem
         {
             get
             {
-                if (_sequenceSpawnerDrawer == null)
-                    _sequenceSpawnerDrawer = new SequenceSpawnerPropertyDrawer();
-                return _sequenceSpawnerDrawer;
+                return _sequenceSpawnerDrawer ??= new SequenceSpawnerPropertyDrawer();
             }
         }
 
@@ -33,12 +29,10 @@ namespace LevelSystem
         {
             if (element is WaveRoutes)
             {
-                // WaveRoutes wird jetzt direkt ohne zusätzliche Box gerendert
                 WaveRoutesDrawer.OnGUI(position, elementProp, label);
             }
             else if (element != null)
             {
-                // Direkte Property-Darstellung ohne ScriptableObject-Referenz
                 DrawInlineProperties(position, elementProp, label, element);
             }
             else
@@ -63,17 +57,14 @@ namespace LevelSystem
             }
         }
 
-        // NEUE METHODE: Nutze spezialisierte PropertyDrawer für SequenceElements
         public static void DrawSequenceElement(Rect position, SerializedProperty elementProp, GUIContent label, AbstractSequenceElement element)
         {
             if (element is SequenceSpawner)
             {
-                // Nutze SequenceSpawnerPropertyDrawer
                 SequenceSpawnerDrawer.OnGUI(position, elementProp, label);
             }
             else if (element != null)
             {
-                // Fallback auf generische Darstellung
                 DrawInlineSequenceProperties(position, elementProp, label, element);
             }
             else
@@ -86,7 +77,6 @@ namespace LevelSystem
         {
             if (element is SequenceSpawner)
             {
-                // Nutze SequenceSpawnerPropertyDrawer für Höhenberechnung
                 return SequenceSpawnerDrawer.GetPropertyHeight(elementProp, label);
             }
             else if (element != null)
@@ -102,8 +92,6 @@ namespace LevelSystem
         private static void DrawInlineProperties(Rect position, SerializedProperty elementProp, GUIContent label, AbstractWaveElement element)
         {
             var currentY = position.y;
-
-            // Header
             var headerRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
             EditorGUI.LabelField(headerRect, label, EditorStyles.boldLabel);
             currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
@@ -112,8 +100,6 @@ namespace LevelSystem
 
             var elementSO = new SerializedObject(element);
             elementSO.Update();
-
-            // Zeichne alle serialisierten Properties
             var iterator = elementSO.GetIterator();
             iterator.NextVisible(true); // Skip m_Script
 
@@ -153,8 +139,6 @@ namespace LevelSystem
         private static void DrawInlineSequenceProperties(Rect position, SerializedProperty elementProp, GUIContent label, AbstractSequenceElement element)
         {
             var currentY = position.y;
-
-            // Header
             var headerRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
             EditorGUI.LabelField(headerRect, label, EditorStyles.boldLabel);
             currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
@@ -163,8 +147,6 @@ namespace LevelSystem
 
             var elementSO = new SerializedObject(element);
             elementSO.Update();
-
-            // Zeichne alle serialisierten Properties
             var iterator = elementSO.GetIterator();
             iterator.NextVisible(true); // Skip m_Script
 

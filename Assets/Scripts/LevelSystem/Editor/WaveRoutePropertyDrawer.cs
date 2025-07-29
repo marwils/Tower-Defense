@@ -39,8 +39,6 @@ namespace LevelSystem
                 EditorGUI.EndProperty();
                 return;
             }
-
-            // Foldout
             var foldoutRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
             property.isExpanded = EditorGUI.Foldout(foldoutRect, property.isExpanded, label, true);
 
@@ -52,13 +50,9 @@ namespace LevelSystem
                 waveRouteSO.Update();
 
                 var currentY = position.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-
-                // Draw WaveRoute properties
                 var spawnPointIdProp = waveRouteSO.FindProperty("_spawnPointId");
                 var targetPointIdProp = waveRouteSO.FindProperty("_targetPointId");
                 var sequenceElementsProp = waveRouteSO.FindProperty("_sequenceElements");
-
-                // Spawn Point ID Dropdown
                 if (spawnPointIdProp != null)
                 {
                     if (string.IsNullOrEmpty(spawnPointIdProp.stringValue) || spawnPointIdProp.stringValue == "None")
@@ -70,8 +64,6 @@ namespace LevelSystem
                     DrawSpawnNameDropdown(spawnPointRect, spawnPointIdProp);
                     currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                 }
-
-                // Target Point ID Dropdown
                 if (targetPointIdProp != null)
                 {
                     if (string.IsNullOrEmpty(targetPointIdProp.stringValue) || targetPointIdProp.stringValue == "None")
@@ -82,8 +74,6 @@ namespace LevelSystem
                     DrawTargetNameDropdown(targetPointRect, targetPointIdProp);
                     currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                 }
-
-                // Sequence Elements Section
                 DrawSequenceElementsSection(position, waveRouteSO, sequenceElementsProp, ref currentY, waveRoute);
 
                 if (waveRouteSO.hasModifiedProperties)
@@ -100,17 +90,12 @@ namespace LevelSystem
 
         private void DrawSpawnNameDropdown(Rect position, SerializedProperty spawnPointIdProp)
         {
-            // Hole alle verfügbaren Spawn Point IDs
             var availableIds = GetAvailableSpawnPointNames();
             var currentId = spawnPointIdProp.stringValue;
             var currentIndex = System.Array.IndexOf(availableIds, currentId);
-
-            // Füge "None" Option hinzu
             var displayOptions = new string[availableIds.Length + 1];
             displayOptions[0] = "None";
             System.Array.Copy(availableIds, 0, displayOptions, 1, availableIds.Length);
-
-            // Adjustiere Index für "None" Option
             var displayIndex = currentIndex >= 0 ? currentIndex + 1 : 0;
 
             EditorGUI.BeginChangeCheck();
@@ -125,12 +110,8 @@ namespace LevelSystem
                 {
                     spawnPointIdProp.stringValue = availableIds[displayIndex - 1];
                 }
-
-                // UPDATE: Scene-Kontext aktualisieren bei Änderungen
                 UpdateLevelSceneContext(spawnPointIdProp);
             }
-
-            // Zeige Warnung wenn ID nicht existiert
             if (!string.IsNullOrEmpty(currentId) && currentIndex < 0)
             {
                 var warningRect = new Rect(position.x + position.width - 20, position.y, 20, position.height);
@@ -143,17 +124,12 @@ namespace LevelSystem
 
         private void DrawTargetNameDropdown(Rect position, SerializedProperty targetPointIdProp)
         {
-            // Hole alle verfügbaren Target Point IDs
             var availableIds = GetAvailableTargetPointNames();
             var currentId = targetPointIdProp.stringValue;
             var currentIndex = System.Array.IndexOf(availableIds, currentId);
-
-            // Füge "None" Option hinzu
             var displayOptions = new string[availableIds.Length + 1];
             displayOptions[0] = "None";
             System.Array.Copy(availableIds, 0, displayOptions, 1, availableIds.Length);
-
-            // Adjustiere Index für "None" Option
             var displayIndex = currentIndex >= 0 ? currentIndex + 1 : 0;
 
             EditorGUI.BeginChangeCheck();
@@ -168,12 +144,8 @@ namespace LevelSystem
                 {
                     targetPointIdProp.stringValue = availableIds[displayIndex - 1];
                 }
-
-                // UPDATE: Scene-Kontext aktualisieren bei Änderungen
                 UpdateLevelSceneContext(targetPointIdProp);
             }
-
-            // Zeige Warnung wenn ID nicht existiert
             if (!string.IsNullOrEmpty(currentId) && currentIndex < 0)
             {
                 var warningRect = new Rect(position.x + position.width - 20, position.y, 20, position.height);
@@ -206,14 +178,12 @@ namespace LevelSystem
 
         private void DrawSequenceElementsSection(Rect position, SerializedObject routeSO, SerializedProperty sequenceElementsProp, ref float currentY, WaveRoute route)
         {
-            // Sequence Elements Header
             var headerRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
             EditorGUI.LabelField(headerRect, "Sequence Elements", EditorStyles.boldLabel);
             currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 
             if (sequenceElementsProp != null)
             {
-                // Draw each sequence element
                 for (int i = 0; i < sequenceElementsProp.arraySize; i++)
                 {
                     var elementProp = sequenceElementsProp.GetArrayElementAtIndex(i);
@@ -226,11 +196,7 @@ namespace LevelSystem
                     var elementHeight = ElementDrawerHelper.GetSequenceElementHeight(elementProp, new GUIContent(elementLabel), element);
                     var elementRect = new Rect(position.x, currentY, position.width - 25, elementHeight);
                     var deleteRect = new Rect(position.x + position.width - 20, currentY, 20, EditorGUIUtility.singleLineHeight);
-
-                    // Draw the sequence element with inline properties
                     ElementDrawerHelper.DrawSequenceElement(elementRect, elementProp, new GUIContent(elementLabel), element);
-
-                    // Delete button
                     if (GUI.Button(deleteRect, "-"))
                     {
                         if (element != null)
@@ -245,14 +211,10 @@ namespace LevelSystem
 
                     currentY += elementHeight + EditorGUIUtility.standardVerticalSpacing;
                 }
-
-                // Show message if no elements
                 if (sequenceElementsProp.arraySize == 0)
                 {
                     GUIHelper.DrawWarning("No Sequence Elements assigned", position, ref currentY);
                 }
-
-                // Add Element Button
                 var addButtonRect = new Rect(position.x, currentY, 150, EditorGUIUtility.singleLineHeight);
                 if (GUI.Button(addButtonRect, "Add Element"))
                 {
@@ -273,8 +235,6 @@ namespace LevelSystem
                 menu.AddItem(new GUIContent(typeName), false, () =>
                 {
                     var element = LevelAssetFactory.CreateSequenceElement(elementType, waveRoute);
-
-                    // Add to array
                     sequenceElementsProp.arraySize++;
                     var newElementProp = sequenceElementsProp.GetArrayElementAtIndex(sequenceElementsProp.arraySize - 1);
                     newElementProp.objectReferenceValue = element;
@@ -305,7 +265,7 @@ namespace LevelSystem
             var targetPointIdProp = waveRouteSO.FindProperty("_targetPointId");
             var sequenceElementsProp = waveRouteSO.FindProperty("_sequenceElements");
 
-            float height = EditorGUIUtility.singleLineHeight; // Foldout
+            float height = EditorGUIUtility.singleLineHeight;
             height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             if (string.IsNullOrEmpty(spawnPointIdProp.stringValue) || spawnPointIdProp.stringValue == "None")
             {
@@ -337,8 +297,6 @@ namespace LevelSystem
                         height += ElementDrawerHelper.GetSequenceElementHeight(elementProp, new GUIContent(elementLabel), element) + EditorGUIUtility.standardVerticalSpacing;
                     }
                 }
-
-                // Add button height
                 height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             }
 

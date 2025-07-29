@@ -32,7 +32,7 @@ public class InputManager : MonoBehaviour
 
         _input = new PlayerInputActions();
         _input.Gameplay.PointAt.performed += ctx => OnPointAt?.Invoke();
-        _input.Gameplay.Select.performed += ctx => OnSelect?.Invoke();
+        _input.Gameplay.Select.performed += ctx => HandleSelect();
         _input.Camera.Zoom.performed += ZoomActionPerformed;
         _input.Enable();
 
@@ -41,6 +41,17 @@ public class InputManager : MonoBehaviour
             listener.RegisterInput(this);
         }
         _pendingListeners.Clear();
+    }
+
+    private void HandleSelect()
+    {
+        if (RaycastFromScreenPosition(out RaycastHit hit))
+        {
+            if (hit.collider.TryGetComponent(out ISelectable selectable))
+            {
+                OnSelect?.Invoke();
+            }
+        }
     }
 
     private void Start()

@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 namespace LevelSystem
 {
-    [CreateAssetMenu(fileName = "Level", menuName = "Game/Level")]
+    [CreateAssetMenu(fileName = "New Level", menuName = "Game/Level")]
     public class Level : ScriptableObject
     {
-        [SerializeField] private string _title;
+        [SerializeField] private string _title = "New Level";
         public string Title => _title;
 
         [SerializeField] private List<Wave> _waves = new();
@@ -22,16 +22,12 @@ namespace LevelSystem
         private bool _blockSerialization = false;
         public bool IsSerializationBlocked => _blockSerialization;
 
-        public void UpdateSceneContext()
+        public void StartLevel()
         {
-            var currentScene = SceneManager.GetActiveScene();
-            if (!string.IsNullOrEmpty(currentScene.name))
+            Debug.Log($"Starting level: {_title}");
+            foreach (var wave in _waves)
             {
-                _lastModifiedBySceneName = currentScene.name;
-                _blockSerialization = false;
-#if UNITY_EDITOR
-                UnityEditor.EditorUtility.SetDirty(this);
-#endif
+                wave.StartWave();
             }
         }
 
@@ -42,7 +38,7 @@ namespace LevelSystem
 
             var currentScene = SceneManager.GetActiveScene();
             bool isDifferent = !string.IsNullOrEmpty(currentScene.name) &&
-                              currentScene.name != _lastModifiedBySceneName;
+                               currentScene.name != _lastModifiedBySceneName;
 
             if (isDifferent)
             {
@@ -52,12 +48,16 @@ namespace LevelSystem
             return isDifferent;
         }
 
-        public void StartLevel()
+        public void UpdateSceneContext()
         {
-            Debug.Log($"Starting level: {_title}");
-            foreach (var wave in _waves)
+            var currentScene = SceneManager.GetActiveScene();
+            if (!string.IsNullOrEmpty(currentScene.name))
             {
-                wave.StartWave();
+                _lastModifiedBySceneName = currentScene.name;
+                _blockSerialization = false;
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(this);
+#endif
             }
         }
 
@@ -89,7 +89,8 @@ namespace LevelSystem
         {
             if (_blockSerialization)
             {
-                Debug.LogWarning($"Serialization blocked for Level '{name}' due to scene context mismatch. Please update scene context first.");
+                return;
+                //Debug.LogWarning("Serialization blocked due to scene context mismatch. Please update scene context first.");
             }
         }
 

@@ -9,8 +9,7 @@ namespace LevelSystem
         public class Weapon : ScriptableObject
         {
                 [SerializeField]
-                [Range(0, 100)]
-                [Tooltip("The damage dealt by the weapon")]
+                [Tooltip("The amount of damage the weapon deals")]
                 private float _damage = 10f;
                 public float Damage { get { return _damage; } }
 
@@ -44,5 +43,12 @@ namespace LevelSystem
                 private float _seekTime = .2f;
                 public float SeekTime { get { return _seekTime; } }
 
+                [SerializeField]
+                private TargetStrategy _targetStrategy;
+                public TargetStrategy TargetStrategy => _targetStrategy;
+
+                [SerializeField]
+                private KeepTargetStrategy _keepTargetStrategy;
+                public KeepTargetStrategy KeepTargetStrategy => _keepTargetStrategy;
         }
 }

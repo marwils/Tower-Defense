@@ -10,9 +10,9 @@ namespace LevelSystem
     public class SequenceSpawner : AbstractSequenceElement, IRouteAware
     {
         [SerializeField]
-        [Tooltip("List of enemy prefabs to spawn")]
-        private List<global::Enemy> _enemyPrefabs = new();
-        public IReadOnlyList<global::Enemy> EnemyPrefabs => _enemyPrefabs;
+        [Tooltip("List of enemies to spawn")]
+        private List<EnemyControl> _enemies = new();
+        public IReadOnlyList<EnemyControl> Enemies => _enemies;
 
         public Transform SpawnTransform { get; set; }
         public Transform TargetTransform { get; set; }
@@ -53,7 +53,7 @@ namespace LevelSystem
 
         private bool ValidateSettings()
         {
-            if (_enemyPrefabs == null || _enemyPrefabs.Count == 0)
+            if (_enemies == null || _enemies.Count == 0)
             {
                 Debug.LogError($"Enemy prefabs list is empty in {name}");
                 return false;
@@ -79,27 +79,27 @@ namespace LevelSystem
         private void SpawnEnemy()
         {
             SpawnTransform.gameObject.GetComponent<SpawnPoint>().DoSpawn(
-                _enemyPrefabs[_currentIndex],
-                TargetTransform.position
+                _enemies[_currentIndex],
+                TargetTransform
             );
 
-            _currentIndex = (_currentIndex + 1) % _enemyPrefabs.Count;
+            _currentIndex = (_currentIndex + 1) % _enemies.Count;
         }
 
         private void ShuffleEnemies()
         {
-            var count = _enemyPrefabs.Count;
+            var count = _enemies.Count;
             var last = count - 1;
             for (var i = 0; i < last; ++i)
             {
                 var r = UnityEngine.Random.Range(i, count);
-                (_enemyPrefabs[i], _enemyPrefabs[r]) = (_enemyPrefabs[r], _enemyPrefabs[i]);
+                (_enemies[i], _enemies[r]) = (_enemies[r], _enemies[i]);
             }
         }
 
         private void OnValidate()
         {
-            if (_enemyPrefabs == null || _enemyPrefabs.Count == 0)
+            if (_enemies == null || _enemies.Count == 0)
             {
                 Debug.LogWarning($"Enemy prefabs list is empty in {name}");
             }

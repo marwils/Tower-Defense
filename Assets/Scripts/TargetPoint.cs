@@ -1,4 +1,4 @@
-public class TargetPoint : AbstractPoint
+public class TargetPoint : GizmoBehaviour
 {
     private void Start()
     {
@@ -9,6 +9,4 @@ public class TargetPoint : AbstractPoint
     {
         RouteRegistry.UnregisterTargetPoint(transform);
     }
-
-
 }

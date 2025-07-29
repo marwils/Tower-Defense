@@ -32,12 +32,6 @@ namespace LevelSystem
 
             serializedObject.Update();
 
-            // Show scene context warning if needed
-            if (level.IsInDifferentScene())
-            {
-                DrawSceneWarning(level);
-            }
-
             EditorGUILayout.PropertyField(_titleProperty);
 
             EditorGUILayout.Space();
@@ -199,78 +193,6 @@ namespace LevelSystem
             GUI.enabled = false;
             EditorGUILayout.LabelField("All other controls are disabled until scene context is resolved.", EditorStyles.helpBox);
             GUI.enabled = true;
-        }
-
-        private void DrawSceneWarning(Level level)
-        {
-            var currentScene = SceneManager.GetActiveScene().name;
-
-            EditorGUILayout.Space();
-
-            var oldColor = GUI.backgroundColor;
-            GUI.backgroundColor = new Color(1f, 0.3f, 0.3f, 0.8f);
-
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-
-            var headerStyle = new GUIStyle(EditorStyles.boldLabel);
-            headerStyle.fontSize = 14;
-            headerStyle.normal.textColor = Color.white;
-
-            EditorGUILayout.LabelField("⚠ SCENE CONTEXT WARNING", headerStyle);
-
-            var warningStyle = new GUIStyle(EditorStyles.label);
-            warningStyle.wordWrap = true;
-            warningStyle.normal.textColor = Color.white;
-
-            EditorGUILayout.LabelField(
-                $"This Level was last modified in scene '{level.LastModifiedBySceneName}', " +
-                $"but you are currently in scene '{currentScene}'. " +
-                $"Spawn/Target Point assignments may not work correctly since these points " +
-                $"are scene-specific objects.",
-                warningStyle
-            );
-
-            EditorGUILayout.Space(5);
-
-            EditorGUILayout.BeginHorizontal();
-
-            if (GUILayout.Button("Update to Current Scene", GUILayout.Height(25)))
-            {
-                level.UpdateSceneContext();
-                EditorUtility.SetDirty(level);
-            }
-
-            if (GUILayout.Button($"Switch to '{level.LastModifiedBySceneName}'", GUILayout.Height(25)))
-            {
-                if (EditorApplication.isPlaying)
-                {
-                    EditorUtility.DisplayDialog("Cannot Switch Scene",
-                        "Cannot switch scenes while in Play Mode.", "OK");
-                }
-                else
-                {
-                    var scenePath = GetScenePath(level.LastModifiedBySceneName);
-                    if (!string.IsNullOrEmpty(scenePath))
-                    {
-                        if (UnityEditor.SceneManagement.EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
-                        {
-                            UnityEditor.SceneManagement.EditorSceneManager.OpenScene(scenePath);
-                        }
-                    }
-                    else
-                    {
-                        EditorUtility.DisplayDialog("Scene Not Found",
-                            $"Could not find scene '{level.LastModifiedBySceneName}' in build settings.", "OK");
-                    }
-                }
-            }
-
-            EditorGUILayout.EndHorizontal();
-            EditorGUILayout.EndVertical();
-
-            GUI.backgroundColor = oldColor;
-
-            EditorGUILayout.Space();
         }
 
         private string GetScenePath(string sceneName)

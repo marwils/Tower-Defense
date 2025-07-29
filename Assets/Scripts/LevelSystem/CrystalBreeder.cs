@@ -6,8 +6,10 @@ namespace LevelSystem
 {
         [CreateAssetMenu(fileName = "CrystalBreeder", menuName = "Game/Building/Crystal Breeder")]
         [Serializable]
-        public class CrystalBreeder : AbstractBuilding
+        public class CrystalBreeder : Entity
         {
+                [Header("Crystal Breeding")]
+
                 [SerializeField]
                 private float _breedingTime = 5f;
                 public float BreedingTime { get { return _breedingTime; } }

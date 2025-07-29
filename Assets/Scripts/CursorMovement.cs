@@ -10,7 +10,7 @@ public class CursorMovement : MonoBehaviour
 
     private GameObject _selectionInstance;
 
-    private CameraController _cameraController;
+    private CameraControl _cameraController;
 
     private bool _cameraEventRegistered = false;
 
@@ -106,7 +106,7 @@ public class CursorMovement : MonoBehaviour
         if (!_cameraEventRegistered)
         {
             InputManager.TryRegister(input => input.OnPointAt += UpdateCursorPosition);
-            _cameraController = FindFirstObjectByType<CameraController>();
+            _cameraController = FindFirstObjectByType<CameraControl>();
             _cameraController.OnCameraMove += UpdateCursorPosition;
             _cameraEventRegistered = true;
         }

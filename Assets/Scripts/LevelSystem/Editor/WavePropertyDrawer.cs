@@ -41,22 +41,17 @@ namespace LevelSystem
             }
 
             var currentY = position.y;
-
-            // Wave header
             var headerRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
             var headerStyle = new GUIStyle(EditorStyles.boldLabel);
             headerStyle.fontSize = 14;
             EditorGUI.LabelField(headerRect, label.text, headerStyle);
             currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-
-            // Content area
             var contentRect = new Rect(position.x, currentY, position.width, position.height - (currentY - position.y));
             DrawWaveContent(contentRect, property, wave);
 
             EditorGUI.EndProperty();
         }
 
-        // Neue öffentliche Methode für das Zeichnen nur des Inhalts
         public void DrawWaveContent(Rect position, SerializedProperty property, Wave wave)
         {
             if (wave == null) return;
@@ -71,7 +66,6 @@ namespace LevelSystem
 
             currentY = indentedRect.y;
 
-            // Draw title
             var titleProp = waveSO.FindProperty("_title");
             if (titleProp != null)
             {
@@ -80,12 +74,10 @@ namespace LevelSystem
                 currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             }
 
-            // Wave Elements Header
             var elementsHeaderRect = new Rect(indentedRect.x, currentY, indentedRect.width, EditorGUIUtility.singleLineHeight);
             EditorGUI.LabelField(elementsHeaderRect, "Elements", EditorStyles.boldLabel);
             currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 
-            // Draw elements
             var elementsProp = waveSO.FindProperty("_waveElements");
             if (elementsProp != null)
             {
@@ -103,7 +95,6 @@ namespace LevelSystem
 
                     ElementDrawerHelper.DrawElement(elementRect, elementProp, elementGuiLabel, element);
 
-                    // Delete button
                     if (GUI.Button(deleteRect, "-"))
                     {
                         if (element != null)
@@ -119,7 +110,6 @@ namespace LevelSystem
                     currentY += elementHeight + EditorGUIUtility.standardVerticalSpacing;
                 }
 
-                // Add Element Button
                 var addButtonRect = new Rect(indentedRect.x, currentY, 150, EditorGUIUtility.singleLineHeight);
                 if (GUI.Button(addButtonRect, "Add Element"))
                 {
@@ -134,7 +124,6 @@ namespace LevelSystem
             }
         }
 
-        // Bestehende Methoden bleiben unverändert...
         private void ShowAddElementMenu(SerializedProperty elementsProperty, Wave wave)
         {
             var menu = new GenericMenu();
@@ -174,13 +163,12 @@ namespace LevelSystem
             var waveSO = new SerializedObject(wave);
             var elementsProp = waveSO.FindProperty("_waveElements");
 
-            float height = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Header
-            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Title
-            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Elements header
+            float height = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 
             if (elementsProp != null)
             {
-                // Calculate height for each element
                 for (int i = 0; i < elementsProp.arraySize; i++)
                 {
                     var elementProp = elementsProp.GetArrayElementAtIndex(i);
@@ -192,7 +180,6 @@ namespace LevelSystem
                     height += ElementDrawerHelper.GetElementHeight(elementProp, elementGuiLabel, element) + EditorGUIUtility.standardVerticalSpacing;
                 }
 
-                // Add button height
                 height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             }
 

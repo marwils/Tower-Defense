@@ -8,7 +8,7 @@ public static class GUIHelper
     {
         var noElementsRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
         var oldColor = GUI.color;
-        GUI.color = new Color(1f, 1f, 0.8f); // Light yellow background
+        GUI.color = new Color(1f, 1f, 0.8f);
         GUI.Box(noElementsRect, "", EditorStyles.helpBox);
         GUI.color = oldColor;
 

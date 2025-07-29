@@ -32,23 +32,17 @@ namespace LevelSystem
             }
 
             var currentY = position.y;
-
-            // WaveRoutes header
             var headerRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
             var headerStyle = new GUIStyle(EditorStyles.boldLabel);
             headerStyle.fontSize = 14;
             EditorGUI.LabelField(headerRect, label.text, headerStyle);
             currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-
-            // Content area
             var indentedRect = new Rect(position.x, currentY, position.width, position.height - (currentY - position.y));
 
             var waveRoutesSO = new SerializedObject(waveRoutes);
             waveRoutesSO.Update();
 
             currentY = indentedRect.y;
-
-            // Draw routes
             var routesProp = waveRoutesSO.FindProperty("_routes");
             if (routesProp != null)
             {
@@ -59,25 +53,17 @@ namespace LevelSystem
 
                     string routeLabel = route != null ? $"Route {i + 1}" : $"Route {i + 1} (Missing)";
                     var routeGuiLabel = new GUIContent(routeLabel);
-
-                    // Berechne Höhe für Route mit WaveRoutePropertyDrawer
                     var routeHeight = WaveRouteDrawer.GetPropertyHeight(routeProp, routeGuiLabel);
                     const float margin = 8f;
-                    var totalRouteHeight = routeHeight + margin * 2; // Box-Margins
-
-                    // Draw background box für Route
+                    var totalRouteHeight = routeHeight + margin * 2;
                     var routeBoxRect = new Rect(indentedRect.x, currentY, indentedRect.width, totalRouteHeight);
                     GUI.Box(routeBoxRect, "", EditorStyles.helpBox);
-
-                    // Route header mit Minus-Button INNERHALB der Box
                     var routeHeaderRect = new Rect(indentedRect.x + margin, currentY + margin, indentedRect.width - margin * 2 - 25, EditorGUIUtility.singleLineHeight);
                     var deleteRect = new Rect(indentedRect.x + indentedRect.width - 25, currentY + margin, 20, EditorGUIUtility.singleLineHeight);
 
                     var routeHeaderStyle = new GUIStyle(EditorStyles.boldLabel);
                     routeHeaderStyle.fontSize = 12;
                     EditorGUI.LabelField(routeHeaderRect, routeLabel, routeHeaderStyle);
-
-                    // Delete Button in der Header-Zeile
                     if (GUI.Button(deleteRect, "-"))
                     {
                         if (route != null)
@@ -89,19 +75,13 @@ namespace LevelSystem
                         EditorUtility.SetDirty(waveRoutes);
                         break;
                     }
-
-                    // Content area für WaveRoutePropertyDrawer (unter dem Header)
                     var routeContentY = currentY + margin + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                     var routeContentHeight = routeHeight - EditorGUIUtility.singleLineHeight - EditorGUIUtility.standardVerticalSpacing;
                     var routeContentRect = new Rect(indentedRect.x + margin, routeContentY, indentedRect.width - margin * 2, routeContentHeight);
-
-                    // EINFACH: Nutze WaveRoutePropertyDrawer direkt (ohne Foldout)
                     DrawWaveRoute(routeContentRect, routeProp, routeGuiLabel);
 
                     currentY += totalRouteHeight + EditorGUIUtility.standardVerticalSpacing;
                 }
-
-                // Add Route Button
                 var addButtonRect = new Rect(indentedRect.x, currentY, 150, EditorGUIUtility.singleLineHeight);
                 if (GUI.Button(addButtonRect, "Add Route"))
                 {
@@ -158,7 +138,7 @@ namespace LevelSystem
             var waveRoutesSO = new SerializedObject(waveRoutes);
             var routesProp = waveRoutesSO.FindProperty("_routes");
 
-            float height = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Header
+            float height = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 
             if (routesProp != null)
             {
@@ -167,20 +147,18 @@ namespace LevelSystem
                 {
                     var routeProp = routesProp.GetArrayElementAtIndex(i);
                     string routeLabel = $"Route {i + 1}";
-
-                    // Force expanded für Höhenberechnung
                     var wasExpanded = routeProp.isExpanded;
                     routeProp.isExpanded = true;
 
                     var routeHeight = WaveRouteDrawer.GetPropertyHeight(routeProp, new GUIContent(routeLabel));
-                    var totalRouteHeight = routeHeight + margin * 2; // Box-Margins
+                    var totalRouteHeight = routeHeight + margin * 2;
 
                     routeProp.isExpanded = wasExpanded;
 
                     height += totalRouteHeight + EditorGUIUtility.standardVerticalSpacing;
                 }
 
-                height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Add button
+                height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             }
 
             return height;

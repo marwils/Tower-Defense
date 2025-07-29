@@ -5296,8 +5296,8 @@
     "m_ObjectId": "bfd6f01827b74e55a9a2c294e74e77b9",
     "m_Title": "Rotation",
     "m_Position": {
-        "x": -3246.0,
-        "y": 73.0
+        "x": -3245.999755859375,
+        "y": 72.99998474121094
     }
 }
 
@@ -6059,7 +6059,7 @@
         "m_Id": "fa0a1c9c31e04108897739f0c3872533"
     },
     "m_AllowMaterialOverride": false,
-    "m_SurfaceType": 1,
+    "m_SurfaceType": 0,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
