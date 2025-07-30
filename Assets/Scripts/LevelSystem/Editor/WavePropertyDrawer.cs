@@ -29,7 +29,6 @@ namespace LevelSystem
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             InitializeTypes();
-
             EditorGUI.BeginProperty(position, label, property);
 
             var wave = property.objectReferenceValue as Wave;
@@ -47,12 +46,12 @@ namespace LevelSystem
             EditorGUI.LabelField(headerRect, label.text, headerStyle);
             currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             var contentRect = new Rect(position.x, currentY, position.width, position.height - (currentY - position.y));
-            DrawWaveContent(contentRect, property, wave);
+            DrawWaveContent(contentRect, wave);
 
             EditorGUI.EndProperty();
         }
 
-        public void DrawWaveContent(Rect position, SerializedProperty property, Wave wave)
+        public void DrawWaveContent(Rect position, Wave wave)
         {
             if (wave == null) return;
 
@@ -74,10 +73,6 @@ namespace LevelSystem
                 currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             }
 
-            var elementsHeaderRect = new Rect(indentedRect.x, currentY, indentedRect.width, EditorGUIUtility.singleLineHeight);
-            EditorGUI.LabelField(elementsHeaderRect, "Elements", EditorStyles.boldLabel);
-            currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-
             var elementsProp = waveSO.FindProperty("_waveElements");
             if (elementsProp != null)
             {
@@ -87,7 +82,7 @@ namespace LevelSystem
                     var element = elementProp.objectReferenceValue as AbstractWaveElement;
 
                     string elementLabel = element != null ? ObjectNames.NicifyVariableName(element.GetType().Name) : $"Element {i + 1}";
-                    var elementGuiLabel = new GUIContent(elementLabel);
+                    var elementGuiLabel = new GUIContent($" • {elementLabel}");
 
                     var elementHeight = ElementDrawerHelper.GetElementHeight(elementProp, elementGuiLabel, element);
                     var elementRect = new Rect(indentedRect.x, currentY, indentedRect.width, elementHeight);
