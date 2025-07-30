@@ -157,4 +157,10 @@ namespace LevelSystem
             return !level.IsSerializationBlocked && base.HasPreviewGUI();
         }
     }
+
+    static class Constants
+    {
+        public const float MarginVertical = 8f;
+        public const float MarginHorizontal = 10f;
+    }
 }
