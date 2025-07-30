@@ -17,6 +17,5 @@ namespace LevelSystem
                         _canMove = true;
                         _speed = 3.5f;
                 }
-                //protected new bool _canMove = true;
         }
 }

@@ -307,7 +307,7 @@ namespace LevelSystem
         {
             var currentObject = anyPropertyFromWaveRoute.serializedObject.targetObject;
 
-            foreach (var level in LevelEditorHelper.FindLevelsContaining(currentObject))
+            foreach (var level in EditorHelper.FindLevelsContaining(currentObject))
             {
                 level.UpdateSceneContext();
                 EditorUtility.SetDirty(level);

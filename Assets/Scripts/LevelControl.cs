@@ -2,7 +2,7 @@ using LevelSystem;
 
 using UnityEngine;
 
-public class LevelController : MonoBehaviour
+public class LevelControl : MonoBehaviour
 {
     [SerializeField] private Level _level;
 

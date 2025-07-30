@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace LevelSystem
 {
-    public static class LevelEditorHelper
+    public static class EditorHelper
     {
         /// <summary>
         /// Recursively checks if an object is contained within a hierarchy of ScriptableObjects.

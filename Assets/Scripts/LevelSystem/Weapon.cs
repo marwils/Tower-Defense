@@ -6,8 +6,20 @@ namespace LevelSystem
 {
         [CreateAssetMenu(fileName = "Weapon", menuName = "Game/Weapon")]
         [Serializable]
-        public class Weapon : ScriptableObject
+        public class Weapon : Entity
         {
+                public Weapon()
+                {
+                        _canTakeDamage = true;
+                        _canBeHealed = false;
+                        _health = 100f;
+                        _shield = 0f;
+                        _canMove = false; // Weapons typically do not move
+                        _speed = 0f; // No movement speed for weapons
+                }
+
+                [Header("Weapon")]
+
                 [SerializeField]
                 [Tooltip("The amount of damage the weapon deals")]
                 private float _damage = 10f;
