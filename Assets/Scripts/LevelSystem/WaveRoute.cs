@@ -21,11 +21,9 @@ namespace LevelSystem
         public string TargetPointId => _targetPointId;
         public IReadOnlyList<AbstractSequenceElement> SequenceElements => _sequenceElements;
 
-        // Runtime Properties
         public Transform SpawnTransform => RouteRegistry.GetSpawnPoint(_spawnPointId);
         public Transform TargetTransform => RouteRegistry.GetTargetPoint(_targetPointId);
 
-        // Validation
         public bool IsValid => SpawnTransform != null && TargetTransform != null;
 
         public IEnumerator StartRoute()

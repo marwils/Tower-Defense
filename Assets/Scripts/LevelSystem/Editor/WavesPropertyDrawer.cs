@@ -11,8 +11,6 @@ namespace LevelSystem
     {
         private WavePropertyDrawer _waveDrawer = new WavePropertyDrawer();
 
-        const float MarginVertical = 8f;
-
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, label, property);
@@ -30,18 +28,18 @@ namespace LevelSystem
                 var waveProperty = property.GetArrayElementAtIndex(i);
 
                 var height = _waveDrawer.GetPropertyHeight(waveProperty, new GUIContent($"Wave {i + 1}"));
-                var totalHeight = height + MarginVertical;
+                var totalHeight = height + Constants.MarginVertical * 2;
 
                 var boxRect = new Rect(position.x, currentY, position.width, totalHeight);
                 GUI.Box(boxRect, "", EditorStyles.helpBox);
 
 
-                var headerWaveRect = new Rect(position.x, currentY + MarginVertical, position.width - 25, EditorGUIUtility.singleLineHeight);
+                var headerWaveRect = new Rect(position.x, currentY + Constants.MarginVertical, position.width - 20 - Constants.MarginVertical, EditorGUIUtility.singleLineHeight);
                 var headerStyle = new GUIStyle(EditorStyles.boldLabel);
                 headerStyle.fontSize = 14;
                 EditorGUI.LabelField(headerWaveRect, $"Wave {i + 1}", headerStyle);
 
-                var deleteMinusButtonRect = new Rect(position.x + position.width - 25, currentY + MarginVertical, 20, EditorGUIUtility.singleLineHeight);
+                var deleteMinusButtonRect = new Rect(position.x + position.width - 20 - Constants.MarginVertical, currentY + Constants.MarginVertical, 20, EditorGUIUtility.singleLineHeight);
                 if (GUI.Button(deleteMinusButtonRect, "-"))
                 {
                     var wave = waveProperty.objectReferenceValue as Wave;
@@ -54,10 +52,10 @@ namespace LevelSystem
                     break;
                 }
 
-                var addPlusButtonRect = new Rect(position.x + position.width - 25 * 2, currentY + MarginVertical, 20, EditorGUIUtility.singleLineHeight);
+                var addPlusButtonRect = new Rect(position.x + position.width - 25 * 2, currentY + Constants.MarginVertical, 20, EditorGUIUtility.singleLineHeight);
                 DrawAddButton(property, addPlusButtonRect, "+");
 
-                var contentY = currentY + MarginVertical * 2 + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                var contentY = currentY + Constants.MarginVertical * 2 + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                 var contentHeight = height - EditorGUIUtility.singleLineHeight - EditorGUIUtility.standardVerticalSpacing;
                 var contentRect = new Rect(position.x, contentY, position.width, contentHeight);
 
@@ -66,7 +64,7 @@ namespace LevelSystem
                 currentY += totalHeight + EditorGUIUtility.standardVerticalSpacing * 2;
             }
 
-            var addButtonRect = new Rect(position.x, currentY, position.width, 30);
+            var addButtonRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
             DrawAddButton(property, addButtonRect, "Add Wave");
 
             EditorGUI.indentLevel--;
@@ -108,7 +106,7 @@ namespace LevelSystem
             {
                 var waveProperty = property.GetArrayElementAtIndex(i);
                 var waveHeight = _waveDrawer.GetPropertyHeight(waveProperty, new GUIContent($"Wave {i + 1}"));
-                height += waveHeight + MarginVertical * 2 + EditorGUIUtility.standardVerticalSpacing;
+                height += waveHeight + Constants.MarginVertical * 2 + EditorGUIUtility.standardVerticalSpacing;
                 height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             }
 

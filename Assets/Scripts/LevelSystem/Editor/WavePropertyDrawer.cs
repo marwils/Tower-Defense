@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using System;
 using System.Linq;
+using UnityEngine.UI;
 
 namespace LevelSystem
 {
@@ -58,12 +59,10 @@ namespace LevelSystem
             InitializeTypes();
 
             var currentY = position.y;
-            var indentedRect = new Rect(position.x, currentY, position.width, position.height);
+            var indentedRect = new Rect(position.x, currentY, position.width - Constants.MarginVertical, position.height);
 
             var waveSO = new SerializedObject(wave);
             waveSO.Update();
-
-            currentY = indentedRect.y;
 
             var titleProp = waveSO.FindProperty("_title");
             if (titleProp != null)
@@ -104,8 +103,9 @@ namespace LevelSystem
 
                     currentY += elementHeight + EditorGUIUtility.standardVerticalSpacing;
                 }
+                currentY += EditorGUIUtility.standardVerticalSpacing;
 
-                var addButtonRect = new Rect(indentedRect.x, currentY, 150, EditorGUIUtility.singleLineHeight);
+                var addButtonRect = new Rect(indentedRect.x + Constants.MarginVertical, currentY, indentedRect.width - Constants.MarginVertical, EditorGUIUtility.singleLineHeight);
                 if (GUI.Button(addButtonRect, "Add Element"))
                 {
                     ShowAddElementMenu(elementsProp, wave);
