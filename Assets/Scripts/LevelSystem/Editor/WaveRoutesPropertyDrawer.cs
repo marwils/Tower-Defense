@@ -34,7 +34,6 @@ namespace LevelSystem
             var currentY = position.y;
             var headerRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
             var headerStyle = new GUIStyle(EditorStyles.boldLabel);
-            headerStyle.fontSize = 14;
             EditorGUI.LabelField(headerRect, label.text, headerStyle);
             currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             var indentedRect = new Rect(position.x, currentY, position.width, position.height - (currentY - position.y));
