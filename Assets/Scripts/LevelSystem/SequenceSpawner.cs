@@ -36,8 +36,11 @@ namespace LevelSystem
 
         private int _currentIndex;
 
+        private bool _isRunning;
+
         public override IEnumerator Run()
         {
+            _isRunning = true;
             if (!ValidateSettings())
             {
                 yield break;
@@ -49,6 +52,7 @@ namespace LevelSystem
             }
 
             yield return SpawnEnemies();
+            _isRunning = false;
         }
 
         private bool ValidateSettings()
@@ -104,6 +108,16 @@ namespace LevelSystem
                 Debug.LogWarning($"Enemy prefabs list is empty in {name}");
             }
             _spawnAmount = Mathf.Max(1, _spawnAmount);
+        }
+
+        protected override float GetDuration()
+        {
+            return _spawnAmount * _interval + (_spawnAmount > 0 ? _interval : 0);
+        }
+
+        protected override bool GetIsRunning()
+        {
+            return _isRunning;
         }
     }
 }

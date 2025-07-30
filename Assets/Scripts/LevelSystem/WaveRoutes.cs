@@ -70,5 +70,15 @@ namespace LevelSystem
 
             _routes.RemoveAll(route => route == null);
         }
+
+        protected override float GetDuration()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override bool GetIsRunning()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

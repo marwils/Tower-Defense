@@ -8,10 +8,14 @@ namespace LevelSystem
     [Serializable]
     public abstract class AbstractWaveElement : ScriptableObject, IWaveElement
     {
-        public float Duration => throw new NotImplementedException();
+        public float Duration => GetDuration();
 
-        public bool IsRunning => throw new NotImplementedException();
+        public bool IsRunning => GetIsRunning();
 
         public abstract IEnumerator Run();
+
+        protected abstract float GetDuration();
+
+        protected abstract bool GetIsRunning();
     }
 }

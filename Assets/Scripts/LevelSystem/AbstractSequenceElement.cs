@@ -1,16 +1,21 @@
+using System;
 using System.Collections;
 
 using UnityEngine;
 
 namespace LevelSystem
 {
-    [System.Serializable]
+    [Serializable]
     public abstract class AbstractSequenceElement : ScriptableObject, ISequenceElement
     {
-        public float Duration => throw new System.NotImplementedException();
+        public float Duration => GetDuration();
 
-        public bool IsRunning => throw new System.NotImplementedException();
+        public bool IsRunning => GetIsRunning();
 
         public abstract IEnumerator Run();
+
+        protected abstract float GetDuration();
+
+        protected abstract bool GetIsRunning();
     }
 }
