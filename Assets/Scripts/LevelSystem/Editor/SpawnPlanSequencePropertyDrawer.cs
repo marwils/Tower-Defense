@@ -118,7 +118,7 @@ namespace LevelSystem
             }
 
             var addButtonRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
-            if (GUI.Button(addButtonRect, "Add Element"))
+            if (GUI.Button(addButtonRect, "Add Sequence Element"))
             {
                 ShowAddElementMenu(elementsProp, sequence);
             }

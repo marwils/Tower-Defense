@@ -101,7 +101,7 @@ namespace LevelSystem
                 }
 
                 var addButtonRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
-                if (GUI.Button(addButtonRect, "Add Sequence"))
+                if (GUI.Button(addButtonRect, "Add Spawn Sequence"))
                 {
                     CreateNewSequence(sequencesProp, spawnPlan);
                 }
@@ -150,7 +150,7 @@ namespace LevelSystem
                 {
                     var sequenceProp = sequencesProp.GetArrayElementAtIndex(i);
                     var sequenceHeight = _sequenceDrawer.GetPropertyHeight(sequenceProp, new GUIContent($"Sequence {i + 1}"));
-                    // Korrekte Höhe: Header + Content + Margins + Spacing
+                    // Header + Content + Margins + Spacing
                     height += sequenceHeight + Constants.MarginVertical * 2 + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing + Constants.MarginVertical;
                 }
 

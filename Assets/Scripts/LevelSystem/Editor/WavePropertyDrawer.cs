@@ -112,7 +112,7 @@ namespace LevelSystem
                 currentY += EditorGUIUtility.standardVerticalSpacing;
 
                 var addButtonRect = new Rect(indentedRect.x, currentY, indentedRect.width, EditorGUIUtility.singleLineHeight);
-                if (GUI.Button(addButtonRect, "Add Element"))
+                if (GUI.Button(addButtonRect, "Add Wave Element"))
                 {
                     ShowAddElementMenu(elementsProp, wave);
                 }
