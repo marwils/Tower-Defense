@@ -6,30 +6,30 @@ namespace LevelSystem
 {
     public static class ElementDrawerHelper
     {
-        private static WaveRoutesPropertyDrawer _waveRoutesDrawer;
-        private static SequenceSpawnerPropertyDrawer _sequenceSpawnerDrawer;
+        private static EnemySpawnerPropertyDrawer _sequenceSpawnerDrawer;
+        private static SpawnPlanPropertyDrawer _spawnPlanDrawer;
 
-        private static WaveRoutesPropertyDrawer WaveRoutesDrawer
+        private static EnemySpawnerPropertyDrawer SequenceSpawnerDrawer
         {
             get
             {
-                return _waveRoutesDrawer ??= new WaveRoutesPropertyDrawer();
+                return _sequenceSpawnerDrawer ??= new EnemySpawnerPropertyDrawer();
             }
         }
 
-        private static SequenceSpawnerPropertyDrawer SequenceSpawnerDrawer
+        private static SpawnPlanPropertyDrawer SpawnPlanDrawer
         {
             get
             {
-                return _sequenceSpawnerDrawer ??= new SequenceSpawnerPropertyDrawer();
+                return _spawnPlanDrawer ??= new SpawnPlanPropertyDrawer();
             }
         }
 
-        public static void DrawElement(Rect position, SerializedProperty elementProp, GUIContent label, AbstractWaveElement element)
+        public static void DrawElement(Rect position, SerializedProperty elementProp, GUIContent label, WaveElement element)
         {
-            if (element is WaveRoutes)
+            if (element is SpawnPlan)
             {
-                WaveRoutesDrawer.OnGUI(position, elementProp, label);
+                DrawSpawnPlan(position, elementProp, label, element as SpawnPlan);
             }
             else if (element != null)
             {
@@ -41,11 +41,11 @@ namespace LevelSystem
             }
         }
 
-        public static float GetElementHeight(SerializedProperty elementProp, GUIContent label, AbstractWaveElement element)
+        public static float GetElementHeight(SerializedProperty elementProp, GUIContent label, WaveElement element)
         {
-            if (element is WaveRoutes)
+            if (element is SpawnPlan)
             {
-                return WaveRoutesDrawer.GetPropertyHeight(elementProp, label);
+                return GetSpawnPlanHeight(elementProp, label, element as SpawnPlan);
             }
             else if (element != null)
             {
@@ -57,9 +57,9 @@ namespace LevelSystem
             }
         }
 
-        public static void DrawSequenceElement(Rect position, SerializedProperty elementProp, GUIContent label, AbstractSequenceElement element)
+        public static void DrawSequenceElement(Rect position, SerializedProperty elementProp, GUIContent label, SequenceElement element)
         {
-            if (element is SequenceSpawner)
+            if (element is EnemySpawner)
             {
                 SequenceSpawnerDrawer.OnGUI(position, elementProp, label);
             }
@@ -73,9 +73,9 @@ namespace LevelSystem
             }
         }
 
-        public static float GetSequenceElementHeight(SerializedProperty elementProp, GUIContent label, AbstractSequenceElement element)
+        public static float GetSequenceElementHeight(SerializedProperty elementProp, GUIContent label, SequenceElement element)
         {
-            if (element is SequenceSpawner)
+            if (element is EnemySpawner)
             {
                 return SequenceSpawnerDrawer.GetPropertyHeight(elementProp, label);
             }
@@ -89,7 +89,18 @@ namespace LevelSystem
             }
         }
 
-        private static void DrawInlineProperties(Rect position, SerializedProperty elementProp, GUIContent label, AbstractWaveElement element)
+        // Neue Methoden für SpawnPlan
+        private static void DrawSpawnPlan(Rect position, SerializedProperty elementProp, GUIContent label, SpawnPlan spawnPlan)
+        {
+            SpawnPlanDrawer.OnGUI(position, elementProp, label);
+        }
+
+        private static float GetSpawnPlanHeight(SerializedProperty elementProp, GUIContent label, SpawnPlan spawnPlan)
+        {
+            return SpawnPlanDrawer.GetPropertyHeight(elementProp, label);
+        }
+
+        private static void DrawInlineProperties(Rect position, SerializedProperty elementProp, GUIContent label, WaveElement element)
         {
             var currentY = position.y;
             var headerRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
@@ -120,7 +131,7 @@ namespace LevelSystem
             EditorGUI.indentLevel--;
         }
 
-        private static float GetInlinePropertiesHeight(SerializedProperty elementProp, GUIContent label, AbstractWaveElement element)
+        private static float GetInlinePropertiesHeight(SerializedProperty elementProp, GUIContent label, WaveElement element)
         {
             float height = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Header
 
@@ -136,7 +147,7 @@ namespace LevelSystem
             return height;
         }
 
-        private static void DrawInlineSequenceProperties(Rect position, SerializedProperty elementProp, GUIContent label, AbstractSequenceElement element)
+        private static void DrawInlineSequenceProperties(Rect position, SerializedProperty elementProp, GUIContent label, SequenceElement element)
         {
             var currentY = position.y;
             var headerRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
@@ -167,7 +178,7 @@ namespace LevelSystem
             EditorGUI.indentLevel--;
         }
 
-        private static float GetInlineSequencePropertiesHeight(SerializedProperty elementProp, GUIContent label, AbstractSequenceElement element)
+        private static float GetInlineSequencePropertiesHeight(SerializedProperty elementProp, GUIContent label, SequenceElement element)
         {
             float height = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Header
 

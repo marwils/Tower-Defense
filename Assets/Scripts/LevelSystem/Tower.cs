@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LevelSystem
 {
-        [CreateAssetMenu(fileName = "Tower", menuName = "Game/Tower")]
+        [CreateAssetMenu(fileName = "New Tower", menuName = "Game/Tower")]
         [Serializable]
         public class Tower : Entity
         {

@@ -17,18 +17,27 @@ namespace LevelSystem
 
             var currentY = position.y;
 
-            var headerRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
-            EditorGUI.LabelField(headerRect, "Waves", EditorStyles.boldLabel);
-            currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-
             EditorGUI.indentLevel++;
 
             for (int i = 0; i < property.arraySize; i++)
             {
                 var waveProperty = property.GetArrayElementAtIndex(i);
 
-                var height = _waveDrawer.GetPropertyHeight(waveProperty, new GUIContent($"Wave {i + 1}"));
-                var totalHeight = height + Constants.MarginVertical * 2;
+                var wave = waveProperty.objectReferenceValue as Wave;
+                if (wave == null)
+                {
+                    Debug.LogWarning($"Wave at index {i} is null. Skipping rendering.");
+                    continue;
+                }
+
+                var headerTitle = $"Wave {i + 1}";
+                if (!string.IsNullOrEmpty(wave.Title) && wave.Title != headerTitle)
+                {
+                    headerTitle += $" - {wave.Title}";
+                }
+
+                var height = _waveDrawer.GetPropertyHeight(waveProperty, new GUIContent(headerTitle));
+                var totalHeight = height + Constants.MarginVertical * 2 + Constants.MarginVertical;
 
                 var boxRect = new Rect(position.x, currentY, position.width, totalHeight);
                 GUI.Box(boxRect, "", EditorStyles.helpBox);
@@ -37,16 +46,12 @@ namespace LevelSystem
                 var headerWaveRect = new Rect(position.x, currentY + Constants.MarginVertical, position.width - 20 - Constants.MarginVertical, EditorGUIUtility.singleLineHeight);
                 var headerStyle = new GUIStyle(EditorStyles.boldLabel);
                 headerStyle.fontSize = 14;
-                EditorGUI.LabelField(headerWaveRect, $"Wave {i + 1}", headerStyle);
+                EditorGUI.LabelField(headerWaveRect, headerTitle, headerStyle);
 
                 var deleteMinusButtonRect = new Rect(position.x + position.width - 20 - Constants.MarginVertical, currentY + Constants.MarginVertical, 20, EditorGUIUtility.singleLineHeight);
                 if (GUI.Button(deleteMinusButtonRect, "-"))
                 {
-                    var wave = waveProperty.objectReferenceValue as Wave;
-                    if (wave != null)
-                    {
-                        AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(wave));
-                    }
+                    AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(wave));
                     property.DeleteArrayElementAtIndex(i);
                     property.serializedObject.ApplyModifiedProperties();
                     break;
@@ -57,11 +62,11 @@ namespace LevelSystem
 
                 var contentY = currentY + Constants.MarginVertical * 2 + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                 var contentHeight = height - EditorGUIUtility.singleLineHeight - EditorGUIUtility.standardVerticalSpacing;
-                var contentRect = new Rect(position.x, contentY, position.width, contentHeight);
+                var contentRect = new Rect(position.x + Constants.MarginHorizontal, contentY, position.width - Constants.MarginHorizontal * 2, contentHeight);
 
                 DrawWaveContent(contentRect, waveProperty);
 
-                currentY += totalHeight + EditorGUIUtility.standardVerticalSpacing * 2;
+                currentY += totalHeight + Constants.MarginVertical;
             }
 
             var addButtonRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
@@ -78,6 +83,7 @@ namespace LevelSystem
             {
                 var level = property.serializedObject.targetObject as Level;
                 var wave = LevelAssetFactory.CreateWave(level);
+                wave.Title = $"Wave {property.arraySize + 1}";
                 property.arraySize++;
                 var newWaveProp = property.GetArrayElementAtIndex(property.arraySize - 1);
                 newWaveProp.objectReferenceValue = wave;
@@ -100,17 +106,16 @@ namespace LevelSystem
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            float height = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+            float height = 0;
 
             for (int i = 0; i < property.arraySize; i++)
             {
                 var waveProperty = property.GetArrayElementAtIndex(i);
-                var waveHeight = _waveDrawer.GetPropertyHeight(waveProperty, new GUIContent($"Wave {i + 1}"));
-                height += waveHeight + Constants.MarginVertical * 2 + EditorGUIUtility.standardVerticalSpacing;
-                height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                var waveHeight = _waveDrawer.GetPropertyHeight(waveProperty, new GUIContent($"Wave"));
+                height += waveHeight + Constants.MarginVertical * 4; // Wave elements, header, and spacing
             }
 
-            height += EditorGUIUtility.standardVerticalSpacing;
+            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // "Add Wave"-Button
 
             return height;
         }

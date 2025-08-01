@@ -36,14 +36,6 @@ namespace Helper
                     }
                 }
             }
-
-            // Rekursiv für Kinder aufrufen
-            for (int i = 0; i < sourceTransformation.childCount; i++)
-            {
-                Transform childTransform = sourceTransformation.GetChild(i);
-                Transform prefabChildTransform = targetTransformation.GetChild(i);
-                SetTransformation(childTransform, prefabChildTransform, types);
-            }
         }
 
         public static void ResetTransformation(Transform target)

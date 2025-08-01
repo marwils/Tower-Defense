@@ -9,14 +9,19 @@ namespace LevelSystem
     public class LevelEditor : Editor
     {
         private SerializedProperty _titleProperty;
+        private SerializedProperty _routesProperty;
         private SerializedProperty _wavesProperty;
-        private WavesPropertyDrawer _wavesPropertyDrawer;
+        private RoutesPropertyDrawer _routesPropertyDrawer = new RoutesPropertyDrawer();
+        private WavesPropertyDrawer _wavesPropertyDrawer = new WavesPropertyDrawer();
+
+        private bool _showRoutes = true;
+        private bool _showWaves = true;
 
         private void OnEnable()
         {
             _titleProperty = serializedObject.FindProperty("_title");
+            _routesProperty = serializedObject.FindProperty("_routes");
             _wavesProperty = serializedObject.FindProperty("_waves");
-            _wavesPropertyDrawer = new WavesPropertyDrawer();
         }
 
         public override void OnInspectorGUI()
@@ -32,13 +37,48 @@ namespace LevelSystem
 
             serializedObject.Update();
 
+            EditorGUILayout.Space();
+            var headerStyle = new GUIStyle(EditorStyles.boldLabel);
+            headerStyle.fontSize = 16;
+            EditorGUILayout.LabelField("Level Configuration", headerStyle);
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
+
             EditorGUILayout.PropertyField(_titleProperty);
+            EditorGUILayout.Space();
+
+            if (_routesProperty != null)
+            {
+                var foldoutStyle = new GUIStyle(EditorStyles.foldout);
+                foldoutStyle.fontSize = 14;
+                foldoutStyle.fontStyle = FontStyle.Bold;
+
+                _showRoutes = EditorGUILayout.Foldout(_showRoutes, "Routes", true, foldoutStyle);
+                if (_showRoutes)
+                {
+                    EditorGUILayout.Space();
+                    var height = _routesPropertyDrawer.GetPropertyHeight(_routesProperty, new GUIContent($"Routes"));
+                    var rect = GUILayoutUtility.GetRect(0, height);
+                    _routesPropertyDrawer.OnGUI(rect, _routesProperty, new GUIContent($"Routes"));
+                }
+            }
+
             EditorGUILayout.Space();
 
             if (_wavesProperty != null)
             {
-                var rect = GUILayoutUtility.GetRect(0, _wavesPropertyDrawer.GetPropertyHeight(_wavesProperty, new GUIContent("Waves")));
-                _wavesPropertyDrawer.OnGUI(rect, _wavesProperty, new GUIContent("Waves"));
+                var foldoutStyle = new GUIStyle(EditorStyles.foldout);
+                foldoutStyle.fontSize = 14;
+                foldoutStyle.fontStyle = FontStyle.Bold;
+
+                _showWaves = EditorGUILayout.Foldout(_showWaves, "Waves", true, foldoutStyle);
+                if (_showWaves)
+                {
+                    EditorGUILayout.Space();
+                    var height = _wavesPropertyDrawer.GetPropertyHeight(_wavesProperty, new GUIContent("Waves"));
+                    var rect = GUILayoutUtility.GetRect(0, height);
+                    _wavesPropertyDrawer.OnGUI(rect, _wavesProperty, new GUIContent("Waves"));
+                }
             }
 
             if (GUI.changed && !level.IsSerializationBlocked)

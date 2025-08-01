@@ -5,9 +5,8 @@ using UnityEngine;
 
 namespace LevelSystem
 {
-    [CreateAssetMenu(fileName = "WaveDelay", menuName = "Game/Wave/Delay")]
     [Serializable]
-    public class WaveDelay : AbstractWaveElement
+    public class WaveDelay : WaveElement
     {
         [SerializeField]
         [Range(0f, 10f)]

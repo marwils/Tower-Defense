@@ -1,13 +1,12 @@
+using System;
+using System.Collections;
+
+using UnityEngine;
+
 namespace LevelSystem
 {
-    using System;
-    using System.Collections;
-
-    using UnityEngine;
-
-    [CreateAssetMenu(fileName = "SequenceDelay", menuName = "Game/Sequence/Delay")]
     [Serializable]
-    public class SequenceDelay : AbstractSequenceElement
+    public class SequenceDelay : SequenceElement
     {
         [Tooltip("Delay in seconds")]
         [Range(0f, 10f)]

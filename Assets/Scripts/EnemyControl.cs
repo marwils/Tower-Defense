@@ -34,7 +34,6 @@ public class EnemyControl : MonoBehaviour
         }
 
         ResetStats();
-
         _agent = GetComponent<NavMeshAgent>();
     }
 
@@ -49,13 +48,11 @@ public class EnemyControl : MonoBehaviour
         if (destination != null)
         {
             _destination = destination;
+            _agent.SetDestination(_destination.position);
         }
         else
         {
             Debug.LogError("No destination set for the enemy.");
-            return;
         }
-
-        _agent.SetDestination(_destination.position);
     }
 }

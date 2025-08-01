@@ -2,7 +2,6 @@ using UnityEditor;
 using UnityEngine;
 using System;
 using System.Linq;
-using UnityEngine.UI;
 
 namespace LevelSystem
 {
@@ -18,7 +17,7 @@ namespace LevelSystem
             {
                 _waveElementTypes = AppDomain.CurrentDomain.GetAssemblies()
                     .SelectMany(asm => asm.GetTypes())
-                    .Where(t => t.IsSubclassOf(typeof(AbstractWaveElement)) && !t.IsAbstract)
+                    .Where(t => t.IsSubclassOf(typeof(WaveElement)) && !t.IsAbstract)
                     .ToArray();
 
                 _waveElementTypeNames = _waveElementTypes
@@ -31,6 +30,13 @@ namespace LevelSystem
         {
             InitializeTypes();
             EditorGUI.BeginProperty(position, label, property);
+
+            if (property.objectReferenceValue == null)
+            {
+                EditorGUI.PropertyField(position, property, label);
+                EditorGUI.EndProperty();
+                return;
+            }
 
             var wave = property.objectReferenceValue as Wave;
             if (wave == null)
@@ -59,7 +65,7 @@ namespace LevelSystem
             InitializeTypes();
 
             var currentY = position.y;
-            var indentedRect = new Rect(position.x, currentY, position.width - Constants.MarginVertical, position.height);
+            var indentedRect = new Rect(position.x, currentY, position.width, position.height);
 
             var waveSO = new SerializedObject(wave);
             waveSO.Update();
@@ -78,7 +84,7 @@ namespace LevelSystem
                 for (int i = 0; i < elementsProp.arraySize; i++)
                 {
                     var elementProp = elementsProp.GetArrayElementAtIndex(i);
-                    var element = elementProp.objectReferenceValue as AbstractWaveElement;
+                    var element = elementProp.objectReferenceValue as WaveElement;
 
                     string elementLabel = element != null ? ObjectNames.NicifyVariableName(element.GetType().Name) : $"Element {i + 1}";
                     var elementGuiLabel = new GUIContent($" • {elementLabel}");
@@ -105,7 +111,7 @@ namespace LevelSystem
                 }
                 currentY += EditorGUIUtility.standardVerticalSpacing;
 
-                var addButtonRect = new Rect(indentedRect.x + Constants.MarginVertical, currentY, indentedRect.width - Constants.MarginVertical, EditorGUIUtility.singleLineHeight);
+                var addButtonRect = new Rect(indentedRect.x, currentY, indentedRect.width, EditorGUIUtility.singleLineHeight);
                 if (GUI.Button(addButtonRect, "Add Element"))
                 {
                     ShowAddElementMenu(elementsProp, wave);
@@ -148,34 +154,36 @@ namespace LevelSystem
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             if (property.objectReferenceValue == null)
-            {
                 return EditorGUIUtility.singleLineHeight;
-            }
 
             var wave = property.objectReferenceValue as Wave;
-            if (wave == null) return EditorGUIUtility.singleLineHeight;
+            if (wave == null)
+                return EditorGUIUtility.singleLineHeight;
 
             var waveSO = new SerializedObject(wave);
             var elementsProp = waveSO.FindProperty("_waveElements");
 
-            float height = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+            float height = 0;
 
+            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Header
+            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Title
+
+            // Elements
             if (elementsProp != null)
             {
                 for (int i = 0; i < elementsProp.arraySize; i++)
                 {
                     var elementProp = elementsProp.GetArrayElementAtIndex(i);
-                    var element = elementProp.objectReferenceValue as AbstractWaveElement;
-
+                    var element = elementProp.objectReferenceValue as WaveElement;
                     string elementLabel = element != null ? ObjectNames.NicifyVariableName(element.GetType().Name) : $"Element {i + 1}";
-                    var elementGuiLabel = new GUIContent(elementLabel);
+                    var elementGuiLabel = new GUIContent($" • {elementLabel}");
 
-                    height += ElementDrawerHelper.GetElementHeight(elementProp, elementGuiLabel, element) + EditorGUIUtility.standardVerticalSpacing;
+                    height += ElementDrawerHelper.GetElementHeight(elementProp, elementGuiLabel, element)
+                              + EditorGUIUtility.standardVerticalSpacing;
                 }
 
-                height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Add button
+                height += EditorGUIUtility.standardVerticalSpacing; // Extra spacing after the add button
             }
 
             return height;
