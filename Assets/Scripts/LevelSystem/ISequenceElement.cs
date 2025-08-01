@@ -1,4 +1,7 @@
 namespace LevelSystem
 {
-    public interface ISequenceElement : IRoutine { }
+    public interface ISequenceElement : IRoutine
+    {
+        void Initialize(IRouteProvider routeProvider);
+    }
 }

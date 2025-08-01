@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LevelSystem
 {
-        [CreateAssetMenu(fileName = "Enemy", menuName = "Game/Enemy")]
+        [CreateAssetMenu(fileName = "New Enemy", menuName = "Game/Enemy")]
         [Serializable]
         public class Enemy : Entity
         {
@@ -17,6 +17,5 @@ namespace LevelSystem
                         _canMove = true;
                         _speed = 3.5f;
                 }
-                //protected new bool _canMove = true;
         }
 }

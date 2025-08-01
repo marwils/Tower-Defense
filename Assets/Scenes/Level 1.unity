@@ -4573,7 +4573,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 691938274}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &487624311
 PrefabInstance:
@@ -7577,7 +7577,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1698240637}
-  - {fileID: 480929677}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &691938275
@@ -7592,7 +7591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f10b84bd1089042bee9dc5b2933482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _level: {fileID: 11400000, guid: 10bd293fa6e9510478982ddb557de14f, type: 2}
+  _level: {fileID: 11400000, guid: 99452e397c4fd0e4b836e427ed387208, type: 2}
 --- !u!114 &691938276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10752,7 +10751,7 @@ PrefabInstance:
     - target: {fileID: 6495969086955981108, guid: 37841d091d9809840b993edf87597999, type: 3}
       propertyPath: _metadata
       value: 
-      objectReference: {fileID: 11400000, guid: 98bc695b80edaaf469ae285cd4cc9f4b, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 6495969086955981108, guid: 37841d091d9809840b993edf87597999, type: 3}
       propertyPath: _settings
       value: 
@@ -10760,7 +10759,7 @@ PrefabInstance:
     - target: {fileID: 6495969086955981108, guid: 37841d091d9809840b993edf87597999, type: 3}
       propertyPath: _buildingSettings
       value: 
-      objectReference: {fileID: 11400000, guid: 98bc695b80edaaf469ae285cd4cc9f4b, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 6495969086955981108, guid: 37841d091d9809840b993edf87597999, type: 3}
       propertyPath: _smallCrystalAmount
       value: 4
@@ -22566,6 +22565,7 @@ SceneRoots:
   - {fileID: 1171152922}
   - {fileID: 1220247594}
   - {fileID: 691938274}
+  - {fileID: 480929677}
   - {fileID: 1736257182}
   - {fileID: 1175962238}
   - {fileID: 1703971558}

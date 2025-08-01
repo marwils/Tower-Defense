@@ -9,14 +9,19 @@ namespace LevelSystem
     public class LevelEditor : Editor
     {
         private SerializedProperty _titleProperty;
+        private SerializedProperty _routesProperty;
         private SerializedProperty _wavesProperty;
-        private WavePropertyDrawer _waveDrawer;
+        private RoutesPropertyDrawer _routesPropertyDrawer = new RoutesPropertyDrawer();
+        private WavesPropertyDrawer _wavesPropertyDrawer = new WavesPropertyDrawer();
+
+        private bool _showRoutes = true;
+        private bool _showWaves = true;
 
         private void OnEnable()
         {
             _titleProperty = serializedObject.FindProperty("_title");
+            _routesProperty = serializedObject.FindProperty("_routes");
             _wavesProperty = serializedObject.FindProperty("_waves");
-            _waveDrawer = new WavePropertyDrawer();
         }
 
         public override void OnInspectorGUI()
@@ -32,70 +37,48 @@ namespace LevelSystem
 
             serializedObject.Update();
 
+            EditorGUILayout.Space();
+            var headerStyle = new GUIStyle(EditorStyles.boldLabel);
+            headerStyle.fontSize = 16;
+            EditorGUILayout.LabelField("Level Configuration", headerStyle);
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
+
             EditorGUILayout.PropertyField(_titleProperty);
+            EditorGUILayout.Space();
+
+            if (_routesProperty != null)
+            {
+                var foldoutStyle = new GUIStyle(EditorStyles.foldout);
+                foldoutStyle.fontSize = 14;
+                foldoutStyle.fontStyle = FontStyle.Bold;
+
+                _showRoutes = EditorGUILayout.Foldout(_showRoutes, "Routes", true, foldoutStyle);
+                if (_showRoutes)
+                {
+                    EditorGUILayout.Space();
+                    var height = _routesPropertyDrawer.GetPropertyHeight(_routesProperty, new GUIContent($"Routes"));
+                    var rect = GUILayoutUtility.GetRect(0, height);
+                    _routesPropertyDrawer.OnGUI(rect, _routesProperty, new GUIContent($"Routes"));
+                }
+            }
 
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Waves", EditorStyles.boldLabel);
 
             if (_wavesProperty != null)
             {
-                EditorGUI.indentLevel++;
+                var foldoutStyle = new GUIStyle(EditorStyles.foldout);
+                foldoutStyle.fontSize = 14;
+                foldoutStyle.fontStyle = FontStyle.Bold;
 
-                for (int i = 0; i < _wavesProperty.arraySize; i++)
+                _showWaves = EditorGUILayout.Foldout(_showWaves, "Waves", true, foldoutStyle);
+                if (_showWaves)
                 {
-                    var waveProperty = _wavesProperty.GetArrayElementAtIndex(i);
-
-                    var height = _waveDrawer.GetPropertyHeight(waveProperty, new GUIContent($"Wave {i + 1}"));
-                    const float marginVertical = 8f;
-                    var totalHeight = height + marginVertical * 2;
-                    var rect = GUILayoutUtility.GetRect(0, totalHeight);
-
-                    var boxRect = new Rect(rect.x, rect.y, rect.width, totalHeight);
-                    GUI.Box(boxRect, "", EditorStyles.helpBox);
-
-                    var headerRect = new Rect(rect.x, rect.y + marginVertical, rect.width, EditorGUIUtility.singleLineHeight);
-                    var deleteRect = new Rect(rect.x + rect.width - 20, rect.y + marginVertical, 20, EditorGUIUtility.singleLineHeight);
-
-                    var headerStyle = new GUIStyle(EditorStyles.boldLabel);
-                    headerStyle.fontSize = 14;
-                    EditorGUI.LabelField(headerRect, $"Wave {i + 1}", headerStyle);
-
-                    if (GUI.Button(deleteRect, "-"))
-                    {
-                        var wave = waveProperty.objectReferenceValue as Wave;
-                        if (wave != null)
-                        {
-                            AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(wave));
-                        }
-                        _wavesProperty.DeleteArrayElementAtIndex(i);
-                        serializedObject.ApplyModifiedProperties();
-                        break;
-                    }
-
-                    var contentY = rect.y + marginVertical * 2 + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-                    var contentHeight = height - EditorGUIUtility.singleLineHeight - EditorGUIUtility.standardVerticalSpacing;
-                    float marginLeft = 0;
-                    var contentRect = new Rect(rect.x + marginLeft, contentY, rect.width - marginLeft * 2, contentHeight);
-
-                    DrawWaveContentUsingPropertyDrawer(contentRect, waveProperty);
+                    EditorGUILayout.Space();
+                    var height = _wavesPropertyDrawer.GetPropertyHeight(_wavesProperty, new GUIContent("Waves"));
+                    var rect = GUILayoutUtility.GetRect(0, height);
+                    _wavesPropertyDrawer.OnGUI(rect, _wavesProperty, new GUIContent("Waves"));
                 }
-
-                EditorGUILayout.Space();
-                if (GUILayout.Button("Add Wave", GUILayout.Height(30)))
-                {
-                    var wave = LevelAssetFactory.CreateWave(target);
-                    _wavesProperty.arraySize++;
-                    var newWaveProp = _wavesProperty.GetArrayElementAtIndex(_wavesProperty.arraySize - 1);
-                    newWaveProp.objectReferenceValue = wave;
-
-                    level.UpdateSceneContext();
-
-                    serializedObject.ApplyModifiedProperties();
-                    AssetDatabase.SaveAssets();
-                    AssetDatabase.Refresh();
-                }
-
-                EditorGUI.indentLevel--;
             }
 
             if (GUI.changed && !level.IsSerializationBlocked)
@@ -208,18 +191,16 @@ namespace LevelSystem
             return null;
         }
 
-        private void DrawWaveContentUsingPropertyDrawer(Rect position, SerializedProperty waveProperty)
-        {
-            var wave = waveProperty.objectReferenceValue as Wave;
-            if (wave == null) return;
-
-            _waveDrawer.DrawWaveContent(position, waveProperty, wave);
-        }
-
         public override bool HasPreviewGUI()
         {
             var level = target as Level;
             return !level.IsSerializationBlocked && base.HasPreviewGUI();
         }
+    }
+
+    static class Constants
+    {
+        public const float MarginVertical = 8f;
+        public const float MarginHorizontal = 10f;
     }
 }

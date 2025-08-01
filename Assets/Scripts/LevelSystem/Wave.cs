@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,18 +9,21 @@ using UnityEngine;
 
 namespace LevelSystem
 {
-    [CreateAssetMenu(fileName = "Wave", menuName = "Game/Wave")]
-    public class Wave : ScriptableObject
+    public class Wave : TimeElement
     {
         [SerializeField]
         private string _title = "New Wave";
-        public string Title => _title;
+        public string Title
+        {
+            get { return _title; }
+            set { _title = value; }
+        }
 
         [SerializeField]
-        private List<AbstractWaveElement> _waveElements = new();
-        public IReadOnlyList<AbstractWaveElement> WaveElements => _waveElements;
+        private List<WaveElement> _waveElements = new();
+        public IReadOnlyList<WaveElement> WaveElements => _waveElements;
 
-        public void AddWaveElement(AbstractWaveElement element)
+        public void AddWaveElement(WaveElement element)
         {
             if (element == null)
             {
@@ -60,7 +62,7 @@ namespace LevelSystem
 
             if (_waveElements == null)
             {
-                _waveElements = new List<AbstractWaveElement>();
+                _waveElements = new List<WaveElement>();
             }
 
             _waveElements.RemoveAll(element => element == null);
@@ -68,7 +70,6 @@ namespace LevelSystem
 
         public void StartWave()
         {
-            Debug.Log($"Starting wave: {_title}");
             CoroutineRunner.Start(RunWave());
         }
 
@@ -78,6 +79,28 @@ namespace LevelSystem
             {
                 yield return element.Run();
             }
+        }
+
+        protected override float GetDuration()
+        {
+            float totalDuration = 0f;
+            foreach (var element in _waveElements)
+            {
+                totalDuration += element.Duration;
+            }
+            return totalDuration;
+        }
+
+        protected override bool GetIsRunning()
+        {
+            foreach (var element in _waveElements)
+            {
+                if (element.IsRunning)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

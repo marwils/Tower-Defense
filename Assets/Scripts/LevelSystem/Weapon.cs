@@ -4,10 +4,12 @@ using UnityEngine;
 
 namespace LevelSystem
 {
-        [CreateAssetMenu(fileName = "Weapon", menuName = "Game/Weapon")]
+        [CreateAssetMenu(fileName = "New Weapon", menuName = "Game/Weapon")]
         [Serializable]
         public class Weapon : ScriptableObject
         {
+                [Header("Weapon")]
+
                 [SerializeField]
                 [Tooltip("The amount of damage the weapon deals")]
                 private float _damage = 10f;

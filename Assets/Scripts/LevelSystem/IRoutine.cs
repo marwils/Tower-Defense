@@ -6,7 +6,6 @@ namespace LevelSystem
     {
         float Duration { get; }
         bool IsRunning { get; }
-
         IEnumerator Run();
     }
 }

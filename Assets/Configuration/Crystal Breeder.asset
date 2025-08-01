@@ -18,5 +18,5 @@ MonoBehaviour:
   _shield: 0
   _canMove: 0
   _speed: 0
-  _breedingTime: 1
+  _breedingTime: 5
   _maxCrystals: 4

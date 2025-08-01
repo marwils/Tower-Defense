@@ -1,15 +1,18 @@
 using UnityEngine;
+using LevelSystem;
 
 public class SpawnPoint : GizmoBehaviour
 {
     private void Start()
     {
         RouteRegistry.RegisterSpawnPoint(transform);
+        EnemySpawnEvent.OnEnemySpawnRequested += HandleEnemySpawnRequest;
     }
 
     private void OnDestroy()
     {
         RouteRegistry.UnregisterSpawnPoint(transform);
+        EnemySpawnEvent.OnEnemySpawnRequested -= HandleEnemySpawnRequest;
     }
 
     protected override Color GetGizmoColor()
@@ -17,9 +20,32 @@ public class SpawnPoint : GizmoBehaviour
         return Color.green;
     }
 
-    public void DoSpawn(EnemyControl enemyPrefab, Transform destination)
+    private void HandleEnemySpawnRequest(EnemySpawnRequest request)
     {
-        EnemyControl enemyInstance = Instantiate(enemyPrefab, transform.position, enemyPrefab.transform.rotation);
-        enemyInstance.SetDestination(destination);
+        if (IsCorrectSpawn(request))
+        {
+            DoSpawn(request);
+        }
+    }
+
+    private bool IsCorrectSpawn(EnemySpawnRequest request)
+    {
+        return request.SpawnTransform == transform;
+    }
+
+
+    private void DoSpawn(EnemySpawnRequest request)
+    {
+        if (request.EnemyPrefab == null)
+        {
+            Debug.LogError($"SpawnPoint '{name}': Enemy prefab is null!");
+            return;
+        }
+
+        EnemyControl enemyInstance = Instantiate(request.EnemyPrefab, transform.position, request.EnemyPrefab.transform.rotation);
+
+        enemyInstance.SetDestination(request.TargetTransform);
+
+        Debug.Log($"SpawnPoint '{name}' spawned enemy: {request.EnemyPrefab.name} -> {request.TargetTransform?.name}");
     }
 }

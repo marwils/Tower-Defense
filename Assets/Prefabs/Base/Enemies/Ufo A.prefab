@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83bacf1bc217ac4448c7217c1b045a83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemySettings: {fileID: 11400000, guid: d97da8c7831267e49b8c366f7fac3b6c, type: 2}
+  _enemySettings: {fileID: 11400000, guid: e5e301627b66f6c459510be785bc10d6, type: 2}
   _destination: {fileID: 0}
   _currentHealth: 0
   _currentSpeed: 0

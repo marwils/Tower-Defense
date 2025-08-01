@@ -8,22 +8,29 @@ public class CameraControl : MonoBehaviour
 
     [SerializeField, Range(0f, 1f)]
     private float _initialZoomAmount = 0.5f;
+
     [SerializeField]
     private float _zoomScrollSensitivity = 0.05f;
+
     [SerializeField]
     private float _zoomSmoothTime = 0.15f;
+
     [SerializeField]
     private float _minZoomZ = -5f;
+
     [SerializeField]
     private float _maxZoomZ = -14f;
+
     [SerializeField]
     private float _minPitch = 25f;
+
     [SerializeField]
     private float _maxPitch = 70f;
 
     [Header("Movement")]
 
-    [SerializeField] private float _moveSpeed = 10f;
+    [SerializeField]
+    private float _moveSpeed = 10f;
 
     public event Action OnCameraMove;
 

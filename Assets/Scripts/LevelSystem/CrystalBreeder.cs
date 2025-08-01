@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LevelSystem
 {
-        [CreateAssetMenu(fileName = "CrystalBreeder", menuName = "Game/Building/Crystal Breeder")]
+        [CreateAssetMenu(fileName = "New Crystal Breeder", menuName = "Game/Building/Crystal Breeder")]
         [Serializable]
         public class CrystalBreeder : Entity
         {

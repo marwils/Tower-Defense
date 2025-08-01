@@ -6,12 +6,24 @@ using UnityEngine.SceneManagement;
 namespace LevelSystem
 {
     [CreateAssetMenu(fileName = "New Level", menuName = "Game/Level")]
-    public class Level : ScriptableObject
+    [System.Serializable]
+    /// <summary>
+    /// Represents a level in the game, containing routes and waves.
+    /// </summary>
+    public class Level : TimeElement
     {
-        [SerializeField] private string _title = "New Level";
+        [SerializeField]
+        private string _title = "New Level";
         public string Title => _title;
 
-        [SerializeField] private List<Wave> _waves = new();
+        [SerializeField]
+        [Tooltip("List of routes used in the level.")]
+        private List<Route> _routes = new();
+        public IReadOnlyList<Route> Routes => _routes;
+
+        [SerializeField]
+        [Tooltip("List of waves in the level.")]
+        private List<Wave> _waves = new();
         public List<Wave> Waves => _waves;
 
         [SerializeField, HideInInspector]
@@ -90,7 +102,6 @@ namespace LevelSystem
             if (_blockSerialization)
             {
                 return;
-                //Debug.LogWarning("Serialization blocked due to scene context mismatch. Please update scene context first.");
             }
         }
 
@@ -100,6 +111,28 @@ namespace LevelSystem
             {
                 _blockSerialization = true;
             }
+        }
+
+        protected override float GetDuration()
+        {
+            float totalDuration = 0f;
+            foreach (var wave in _waves)
+            {
+                totalDuration += wave.Duration;
+            }
+            return totalDuration;
+        }
+
+        protected override bool GetIsRunning()
+        {
+            foreach (var wave in _waves)
+            {
+                if (wave.IsRunning)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 #endif
     }
