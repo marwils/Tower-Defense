@@ -5,10 +5,6 @@ using UnityEngine;
 public class TowerController : EntityController
 {
     [SerializeField]
-    private Tower _towerSettings;
-    public Tower TowerSettings => _towerSettings;
-
-    [SerializeField]
     private WeaponController _weaponController;
     public WeaponController WeaponController => _weaponController;
 
@@ -24,6 +20,6 @@ public class TowerController : EntityController
 
     protected override Tower GetEntitySettings<Tower>()
     {
-        return _towerSettings as Tower;
+        return _entitySettings as Tower;
     }
 }

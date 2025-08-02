@@ -7,10 +7,6 @@ using UnityEngine.AI;
 public class EnemyController : EntityController
 {
     [SerializeField]
-    private Enemy _enemySettings;
-    public Enemy EnemySettings => _enemySettings;
-
-    [SerializeField]
     private Transform _destination;
     public Transform Destination => _destination;
 
@@ -26,16 +22,17 @@ public class EnemyController : EntityController
 
     protected override void Awake()
     {
-        base.Awake();
-
         _agent = GetComponent<NavMeshAgent>();
+
+        base.Awake();
     }
 
-    protected override void Initialize()
+    protected override void InitializeEntity()
     {
-        base.Initialize();
-        _currentHealth = _enemySettings.Health;
-        _agent.speed = _enemySettings.Speed;
+        base.InitializeEntity();
+
+        _currentHealth = GetEntitySettings<Enemy>().Health;
+        _agent.speed = GetEntitySettings<Enemy>().Speed;
     }
 
     public void SetDestination(Transform destination)
@@ -53,6 +50,6 @@ public class EnemyController : EntityController
 
     protected override Enemy GetEntitySettings<Enemy>()
     {
-        return _enemySettings as Enemy;
+        return _entitySettings as Enemy;
     }
 }

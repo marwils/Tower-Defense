@@ -37,7 +37,7 @@ public abstract class EntityController : MonoBehaviour
             return;
         }
 
-        Initialize();
+        InitializeEntity();
     }
 
     protected virtual T GetEntitySettings<T>() where T : Entity
@@ -54,10 +54,10 @@ public abstract class EntityController : MonoBehaviour
         }
 
         _entitySettings = entitySettings;
-        Initialize();
+        InitializeEntity();
     }
 
-    protected virtual void Initialize()
+    protected virtual void InitializeEntity()
     {
         _canTakeDamage = _entitySettings.CanTakeDamage;
         _canBeHealed = _entitySettings.CanBeHealed;

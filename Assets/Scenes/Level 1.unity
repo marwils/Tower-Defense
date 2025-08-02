@@ -7496,7 +7496,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab9415843746de4092fce86ddcd9be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _towerSettings: {fileID: 11400000, guid: 6bb60cc7a235bc94a866a1c63f209227, type: 2}
+  _entitySettings: {fileID: 11400000, guid: 6bb60cc7a235bc94a866a1c63f209227, type: 2}
+  _weaponController: {fileID: 0}
 --- !u!1001 &690215535
 PrefabInstance:
   m_ObjectHideFlags: 0

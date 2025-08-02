@@ -22,17 +22,16 @@ public class SpawnPoint : GizmoBehaviour
 
     private void HandleEnemySpawnRequest(EnemySpawnRequest request)
     {
-        if (IsCorrectSpawn(request))
+        if (IsSpawnPointCorrect(request))
         {
             DoSpawn(request);
         }
     }
 
-    private bool IsCorrectSpawn(EnemySpawnRequest request)
+    private bool IsSpawnPointCorrect(EnemySpawnRequest request)
     {
         return request.SpawnTransform == transform;
     }
-
 
     private void DoSpawn(EnemySpawnRequest request)
     {
@@ -42,7 +41,7 @@ public class SpawnPoint : GizmoBehaviour
             return;
         }
 
-        EnemyControl enemyInstance = Instantiate(request.EnemyPrefab, transform.position, request.EnemyPrefab.transform.rotation);
+        EnemyController enemyInstance = Instantiate(request.EnemyPrefab, transform.position, request.EnemyPrefab.transform.rotation);
 
         enemyInstance.SetDestination(request.TargetTransform);
 
