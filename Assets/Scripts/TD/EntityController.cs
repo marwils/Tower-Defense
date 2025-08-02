@@ -8,24 +8,33 @@ public abstract class EntityController : MonoBehaviour
     protected Entity _entitySettings;
     public Entity EntitySettings => _entitySettings;
 
+    [Header("Runtime Properties")]
+
+    [SerializeField]
     private bool _canTakeDamage;
     public bool CanTakeDamage => _canTakeDamage;
 
+    [SerializeField]
     private bool _canBeHealed;
     public bool CanBeHealed => _canBeHealed;
 
+    [SerializeField]
     private float _health;
     public float Health => _health;
 
+    [SerializeField]
     private float _shield;
     public float Shield => _shield;
 
+    [SerializeField]
     private bool _canMove;
     public bool CanMove => _canMove;
 
+    [SerializeField]
     private float _speed;
     public float Speed => _speed;
 
+    [SerializeField]
     private float _maxHealth;
     public float MaxHealth => _maxHealth;
 
