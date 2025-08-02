@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-using Helper;
+using MarwilsTD.Helper;
 
 using UnityEngine;
 
@@ -192,8 +192,8 @@ public class CrystalBreeder : EntityBase, ISelectable
 
     protected override void InitState()
     {
-        _breedingTime = GetSettings<LevelSystem.CrystalBreeder>().BreedingTime;
-        _smallCrystalAmount = GetSettings<LevelSystem.CrystalBreeder>().MaxCrystals - 1;
+        _breedingTime = GetSettings<MarwilsTD.LevelSystem.CrystalBreeder>().BreedingTime;
+        _smallCrystalAmount = GetSettings<MarwilsTD.LevelSystem.CrystalBreeder>().MaxCrystals - 1;
     }
 
 }

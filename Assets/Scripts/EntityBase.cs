@@ -1,10 +1,12 @@
+using MarwilsTD.LevelSystem;
+
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class EntityBase : MonoBehaviour, ISelectable
+public abstract class EntityBase : MonoBehaviour
 {
     [SerializeField]
-    private LevelSystem.Entity _settings;
+    private Entity _settings;
 
     [Header("Damage and Healing")]
 
@@ -57,7 +59,7 @@ public abstract class EntityBase : MonoBehaviour, ISelectable
         }
     }
 
-    public T GetSettings<T>() where T : LevelSystem.Entity
+    public T GetSettings<T>() where T : Entity
     {
         return _settings as T;
     }
