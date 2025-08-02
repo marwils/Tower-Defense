@@ -18,7 +18,6 @@ namespace LevelSystem
         {
             serializedObject.Update();
 
-            // Header
             EditorGUILayout.Space();
             var headerStyle = new GUIStyle(EditorStyles.boldLabel);
             headerStyle.fontSize = 16;
@@ -26,7 +25,6 @@ namespace LevelSystem
             EditorGUILayout.Space();
             EditorGUILayout.Space();
 
-            // Properties
             EditorGUI.indentLevel++;
             EditorGUILayout.Foldout(true, "Route Properties", true);
             DrawRouteUsingPropertyDrawer();

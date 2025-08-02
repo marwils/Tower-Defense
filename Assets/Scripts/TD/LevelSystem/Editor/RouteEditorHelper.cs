@@ -16,29 +16,22 @@ namespace LevelSystem
 
             if (containerRect.HasValue)
             {
-                // Für PropertyDrawer (mit festen Rects)
                 var rect = containerRect.Value;
                 var currentY = rect.y;
                 var lineHeight = EditorGUIUtility.singleLineHeight;
                 var spacing = EditorGUIUtility.standardVerticalSpacing;
-
-                // Title
                 if (titleProp != null)
                 {
                     var titleRect = new Rect(rect.x, currentY, rect.width, lineHeight);
                     EditorGUI.PropertyField(titleRect, titleProp, new GUIContent("Title"));
                     currentY += lineHeight + spacing;
                 }
-
-                // Spawn Point
                 if (spawnPointIdProp != null)
                 {
                     var spawnRect = new Rect(rect.x, currentY, rect.width, lineHeight);
                     DrawSpawnPointDropdown(spawnRect, spawnPointIdProp);
                     currentY += lineHeight + spacing;
                 }
-
-                // Target Point
                 if (targetPointIdProp != null)
                 {
                     var targetRect = new Rect(rect.x, currentY, rect.width, lineHeight);
@@ -47,7 +40,6 @@ namespace LevelSystem
             }
             else
             {
-                // Für Editor (mit Layout)
                 if (titleProp != null)
                 {
                     EditorGUILayout.PropertyField(titleProp, new GUIContent("Title"));
@@ -129,8 +121,6 @@ namespace LevelSystem
                     spawnPointIdProp.stringValue = spawnPointNames[displayIndex - 1];
                 }
             }
-
-            // Warning if not found
             if (!string.IsNullOrEmpty(currentId) && currentIndex < 0)
             {
                 EditorGUILayout.HelpBox($"Spawn Point '{currentId}' not found in scene!", MessageType.Warning);
@@ -201,34 +191,10 @@ namespace LevelSystem
                     targetPointIdProp.stringValue = targetPointNames[displayIndex - 1];
                 }
             }
-
-            // Warning if not found
             if (!string.IsNullOrEmpty(currentId) && currentIndex < 0)
             {
                 EditorGUILayout.HelpBox($"Target Point '{currentId}' not found in scene!", MessageType.Warning);
             }
-        }
-
-        public static float GetRouteFieldsHeight(SerializedObject serializedObject)
-        {
-            var lineHeight = EditorGUIUtility.singleLineHeight;
-            var spacing = EditorGUIUtility.standardVerticalSpacing;
-
-            float height = 0;
-
-            // Title
-            if (serializedObject.FindProperty("_title") != null)
-                height += lineHeight + spacing;
-
-            // Spawn Point
-            if (serializedObject.FindProperty("_spawnPointId") != null)
-                height += lineHeight + spacing;
-
-            // Target Point  
-            if (serializedObject.FindProperty("_targetPointId") != null)
-                height += lineHeight + spacing;
-
-            return height;
         }
     }
 }

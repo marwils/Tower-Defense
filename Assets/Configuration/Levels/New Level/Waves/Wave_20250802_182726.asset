@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c678e724b9134444a96f05b1652a6f0, type: 3}
-  m_Name: SequenceDelay_20250802_022341
+  m_Script: {fileID: 11500000, guid: f3162b708baa4384e940a7dfff2d0fa2, type: 3}
+  m_Name: Wave_20250802_182726
   m_EditorClassIdentifier: 
-  _delayTime: 1
+  _title: Wave 1
+  _waveElements:
+  - {fileID: 11400000, guid: eb6b2a44c9d1672419103b0bafc48883, type: 2}
+  - {fileID: 11400000, guid: 34cf8d62630bd024d99006ef094b0a79, type: 2}

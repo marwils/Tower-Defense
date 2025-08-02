@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a349cefd3e854e047b0dbe02aa61afa3, type: 3}
-  m_Name: Route_20250801_234145
+  m_Script: {fileID: 11500000, guid: ed5d5217987690144ba33817c7c5349d, type: 3}
+  m_Name: WaveDelay_20250802_182729
   m_EditorClassIdentifier: 
-  _title: Route 1
-  _spawnPointId: GR Spawn End Round 2
-  _targetPointId: GR End
+  _delayTime: 1
