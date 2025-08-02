@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
 {
-        [CreateAssetMenu(fileName = "New Enemy", menuName = "Game/Enemy")]
+        [CreateAssetMenu(fileName = "New Enemy", menuName = "Marwils.TD/Enemy")]
         [Serializable]
         public class Enemy : Entity
         {

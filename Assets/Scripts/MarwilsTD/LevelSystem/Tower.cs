@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
 {
-        [CreateAssetMenu(fileName = "New Tower", menuName = "Game/Tower")]
+        [CreateAssetMenu(fileName = "New Tower", menuName = "Marwils.TD/Tower")]
         [Serializable]
         public class Tower : Entity
         {

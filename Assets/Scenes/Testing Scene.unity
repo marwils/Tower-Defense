@@ -287,11 +287,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1375553025516815855, guid: 20ef4c45997678048bd860c825fc3bd9, type: 3}
       propertyPath: m_Name
-      value: Tower Round Bottom C (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1375553025516815855, guid: 20ef4c45997678048bd860c825fc3bd9, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: Tower Round Bottom C
       objectReference: {fileID: 0}
     - target: {fileID: 1755597486729502549, guid: 20ef4c45997678048bd860c825fc3bd9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -333,7 +329,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5925464846146441394, guid: 20ef4c45997678048bd860c825fc3bd9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -456,12 +453,12 @@ GameObject:
   - component: {fileID: 123309956}
   - component: {fileID: 123309955}
   m_Layer: 0
-  m_Name: '4: Tower Small Battlements'
+  m_Name: '4: Tower Battlements'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &123309954
 Transform:
   m_ObjectHideFlags: 0
@@ -639,11 +636,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1834465157}
+    m_TransformParent: {fileID: 1327403483}
     m_Modifications:
     - target: {fileID: 193148741467012309, guid: 638ddf5f6cab2704f9c1ba35e29b11ee, type: 3}
       propertyPath: m_Name
-      value: Tower Round Build C (1)
+      value: Tower Round Build C
       objectReference: {fileID: 0}
     - target: {fileID: 713226174662452847, guid: 638ddf5f6cab2704f9c1ba35e29b11ee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -685,7 +682,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8657947309150854692, guid: 638ddf5f6cab2704f9c1ba35e29b11ee, type: 3}
+      propertyPath: _isExtensible
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8657947309150854692, guid: 638ddf5f6cab2704f9c1ba35e29b11ee, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1022,11 +1024,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7335746443327569687, guid: 7daada55ba2d45a419c0fe15f6c61a96, type: 3}
       propertyPath: m_Name
-      value: Tower Round Bottom B (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335746443327569687, guid: 7daada55ba2d45a419c0fe15f6c61a96, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: Tower Round Bottom B
       objectReference: {fileID: 0}
     - target: {fileID: 7964086159178442157, guid: 7daada55ba2d45a419c0fe15f6c61a96, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1068,7 +1066,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6987695260478736682, guid: 7daada55ba2d45a419c0fe15f6c61a96, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1485,7 +1484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _modifierKey: Digit1
-  _amount: 0.1
+  _amount: 0.05
   _vector: {x: 0, y: 1, z: 0}
 --- !u!4 &471933080 stripped
 Transform:
@@ -2174,7 +2173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &880411280
 Transform:
   m_ObjectHideFlags: 0
@@ -2443,7 +2442,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1834465157}
+    m_TransformParent: {fileID: 1327403483}
     m_Modifications:
     - target: {fileID: 2765813812251877078, guid: c89a11d024cd1fa47a71fac210f10a05, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2487,9 +2486,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3254402336521716844, guid: c89a11d024cd1fa47a71fac210f10a05, type: 3}
       propertyPath: m_Name
-      value: Tower Round Build A (1)
+      value: Tower Round Build A
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7890988677545176757, guid: c89a11d024cd1fa47a71fac210f10a05, type: 3}
+      propertyPath: _isExtensible
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7890988677545176757, guid: c89a11d024cd1fa47a71fac210f10a05, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2832,7 +2836,6 @@ Transform:
   - {fileID: 1327403483}
   - {fileID: 880411280}
   - {fileID: 123309954}
-  - {fileID: 1834465157}
   - {fileID: 1379562267}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2866,11 +2869,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3886406549468602973, guid: ec71e5f625f86e44598a2c0253ac3780, type: 3}
       propertyPath: m_Name
-      value: Base (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3886406549468602973, guid: ec71e5f625f86e44598a2c0253ac3780, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: Base
       objectReference: {fileID: 0}
     - target: {fileID: 4513902630931773671, guid: ec71e5f625f86e44598a2c0253ac3780, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2912,7 +2911,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7743696460913650002, guid: ec71e5f625f86e44598a2c0253ac3780, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2932,11 +2932,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7076250017403336568, guid: d2d2e8c147cae174198c0c01ee2291f4, type: 3}
       propertyPath: m_Name
-      value: Tower Round Bottom A (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7076250017403336568, guid: d2d2e8c147cae174198c0c01ee2291f4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: Tower Round Bottom A
       objectReference: {fileID: 0}
     - target: {fileID: 7599880767054622146, guid: d2d2e8c147cae174198c0c01ee2291f4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2978,7 +2974,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3568297246342347491, guid: d2d2e8c147cae174198c0c01ee2291f4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3076,7 +3073,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1327403483}
   - component: {fileID: 1327403484}
-  - component: {fileID: 1327403485}
   m_Layer: 0
   m_Name: '2: Tower Base'
   m_TagString: Untagged
@@ -3098,9 +3094,12 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1027369709}
-  - {fileID: 1715879195}
   - {fileID: 514182170}
+  - {fileID: 1715879195}
   - {fileID: 1256451635}
+  - {fileID: 993728162}
+  - {fileID: 1671171745}
+  - {fileID: 168433599}
   m_Father: {fileID: 1165216342}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1327403484
@@ -3117,21 +3116,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _modifierKey: Digit2
   _activateOnStart: 1
---- !u!114 &1327403485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1327403482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf7d97b959cd8f945b802d1b6cdcea88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _modifierKey: Digit2
-  _amount: 0.1
-  _vector: {x: 0, y: 1, z: 0}
 --- !u!1001 &1330997758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3355,12 +3339,12 @@ GameObject:
   - component: {fileID: 1379562269}
   - component: {fileID: 1379562268}
   m_Layer: 0
-  m_Name: '6: Tower Tops'
+  m_Name: '5: Tower Tops'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1379562267
 Transform:
   m_ObjectHideFlags: 0
@@ -3391,7 +3375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7d97b959cd8f945b802d1b6cdcea88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _modifierKey: Digit6
+  _modifierKey: Digit5
   _amount: 0.1
   _vector: {x: 0, y: 1, z: 0}
 --- !u!114 &1379562269
@@ -3406,7 +3390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a520335e58f2878489dbf2a53fa7a8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _modifierKey: Digit6
+  _modifierKey: Digit5
   _activateOnStart: 0
 --- !u!4 &1389611510 stripped
 Transform:
@@ -3815,6 +3799,8 @@ MonoBehaviour:
   _speed: 0
   _maxHealth: 0
   _weaponController: {fileID: 0}
+  _base: {fileID: 0}
+  _elements: []
 --- !u!4 &1621731937 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7463664485087954654, guid: 347ff391ed0a34d40b5e0ed3d3dbd477, type: 3}
@@ -3831,8 +3817,12 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1834465157}
+    m_TransformParent: {fileID: 1327403483}
     m_Modifications:
+    - target: {fileID: 4320298619594256298, guid: 86a812e5e9bed894ba4d0f8fa1522ede, type: 3}
+      propertyPath: _isExtensible
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7218106854743589432, guid: 86a812e5e9bed894ba4d0f8fa1522ede, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3875,9 +3865,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8025429226532214914, guid: 86a812e5e9bed894ba4d0f8fa1522ede, type: 3}
       propertyPath: m_Name
-      value: Tower Round Build B (1)
+      value: Tower Round Build B
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4320298619594256298, guid: 86a812e5e9bed894ba4d0f8fa1522ede, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -4071,71 +4062,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3069375055813508138, guid: fafec685aa4527a4c90b1e06147a2c51, type: 3}
   m_PrefabInstance: {fileID: 83931437286749197}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1834465156
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1834465157}
-  - component: {fileID: 1834465159}
-  - component: {fileID: 1834465158}
-  m_Layer: 0
-  m_Name: '5: Tower Large Battlements'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1834465157
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834465156}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 993728162}
-  - {fileID: 1671171745}
-  - {fileID: 168433599}
-  m_Father: {fileID: 1165216342}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1834465158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834465156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf7d97b959cd8f945b802d1b6cdcea88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _modifierKey: Digit5
-  _amount: 0.1
-  _vector: {x: 0, y: 1, z: 0}
---- !u!114 &1834465159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834465156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a520335e58f2878489dbf2a53fa7a8c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _modifierKey: Digit5
-  _activateOnStart: 0
 --- !u!4 &1848107824 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1351721347296335012, guid: 36270ced143413b41a3f358b0cccee5e, type: 3}
@@ -11858,7 +11784,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7743696460913650002, guid: ec71e5f625f86e44598a2c0253ac3780, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

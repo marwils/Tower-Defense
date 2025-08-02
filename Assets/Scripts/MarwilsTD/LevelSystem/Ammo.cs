@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
 {
-    [CreateAssetMenu(fileName = "New Ammo", menuName = "Game/Ammo")]
+    [CreateAssetMenu(fileName = "New Ammo", menuName = "Marwils.TD/Ammo")]
     [Serializable]
     public class Ammo : ScriptableObject
     {

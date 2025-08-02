@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
 {
-        [CreateAssetMenu(fileName = "New Crystal Breeder", menuName = "Game/Building/Crystal Breeder")]
+        [CreateAssetMenu(fileName = "New Crystal Breeder", menuName = "Marwils.TD/Building/Crystal Breeder")]
         [Serializable]
         public class CrystalBreeder : Entity
         {
