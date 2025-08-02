@@ -5,16 +5,16 @@ using UnityEngine.InputSystem;
 
 namespace Testing
 {
-    public class ChildrenMover : MonoBehaviour
+    public class ObjectMover : MonoBehaviour
     {
+        [SerializeField]
+        private string _modifierKey = "";
+
         [SerializeField]
         private float _amount = 0.1f;
 
         [SerializeField]
         private Vector3 _vector = Vector3.up;
-
-        [SerializeField]
-        private string _modifierKey = "";
 
         private Key _modKey;
 
@@ -42,25 +42,18 @@ namespace Testing
             {
                 if (Keyboard.current[Key.NumpadPlus].wasPressedThisFrame)
                 {
-                    MoveChildren(_amount);
+                    Move(_amount);
                 }
                 if (Keyboard.current[Key.NumpadMinus].wasPressedThisFrame)
                 {
-                    MoveChildren(-_amount);
+                    Move(-_amount);
                 }
             }
         }
 
-        private void MoveChildren(float distance)
+        private void Move(float distance)
         {
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                Transform child = transform.GetChild(i);
-                if (child != null)
-                {
-                    child.localPosition += _vector * distance;
-                }
-            }
+            transform.localPosition += _vector * distance;
         }
     }
 }
