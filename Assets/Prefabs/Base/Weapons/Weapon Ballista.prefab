@@ -64,11 +64,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5337069948728688430}
   m_SourcePrefab: {fileID: 100100000, guid: 2a1855f269aaff94aa82b46e0e62d3ba, type: 3}
---- !u!4 &2919768913750604928 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1329380249762036386, guid: 2a1855f269aaff94aa82b46e0e62d3ba, type: 3}
-  m_PrefabInstance: {fileID: 4249130927003354658}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3906480981366045555 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2a1855f269aaff94aa82b46e0e62d3ba, type: 3}
@@ -83,9 +78,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3906480981366045555}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 234367b08712583439877458de7c2263, type: 3}
+  m_Script: {fileID: 11500000, guid: dbb54e04e57b25e4fb4f0d3dde45dd5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _range: 5
-  _turret: {fileID: 2919768913750604928}
-  _targetTag: Enemy
+  _weaponSettings: {fileID: 0}
+  _ammoSettings: {fileID: 0}
+  _aimTarget: {fileID: 0}
+  _firePoint: {fileID: 0}
+  _currentAmmo: 0

@@ -65,14 +65,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: aa426d6f26fd64e43b3464d2d8d513ea, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 5780312450969370953}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: aa426d6f26fd64e43b3464d2d8d513ea, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1266438290383290458}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: aa426d6f26fd64e43b3464d2d8d513ea, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6407855621938764873}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: aa426d6f26fd64e43b3464d2d8d513ea, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5780312450969370953}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: aa426d6f26fd64e43b3464d2d8d513ea, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1626529853386424147}
@@ -98,28 +98,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponSettings: {fileID: 0}
+  _ammoSettings: {fileID: 0}
   _aimTarget: {fileID: 0}
-  TargetTag: 
+  _firePoint: {fileID: 0}
+  _currentAmmo: 0
 --- !u!1 &9028976052347195205 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: aa426d6f26fd64e43b3464d2d8d513ea, type: 3}
   m_PrefabInstance: {fileID: 8181972004487098900}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5780312450969370953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9028976052347195205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83bacf1bc217ac4448c7217c1b045a83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemySettings: {fileID: 0}
-  _weapon: {fileID: 0}
-  _destination: {fileID: 0}
 --- !u!135 &1266438290383290458
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -163,6 +150,22 @@ NavMeshAgent:
   m_BaseOffset: 0.67
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5780312450969370953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9028976052347195205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83bacf1bc217ac4448c7217c1b045a83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entitySettings: {fileID: 0}
+  _destination: {fileID: 0}
+  _currentHealth: 0
+  _currentSpeed: 0
 --- !u!114 &1626529853386424147
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,29 +1,57 @@
+using System;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// A script to switch active child GameObjects based on number keys (0-9). Just for testing purposes.
+/// ChildSwitcher allows switching between child GameObjects based on numpad key presses.
+/// It can be configured to require a modifier key (like P) to activate the switching.
+/// The first child is activated on start if _activateOnStart is true.
 /// </summary>
 namespace Testing
 {
     public class ChildSwitcher : MonoBehaviour
     {
-        private static Key[] NumpadKeys = { Key.Numpad0, Key.Numpad1, Key.Numpad2, Key.Numpad3, Key.Numpad4,
+        [SerializeField]
+        private string _modifierKey = "";
+
+        [SerializeField]
+        private bool _activateOnStart = true;
+
+        private static readonly Key[] NumpadKeys = { Key.Numpad0, Key.Numpad1, Key.Numpad2, Key.Numpad3, Key.Numpad4,
                    Key.Numpad5, Key.Numpad6, Key.Numpad7, Key.Numpad8, Key.Numpad9 };
+
+        private Key _modKey;
 
         private void Start()
         {
-            SwitchChild(0);
+            UpdateModifierKey();
+            SwitchChild(_activateOnStart ? 0 : -1);
+        }
+
+        private void UpdateModifierKey()
+        {
+            if (_modifierKey != "")
+            {
+                _modKey = Enum.Parse<Key>(_modifierKey, true);
+            }
+            else
+            {
+                Debug.LogWarning($"Invalid modifier key specified. No modifier key will be used in {gameObject.name}.");
+                _modKey = Key.None;
+            }
         }
 
         private void Update()
         {
-            for (int i = 0; i < NumpadKeys.Length; i++)
+            if (_modKey == Key.None || Keyboard.current[_modKey].isPressed)
             {
-                if (Keyboard.current[NumpadKeys[i]].wasPressedThisFrame)
+                for (int i = 0; i < NumpadKeys.Length; i++)
                 {
-                    Debug.Log($"Switching to child {i}");
-                    SwitchChild(i);
+                    if (Keyboard.current[NumpadKeys[i]].wasPressedThisFrame)
+                    {
+                        SwitchChild(i);
+                    }
                 }
             }
         }
@@ -31,14 +59,8 @@ namespace Testing
         private void SwitchChild(int index)
         {
             int childCount = transform.childCount;
-            if (index < 0 || index >= childCount)
-            {
-                Debug.LogWarning($"Index {index} is out of bounds for child switching.");
-                return;
-            }
             for (int i = 0; i < childCount; i++)
             {
-                Debug.Log($"Setting child {i} active: {i == index}");
                 transform.GetChild(i).gameObject.SetActive(i == index);
             }
         }

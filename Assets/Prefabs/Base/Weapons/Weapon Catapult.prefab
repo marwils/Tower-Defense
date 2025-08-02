@@ -78,14 +78,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3143270784356658681}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8225f7e6a806a534aa92951c05c3d004, type: 3}
+  m_Script: {fileID: 11500000, guid: dbb54e04e57b25e4fb4f0d3dde45dd5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _range: 5
-  _turret: {fileID: 7099870750036027813}
-  _targetTag: Enemy
---- !u!4 &7099870750036027813 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5033198208762345741, guid: 3eca1abdfe224a4409127633df75552e, type: 3}
-  m_PrefabInstance: {fileID: 2836790362490278056}
-  m_PrefabAsset: {fileID: 0}
+  _weaponSettings: {fileID: 0}
+  _ammoSettings: {fileID: 0}
+  _aimTarget: {fileID: 0}
+  _firePoint: {fileID: 0}
+  _currentAmmo: 0
