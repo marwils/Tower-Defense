@@ -8,16 +8,13 @@ namespace Testing
     public class ChildrenMover : MonoBehaviour
     {
         [SerializeField]
-        private float _amount = 0.2f;
+        private float _amount = 0.1f;
 
         [SerializeField]
         private Vector3 _vector = Vector3.up;
 
         [SerializeField]
         private string _modifierKey = "";
-
-        private static readonly Key[] NumpadKeys = { Key.Numpad0, Key.Numpad1, Key.Numpad2, Key.Numpad3, Key.Numpad4,
-                   Key.Numpad5, Key.Numpad6, Key.Numpad7, Key.Numpad8, Key.Numpad9 };
 
         private Key _modKey;
 
