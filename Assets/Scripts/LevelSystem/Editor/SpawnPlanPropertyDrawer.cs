@@ -32,6 +32,13 @@ namespace LevelSystem
             currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 
             DrawSpawnPlanContent(position, spawnPlan, ref currentY);
+
+            EditorGUI.HelpBox(
+                new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight * 2),
+                "All sequences in this Spawn Plan start simultaneously. The Spawn Plan is only considered finished when all sequences are complete.",
+                MessageType.Info
+            );
+            currentY += EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing;
         }
 
         public void DrawSpawnPlanContent(Rect position, SpawnPlan spawnPlan, ref float currentY)
@@ -112,6 +119,8 @@ namespace LevelSystem
                 {
                     CreateNewSequence(sequencesProp, spawnPlan);
                 }
+
+                currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             }
 
             if (spawnPlanSO.hasModifiedProperties)
@@ -147,8 +156,7 @@ namespace LevelSystem
 
             float height = 0;
 
-            // Header
-            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+            height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Header
 
             // Sequences
             if (sequencesProp != null)
@@ -163,6 +171,8 @@ namespace LevelSystem
 
                 height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Add Button
             }
+
+            height += EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing; // Info Box
 
             return height;
         }

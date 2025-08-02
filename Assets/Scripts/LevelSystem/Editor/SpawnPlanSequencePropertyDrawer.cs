@@ -34,6 +34,8 @@ namespace LevelSystem
                 var currentRoute = routeProp.objectReferenceValue as Route;
                 if (currentRoute != null)
                     currentIndex = System.Array.IndexOf(routes, currentRoute);
+                else if (routes.Length > 0)
+                    currentIndex = 0;
 
                 var routeRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
                 int selected = EditorGUI.Popup(routeRect, "Route", currentIndex, routeNames);
