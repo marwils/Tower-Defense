@@ -2,7 +2,7 @@ using System;
 
 using UnityEngine;
 
-public class CameraControl : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     [Header("Zoom")]
 

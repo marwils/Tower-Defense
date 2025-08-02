@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemyControl : MonoBehaviour
+public class EnemyController : EntityController
 {
     [SerializeField]
     private Enemy _enemySettings;
@@ -24,23 +24,18 @@ public class EnemyControl : MonoBehaviour
 
     private NavMeshAgent _agent;
 
-    void Awake()
+    protected override void Awake()
     {
-        if (_enemySettings == null)
-        {
-            Debug.LogError("Enemy settings not assigned in EnemyControl.");
-            Destroy(this);
-            return;
-        }
+        base.Awake();
 
-        ResetStats();
         _agent = GetComponent<NavMeshAgent>();
     }
 
-    private void ResetStats()
+    protected override void Initialize()
     {
+        base.Initialize();
         _currentHealth = _enemySettings.Health;
-        _currentSpeed = _enemySettings.Speed;
+        _agent.speed = _enemySettings.Speed;
     }
 
     public void SetDestination(Transform destination)
@@ -54,5 +49,10 @@ public class EnemyControl : MonoBehaviour
         {
             Debug.LogError("No destination set for the enemy.");
         }
+    }
+
+    protected override Enemy GetEntitySettings<Enemy>()
+    {
+        return _enemySettings as Enemy;
     }
 }

@@ -14,8 +14,8 @@ namespace LevelSystem
                         _canBeHealed = false;
                         _health = 200f;
                         _shield = 50f;
-                        _canMove = false; // Towers typically do not move
-                        _speed = 0f; // No movement speed for towers
+                        _canMove = false;
+                        _speed = 0f;
                 }
         }
 }

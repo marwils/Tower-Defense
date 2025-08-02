@@ -17,12 +17,12 @@ namespace LevelSystem
     [Serializable]
     public class EnemySpawnRequest
     {
-        public EnemyControl EnemyPrefab { get; set; }
+        public EnemyController EnemyPrefab { get; set; }
         public Transform SpawnTransform { get; set; }
         public Transform TargetTransform { get; set; }
         public ISequenceElement SourceSequence { get; set; }
 
-        public EnemySpawnRequest(EnemyControl enemyPrefab, Transform spawnTransform, Transform targetTransform, ISequenceElement sourceSequence)
+        public EnemySpawnRequest(EnemyController enemyPrefab, Transform spawnTransform, Transform targetTransform, ISequenceElement sourceSequence)
         {
             EnemyPrefab = enemyPrefab;
             SpawnTransform = spawnTransform;

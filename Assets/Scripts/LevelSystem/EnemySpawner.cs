@@ -10,8 +10,8 @@ namespace LevelSystem
     {
         [SerializeField]
         [Tooltip("List of enemies to spawn")]
-        private List<EnemyControl> _enemies = new();
-        public IReadOnlyList<EnemyControl> Enemies => _enemies;
+        private List<EnemyController> _enemies = new();
+        public IReadOnlyList<EnemyController> Enemies => _enemies;
 
         [SerializeField]
         [Tooltip("Randomize the spawn order?")]
@@ -94,7 +94,6 @@ namespace LevelSystem
 
         private void SpawnEnemy()
         {
-            // Sende Event-Request statt direktem Aufruf
             var request = new EnemySpawnRequest(
                 _enemies[_currentIndex],
                 SpawnTransform,

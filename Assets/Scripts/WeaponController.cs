@@ -1,12 +1,26 @@
 using System;
 
+using LevelSystem;
+
 using UnityEngine;
 
-public class WeaponControl : MonoBehaviour
+public class WeaponController : MonoBehaviour
 {
+    [SerializeField]
+    private Weapon _weaponSettings;
+    public Weapon WeaponSettings => _weaponSettings;
+
+    [SerializeField]
+    private Ammo _ammoSettings;
+    public Ammo AmmoSettings => _ammoSettings;
+
     [SerializeField]
     private Transform _aimTarget;
     public Transform AimTarget { get => _aimTarget; }
+
+    [SerializeField]
+    private Transform _firePoint;
+    public Transform FirePoint => _firePoint;
 
     [SerializeField]
     private int _currentAmmo;
