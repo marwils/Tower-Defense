@@ -3770,7 +3770,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1609082234}
-  - component: {fileID: 1609082233}
+  - component: {fileID: 1609082235}
   m_Layer: 0
   m_Name: Real Tower
   m_TagString: Untagged
@@ -3778,27 +3778,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1609082233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1609082232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eab9415843746de4092fce86ddcd9be5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _entitySettings: {fileID: 11400000, guid: 6bb60cc7a235bc94a866a1c63f209227, type: 2}
-  _canTakeDamage: 0
-  _canBeHealed: 0
-  _health: 200
-  _shield: 0
-  _canMove: 0
-  _speed: 0
-  _maxHealth: 0
-  _weaponController: {fileID: 0}
 --- !u!4 &1609082234
 Transform:
   m_ObjectHideFlags: 0
@@ -3815,6 +3794,27 @@ Transform:
   - {fileID: 774205743}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1609082235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609082232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b5a3dde62c85254fac1d3bd44056d82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entitySettings: {fileID: 11400000, guid: 6bb60cc7a235bc94a866a1c63f209227, type: 2}
+  _canTakeDamage: 0
+  _canBeHealed: 0
+  _health: 200
+  _shield: 0
+  _canMove: 0
+  _speed: 0
+  _maxHealth: 0
+  _weaponController: {fileID: 0}
 --- !u!4 &1621731937 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7463664485087954654, guid: 347ff391ed0a34d40b5e0ed3d3dbd477, type: 3}

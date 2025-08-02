@@ -4,11 +4,15 @@ namespace MarwilsTD
 {
     public class TowerController : EntityController
     {
-        protected new Tower _entitySettings;
-
-        public override Tower GetEntitySettings<Tower>()
+        public new Tower GetEntitySettings()
         {
             return _entitySettings as Tower;
+        }
+
+        protected void SetEntitySettings(Tower towerSettings)
+        {
+            _entitySettings = towerSettings;
+            InitializeEntity();
         }
     }
 }

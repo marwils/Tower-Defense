@@ -8,7 +8,7 @@ namespace MarwilsTD
     {
         [SerializeField]
         protected Entity _entitySettings;
-        public Entity EntitySettings => _entitySettings;
+        public Entity EntitySettings { get { return GetEntitySettings(); } set { SetEntitySettings(value); } }
 
         [Header("Runtime Properties")]
 
@@ -58,12 +58,12 @@ namespace MarwilsTD
             InitializeEntity();
         }
 
-        public virtual T GetEntitySettings<T>() where T : Entity
+        public virtual Entity GetEntitySettings()
         {
-            return _entitySettings as T;
+            return _entitySettings;
         }
 
-        public virtual void SetEntitySettings(Entity entitySettings)
+        protected virtual void SetEntitySettings(Entity entitySettings)
         {
             if (entitySettings == null)
             {

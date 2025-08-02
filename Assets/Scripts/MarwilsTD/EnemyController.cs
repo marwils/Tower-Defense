@@ -8,7 +8,7 @@ namespace MarwilsTD
     [RequireComponent(typeof(NavMeshAgent))]
     public class EnemyController : EntityController
     {
-        protected new Enemy _entitySettings;
+        // protected new Enemy _entitySettings;
 
         [SerializeField]
         private Transform _destination;
@@ -35,8 +35,8 @@ namespace MarwilsTD
         {
             base.InitializeEntity();
 
-            _currentHealth = GetEntitySettings<Enemy>().Health;
-            _agent.speed = GetEntitySettings<Enemy>().Speed;
+            _currentHealth = GetEntitySettings().Health;
+            _agent.speed = GetEntitySettings().Speed;
         }
 
         public void SetDestination(Transform destination)
@@ -52,9 +52,21 @@ namespace MarwilsTD
             }
         }
 
-        public override Enemy GetEntitySettings<Enemy>()
+        public new Enemy GetEntitySettings()
         {
             return _entitySettings as Enemy;
+        }
+
+        public void SetEntitySettings(Enemy enemySettings)
+        {
+            if (enemySettings == null)
+            {
+                Debug.LogError("Entity settings cannot be null");
+                return;
+            }
+
+            _entitySettings = enemySettings;
+            InitializeEntity();
         }
     }
 }
