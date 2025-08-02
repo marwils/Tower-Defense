@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LevelSystem
 {
-    [CreateAssetMenu(fileName = "Ammo", menuName = "Game/Ammo")]
+    [CreateAssetMenu(fileName = "New Ammo", menuName = "Game/Ammo")]
     [Serializable]
     public class Ammo : ScriptableObject
     {
