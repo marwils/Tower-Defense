@@ -8,6 +8,8 @@ namespace MarwilsTD
     [RequireComponent(typeof(NavMeshAgent))]
     public class EnemyController : EntityController
     {
+        protected new Enemy _entitySettings;
+
         [SerializeField]
         private Transform _destination;
         public Transform Destination => _destination;
