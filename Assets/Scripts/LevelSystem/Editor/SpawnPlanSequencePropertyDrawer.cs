@@ -19,53 +19,43 @@ namespace LevelSystem
                 return;
             }
 
-            var foldoutRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
-            property.isExpanded = EditorGUI.Foldout(foldoutRect, property.isExpanded, label, true);
+            var sequenceSO = new SerializedObject(sequence);
+            sequenceSO.Update();
 
-            if (property.isExpanded)
+            float currentY = position.y;
+            var routeProp = sequenceSO.FindProperty("_route");
+            if (routeProp != null)
             {
-                EditorGUI.indentLevel++;
+                var parentLevel = FindParentLevel(sequence);
+                Route[] routes = parentLevel != null ? parentLevel.Routes.ToArray() : new Route[0];
+                string[] routeNames = routes.Select(r => r != null ? r.Title : "<None>").ToArray();
 
-                var sequenceSO = new SerializedObject(sequence);
-                sequenceSO.Update();
+                int currentIndex = -1;
+                var currentRoute = routeProp.objectReferenceValue as Route;
+                if (currentRoute != null)
+                    currentIndex = System.Array.IndexOf(routes, currentRoute);
 
-                float currentY = position.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-                var routeProp = sequenceSO.FindProperty("_route");
-                if (routeProp != null)
+                var routeRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
+                int selected = EditorGUI.Popup(routeRect, "Route", currentIndex, routeNames);
+
+                if (selected >= 0 && selected < routes.Length && routes[selected] != currentRoute)
                 {
-                    var parentLevel = FindParentLevel(sequence);
-                    Route[] routes = parentLevel != null ? parentLevel.Routes.ToArray() : new Route[0];
-                    string[] routeNames = routes.Select(r => r != null ? r.Title : "<None>").ToArray();
-
-                    int currentIndex = -1;
-                    var currentRoute = routeProp.objectReferenceValue as Route;
-                    if (currentRoute != null)
-                        currentIndex = System.Array.IndexOf(routes, currentRoute);
-
-                    var routeRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
-                    int selected = EditorGUI.Popup(routeRect, "Route", currentIndex, routeNames);
-
-                    if (selected >= 0 && selected < routes.Length && routes[selected] != currentRoute)
-                    {
-                        routeProp.objectReferenceValue = routes[selected];
-                        sequenceSO.ApplyModifiedProperties();
-                        EditorUtility.SetDirty(sequence);
-                    }
-                    currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-                }
-                var elementsProp = sequenceSO.FindProperty("_sequenceElements");
-                if (elementsProp != null)
-                {
-                    DrawSequenceElementsSection(position, sequenceSO, elementsProp, ref currentY, sequence);
-                }
-
-                if (sequenceSO.hasModifiedProperties)
-                {
+                    routeProp.objectReferenceValue = routes[selected];
                     sequenceSO.ApplyModifiedProperties();
                     EditorUtility.SetDirty(sequence);
                 }
+                currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+            }
+            var elementsProp = sequenceSO.FindProperty("_sequenceElements");
+            if (elementsProp != null)
+            {
+                DrawSequenceElementsSection(position, sequenceSO, elementsProp, ref currentY, sequence);
+            }
 
-                EditorGUI.indentLevel--;
+            if (sequenceSO.hasModifiedProperties)
+            {
+                sequenceSO.ApplyModifiedProperties();
+                EditorUtility.SetDirty(sequence);
             }
 
             EditorGUI.EndProperty();
@@ -156,17 +146,17 @@ namespace LevelSystem
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            if (!property.isExpanded || property.objectReferenceValue == null)
-                return EditorGUIUtility.singleLineHeight;
+            if (property.objectReferenceValue == null)
+                return 0;
 
             var sequence = property.objectReferenceValue as SpawnPlanSequence;
             if (sequence == null)
-                return EditorGUIUtility.singleLineHeight;
+                return 0;
 
             var sequenceSO = new SerializedObject(sequence);
             var elementsProp = sequenceSO.FindProperty("_sequenceElements");
 
-            float height = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Foldout
+            float height = 0;
 
             // Route
             height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;

@@ -29,6 +29,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _route: {fileID: 0}
   _sequenceElements: []
+--- !u!114 &-5947519030261151299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c6d16f6556481c469fb882e2da95c65, type: 3}
+  m_Name: SpawnPlanSequence_20250802_020258
+  m_EditorClassIdentifier: 
+  _route: {fileID: 0}
+  _sequenceElements: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,6 +58,7 @@ MonoBehaviour:
   _spawnPlanSequences:
   - {fileID: -7956716243997915993}
   - {fileID: 4270669039660591716}
+  - {fileID: -5947519030261151299}
 --- !u!114 &4270669039660591716
 MonoBehaviour:
   m_ObjectHideFlags: 0

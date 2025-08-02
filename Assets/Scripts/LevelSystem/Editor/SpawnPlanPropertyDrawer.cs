@@ -52,14 +52,18 @@ namespace LevelSystem
                     string sequenceLabel = sequence != null ? $"Sequence {i + 1}" : $"Sequence {i + 1} (Missing)";
                     var sequenceGuiLabel = new GUIContent(sequenceLabel);
 
-                    var sequenceHeight = _sequenceDrawer.GetPropertyHeight(sequenceProp, sequenceGuiLabel);
+                    var sequenceHeight = sequenceProp.isExpanded ? _sequenceDrawer.GetPropertyHeight(sequenceProp, sequenceGuiLabel) : 0;
                     var totalHeight = sequenceHeight + Constants.MarginVertical * 2 + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 
                     var boxRect = new Rect(position.x, currentY, position.width, totalHeight);
                     GUI.Box(boxRect, "", EditorStyles.helpBox);
 
+                    var foldoutRect = new Rect(position.x + Constants.MarginVertical, currentY + Constants.MarginVertical,
+                                             15, EditorGUIUtility.singleLineHeight);
+                    sequenceProp.isExpanded = EditorGUI.Foldout(foldoutRect, sequenceProp.isExpanded, GUIContent.none, true);
+
                     var headerWaveRect = new Rect(position.x + Constants.MarginVertical, currentY + Constants.MarginVertical,
-                                                 position.width - 45 - Constants.MarginVertical, EditorGUIUtility.singleLineHeight);
+                                                 position.width - 60 - Constants.MarginVertical, EditorGUIUtility.singleLineHeight);
                     var headerStyle = new GUIStyle(EditorStyles.boldLabel);
                     headerStyle.fontSize = 14;
                     EditorGUI.LabelField(headerWaveRect, sequenceLabel, headerStyle);
@@ -90,18 +94,21 @@ namespace LevelSystem
                         CreateNewSequence(sequencesProp, spawnPlan);
                     }
 
-                    var contentY = currentY + Constants.MarginVertical + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-                    var contentHeight = sequenceHeight;
-                    var contentRect = new Rect(position.x + Constants.MarginHorizontal, contentY,
-                                              position.width - Constants.MarginHorizontal * 2, contentHeight);
+                    if (sequenceProp.isExpanded)
+                    {
+                        var contentY = currentY + Constants.MarginVertical + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                        var contentHeight = sequenceHeight;
+                        var contentRect = new Rect(position.x + Constants.MarginHorizontal, contentY,
+                                                  position.width - Constants.MarginHorizontal * 2, contentHeight);
 
-                    _sequenceDrawer.OnGUI(contentRect, sequenceProp, sequenceGuiLabel);
+                        _sequenceDrawer.OnGUI(contentRect, sequenceProp, sequenceGuiLabel);
+                    }
 
                     currentY += totalHeight + Constants.MarginVertical;
                 }
 
                 var addButtonRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
-                if (GUI.Button(addButtonRect, "Add Spawn Sequence"))
+                if (GUI.Button(addButtonRect, "Add Sequence to Spawn Plan"))
                 {
                     CreateNewSequence(sequencesProp, spawnPlan);
                 }
@@ -149,7 +156,7 @@ namespace LevelSystem
                 for (int i = 0; i < sequencesProp.arraySize; i++)
                 {
                     var sequenceProp = sequencesProp.GetArrayElementAtIndex(i);
-                    var sequenceHeight = _sequenceDrawer.GetPropertyHeight(sequenceProp, new GUIContent($"Sequence {i + 1}"));
+                    var sequenceHeight = sequenceProp.isExpanded ? _sequenceDrawer.GetPropertyHeight(sequenceProp, new GUIContent($"Sequence {i + 1}")) : 0;
                     // Header + Content + Margins + Spacing
                     height += sequenceHeight + Constants.MarginVertical * 2 + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing + Constants.MarginVertical;
                 }

@@ -89,7 +89,6 @@ namespace LevelSystem
             }
         }
 
-        // Neue Methoden für SpawnPlan
         private static void DrawSpawnPlan(Rect position, SerializedProperty elementProp, GUIContent label, SpawnPlan spawnPlan)
         {
             SpawnPlanDrawer.OnGUI(position, elementProp, label);
