@@ -23,10 +23,12 @@ namespace MarwilsTD
         [SerializeField]
         private float _health;
         public float Health => _health;
+        public bool IsAlive { get { return _health > 0; } }
 
         [SerializeField]
         private float _shield;
         public float Shield => _shield;
+        public bool HasShield { get { return _shield > 0; } }
 
         [SerializeField]
         private bool _canMove;
@@ -38,7 +40,12 @@ namespace MarwilsTD
 
         [SerializeField]
         private float _maxHealth;
-        public float MaxHealth => _maxHealth;
+        public float MaxHealth { get { return _maxHealth; } set { SetMaxHealth(value); } }
+
+        [SerializeField]
+        private WeaponController _weaponController;
+        public WeaponController WeaponController => _weaponController;
+        public bool HasWeapon { get { return _weaponController != null; } }
 
         protected virtual void Awake()
         {
@@ -51,12 +58,12 @@ namespace MarwilsTD
             InitializeEntity();
         }
 
-        protected virtual T GetEntitySettings<T>() where T : Entity
+        public virtual T GetEntitySettings<T>() where T : Entity
         {
             return _entitySettings as T;
         }
 
-        protected virtual void SetEntitySettings(Entity entitySettings)
+        public virtual void SetEntitySettings(Entity entitySettings)
         {
             if (entitySettings == null)
             {
@@ -113,17 +120,7 @@ namespace MarwilsTD
             }
         }
 
-        public bool IsAlive()
-        {
-            return _health > 0;
-        }
-
-        public bool HasShield()
-        {
-            return _shield > 0;
-        }
-
-        public void SetMaxHealth(float maxHealth)
+        protected void SetMaxHealth(float maxHealth)
         {
             if (maxHealth >= 0)
             {

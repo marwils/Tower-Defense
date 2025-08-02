@@ -50,7 +50,7 @@ namespace MarwilsTD
             }
         }
 
-        protected override Enemy GetEntitySettings<Enemy>()
+        public override Enemy GetEntitySettings<Enemy>()
         {
             return _entitySettings as Enemy;
         }
