@@ -16,9 +16,10 @@ MonoBehaviour:
   _prefab: {fileID: 3886406549468602973, guid: ec71e5f625f86e44598a2c0253ac3780, type: 3}
   _towerSettings: {fileID: 11400000, guid: ec0f72efe1e101d42bd1cb2e37412e4e, type: 2}
   _price: 100
-  _isExtensibleBy: []
-  _isUpgradableBy:
+  _extensibleBy: []
+  _upgradableBy:
   - {fileID: 11400000, guid: d8d7ade0dd76b1245930acd3bd7dfda1, type: 2}
+  - {fileID: 11400000, guid: a9c1bb8444483e147828cd9d53f24680, type: 2}
   _isBase: 1
   _height: 0.2
   _yOffset: 0

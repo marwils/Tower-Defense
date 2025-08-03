@@ -2,11 +2,11 @@ using MarwilsTD.LevelSystem;
 
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Tower Element", menuName = "Game/Tower Element")]
-public class TowerElement : ScriptableObject
+[CreateAssetMenu(fileName = "New Tower Node", menuName = "Game/Tower Node")]
+public class TowerNode : ScriptableObject
 {
     [SerializeField]
-    private string _name = "Tower Element";
+    private string _name = "Tower Node";
     public string Name => _name;
 
     [SerializeField]
@@ -22,15 +22,14 @@ public class TowerElement : ScriptableObject
     public int Price => _price;
 
     [SerializeField]
-    private TowerElement[] _isExtensibleBy;
-    public TowerElement[] IsExtensibleBy => _isExtensibleBy;
+    private TowerNode[] _extensibleBy;
+    public TowerNode[] ExtensibleBy => _extensibleBy;
+    public bool IsExtensible { get { return _extensibleBy != null && _extensibleBy.Length > 0; } }
 
     [SerializeField]
-    private TowerElement[] _isUpgradableBy;
-    public TowerElement[] IsUpgradableBy => _isUpgradableBy;
-
-    [SerializeField]
-    public bool IsExtensible { get { return _isExtensibleBy != null && _isExtensibleBy.Length > 0; } }
+    private TowerNode[] _upgradableBy;
+    public TowerNode[] UpgradableBy => _upgradableBy;
+    public bool IsUpgradable { get { return _upgradableBy != null && _upgradableBy.Length > 0; } }
 
     [SerializeField]
     private bool _isBase = false;

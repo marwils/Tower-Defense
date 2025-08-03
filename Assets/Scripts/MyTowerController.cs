@@ -8,6 +8,6 @@ public class MyTowerController : TowerController
 {
     [Header("Tower")]
     [SerializeField]
-    private TowerElement _baseElement;
-    public TowerElement BaseElement => _baseElement;
+    private TowerConfiguration _towerConfiguration;
+    public TowerConfiguration TowerConfiguration => _towerConfiguration;
 }
