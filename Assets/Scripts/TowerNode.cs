@@ -10,12 +10,12 @@ public class TowerNode : ScriptableObject
     public string Name => _name;
 
     [SerializeField]
-    private GameObject _prefab;
-    public GameObject Prefab => _prefab;
+    private TowerConfiguration _towerSettings;
+    public TowerConfiguration TowerSettings => _towerSettings;
 
     [SerializeField]
-    private Tower _towerSettings;
-    public Tower TowerSettings => _towerSettings;
+    private GameObject _prefab;
+    public GameObject Prefab => _prefab;
 
     [SerializeField]
     private int _price = 100;

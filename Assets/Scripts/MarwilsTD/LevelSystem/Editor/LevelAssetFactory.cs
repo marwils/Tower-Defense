@@ -9,49 +9,49 @@ namespace MarwilsTD.LevelSystem
 {
     public static class LevelAssetFactory
     {
-        public static Wave CreateWave(UnityEngine.Object context)
+        public static WaveConfiguration CreateWave(UnityEngine.Object context)
         {
-            var wave = ScriptableObject.CreateInstance<Wave>();
+            var wave = ScriptableObject.CreateInstance<WaveConfiguration>();
             wave.name = $"Wave_{DateTime.Now:yyyyMMdd_HHmmss}";
             SaveAsset(wave, context, "Waves");
             return wave;
         }
 
-        public static WaveElement CreateWaveElement(Type elementType, UnityEngine.Object context)
+        public static WaveElementConfiguration CreateWaveElement(Type elementType, UnityEngine.Object context)
         {
-            var element = ScriptableObject.CreateInstance(elementType) as WaveElement;
+            var element = ScriptableObject.CreateInstance(elementType) as WaveElementConfiguration;
             element.name = $"{elementType.Name}_{DateTime.Now:yyyyMMdd_HHmmss}";
             SaveAsset(element, context, null);
             return element;
         }
 
-        public static SequenceElement CreateSequenceElement(Type elementType, UnityEngine.Object context)
+        public static SequenceElementConfiguration CreateSequenceElement(Type elementType, UnityEngine.Object context)
         {
-            var element = ScriptableObject.CreateInstance(elementType) as SequenceElement;
+            var element = ScriptableObject.CreateInstance(elementType) as SequenceElementConfiguration;
             element.name = $"{elementType.Name}_{DateTime.Now:yyyyMMdd_HHmmss}";
             SaveAsset(element, context, "Sequences");
             return element;
         }
 
-        public static Route CreateRoute(UnityEngine.Object context)
+        public static RouteConfiguration CreateRoute(UnityEngine.Object context)
         {
-            var route = ScriptableObject.CreateInstance<Route>();
+            var route = ScriptableObject.CreateInstance<RouteConfiguration>();
             route.name = $"Route_{DateTime.Now:yyyyMMdd_HHmmss}";
             SaveAsset(route, context, "Routes");
             return route;
         }
 
-        public static SpawnPlan CreateSpawnPlanSequence(UnityEngine.Object context)
+        public static SpawnPlanConfiguration CreateSpawnPlanSequence(UnityEngine.Object context)
         {
-            var spawnPlan = ScriptableObject.CreateInstance<SpawnPlan>();
+            var spawnPlan = ScriptableObject.CreateInstance<SpawnPlanConfiguration>();
             spawnPlan.name = $"SpawnPlan_{DateTime.Now:yyyyMMdd_HHmmss}";
             SaveAsset(spawnPlan, context, "SpawnPlans");
             return spawnPlan;
         }
 
-        public static SpawnPlanSequence CreateSpawnPlanSequence(SpawnPlan spawnPlan)
+        public static SequenceConfiguration CreateSpawnPlanSequence(SpawnPlanConfiguration spawnPlan)
         {
-            var sequence = ScriptableObject.CreateInstance<SpawnPlanSequence>();
+            var sequence = ScriptableObject.CreateInstance<SequenceConfiguration>();
             sequence.name = $"SpawnPlanSequence_{DateTime.Now:yyyyMMdd_HHmmss}";
 
             var assetPath = AssetDatabase.GetAssetPath(spawnPlan);
@@ -61,13 +61,13 @@ namespace MarwilsTD.LevelSystem
             return sequence;
         }
 
-        public static SequenceElement CreateSequenceElement(Type elementType, object parent)
+        public static SequenceElementConfiguration CreateSequenceElement(Type elementType, object parent)
         {
-            var element = ScriptableObject.CreateInstance(elementType) as SequenceElement;
+            var element = ScriptableObject.CreateInstance(elementType) as SequenceElementConfiguration;
             element.name = $"{elementType.Name}_{DateTime.Now:yyyyMMdd_HHmmss}";
 
             string assetPath;
-            if (parent is SpawnPlanSequence sequence)
+            if (parent is SequenceConfiguration sequence)
             {
                 assetPath = AssetDatabase.GetAssetPath(sequence);
             }

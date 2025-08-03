@@ -1,12 +1,12 @@
-using MarwilsTD.LevelSystem;
-
 using UnityEngine;
 
 namespace MarwilsTD
 {
+    using LevelSystem;
+
     public class LevelController : MonoBehaviour
     {
-        [SerializeField] private Level _level;
+        [SerializeField] private LevelConfiguration _level;
 
         private void Start()
         {
@@ -15,6 +15,12 @@ namespace MarwilsTD
 
         private void StartLevel()
         {
+            if (_level == null)
+            {
+                Debug.LogWarning($"LevelConfiguration is not set in LevelController <{this}>.");
+                return;
+            }
+
             _level.StartLevel();
         }
     }

@@ -1,14 +1,14 @@
-using MarwilsTD.LevelSystem;
-
 using UnityEngine;
 
 namespace MarwilsTD
 {
+    using LevelSystem;
+
     public abstract class EntityController : MonoBehaviour
     {
         [SerializeField]
-        protected Entity _entitySettings;
-        public Entity EntitySettings { get { return GetEntitySettings(); } set { SetEntitySettings(value); } }
+        protected EntityConfiguration _configuration;
+        public EntityConfiguration Configuration { get { return GetConfiguration(); } set { SetConfiguration(value); } }
 
         [Header("Stats (Runtime Properties)")]
 
@@ -51,40 +51,40 @@ namespace MarwilsTD
 
         protected virtual void Awake()
         {
-            if (_entitySettings == null)
+            if (_configuration == null)
             {
-                Debug.LogWarning($"Entity settings not assigned in <{gameObject.name}>.");
+                Debug.LogWarning($"Entity configuration not assigned in <{gameObject.name}>.");
                 return;
             }
 
             InitializeEntity();
         }
 
-        public virtual Entity GetEntitySettings()
+        public virtual EntityConfiguration GetConfiguration()
         {
-            return _entitySettings;
+            return _configuration;
         }
 
-        protected virtual void SetEntitySettings(Entity entitySettings)
+        protected virtual void SetConfiguration(EntityConfiguration entityConfiguration)
         {
-            if (entitySettings == null)
+            if (entityConfiguration == null)
             {
-                Debug.LogWarning($"Entity settings cannot be null in <{gameObject.name}>.");
+                Debug.LogWarning($"Entity configuration cannot be null in <{gameObject.name}>.");
                 return;
             }
 
-            _entitySettings = entitySettings;
+            _configuration = entityConfiguration;
             InitializeEntity();
         }
 
         protected virtual void InitializeEntity()
         {
-            _canTakeDamage = _entitySettings.CanTakeDamage;
-            _canBeHealed = _entitySettings.CanBeHealed;
-            _health = _entitySettings.Health;
-            _shield = _entitySettings.Shield;
-            _canMove = _entitySettings.CanMove;
-            _speed = _entitySettings.Speed;
+            _canTakeDamage = _configuration.CanTakeDamage;
+            _canBeHealed = _configuration.CanBeHealed;
+            _health = _configuration.Health;
+            _shield = _configuration.Shield;
+            _canMove = _configuration.CanMove;
+            _speed = _configuration.Speed;
 
             _maxHealth = _health;
         }
@@ -115,9 +115,9 @@ namespace MarwilsTD
             {
                 _health += amount;
 
-                if (_health > _entitySettings.Health)
+                if (_health > _configuration.Health)
                 {
-                    _health = _entitySettings.Health;
+                    _health = _configuration.Health;
                 }
             }
         }

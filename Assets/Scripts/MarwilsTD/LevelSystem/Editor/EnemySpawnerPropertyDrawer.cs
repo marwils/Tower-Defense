@@ -3,14 +3,14 @@ using UnityEditor;
 
 namespace MarwilsTD.LevelSystem
 {
-    [CustomPropertyDrawer(typeof(EnemySpawner))]
+    [CustomPropertyDrawer(typeof(EnemySpawnerConfiguration))]
     public class EnemySpawnerPropertyDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, label, property);
 
-            var spawner = property.objectReferenceValue as EnemySpawner;
+            var spawner = property.objectReferenceValue as EnemySpawnerConfiguration;
             if (spawner == null)
             {
                 EditorGUI.PropertyField(position, property, label);
@@ -80,7 +80,7 @@ namespace MarwilsTD.LevelSystem
             if (!property.isExpanded || property.objectReferenceValue == null)
                 return EditorGUIUtility.singleLineHeight;
 
-            var spawner = property.objectReferenceValue as EnemySpawner;
+            var spawner = property.objectReferenceValue as EnemySpawnerConfiguration;
             if (spawner == null)
                 return EditorGUIUtility.singleLineHeight;
 

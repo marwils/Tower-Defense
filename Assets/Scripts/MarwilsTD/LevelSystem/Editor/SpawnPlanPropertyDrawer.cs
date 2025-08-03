@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
 {
-    [CustomPropertyDrawer(typeof(SpawnPlan))]
+    [CustomPropertyDrawer(typeof(SpawnPlanConfiguration))]
     public class SpawnPlanPropertyDrawer : PropertyDrawer
     {
         private SpawnPlanSequencePropertyDrawer _sequenceDrawer = new SpawnPlanSequencePropertyDrawer();
@@ -17,7 +17,7 @@ namespace MarwilsTD.LevelSystem
                 return;
             }
 
-            var spawnPlan = property.objectReferenceValue as SpawnPlan;
+            var spawnPlan = property.objectReferenceValue as SpawnPlanConfiguration;
             if (spawnPlan == null)
             {
                 EditorGUI.PropertyField(position, property, label);
@@ -41,7 +41,7 @@ namespace MarwilsTD.LevelSystem
             currentY += EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing;
         }
 
-        public void DrawSpawnPlanContent(Rect position, SpawnPlan spawnPlan, ref float currentY)
+        public void DrawSpawnPlanContent(Rect position, SpawnPlanConfiguration spawnPlan, ref float currentY)
         {
             if (spawnPlan == null) return;
 
@@ -54,7 +54,7 @@ namespace MarwilsTD.LevelSystem
                 for (int i = 0; i < sequencesProp.arraySize; i++)
                 {
                     var sequenceProp = sequencesProp.GetArrayElementAtIndex(i);
-                    var sequence = sequenceProp.objectReferenceValue as SpawnPlanSequence;
+                    var sequence = sequenceProp.objectReferenceValue as SequenceConfiguration;
 
                     string sequenceLabel = sequence != null ? $"Sequence {i + 1}" : $"Sequence {i + 1} (Missing)";
                     var sequenceGuiLabel = new GUIContent(sequenceLabel);
@@ -130,7 +130,7 @@ namespace MarwilsTD.LevelSystem
             }
         }
 
-        private void CreateNewSequence(SerializedProperty sequencesProp, SpawnPlan spawnPlan)
+        private void CreateNewSequence(SerializedProperty sequencesProp, SpawnPlanConfiguration spawnPlan)
         {
             var sequence = LevelAssetFactory.CreateSpawnPlanSequence(spawnPlan);
             sequencesProp.arraySize++;
@@ -147,7 +147,7 @@ namespace MarwilsTD.LevelSystem
             if (property.objectReferenceValue == null)
                 return EditorGUIUtility.singleLineHeight;
 
-            var spawnPlan = property.objectReferenceValue as SpawnPlan;
+            var spawnPlan = property.objectReferenceValue as SpawnPlanConfiguration;
             if (spawnPlan == null)
                 return EditorGUIUtility.singleLineHeight;
 

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
 {
-    [CustomPropertyDrawer(typeof(List<Wave>))]
+    [CustomPropertyDrawer(typeof(List<WaveConfiguration>))]
     public class WavesPropertyDrawer : PropertyDrawer
     {
         private WavePropertyDrawer _waveDrawer = new WavePropertyDrawer();
@@ -23,7 +23,7 @@ namespace MarwilsTD.LevelSystem
             {
                 var waveProperty = property.GetArrayElementAtIndex(i);
 
-                var wave = waveProperty.objectReferenceValue as Wave;
+                var wave = waveProperty.objectReferenceValue as WaveConfiguration;
                 if (wave == null)
                 {
                     continue;
@@ -80,7 +80,7 @@ namespace MarwilsTD.LevelSystem
         {
             if (GUI.Button(addRect, label))
             {
-                var level = property.serializedObject.targetObject as Level;
+                var level = property.serializedObject.targetObject as LevelConfiguration;
                 var wave = LevelAssetFactory.CreateWave(level);
                 wave.Title = $"Wave {property.arraySize + 1}";
                 property.arraySize++;
@@ -97,7 +97,7 @@ namespace MarwilsTD.LevelSystem
 
         private void DrawWaveContent(Rect position, SerializedProperty waveProperty)
         {
-            var wave = waveProperty.objectReferenceValue as Wave;
+            var wave = waveProperty.objectReferenceValue as WaveConfiguration;
             if (wave == null) return;
 
             _waveDrawer.DrawWaveContent(position, wave);

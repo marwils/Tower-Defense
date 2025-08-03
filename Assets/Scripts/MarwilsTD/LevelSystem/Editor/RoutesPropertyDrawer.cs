@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
 {
-    [CustomPropertyDrawer(typeof(List<Route>))]
+    [CustomPropertyDrawer(typeof(List<RouteConfiguration>))]
     public class RoutesPropertyDrawer : PropertyDrawer
     {
         private RoutePropertyDrawer _routeDrawer = new RoutePropertyDrawer();
@@ -24,7 +24,7 @@ namespace MarwilsTD.LevelSystem
                 var routeProperty = property.GetArrayElementAtIndex(i);
                 var routeHeight = _routeDrawer.GetPropertyHeight(routeProperty, new GUIContent($"Route {i + 1}"));
 
-                var route = routeProperty.objectReferenceValue as Route;
+                var route = routeProperty.objectReferenceValue as RouteConfiguration;
                 if (route == null)
                 {
                     continue;
@@ -80,7 +80,7 @@ namespace MarwilsTD.LevelSystem
         {
             if (GUI.Button(addRect, label))
             {
-                var level = property.serializedObject.targetObject as Level;
+                var level = property.serializedObject.targetObject as LevelConfiguration;
                 var route = LevelAssetFactory.CreateRoute(level);
                 route.Title = $"Route {property.arraySize + 1}";
                 property.arraySize++;
@@ -97,7 +97,7 @@ namespace MarwilsTD.LevelSystem
 
         private void DrawRouteContent(Rect position, SerializedProperty routeProperty)
         {
-            var route = routeProperty.objectReferenceValue as Route;
+            var route = routeProperty.objectReferenceValue as RouteConfiguration;
             if (route == null) return;
 
             _routeDrawer.DrawRouteContent(position, route);

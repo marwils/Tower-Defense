@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: New Level
   _routes:
-  - {fileID: 11400000, guid: 48598bf55ae86584f89425052efa6f8e, type: 2}
+  - {fileID: 11400000, guid: fe90afa13eb30fd43bb8619750bef6b6, type: 2}
   _waves:
-  - {fileID: 11400000, guid: 59adf2663ce0b8f43bbeacc7d6c416b8, type: 2}
+  - {fileID: 11400000, guid: 5536dd3322c7a1340a8ad27720347cd6, type: 2}
   _lastModifiedBySceneName: Level 1
   _blockSerialization: 0

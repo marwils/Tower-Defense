@@ -2331,7 +2331,7 @@ Transform:
   m_GameObject: {fileID: 969397369}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.9431067, z: -0.33249032, w: 0}
-  m_LocalPosition: {x: -18.89, y: 0, z: 0}
+  m_LocalPosition: {x: -1.9, y: 0, z: -2.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3679,7 +3679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b5a3dde62c85254fac1d3bd44056d82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entitySettings: {fileID: 11400000, guid: ec0f72efe1e101d42bd1cb2e37412e4e, type: 2}
+  _configuration: {fileID: 0}
   _canTakeDamage: 0
   _canBeHealed: 0
   _health: 200
@@ -3688,7 +3688,7 @@ MonoBehaviour:
   _speed: 0
   _maxHealth: 0
   _weaponController: {fileID: 0}
-  _towerConfiguration: {fileID: 0}
+  _towerConfiguration: {fileID: 11400000, guid: c4937d4f4c3c59d43a70f6ee95ad9108, type: 2}
 --- !u!4 &1621731937 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7463664485087954654, guid: 347ff391ed0a34d40b5e0ed3d3dbd477, type: 3}

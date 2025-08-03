@@ -25,11 +25,11 @@ namespace MarwilsTD.LevelSystem
             }
         }
 
-        public static void DrawElement(Rect position, SerializedProperty elementProp, GUIContent label, WaveElement element)
+        public static void DrawElement(Rect position, SerializedProperty elementProp, GUIContent label, WaveElementConfiguration element)
         {
-            if (element is SpawnPlan)
+            if (element is SpawnPlanConfiguration)
             {
-                DrawSpawnPlan(position, elementProp, label, element as SpawnPlan);
+                DrawSpawnPlan(position, elementProp, label, element as SpawnPlanConfiguration);
             }
             else if (element != null)
             {
@@ -41,11 +41,11 @@ namespace MarwilsTD.LevelSystem
             }
         }
 
-        public static float GetElementHeight(SerializedProperty elementProp, GUIContent label, WaveElement element)
+        public static float GetElementHeight(SerializedProperty elementProp, GUIContent label, WaveElementConfiguration element)
         {
-            if (element is SpawnPlan)
+            if (element is SpawnPlanConfiguration)
             {
-                return GetSpawnPlanHeight(elementProp, label, element as SpawnPlan);
+                return GetSpawnPlanHeight(elementProp, label, element as SpawnPlanConfiguration);
             }
             else if (element != null)
             {
@@ -57,9 +57,9 @@ namespace MarwilsTD.LevelSystem
             }
         }
 
-        public static void DrawSequenceElement(Rect position, SerializedProperty elementProp, GUIContent label, SequenceElement element)
+        public static void DrawSequenceElement(Rect position, SerializedProperty elementProp, GUIContent label, SequenceElementConfiguration element)
         {
-            if (element is EnemySpawner)
+            if (element is EnemySpawnerConfiguration)
             {
                 SequenceSpawnerDrawer.OnGUI(position, elementProp, label);
             }
@@ -73,9 +73,9 @@ namespace MarwilsTD.LevelSystem
             }
         }
 
-        public static float GetSequenceElementHeight(SerializedProperty elementProp, GUIContent label, SequenceElement element)
+        public static float GetSequenceElementHeight(SerializedProperty elementProp, GUIContent label, SequenceElementConfiguration element)
         {
-            if (element is EnemySpawner)
+            if (element is EnemySpawnerConfiguration)
             {
                 return SequenceSpawnerDrawer.GetPropertyHeight(elementProp, label);
             }
@@ -89,17 +89,17 @@ namespace MarwilsTD.LevelSystem
             }
         }
 
-        private static void DrawSpawnPlan(Rect position, SerializedProperty elementProp, GUIContent label, SpawnPlan spawnPlan)
+        private static void DrawSpawnPlan(Rect position, SerializedProperty elementProp, GUIContent label, SpawnPlanConfiguration spawnPlan)
         {
             SpawnPlanDrawer.OnGUI(position, elementProp, label);
         }
 
-        private static float GetSpawnPlanHeight(SerializedProperty elementProp, GUIContent label, SpawnPlan spawnPlan)
+        private static float GetSpawnPlanHeight(SerializedProperty elementProp, GUIContent label, SpawnPlanConfiguration spawnPlan)
         {
             return SpawnPlanDrawer.GetPropertyHeight(elementProp, label);
         }
 
-        private static void DrawInlineProperties(Rect position, SerializedProperty elementProp, GUIContent label, WaveElement element)
+        private static void DrawInlineProperties(Rect position, SerializedProperty elementProp, GUIContent label, WaveElementConfiguration element)
         {
             var currentY = position.y;
             var headerRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
@@ -130,7 +130,7 @@ namespace MarwilsTD.LevelSystem
             EditorGUI.indentLevel--;
         }
 
-        private static float GetInlinePropertiesHeight(SerializedProperty elementProp, GUIContent label, WaveElement element)
+        private static float GetInlinePropertiesHeight(SerializedProperty elementProp, GUIContent label, WaveElementConfiguration element)
         {
             float height = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Header
 
@@ -146,7 +146,7 @@ namespace MarwilsTD.LevelSystem
             return height;
         }
 
-        private static void DrawInlineSequenceProperties(Rect position, SerializedProperty elementProp, GUIContent label, SequenceElement element)
+        private static void DrawInlineSequenceProperties(Rect position, SerializedProperty elementProp, GUIContent label, SequenceElementConfiguration element)
         {
             var currentY = position.y;
             var headerRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
@@ -177,7 +177,7 @@ namespace MarwilsTD.LevelSystem
             EditorGUI.indentLevel--;
         }
 
-        private static float GetInlineSequencePropertiesHeight(SerializedProperty elementProp, GUIContent label, SequenceElement element)
+        private static float GetInlineSequencePropertiesHeight(SerializedProperty elementProp, GUIContent label, SequenceElementConfiguration element)
         {
             float height = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Header
 

@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace MarwilsTD.LevelSystem
 {
-    [CustomPropertyDrawer(typeof(Route))]
+    [CustomPropertyDrawer(typeof(RouteConfiguration))]
     public class RoutePropertyDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, label, property);
 
-            var route = property.objectReferenceValue as Route;
+            var route = property.objectReferenceValue as RouteConfiguration;
             if (route == null)
             {
                 EditorGUI.PropertyField(position, property, label);
@@ -25,7 +25,7 @@ namespace MarwilsTD.LevelSystem
             EditorGUI.EndProperty();
         }
 
-        public void DrawRouteContent(Rect position, Route route)
+        public void DrawRouteContent(Rect position, RouteConfiguration route)
         {
             if (route == null) return;
 
@@ -139,7 +139,7 @@ namespace MarwilsTD.LevelSystem
             }
         }
 
-        private void DrawValidationStatus(Rect position, Route route, ref float currentY)
+        private void DrawValidationStatus(Rect position, RouteConfiguration route, ref float currentY)
         {
             bool isRouteValid = route != null;
             bool isSpawnPointValid = !string.IsNullOrEmpty(route?.SpawnPointId);
@@ -200,7 +200,7 @@ namespace MarwilsTD.LevelSystem
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            var route = property.objectReferenceValue as Route;
+            var route = property.objectReferenceValue as RouteConfiguration;
             if (route == null) return EditorGUIUtility.singleLineHeight;
 
             bool isRouteValid = route != null;

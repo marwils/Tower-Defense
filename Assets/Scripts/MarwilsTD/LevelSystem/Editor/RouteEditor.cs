@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
 {
-    [CustomEditor(typeof(Route))]
+    [CustomEditor(typeof(RouteConfiguration))]
     public class RouteEditor : Editor
     {
         private RoutePropertyDrawer _routeDrawer;
@@ -42,7 +42,7 @@ namespace MarwilsTD.LevelSystem
 
         private void DrawRouteUsingPropertyDrawer()
         {
-            var route = target as Route;
+            var route = target as RouteConfiguration;
             var wrapper = CreateWrapper(route);
             var wrapperSO = new SerializedObject(wrapper);
             var routeProperty = wrapperSO.FindProperty("route");
@@ -68,7 +68,7 @@ namespace MarwilsTD.LevelSystem
             }
         }
 
-        private RouteWrapper CreateWrapper(Route route)
+        private RouteWrapper CreateWrapper(RouteConfiguration route)
         {
             var wrapper = CreateInstance<RouteWrapper>();
             wrapper.route = route;
@@ -77,7 +77,7 @@ namespace MarwilsTD.LevelSystem
 
         private void DrawDebugInfo()
         {
-            var route = target as Route;
+            var route = target as RouteConfiguration;
 
             EditorGUILayout.LabelField("Debug Information", EditorStyles.boldLabel);
 
@@ -109,6 +109,6 @@ namespace MarwilsTD.LevelSystem
     [System.Serializable]
     internal class RouteWrapper : ScriptableObject
     {
-        public Route route;
+        public RouteConfiguration route;
     }
 }

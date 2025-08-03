@@ -1,17 +1,17 @@
-using MarwilsTD.LevelSystem;
-
 namespace MarwilsTD
 {
+    using LevelSystem;
+
     public class TowerController : EntityController
     {
-        public new Tower GetEntitySettings()
+        public new TowerConfiguration GetConfiguration()
         {
-            return _entitySettings as Tower;
+            return _configuration as TowerConfiguration;
         }
 
-        protected void SetEntitySettings(Tower towerSettings)
+        protected void SetConfiguration(TowerConfiguration towerConfiguration)
         {
-            _entitySettings = towerSettings;
+            _configuration = towerConfiguration;
             InitializeEntity();
         }
     }

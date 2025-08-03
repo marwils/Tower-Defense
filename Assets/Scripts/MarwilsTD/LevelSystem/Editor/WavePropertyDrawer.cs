@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MarwilsTD.LevelSystem
 {
-    [CustomPropertyDrawer(typeof(Wave))]
+    [CustomPropertyDrawer(typeof(WaveConfiguration))]
     public class WavePropertyDrawer : PropertyDrawer
     {
         private Type[] _waveElementTypes;
@@ -17,7 +17,7 @@ namespace MarwilsTD.LevelSystem
             {
                 _waveElementTypes = AppDomain.CurrentDomain.GetAssemblies()
                     .SelectMany(asm => asm.GetTypes())
-                    .Where(t => t.IsSubclassOf(typeof(WaveElement)) && !t.IsAbstract)
+                    .Where(t => t.IsSubclassOf(typeof(WaveElementConfiguration)) && !t.IsAbstract)
                     .ToArray();
 
                 _waveElementTypeNames = _waveElementTypes
@@ -38,7 +38,7 @@ namespace MarwilsTD.LevelSystem
                 return;
             }
 
-            var wave = property.objectReferenceValue as Wave;
+            var wave = property.objectReferenceValue as WaveConfiguration;
             if (wave == null)
             {
                 EditorGUI.PropertyField(position, property, label);
@@ -58,7 +58,7 @@ namespace MarwilsTD.LevelSystem
             EditorGUI.EndProperty();
         }
 
-        public void DrawWaveContent(Rect position, Wave wave)
+        public void DrawWaveContent(Rect position, WaveConfiguration wave)
         {
             if (wave == null) return;
 
@@ -84,7 +84,7 @@ namespace MarwilsTD.LevelSystem
                 for (int i = 0; i < elementsProp.arraySize; i++)
                 {
                     var elementProp = elementsProp.GetArrayElementAtIndex(i);
-                    var element = elementProp.objectReferenceValue as WaveElement;
+                    var element = elementProp.objectReferenceValue as WaveElementConfiguration;
 
                     string elementLabel = element != null ? ObjectNames.NicifyVariableName(element.GetType().Name) : $"Element {i + 1}";
                     var elementGuiLabel = new GUIContent($" • {elementLabel}");
@@ -125,7 +125,7 @@ namespace MarwilsTD.LevelSystem
             }
         }
 
-        private void ShowAddElementMenu(SerializedProperty elementsProperty, Wave wave)
+        private void ShowAddElementMenu(SerializedProperty elementsProperty, WaveConfiguration wave)
         {
             var menu = new GenericMenu();
 
@@ -156,7 +156,7 @@ namespace MarwilsTD.LevelSystem
             if (property.objectReferenceValue == null)
                 return EditorGUIUtility.singleLineHeight;
 
-            var wave = property.objectReferenceValue as Wave;
+            var wave = property.objectReferenceValue as WaveConfiguration;
             if (wave == null)
                 return EditorGUIUtility.singleLineHeight;
 
@@ -174,7 +174,7 @@ namespace MarwilsTD.LevelSystem
                 for (int i = 0; i < elementsProp.arraySize; i++)
                 {
                     var elementProp = elementsProp.GetArrayElementAtIndex(i);
-                    var element = elementProp.objectReferenceValue as WaveElement;
+                    var element = elementProp.objectReferenceValue as WaveElementConfiguration;
                     string elementLabel = element != null ? ObjectNames.NicifyVariableName(element.GetType().Name) : $"Element {i + 1}";
                     var elementGuiLabel = new GUIContent($" • {elementLabel}");
 

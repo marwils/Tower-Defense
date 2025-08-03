@@ -1,14 +1,14 @@
-using MarwilsTD.LevelSystem;
-
 using UnityEngine;
 
 namespace MarwilsTD
 {
+    using LevelSystem;
+
     public class AmmoControl : MonoBehaviour
     {
         [SerializeField]
-        private Ammo _ammoSettings;
-        public Ammo AmmoSettings => _ammoSettings;
+        private AmmoConfiguration _ammoConfiguration;
+        public AmmoConfiguration AmmoConfiguration => _ammoConfiguration;
 
         [SerializeField]
         private int _currentAmmo;
@@ -16,7 +16,7 @@ namespace MarwilsTD
 
         public void Reload()
         {
-            _currentAmmo = _ammoSettings.MaxAmmo;
+            _currentAmmo = _ammoConfiguration.MaxAmmo;
         }
 
         public bool HasAmmo()

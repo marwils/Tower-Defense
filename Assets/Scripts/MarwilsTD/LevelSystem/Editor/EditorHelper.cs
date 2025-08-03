@@ -91,14 +91,14 @@ namespace MarwilsTD.LevelSystem
         /// <summary>
         /// Finds all Level assets that contain a specific object.
         /// </summary>
-        public static IEnumerable<Level> FindLevelsContaining(UnityEngine.Object obj)
+        public static IEnumerable<LevelConfiguration> FindLevelsContaining(UnityEngine.Object obj)
         {
 #if UNITY_EDITOR
             var levelGuids = UnityEditor.AssetDatabase.FindAssets("t:Level");
             foreach (var guid in levelGuids)
             {
                 var levelPath = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
-                var level = UnityEditor.AssetDatabase.LoadAssetAtPath<Level>(levelPath);
+                var level = UnityEditor.AssetDatabase.LoadAssetAtPath<LevelConfiguration>(levelPath);
 
                 if (level != null && ContainsObject(level, obj))
                 {

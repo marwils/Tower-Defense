@@ -1,20 +1,20 @@
 using System;
 
-using MarwilsTD.LevelSystem;
-
 using UnityEngine;
 
 namespace MarwilsTD
 {
+    using LevelSystem;
+
     public class WeaponController : MonoBehaviour
     {
         [SerializeField]
-        private Weapon _weaponSettings;
-        public Weapon WeaponSettings => _weaponSettings;
+        private WeaponConfiguration _weaponSettings;
+        public WeaponConfiguration WeaponSettings => _weaponSettings;
 
         [SerializeField]
-        private Ammo _ammoSettings;
-        public Ammo AmmoSettings => _ammoSettings;
+        private AmmoConfiguration _ammoSettings;
+        public AmmoConfiguration AmmoSettings => _ammoSettings;
 
         [SerializeField]
         private Transform _aimTarget;

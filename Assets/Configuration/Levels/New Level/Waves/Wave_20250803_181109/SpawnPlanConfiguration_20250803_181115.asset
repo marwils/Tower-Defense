@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3709559267045126613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c6d16f6556481c469fb882e2da95c65, type: 3}
+  m_Name: SpawnPlanSequence_20250803_181116
+  m_EditorClassIdentifier: 
+  _route: {fileID: 11400000, guid: fe90afa13eb30fd43bb8619750bef6b6, type: 2}
+  _sequenceElements:
+  - {fileID: 11400000, guid: 83d45e0fe45c5e2498263bfd84bb7e9d, type: 2}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f5b8b407db47eb4da0732c2acef7d1f, type: 3}
+  m_Name: SpawnPlanConfiguration_20250803_181115
+  m_EditorClassIdentifier: 
+  _spawnPlanSequences:
+  - {fileID: -3709559267045126613}

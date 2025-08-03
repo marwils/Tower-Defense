@@ -1,8 +1,9 @@
 using UnityEngine;
-using MarwilsTD.LevelSystem;
 
 namespace MarwilsTD
 {
+    using LevelSystem;
+
     public class SpawnPoint : GizmoBehaviour
     {
         private void Start()

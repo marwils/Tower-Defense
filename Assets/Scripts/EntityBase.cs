@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public abstract class EntityBase : MonoBehaviour
 {
     [SerializeField]
-    private Entity _settings;
+    private EntityConfiguration _configuration;
 
     [Header("Damage and Healing")]
 
@@ -31,16 +31,16 @@ public abstract class EntityBase : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if (_settings == null)
+        if (_configuration == null)
         {
             Debug.LogWarning($"Building settings not assigned in <{gameObject.name}>.");
             return;
         }
 
-        _canTakeDamage = _settings.CanTakeDamage;
-        _canBeHealed = _settings.CanBeHealed;
-        _health = _settings.Health;
-        _shield = _settings.Shield;
+        _canTakeDamage = _configuration.CanTakeDamage;
+        _canBeHealed = _configuration.CanBeHealed;
+        _health = _configuration.Health;
+        _shield = _configuration.Shield;
         InitState();
     }
 
@@ -59,9 +59,9 @@ public abstract class EntityBase : MonoBehaviour
         }
     }
 
-    public T GetSettings<T>() where T : Entity
+    public T GetSettings<T>() where T : EntityConfiguration
     {
-        return _settings as T;
+        return _configuration as T;
     }
 
     public abstract void OnSelect();

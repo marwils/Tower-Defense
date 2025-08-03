@@ -1,10 +1,10 @@
-using MarwilsTD.LevelSystem;
-
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace MarwilsTD
 {
+    using LevelSystem;
+
     [RequireComponent(typeof(NavMeshAgent))]
     public class EnemyController : EntityController
     {
@@ -33,8 +33,8 @@ namespace MarwilsTD
         {
             base.InitializeEntity();
 
-            _currentHealth = GetEntitySettings().Health;
-            _agent.speed = GetEntitySettings().Speed;
+            _currentHealth = GetConfiguration().Health;
+            _agent.speed = GetConfiguration().Speed;
         }
 
         public void SetDestination(Transform destination)
@@ -50,20 +50,20 @@ namespace MarwilsTD
             }
         }
 
-        public new Enemy GetEntitySettings()
+        public new EnemyConfiguration GetConfiguration()
         {
-            return _entitySettings as Enemy;
+            return _configuration as EnemyConfiguration;
         }
 
-        public void SetEntitySettings(Enemy enemySettings)
+        public void SetConfiguration(EnemyConfiguration enemyConfiguration)
         {
-            if (enemySettings == null)
+            if (enemyConfiguration == null)
             {
-                Debug.LogWarning($"Entity settings cannot be null in <{gameObject.name}>.");
+                Debug.LogWarning($"Enemy configuration cannot be null in <{gameObject.name}>.");
                 return;
             }
 
-            _entitySettings = enemySettings;
+            _configuration = enemyConfiguration;
             InitializeEntity();
         }
     }

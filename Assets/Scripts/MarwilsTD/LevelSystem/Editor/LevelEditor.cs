@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace MarwilsTD.LevelSystem
 {
-    [CustomEditor(typeof(Level))]
+    [CustomEditor(typeof(LevelConfiguration))]
     public class LevelEditor : Editor
     {
         private SerializedProperty _titleProperty;
@@ -26,7 +26,7 @@ namespace MarwilsTD.LevelSystem
 
         public override void OnInspectorGUI()
         {
-            var level = target as Level;
+            var level = target as LevelConfiguration;
 
             // Block serialization if scene context is invalid
             if (level.IsSerializationBlocked && level.IsInDifferentScene())
@@ -92,7 +92,7 @@ namespace MarwilsTD.LevelSystem
             }
         }
 
-        private void DrawBlockedSerializationWarning(Level level)
+        private void DrawBlockedSerializationWarning(LevelConfiguration level)
         {
             var currentScene = SceneManager.GetActiveScene().name;
 
@@ -193,7 +193,7 @@ namespace MarwilsTD.LevelSystem
 
         public override bool HasPreviewGUI()
         {
-            var level = target as Level;
+            var level = target as LevelConfiguration;
             return !level.IsSerializationBlocked && base.HasPreviewGUI();
         }
     }
