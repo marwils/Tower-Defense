@@ -76,7 +76,7 @@ public class InputManager : MonoBehaviour
     public bool RaycastFromScreenPosition(out RaycastHit hit)
     {
         int groundLayer = LayerMask.NameToLayer("Ground");
-        int mask = ~(1 << groundLayer); // alles außer Ground
+        int mask = ~(1 << groundLayer);
 
         Vector2 screenPosition = GetPointerScreenPosition();
 

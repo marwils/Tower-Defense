@@ -37,7 +37,7 @@ namespace MarwilsTD
                 _aimTarget = GameObject.FindGameObjectWithTag(TargetTag)?.transform;
                 if (_aimTarget == null)
                 {
-                    Debug.LogError("No target found with tag: " + TargetTag);
+                    Debug.LogWarning($"No target found with tag <{TargetTag}> in <{gameObject.name}>.");
                 }
             }
         }

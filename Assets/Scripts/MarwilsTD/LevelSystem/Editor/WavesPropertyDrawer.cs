@@ -26,7 +26,6 @@ namespace MarwilsTD.LevelSystem
                 var wave = waveProperty.objectReferenceValue as Wave;
                 if (wave == null)
                 {
-                    Debug.LogWarning($"Wave at index {i} is null. Skipping rendering.");
                     continue;
                 }
 

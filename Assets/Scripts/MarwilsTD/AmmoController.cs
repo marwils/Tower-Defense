@@ -14,12 +14,6 @@ namespace MarwilsTD
         private int _currentAmmo;
         public int CurrentAmmo => _currentAmmo;
 
-        public void Initialize(Ammo ammo)
-        {
-            _ammoSettings = ammo;
-            _currentAmmo = ammo.MaxAmmo;
-        }
-
         public void Reload()
         {
             _currentAmmo = _ammoSettings.MaxAmmo;

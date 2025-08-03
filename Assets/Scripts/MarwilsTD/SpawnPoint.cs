@@ -39,7 +39,7 @@ namespace MarwilsTD
         {
             if (request.EnemyPrefab == null)
             {
-                Debug.LogError($"SpawnPoint '{name}': Enemy prefab is null!");
+                Debug.LogWarning($"SpawnPoint <{name}>: Enemy prefab is null for request <{request}>.");
                 return;
             }
 
@@ -47,7 +47,7 @@ namespace MarwilsTD
 
             enemyInstance.SetDestination(request.TargetTransform);
 
-            Debug.Log($"SpawnPoint '{name}' spawned enemy: {request.EnemyPrefab.name} -> {request.TargetTransform?.name}");
+            Debug.Log($"SpawnPoint <{name}> spawned enemy: <{request.EnemyPrefab.name}> -> <{request.TargetTransform?.name}>.");
         }
     }
 }

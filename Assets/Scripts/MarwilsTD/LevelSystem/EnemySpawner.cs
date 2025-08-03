@@ -58,19 +58,19 @@ namespace MarwilsTD.LevelSystem
         {
             if (_enemies == null || _enemies.Count == 0)
             {
-                Debug.LogError($"Enemy prefabs list is empty in {name}");
+                Debug.LogWarning($"Enemy prefabs list is empty in <{name}>.");
                 return false;
             }
 
             if (_routeProvider == null)
             {
-                Debug.LogError($"No route provider set for {name}");
+                Debug.LogWarning($"No route provider set for <{name}>.");
                 return false;
             }
 
             if (SpawnTransform == null || TargetTransform == null)
             {
-                Debug.LogError($"Spawn or target transform is null in {name}");
+                Debug.LogWarning($"Spawn or target transform is null in <{name}>.");
                 return false;
             }
 
@@ -121,7 +121,7 @@ namespace MarwilsTD.LevelSystem
         {
             if (_enemies == null || _enemies.Count == 0)
             {
-                Debug.LogWarning($"Enemy prefabs list is empty in {name}");
+                Debug.LogWarning($"Enemy prefabs list is empty in <{name}>.");
             }
             _spawnAmount = Mathf.Max(1, _spawnAmount);
         }

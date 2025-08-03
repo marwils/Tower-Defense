@@ -53,7 +53,7 @@ namespace MarwilsTD
         {
             if (_entitySettings == null)
             {
-                Debug.LogError("Entity settings not assigned in " + gameObject.name);
+                Debug.LogWarning($"Entity settings not assigned in <{gameObject.name}>.");
                 return;
             }
 
@@ -69,7 +69,7 @@ namespace MarwilsTD
         {
             if (entitySettings == null)
             {
-                Debug.LogError("Entity settings cannot be null");
+                Debug.LogWarning($"Entity settings cannot be null in <{gameObject.name}>.");
                 return;
             }
 

@@ -8,8 +8,6 @@ namespace MarwilsTD
     [RequireComponent(typeof(NavMeshAgent))]
     public class EnemyController : EntityController
     {
-        // protected new Enemy _entitySettings;
-
         [SerializeField]
         private Transform _destination;
         public Transform Destination => _destination;
@@ -48,7 +46,7 @@ namespace MarwilsTD
             }
             else
             {
-                Debug.LogError("No destination set for the enemy.");
+                Debug.LogWarning($"No destination set for the enemy in <{gameObject.name}>.");
             }
         }
 
@@ -61,7 +59,7 @@ namespace MarwilsTD
         {
             if (enemySettings == null)
             {
-                Debug.LogError("Entity settings cannot be null");
+                Debug.LogWarning($"Entity settings cannot be null in <{gameObject.name}>.");
                 return;
             }
 

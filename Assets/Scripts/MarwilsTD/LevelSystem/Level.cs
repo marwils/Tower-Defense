@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.SceneManagement;
 namespace MarwilsTD.LevelSystem
 {
     [CreateAssetMenu(fileName = "New Level", menuName = "Marwils.TD/Level")]
-    [System.Serializable]
+    [Serializable]
     /// <summary>
     /// Represents a level in the game, containing routes and waves.
     /// </summary>

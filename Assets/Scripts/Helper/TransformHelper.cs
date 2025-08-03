@@ -6,7 +6,7 @@ public class TransformHelper
     {
         if (sourceTransformation == null || targetTransformation == null)
         {
-            Debug.LogError("Source or target transformation null.");
+            Debug.LogWarning("Source or target transformation null.");
             return;
         }
 
@@ -40,7 +40,7 @@ public class TransformHelper
     {
         if (target == null)
         {
-            Debug.LogError("Target transform is null.");
+            Debug.LogWarning("Target transform is null.");
             return;
         }
 

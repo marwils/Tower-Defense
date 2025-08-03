@@ -18,7 +18,7 @@ public class CursorMovement : MonoBehaviour
     {
         if (_selectionPrefab == null)
         {
-            Debug.LogError($"No Selection Prefab set for cursor in scene: {SceneManager.GetActiveScene().name}");
+            Debug.LogWarning($"No Selection Prefab set for cursor in scene <{SceneManager.GetActiveScene().name}>");
             Destroy(gameObject);
             return;
         }

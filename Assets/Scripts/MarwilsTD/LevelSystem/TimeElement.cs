@@ -1,8 +1,10 @@
+using System;
+
 using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
 {
-    [System.Serializable]
+    [Serializable]
     public abstract class TimeElement : ScriptableObject
     {
         public float Duration => GetDuration();

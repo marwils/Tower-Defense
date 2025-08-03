@@ -53,7 +53,7 @@ namespace MarwilsTD.LevelSystem
         {
             if (_spawnPlanSequences == null || _spawnPlanSequences.Count == 0)
             {
-                Debug.LogError("Spawn Plan must have at least one RouteSpawn defined.");
+                Debug.LogWarning($"Spawn Plan <{name}> must have at least one RouteSpawn defined.");
                 return false;
             }
             return true;

@@ -145,7 +145,6 @@ namespace MarwilsTD.LevelSystem
             if (obj == null || currentDepth > maxDepth || !visited.Add(obj)) return;
 
             var indent = new string(' ', currentDepth * 2);
-            Debug.Log($"{indent}{obj.GetType().Name}: {obj.name}");
 
             var objType = obj.GetType();
             foreach (var field in GetAllFields(objType))
@@ -166,7 +165,6 @@ namespace MarwilsTD.LevelSystem
                         {
                             if (item is UnityEngine.Object unityItem)
                             {
-                                Debug.Log($"{indent}  [{index}]:");
                                 LogObjectHierarchyRecursive(unityItem, currentDepth + 2, maxDepth, visited);
                                 index++;
                             }

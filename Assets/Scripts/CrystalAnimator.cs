@@ -12,7 +12,7 @@ public class CrystalAnimator : MonoBehaviour
         _animator = GetComponent<Animator>();
         if (_animator == null)
         {
-            Debug.LogError("Animator component is not assigned.");
+            Debug.LogWarning($"Animator component is not assigned in <{gameObject.name}>.");
             Destroy(this);
             return;
         }

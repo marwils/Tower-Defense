@@ -33,7 +33,7 @@ public abstract class EntityBase : MonoBehaviour
     {
         if (_settings == null)
         {
-            Debug.LogError("Building settings not assigned.");
+            Debug.LogWarning($"Building settings not assigned in <{gameObject.name}>.");
             return;
         }
 

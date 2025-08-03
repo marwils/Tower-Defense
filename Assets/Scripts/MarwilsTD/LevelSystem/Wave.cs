@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -9,6 +10,7 @@ using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
 {
+    [Serializable]
     public class Wave : TimeElement
     {
         [SerializeField]
@@ -27,7 +29,7 @@ namespace MarwilsTD.LevelSystem
         {
             if (element == null)
             {
-                Debug.LogError($"Cannot add null element to wave '{_title}'");
+                Debug.LogWarning($"Cannot add null element to wave <{_title}>");
                 return;
             }
 
@@ -39,7 +41,7 @@ namespace MarwilsTD.LevelSystem
         {
             if (index < 0 || index >= _waveElements.Count)
             {
-                Debug.LogError($"Invalid element index {index} for wave '{_title}'");
+                Debug.LogWarning($"Invalid element index <{index}> for wave <{_title}>");
                 return;
             }
 

@@ -27,7 +27,6 @@ namespace MarwilsTD.LevelSystem
                 var route = routeProperty.objectReferenceValue as Route;
                 if (route == null)
                 {
-                    Debug.LogWarning($"Route at index {i} is null. Skipping rendering.");
                     continue;
                 }
 

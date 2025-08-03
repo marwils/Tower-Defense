@@ -51,7 +51,7 @@ public class CrystalBreeder : MonoBehaviour, ISelectable
     {
         if (_largeCrystalPrefab == null || _smallCrystalPrefab == null)
         {
-            Debug.LogError("Crystal prefabs are not assigned.");
+            Debug.LogWarning($"Crystal prefabs are not assigned in <{gameObject.name}>.");
             Destroy(this);
             return;
         }
@@ -66,7 +66,7 @@ public class CrystalBreeder : MonoBehaviour, ISelectable
         }
         if (_crystalAnimators == null || _crystalAnimators.Length == 0)
         {
-            Debug.LogError("Crystal animators are not assigned.");
+            Debug.LogWarning($"Crystal animators are not assigned in <{gameObject.name}>.");
             Destroy(this);
             return;
         }

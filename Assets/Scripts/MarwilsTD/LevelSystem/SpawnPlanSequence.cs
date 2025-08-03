@@ -43,20 +43,20 @@ namespace MarwilsTD.LevelSystem
         {
             if (_route == null)
             {
-                Debug.LogWarning($"No route defined in {name}");
+                Debug.LogWarning($"No route defined in <{name}>.");
                 return false;
             }
 
-            Debug.Log($"Route {_route.name} is starting...");
+            Debug.Log($"Route <{_route.name}> is starting...");
             if (!_route.IsValid)
             {
-                Debug.LogError($"Invalid route in {name}: {_route.name}");
+                Debug.LogWarning($"Invalid route in <{name}>: <{_route.name}>.");
                 return false;
             }
 
             if (_sequenceElements == null || _sequenceElements.Count == 0)
             {
-                Debug.LogError($"No sequence elements defined in {name}");
+                Debug.LogWarning($"No sequence elements defined in <{name}>: <{_route.name}>.");
                 return false;
             }
 
@@ -71,7 +71,7 @@ namespace MarwilsTD.LevelSystem
                 var element = _sequenceElements[i];
                 if (element == null)
                 {
-                    Debug.LogError($"Null sequence element found in {name} at index {i}");
+                    Debug.LogWarning($"Null sequence element found in <{name}> at index <{i}>.");
                     isValid = false;
                     continue;
                 }
@@ -85,7 +85,7 @@ namespace MarwilsTD.LevelSystem
 
         private IEnumerator RunRoute()
         {
-            Debug.Log($"Starting SpawnPlan: {name}");
+            Debug.Log($"Starting SpawnPlan <{name}> with {_sequenceElements.Count} elements.");
 
             foreach (var element in _sequenceElements)
             {

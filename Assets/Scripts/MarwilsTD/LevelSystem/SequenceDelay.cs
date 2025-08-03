@@ -18,7 +18,7 @@ namespace MarwilsTD.LevelSystem
         public override IEnumerator Run()
         {
             _isRunning = true;
-            Debug.Log($"Sequence delay for {_delayTime} seconds in {name}");
+            Debug.Log($"Sequence delay for <{_delayTime}> seconds in <{name}>.");
             yield return new WaitForSeconds(_delayTime);
             _isRunning = false;
         }
