@@ -49,6 +49,14 @@ public class TransformHelper
         target.localScale = Vector3.one;
     }
 
+    public static void SetChildrenActive(Transform transform, bool value)
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(value);
+        }
+    }
+
     public enum TransformationType
     {
         Position,

@@ -45,7 +45,7 @@ namespace MarwilsTD
         [Header("Weapon (Runtime Properties)")]
 
         [SerializeField]
-        private WeaponController _weaponController;
+        protected WeaponController _weaponController;
         public WeaponController WeaponController => _weaponController;
         public bool HasWeapon { get { return _weaponController != null; } }
 

@@ -22,6 +22,19 @@ public class MyTowerController : TowerController
             Destroy(gameObject);
             return;
         }
+
+        SetAllButRootNodeActive(false);
+    }
+
+    private void SetAllButRootNodeActive(bool value)
+    {
+        foreach (Transform child in transform)
+        {
+            if (child != _rootNode.transform)
+            {
+                TransformHelper.SetChildrenActive(child, value);
+            }
+        }
     }
 
     public void ExtendTower()
