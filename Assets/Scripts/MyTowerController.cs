@@ -1,13 +1,36 @@
-using MarwilsTD;
+using System;
 
-using Unity.VisualScripting;
+using MarwilsTD;
 
 using UnityEngine;
 
 public class MyTowerController : TowerController
 {
-    [Header("Tower")]
+    [Header("My Tower Controller")]
+
     [SerializeField]
-    private MyTowerConfiguration _towerConfiguration;
-    public MyTowerConfiguration TowerConfiguration => _towerConfiguration;
+    [Tooltip("Root tower node. If not set, the first child will be used.")]
+    private TowerNode _rootNode;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if (_rootNode == null)
+        {
+            Debug.LogWarning($"Root node is not set in tower <{gameObject.name}>.");
+            Destroy(gameObject);
+            return;
+        }
+    }
+
+    public void ExtendTower()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void UpgradeTower()
+    {
+        throw new NotImplementedException();
+    }
 }

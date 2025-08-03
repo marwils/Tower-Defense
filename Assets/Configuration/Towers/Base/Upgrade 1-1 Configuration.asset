@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a489b7925c2f674ba6c415e4a21995b, type: 3}
-  m_Name: Tower Base Main Upgrade 2 Configuration
+  m_Name: Upgrade 1-1 Configuration
   m_EditorClassIdentifier: 
   _canTakeDamage: 1
   _canBeHealed: 0
-  _health: 100
-  _shield: 500
+  _health: 500
+  _shield: 0
   _canMove: 0
   _speed: 0

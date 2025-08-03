@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 using UnityEngine;
 
-public class CrystalBreeder : MonoBehaviour, ISelectable
+public class CrystalBreeder : TowerNode, ISelectable
 {
     [Header("Crystal Breeding")]
 

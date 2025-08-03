@@ -54,10 +54,46 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 487c029c139fed64d83f5e544c8728d4, type: 2}
     - target: {fileID: 919132149155446097, guid: 86f5c0d5e47f79a49ad25ca46d1a0f31, type: 3}
       propertyPath: m_Name
-      value: TR Bottom A
+      value: Upgrade 1-1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 86f5c0d5e47f79a49ad25ca46d1a0f31, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1750095839454783621}
   m_SourcePrefab: {fileID: 100100000, guid: 86f5c0d5e47f79a49ad25ca46d1a0f31, type: 3}
+--- !u!1 &7076250017403336568 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 86f5c0d5e47f79a49ad25ca46d1a0f31, type: 3}
+  m_PrefabInstance: {fileID: 7994604260872440361}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-1750095839454783621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7076250017403336568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87390ec03cd611449bc78fe63103621a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _configuration: {fileID: 0}
+  _canTakeDamage: 0
+  _canBeHealed: 0
+  _health: 0
+  _shield: 0
+  _canMove: 0
+  _speed: 0
+  _maxHealth: 0
+  _weaponController: {fileID: 0}
+  _name: Tower Node
+  _towerSettings: {fileID: 0}
+  _price: 100
+  _buildableOnTop: []
+  _upgradesInto: []
+  _height: 1
+  _yOffset: 0

@@ -1,45 +1,47 @@
+using MarwilsTD;
 using MarwilsTD.LevelSystem;
 
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Tower Node", menuName = "Game/Tower Node")]
-public class TowerNode : ScriptableObject
+public class TowerNode : TowerController
 {
-    [SerializeField]
-    private string _name = "Tower Node";
-    public string Name => _name;
+    [Header("Tower Node")]
 
     [SerializeField]
+    [Tooltip("Initial stats of the tower. Use a TowerConfiguration to set them.")]
     private TowerConfiguration _towerSettings;
     public TowerConfiguration TowerSettings => _towerSettings;
 
     [SerializeField]
-    private GameObject _prefab;
-    public GameObject Prefab => _prefab;
-
-    [SerializeField]
+    [Tooltip("Initial price of the tower.")]
     private int _price = 100;
     public int Price => _price;
 
     [SerializeField]
-    private TowerNode[] _extensibleBy;
-    public TowerNode[] ExtensibleBy => _extensibleBy;
-    public bool IsExtensible { get { return _extensibleBy != null && _extensibleBy.Length > 0; } }
+    [Tooltip("These tower nodes can be built on top of this one.")]
+    private TowerNode[] _buildableOnTop;
+    public TowerNode[] BuildableOnTop => _buildableOnTop;
+    public bool AllowsBuildingOnTop { get { return _buildableOnTop != null && _buildableOnTop.Length > 0; } }
 
     [SerializeField]
-    private TowerNode[] _upgradableBy;
-    public TowerNode[] UpgradableBy => _upgradableBy;
-    public bool IsUpgradable { get { return _upgradableBy != null && _upgradableBy.Length > 0; } }
+    [Tooltip("This tower node can be upgraded into these ones.")]
+    private TowerNode[] _upgradesInto;
+    public TowerNode[] UpgradesInto => _upgradesInto;
+    public bool HasUpgrades { get { return _upgradesInto != null && _upgradesInto.Length > 0; } }
 
     [SerializeField]
-    private bool _isBase = false;
-    public bool IsBase => _isBase;
+    private bool _replaceRootNode = false;
+    public bool ReplaceRootNode => _replaceRootNode;
 
     [SerializeField]
+    [Tooltip("Defines on which height the next tower node will be placed.")]
     private float _height = 1.0f;
     public float Height => _height;
 
     [SerializeField]
+    [Tooltip("Defines the offset on the Y-axis for the tower node's position (upon another tower node).")]
     private float _yOffset;
     public float YOffset => _yOffset;
+
+    public string Name { get { return gameObject.name; } }
 }
