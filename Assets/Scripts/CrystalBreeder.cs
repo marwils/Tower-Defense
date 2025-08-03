@@ -46,8 +46,10 @@ public class CrystalBreeder : TowerNode, ISelectable
     private List<GameObject> _smallCrystalInstances = new();
     private GameObject _largeCrystalInstance;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         if (_largeCrystalPrefab == null || _smallCrystalPrefab == null)
         {
             Debug.LogWarning($"Crystal prefabs are not assigned in <{gameObject.name}>.");
