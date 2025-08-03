@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87390ec03cd611449bc78fe63103621a, type: 3}
-  m_Name: Base Main Upgrade 1
+  m_Name: Tower Base Upgrade 2
   m_EditorClassIdentifier: 
   _name: Tower Element
-  _prefab: {fileID: 7076250017403336568, guid: d2d2e8c147cae174198c0c01ee2291f4, type: 3}
-  _towerSettings: {fileID: 11400000, guid: ec0f72efe1e101d42bd1cb2e37412e4e, type: 2}
+  _prefab: {fileID: 1375553025516815855, guid: 20ef4c45997678048bd860c825fc3bd9, type: 3}
+  _towerSettings: {fileID: 11400000, guid: 56f79186228e11a49a7011932a1e772e, type: 2}
   _price: 100
   _isExtensibleBy: []
   _isUpgradableBy: []
-  _isBase: 0
+  _isBase: 1
   _height: 1
+  _yOffset: 0

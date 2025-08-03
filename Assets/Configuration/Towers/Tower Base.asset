@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87390ec03cd611449bc78fe63103621a, type: 3}
-  m_Name: Base
+  m_Name: Tower Base
   m_EditorClassIdentifier: 
   _name: Tower Element
   _prefab: {fileID: 3886406549468602973, guid: ec71e5f625f86e44598a2c0253ac3780, type: 3}
@@ -19,5 +19,6 @@ MonoBehaviour:
   _isExtensibleBy: []
   _isUpgradableBy:
   - {fileID: 11400000, guid: d8d7ade0dd76b1245930acd3bd7dfda1, type: 2}
-  _isBase: 0
-  _height: 1
+  _isBase: 1
+  _height: 0.2
+  _yOffset: 0

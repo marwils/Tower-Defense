@@ -1,13 +1,13 @@
 using MarwilsTD;
 
+using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class MyTowerController : TowerController
 {
+    [Header("Tower")]
     [SerializeField]
-    private GameObject _base;
-
-    [SerializeField]
-    private GameObject[] _elements;
-    public GameObject[] Elements => _elements;
+    private TowerElement _baseElement;
+    public TowerElement BaseElement => _baseElement;
 }

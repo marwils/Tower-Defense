@@ -10,7 +10,7 @@ namespace MarwilsTD
         protected Entity _entitySettings;
         public Entity EntitySettings { get { return GetEntitySettings(); } set { SetEntitySettings(value); } }
 
-        [Header("Runtime Properties")]
+        [Header("Stats (Runtime Properties)")]
 
         [SerializeField]
         private bool _canTakeDamage;
@@ -41,6 +41,8 @@ namespace MarwilsTD
         [SerializeField]
         private float _maxHealth;
         public float MaxHealth { get { return _maxHealth; } set { SetMaxHealth(value); } }
+
+        [Header("Weapon (Runtime Properties)")]
 
         [SerializeField]
         private WeaponController _weaponController;

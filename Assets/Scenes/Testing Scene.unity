@@ -289,6 +289,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tower Round Bottom C
       objectReference: {fileID: 0}
+    - target: {fileID: 1375553025516815855, guid: 20ef4c45997678048bd860c825fc3bd9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1755597486729502549, guid: 20ef4c45997678048bd860c825fc3bd9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -641,6 +645,10 @@ PrefabInstance:
     - target: {fileID: 193148741467012309, guid: 638ddf5f6cab2704f9c1ba35e29b11ee, type: 3}
       propertyPath: m_Name
       value: Tower Round Build C
+      objectReference: {fileID: 0}
+    - target: {fileID: 193148741467012309, guid: 638ddf5f6cab2704f9c1ba35e29b11ee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 713226174662452847, guid: 638ddf5f6cab2704f9c1ba35e29b11ee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1026,6 +1034,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tower Round Bottom B
       objectReference: {fileID: 0}
+    - target: {fileID: 7335746443327569687, guid: 7daada55ba2d45a419c0fe15f6c61a96, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7964086159178442157, guid: 7daada55ba2d45a419c0fe15f6c61a96, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1067,7 +1079,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 6987695260478736682, guid: 7daada55ba2d45a419c0fe15f6c61a96, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2488,6 +2500,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tower Round Build A
       objectReference: {fileID: 0}
+    - target: {fileID: 3254402336521716844, guid: c89a11d024cd1fa47a71fac210f10a05, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7890988677545176757, guid: c89a11d024cd1fa47a71fac210f10a05, type: 3}
       propertyPath: _isExtensible
       value: 0
@@ -2933,6 +2949,10 @@ PrefabInstance:
     - target: {fileID: 7076250017403336568, guid: d2d2e8c147cae174198c0c01ee2291f4, type: 3}
       propertyPath: m_Name
       value: Tower Round Bottom A
+      objectReference: {fileID: 0}
+    - target: {fileID: 7076250017403336568, guid: d2d2e8c147cae174198c0c01ee2291f4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7599880767054622146, guid: d2d2e8c147cae174198c0c01ee2291f4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3790,7 +3810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b5a3dde62c85254fac1d3bd44056d82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entitySettings: {fileID: 11400000, guid: 6bb60cc7a235bc94a866a1c63f209227, type: 2}
+  _entitySettings: {fileID: 11400000, guid: ec0f72efe1e101d42bd1cb2e37412e4e, type: 2}
   _canTakeDamage: 0
   _canBeHealed: 0
   _health: 200
@@ -3799,8 +3819,7 @@ MonoBehaviour:
   _speed: 0
   _maxHealth: 0
   _weaponController: {fileID: 0}
-  _base: {fileID: 0}
-  _elements: []
+  _baseElement: {fileID: 11400000, guid: 963d0b0a3c61b4d44bfd5baaec022100, type: 2}
 --- !u!4 &1621731937 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7463664485087954654, guid: 347ff391ed0a34d40b5e0ed3d3dbd477, type: 3}
@@ -3866,6 +3885,10 @@ PrefabInstance:
     - target: {fileID: 8025429226532214914, guid: 86a812e5e9bed894ba4d0f8fa1522ede, type: 3}
       propertyPath: m_Name
       value: Tower Round Build B
+      objectReference: {fileID: 0}
+    - target: {fileID: 8025429226532214914, guid: 86a812e5e9bed894ba4d0f8fa1522ede, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4320298619594256298, guid: 86a812e5e9bed894ba4d0f8fa1522ede, type: 3}
