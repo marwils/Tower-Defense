@@ -7610,6 +7610,10 @@ PrefabInstance:
       propertyPath: _height
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 345939501782872242, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: _replaceCurrentNodeOnUpgrade
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 795247254583279799, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7658,17 +7662,33 @@ PrefabInstance:
       propertyPath: _height
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 3906413768225034149, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: _replaceCurrentNodeOnUpgrade
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4364072068256077645, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: _height
       value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364072068256077645, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: _replaceCurrentNodeOnUpgrade
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5302159472513475010, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: _height
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5302159472513475010, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: _replaceCurrentNodeOnUpgrade
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5533868271468280052, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: _height
       value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5533868271468280052, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: _replaceCurrentNodeOnUpgrade
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5720381412802960137, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7742,9 +7762,17 @@ PrefabInstance:
       propertyPath: _height
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 8505995797492526799, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: _replaceCurrentNodeOnUpgrade
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8766274220915333542, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: _height
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8766274220915333542, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: _replaceCurrentNodeOnUpgrade
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
