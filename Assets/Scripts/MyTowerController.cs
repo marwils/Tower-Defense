@@ -32,7 +32,7 @@ public class MyTowerController : TowerController
         {
             if (child != _rootNode.transform)
             {
-                TransformHelper.SetChildrenActive(child, value);
+                child.gameObject.SetActive(value);
             }
         }
     }
