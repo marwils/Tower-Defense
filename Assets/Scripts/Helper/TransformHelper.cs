@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TransformHelper
+public static class TransformHelper
 {
     public static void SetTransformation(Transform sourceTransformation, Transform targetTransformation, params TransformationType[] types)
     {
