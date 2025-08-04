@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-public class CrystalBreeder : TowerNode, ISelectable
+public class CrystalBreeder : MyTowerNode, ISelectable
 {
     [Header("Crystal Breeding")]
 
