@@ -47,9 +47,9 @@ public class MyTowerNode : TowerNode
     {
         base.SetExtensionNode(extensionNode);
 
-        if (extensionNode is MyTowerNode myTowerNode)
+        if (HasExtension && extensionNode is MyTowerNode myTowerNode)
         {
-            myTowerNode.SetY(transform.position.y + _height + _yOffset);
+            myTowerNode.SetY(transform.position.y + _height);
         }
 
         extensionNode.gameObject.SetActive(true);
