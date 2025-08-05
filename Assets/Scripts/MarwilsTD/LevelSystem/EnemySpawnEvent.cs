@@ -1,5 +1,4 @@
 using System;
-
 using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
@@ -22,7 +21,12 @@ namespace MarwilsTD.LevelSystem
         public Transform TargetTransform { get; set; }
         public ISequenceElement SourceSequence { get; set; }
 
-        public EnemySpawnRequest(EnemyController enemyPrefab, Transform spawnTransform, Transform targetTransform, ISequenceElement sourceSequence)
+        public EnemySpawnRequest(
+            EnemyController enemyPrefab,
+            Transform spawnTransform,
+            Transform targetTransform,
+            ISequenceElement sourceSequence
+        )
         {
             EnemyPrefab = enemyPrefab;
             SpawnTransform = spawnTransform;

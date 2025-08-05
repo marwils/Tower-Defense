@@ -1,7 +1,7 @@
-using UnityEditor;
-using UnityEngine;
 using System;
 using System.Linq;
+using UnityEditor;
+using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
 {
@@ -15,14 +15,13 @@ namespace MarwilsTD.LevelSystem
         {
             if (_waveElementTypes == null)
             {
-                _waveElementTypes = AppDomain.CurrentDomain.GetAssemblies()
+                _waveElementTypes = AppDomain
+                    .CurrentDomain.GetAssemblies()
                     .SelectMany(asm => asm.GetTypes())
                     .Where(t => t.IsSubclassOf(typeof(WaveElementConfiguration)) && !t.IsAbstract)
                     .ToArray();
 
-                _waveElementTypeNames = _waveElementTypes
-                    .Select(t => ObjectNames.NicifyVariableName(t.Name))
-                    .ToArray();
+                _waveElementTypeNames = _waveElementTypes.Select(t => ObjectNames.NicifyVariableName(t.Name)).ToArray();
             }
         }
 
@@ -60,7 +59,8 @@ namespace MarwilsTD.LevelSystem
 
         public void DrawWaveContent(Rect position, WaveConfiguration wave)
         {
-            if (wave == null) return;
+            if (wave == null)
+                return;
 
             InitializeTypes();
 
@@ -73,7 +73,12 @@ namespace MarwilsTD.LevelSystem
             var titleProp = waveSO.FindProperty("_title");
             if (titleProp != null)
             {
-                var titleRect = new Rect(indentedRect.x, currentY, indentedRect.width, EditorGUIUtility.singleLineHeight);
+                var titleRect = new Rect(
+                    indentedRect.x,
+                    currentY,
+                    indentedRect.width,
+                    EditorGUIUtility.singleLineHeight
+                );
                 EditorGUI.PropertyField(titleRect, titleProp, new GUIContent("Title"));
                 currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             }
@@ -86,12 +91,18 @@ namespace MarwilsTD.LevelSystem
                     var elementProp = elementsProp.GetArrayElementAtIndex(i);
                     var element = elementProp.objectReferenceValue as WaveElementConfiguration;
 
-                    string elementLabel = element != null ? ObjectNames.NicifyVariableName(element.GetType().Name) : $"Element {i + 1}";
+                    string elementLabel =
+                        element != null ? ObjectNames.NicifyVariableName(element.GetType().Name) : $"Element {i + 1}";
                     var elementGuiLabel = new GUIContent($" • {elementLabel}");
 
                     var elementHeight = ElementDrawerHelper.GetElementHeight(elementProp, elementGuiLabel, element);
                     var elementRect = new Rect(indentedRect.x, currentY, indentedRect.width, elementHeight);
-                    var deleteRect = new Rect(indentedRect.x + indentedRect.width - 20, currentY, 20, EditorGUIUtility.singleLineHeight);
+                    var deleteRect = new Rect(
+                        indentedRect.x + indentedRect.width - 20,
+                        currentY,
+                        20,
+                        EditorGUIUtility.singleLineHeight
+                    );
 
                     ElementDrawerHelper.DrawElement(elementRect, elementProp, elementGuiLabel, element);
 
@@ -111,7 +122,12 @@ namespace MarwilsTD.LevelSystem
                 }
                 currentY += EditorGUIUtility.standardVerticalSpacing;
 
-                var addButtonRect = new Rect(indentedRect.x, currentY, indentedRect.width, EditorGUIUtility.singleLineHeight);
+                var addButtonRect = new Rect(
+                    indentedRect.x,
+                    currentY,
+                    indentedRect.width,
+                    EditorGUIUtility.singleLineHeight
+                );
                 if (GUI.Button(addButtonRect, "Add Wave Element"))
                 {
                     ShowAddElementMenu(elementsProp, wave);
@@ -134,18 +150,22 @@ namespace MarwilsTD.LevelSystem
                 var elementType = _waveElementTypes[i];
                 var typeName = _waveElementTypeNames[i];
 
-                menu.AddItem(new GUIContent(typeName), false, () =>
-                {
-                    var element = LevelAssetFactory.CreateWaveElement(elementType, wave);
-                    elementsProperty.arraySize++;
-                    var newElementProp = elementsProperty.GetArrayElementAtIndex(elementsProperty.arraySize - 1);
-                    newElementProp.objectReferenceValue = element;
+                menu.AddItem(
+                    new GUIContent(typeName),
+                    false,
+                    () =>
+                    {
+                        var element = LevelAssetFactory.CreateWaveElement(elementType, wave);
+                        elementsProperty.arraySize++;
+                        var newElementProp = elementsProperty.GetArrayElementAtIndex(elementsProperty.arraySize - 1);
+                        newElementProp.objectReferenceValue = element;
 
-                    elementsProperty.serializedObject.ApplyModifiedProperties();
-                    EditorUtility.SetDirty(wave);
-                    AssetDatabase.SaveAssets();
-                    AssetDatabase.Refresh();
-                });
+                        elementsProperty.serializedObject.ApplyModifiedProperties();
+                        EditorUtility.SetDirty(wave);
+                        AssetDatabase.SaveAssets();
+                        AssetDatabase.Refresh();
+                    }
+                );
             }
 
             menu.ShowAsContext();
@@ -175,11 +195,13 @@ namespace MarwilsTD.LevelSystem
                 {
                     var elementProp = elementsProp.GetArrayElementAtIndex(i);
                     var element = elementProp.objectReferenceValue as WaveElementConfiguration;
-                    string elementLabel = element != null ? ObjectNames.NicifyVariableName(element.GetType().Name) : $"Element {i + 1}";
+                    string elementLabel =
+                        element != null ? ObjectNames.NicifyVariableName(element.GetType().Name) : $"Element {i + 1}";
                     var elementGuiLabel = new GUIContent($" • {elementLabel}");
 
-                    height += ElementDrawerHelper.GetElementHeight(elementProp, elementGuiLabel, element)
-                              + EditorGUIUtility.standardVerticalSpacing;
+                    height +=
+                        ElementDrawerHelper.GetElementHeight(elementProp, elementGuiLabel, element)
+                        + EditorGUIUtility.standardVerticalSpacing;
                 }
 
                 height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Add button

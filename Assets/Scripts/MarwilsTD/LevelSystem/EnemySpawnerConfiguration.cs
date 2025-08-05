@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
@@ -94,12 +93,7 @@ namespace MarwilsTD.LevelSystem
 
         private void SpawnEnemy()
         {
-            var request = new EnemySpawnRequest(
-                _enemies[_currentIndex],
-                SpawnTransform,
-                TargetTransform,
-                this
-            );
+            var request = new EnemySpawnRequest(_enemies[_currentIndex], SpawnTransform, TargetTransform, this);
 
             EnemySpawnEvent.RequestSpawn(request);
 

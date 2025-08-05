@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
@@ -89,7 +88,8 @@ namespace MarwilsTD.LevelSystem
 
             foreach (var element in _sequenceElements)
             {
-                if (element == null) continue;
+                if (element == null)
+                    continue;
                 yield return element.Run();
             }
         }

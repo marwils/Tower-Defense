@@ -58,6 +58,7 @@ public class ColorMapToggle : MonoBehaviour
 
         if (_showDefault)
             _material.SetTexture("_BaseMap", _defaultTexture);
-        else _material.SetTexture("_BaseMap", _alternateTexture);
+        else
+            _material.SetTexture("_BaseMap", _alternateTexture);
     }
 }

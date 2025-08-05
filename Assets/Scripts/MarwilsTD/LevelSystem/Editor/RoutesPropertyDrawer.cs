@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-
 using UnityEditor;
-
 using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
@@ -41,13 +39,22 @@ namespace MarwilsTD.LevelSystem
                 var boxRect = new Rect(position.x, currentY, position.width, totalHeight);
                 GUI.Box(boxRect, "", EditorStyles.helpBox);
 
-
-                var headerWaveRect = new Rect(position.x, currentY + Constants.MarginVertical, position.width - 20 - Constants.MarginVertical, EditorGUIUtility.singleLineHeight);
+                var headerWaveRect = new Rect(
+                    position.x,
+                    currentY + Constants.MarginVertical,
+                    position.width - 20 - Constants.MarginVertical,
+                    EditorGUIUtility.singleLineHeight
+                );
                 var headerStyle = new GUIStyle(EditorStyles.boldLabel);
                 headerStyle.fontSize = 14;
                 EditorGUI.LabelField(headerWaveRect, headerTitle, headerStyle);
 
-                var deleteMinusButtonRect = new Rect(position.x + position.width - 20 - Constants.MarginVertical, currentY + Constants.MarginVertical, 20, EditorGUIUtility.singleLineHeight);
+                var deleteMinusButtonRect = new Rect(
+                    position.x + position.width - 20 - Constants.MarginVertical,
+                    currentY + Constants.MarginVertical,
+                    20,
+                    EditorGUIUtility.singleLineHeight
+                );
                 if (GUI.Button(deleteMinusButtonRect, "-"))
                 {
                     AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(route));
@@ -56,12 +63,27 @@ namespace MarwilsTD.LevelSystem
                     break;
                 }
 
-                var addPlusButtonRect = new Rect(position.x + position.width - 25 * 2, currentY + Constants.MarginVertical, 20, EditorGUIUtility.singleLineHeight);
+                var addPlusButtonRect = new Rect(
+                    position.x + position.width - 25 * 2,
+                    currentY + Constants.MarginVertical,
+                    20,
+                    EditorGUIUtility.singleLineHeight
+                );
                 DrawAddButton(property, addPlusButtonRect, "+");
 
-                var contentY = currentY + Constants.MarginVertical * 2 + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-                var contentHeight = routeHeight - EditorGUIUtility.singleLineHeight - EditorGUIUtility.standardVerticalSpacing;
-                var contentRect = new Rect(position.x + Constants.MarginHorizontal, contentY, position.width - Constants.MarginHorizontal * 2, contentHeight);
+                var contentY =
+                    currentY
+                    + Constants.MarginVertical * 2
+                    + EditorGUIUtility.singleLineHeight
+                    + EditorGUIUtility.standardVerticalSpacing;
+                var contentHeight =
+                    routeHeight - EditorGUIUtility.singleLineHeight - EditorGUIUtility.standardVerticalSpacing;
+                var contentRect = new Rect(
+                    position.x + Constants.MarginHorizontal,
+                    contentY,
+                    position.width - Constants.MarginHorizontal * 2,
+                    contentHeight
+                );
 
                 DrawRouteContent(contentRect, routeProperty);
 
@@ -98,7 +120,8 @@ namespace MarwilsTD.LevelSystem
         private void DrawRouteContent(Rect position, SerializedProperty routeProperty)
         {
             var route = routeProperty.objectReferenceValue as RouteConfiguration;
-            if (route == null) return;
+            if (route == null)
+                return;
 
             _routeDrawer.DrawRouteContent(position, route);
         }
@@ -123,12 +146,14 @@ namespace MarwilsTD.LevelSystem
             var routeHeight = _routeDrawer.GetPropertyHeight(routeProperty, new GUIContent($"Route"));
 
             float totalHeight =
-                    Constants.MarginVertical +
-                    EditorGUIUtility.singleLineHeight + // Header
-                    EditorGUIUtility.standardVerticalSpacing +
-                    Constants.MarginVertical +
-                    routeHeight + // Route content
-                    Constants.MarginVertical;
+                Constants.MarginVertical
+                + EditorGUIUtility.singleLineHeight
+                + // Header
+                EditorGUIUtility.standardVerticalSpacing
+                + Constants.MarginVertical
+                + routeHeight
+                + // Route content
+                Constants.MarginVertical;
 
             return totalHeight;
         }

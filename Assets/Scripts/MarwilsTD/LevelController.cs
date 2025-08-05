@@ -6,7 +6,8 @@ namespace MarwilsTD
 
     public class LevelController : MonoBehaviour
     {
-        [SerializeField] private LevelConfiguration _level;
+        [SerializeField]
+        private LevelConfiguration _level;
 
         private void Start()
         {

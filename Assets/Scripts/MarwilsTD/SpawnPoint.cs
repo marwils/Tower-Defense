@@ -44,11 +44,17 @@ namespace MarwilsTD
                 return;
             }
 
-            EnemyController enemyInstance = Instantiate(request.EnemyPrefab, transform.position, request.EnemyPrefab.transform.rotation);
+            EnemyController enemyInstance = Instantiate(
+                request.EnemyPrefab,
+                transform.position,
+                request.EnemyPrefab.transform.rotation
+            );
 
             enemyInstance.SetDestination(request.TargetTransform);
 
-            Debug.Log($"SpawnPoint <{name}> spawned enemy: <{request.EnemyPrefab.name}> -> <{request.TargetTransform?.name}>.");
+            Debug.Log(
+                $"SpawnPoint <{name}> spawned enemy: <{request.EnemyPrefab.name}> -> <{request.TargetTransform?.name}>."
+            );
         }
     }
 }

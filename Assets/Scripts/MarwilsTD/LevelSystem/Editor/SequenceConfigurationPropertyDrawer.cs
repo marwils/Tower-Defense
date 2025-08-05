@@ -1,6 +1,6 @@
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using System.Linq;
 
 namespace MarwilsTD.LevelSystem
 {
@@ -27,7 +27,8 @@ namespace MarwilsTD.LevelSystem
             if (routeProp != null)
             {
                 var parentLevel = FindParentLevel(sequence);
-                RouteConfiguration[] routes = parentLevel != null ? parentLevel.Routes.ToArray() : new RouteConfiguration[0];
+                RouteConfiguration[] routes =
+                    parentLevel != null ? parentLevel.Routes.ToArray() : new RouteConfiguration[0];
                 string[] routeNames = routes.Select(r => r != null ? r.Title : "<None>").ToArray();
 
                 int currentIndex = -1;
@@ -63,7 +64,13 @@ namespace MarwilsTD.LevelSystem
             EditorGUI.EndProperty();
         }
 
-        private void DrawSequenceElementsSection(Rect position, SerializedObject sequenceSO, SerializedProperty elementsProp, ref float currentY, SequenceConfiguration sequence)
+        private void DrawSequenceElementsSection(
+            Rect position,
+            SerializedObject sequenceSO,
+            SerializedProperty elementsProp,
+            ref float currentY,
+            SequenceConfiguration sequence
+        )
         {
             var headerRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
             EditorGUI.LabelField(headerRect, "Sequence Elements", EditorStyles.boldLabel);
@@ -74,15 +81,30 @@ namespace MarwilsTD.LevelSystem
                 var elementProp = elementsProp.GetArrayElementAtIndex(i);
                 var element = elementProp.objectReferenceValue as SequenceElementConfiguration;
 
-                string elementLabel = element != null ?
-                    $"{ObjectNames.NicifyVariableName(element.GetType().Name)} {i + 1}" :
-                    $"Element {i + 1} (Missing)";
+                string elementLabel =
+                    element != null
+                        ? $"{ObjectNames.NicifyVariableName(element.GetType().Name)} {i + 1}"
+                        : $"Element {i + 1} (Missing)";
 
-                var elementHeight = ElementDrawerHelper.GetSequenceElementHeight(elementProp, new GUIContent(elementLabel), element);
+                var elementHeight = ElementDrawerHelper.GetSequenceElementHeight(
+                    elementProp,
+                    new GUIContent(elementLabel),
+                    element
+                );
                 var elementRect = new Rect(position.x, currentY, position.width - 25, elementHeight);
-                var deleteRect = new Rect(position.x + position.width - 20, currentY, 20, EditorGUIUtility.singleLineHeight);
+                var deleteRect = new Rect(
+                    position.x + position.width - 20,
+                    currentY,
+                    20,
+                    EditorGUIUtility.singleLineHeight
+                );
 
-                ElementDrawerHelper.DrawSequenceElement(elementRect, elementProp, new GUIContent(elementLabel), element);
+                ElementDrawerHelper.DrawSequenceElement(
+                    elementRect,
+                    elementProp,
+                    new GUIContent(elementLabel),
+                    element
+                );
 
                 if (GUI.Button(deleteRect, "-"))
                 {
@@ -121,7 +143,8 @@ namespace MarwilsTD.LevelSystem
         {
             var menu = new GenericMenu();
 
-            var sequenceElementTypes = System.AppDomain.CurrentDomain.GetAssemblies()
+            var sequenceElementTypes = System
+                .AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(asm => asm.GetTypes())
                 .Where(t => t.IsSubclassOf(typeof(SequenceElementConfiguration)) && !t.IsAbstract)
                 .ToArray();
@@ -129,18 +152,22 @@ namespace MarwilsTD.LevelSystem
             foreach (var elementType in sequenceElementTypes)
             {
                 var typeName = ObjectNames.NicifyVariableName(elementType.Name);
-                menu.AddItem(new GUIContent(typeName), false, () =>
-                {
-                    var element = LevelAssetFactory.CreateSequenceElement(elementType, sequence);
-                    elementsProp.arraySize++;
-                    var newElementProp = elementsProp.GetArrayElementAtIndex(elementsProp.arraySize - 1);
-                    newElementProp.objectReferenceValue = element;
+                menu.AddItem(
+                    new GUIContent(typeName),
+                    false,
+                    () =>
+                    {
+                        var element = LevelAssetFactory.CreateSequenceElement(elementType, sequence);
+                        elementsProp.arraySize++;
+                        var newElementProp = elementsProp.GetArrayElementAtIndex(elementsProp.arraySize - 1);
+                        newElementProp.objectReferenceValue = element;
 
-                    elementsProp.serializedObject.ApplyModifiedProperties();
-                    EditorUtility.SetDirty(sequence);
-                    AssetDatabase.SaveAssets();
-                    AssetDatabase.Refresh();
-                });
+                        elementsProp.serializedObject.ApplyModifiedProperties();
+                        EditorUtility.SetDirty(sequence);
+                        AssetDatabase.SaveAssets();
+                        AssetDatabase.Refresh();
+                    }
+                );
             }
 
             menu.ShowAsContext();
@@ -178,12 +205,17 @@ namespace MarwilsTD.LevelSystem
                     {
                         var elementProp = elementsProp.GetArrayElementAtIndex(i);
                         var element = elementProp.objectReferenceValue as SequenceElementConfiguration;
-                        string elementLabel = element != null ?
-                            $"{ObjectNames.NicifyVariableName(element.GetType().Name)} {i + 1}" :
-                            $"Element {i + 1} (Missing)";
+                        string elementLabel =
+                            element != null
+                                ? $"{ObjectNames.NicifyVariableName(element.GetType().Name)} {i + 1}"
+                                : $"Element {i + 1} (Missing)";
 
-                        height += ElementDrawerHelper.GetSequenceElementHeight(elementProp, new GUIContent(elementLabel), element)
-                                  + EditorGUIUtility.standardVerticalSpacing;
+                        height +=
+                            ElementDrawerHelper.GetSequenceElementHeight(
+                                elementProp,
+                                new GUIContent(elementLabel),
+                                element
+                            ) + EditorGUIUtility.standardVerticalSpacing;
                     }
                 }
                 height += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing; // Add-Button
@@ -199,15 +231,18 @@ namespace MarwilsTD.LevelSystem
             {
                 var path = AssetDatabase.GUIDToAssetPath(guid);
                 var level = AssetDatabase.LoadAssetAtPath<LevelConfiguration>(path);
-                if (level == null) continue;
+                if (level == null)
+                    continue;
 
                 foreach (var wave in level.Waves)
                 {
-                    if (wave == null) continue;
+                    if (wave == null)
+                        continue;
 
                     foreach (var elements in wave.WaveElements)
                     {
-                        if (elements == null) continue;
+                        if (elements == null)
+                            continue;
                         if (elements is SpawnPlanConfiguration spawnPlan)
                         {
                             foreach (var seq in spawnPlan.Sequences)

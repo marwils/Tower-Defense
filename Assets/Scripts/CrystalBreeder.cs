@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-
 using UnityEngine;
 
 public class CrystalBreeder : MyTowerNode, ISelectable
 {
     [Header("Crystal Breeding")]
-
     [SerializeField]
     private float _breedingTime = 5f;
     public float BreedingTime => _breedingTime;
@@ -16,7 +14,6 @@ public class CrystalBreeder : MyTowerNode, ISelectable
     public int MaxCrystals => _maxCrystals;
 
     [Header("Prefabs")]
-
     [SerializeField]
     [Tooltip("Prefab for the large crystal that will be spawned after breeding small crystals.")]
     private GameObject _largeCrystalPrefab;
@@ -26,7 +23,6 @@ public class CrystalBreeder : MyTowerNode, ISelectable
     private GameObject _smallCrystalPrefab;
 
     [Header("Animation")]
-
     [SerializeField]
     [Tooltip("Maximum time offset (in seconds) for the crystal collection animation.")]
     [Range(0f, 0.5f)]
@@ -84,7 +80,8 @@ public class CrystalBreeder : MyTowerNode, ISelectable
 
     private void CollectCrystals()
     {
-        if (_crystalCount == 0) return;
+        if (_crystalCount == 0)
+            return;
 
         StopBreeding();
         StartCollectAnimations();
@@ -140,7 +137,12 @@ public class CrystalBreeder : MyTowerNode, ISelectable
             0.44375f,
             Mathf.Sin(angle) * SmallCrystalSpawnRadius
         );
-        return Instantiate(_smallCrystalPrefab, transform.TransformPoint(localOffset), _smallCrystalPrefab.transform.rotation, transform);
+        return Instantiate(
+            _smallCrystalPrefab,
+            transform.TransformPoint(localOffset),
+            _smallCrystalPrefab.transform.rotation,
+            transform
+        );
     }
 
     private GameObject InstantiateLargeCrystal()
@@ -162,8 +164,10 @@ public class CrystalBreeder : MyTowerNode, ISelectable
 
         for (int i = 0; i < _crystalAnimators.Length; i++)
         {
-            if (i == 0) _crystalAnimators[i].StartCollect();
-            else _crystalAnimators[i].StartCollect(Random.Range(0f, _maxTimeOffset));
+            if (i == 0)
+                _crystalAnimators[i].StartCollect();
+            else
+                _crystalAnimators[i].StartCollect(Random.Range(0f, _maxTimeOffset));
         }
     }
 
@@ -171,7 +175,8 @@ public class CrystalBreeder : MyTowerNode, ISelectable
     {
         _smallCrystalInstances.ForEach(Destroy);
         _smallCrystalInstances.Clear();
-        if (_largeCrystalInstance != null) Destroy(_largeCrystalInstance);
+        if (_largeCrystalInstance != null)
+            Destroy(_largeCrystalInstance);
     }
 
     private void SpinAround() => transform.Rotate(Vector3.up, _spinningVelocity);
@@ -187,10 +192,20 @@ public class CrystalBreeder : MyTowerNode, ISelectable
     private void ResetSmallCrystal(int index)
     {
         GameObject smallCrystal = _smallCrystalInstances[index];
-        TransformHelper.SetTransformation(smallCrystal.transform, _smallCrystalPrefab.transform, TransformHelper.TransformationType.Rotation, TransformHelper.TransformationType.Scale);
+        TransformHelper.SetTransformation(
+            smallCrystal.transform,
+            _smallCrystalPrefab.transform,
+            TransformHelper.TransformationType.Rotation,
+            TransformHelper.TransformationType.Scale
+        );
         for (int i = 0; i < smallCrystal.transform.childCount; i++)
         {
-            TransformHelper.SetTransformation(smallCrystal.transform.GetChild(i), _smallCrystalPrefab.transform.GetChild(i), TransformHelper.TransformationType.Rotation, TransformHelper.TransformationType.Scale);
+            TransformHelper.SetTransformation(
+                smallCrystal.transform.GetChild(i),
+                _smallCrystalPrefab.transform.GetChild(i),
+                TransformHelper.TransformationType.Rotation,
+                TransformHelper.TransformationType.Scale
+            );
         }
     }
 

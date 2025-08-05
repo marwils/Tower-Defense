@@ -8,10 +8,13 @@ namespace MarwilsTD
     {
         [SerializeField]
         protected EntityConfiguration _configuration;
-        public EntityConfiguration Configuration { get { return GetConfiguration(); } set { SetConfiguration(value); } }
+        public EntityConfiguration Configuration
+        {
+            get { return GetConfiguration(); }
+            set { SetConfiguration(value); }
+        }
 
         [Header("Stats (Runtime Properties)")]
-
         [SerializeField]
         private bool _canTakeDamage;
         public bool CanTakeDamage => _canTakeDamage;
@@ -23,12 +26,18 @@ namespace MarwilsTD
         [SerializeField]
         private float _health;
         public float Health => _health;
-        public bool IsAlive { get { return _health > 0; } }
+        public bool IsAlive
+        {
+            get { return _health > 0; }
+        }
 
         [SerializeField]
         private float _shield;
         public float Shield => _shield;
-        public bool HasShield { get { return _shield > 0; } }
+        public bool HasShield
+        {
+            get { return _shield > 0; }
+        }
 
         [SerializeField]
         private bool _canMove;
@@ -40,14 +49,20 @@ namespace MarwilsTD
 
         [SerializeField]
         private float _maxHealth;
-        public float MaxHealth { get { return _maxHealth; } set { SetMaxHealth(value); } }
+        public float MaxHealth
+        {
+            get { return _maxHealth; }
+            set { SetMaxHealth(value); }
+        }
 
         [Header("Weapon (Runtime Properties)")]
-
         [SerializeField]
         protected WeaponController _weaponController;
         public WeaponController WeaponController => _weaponController;
-        public bool HasWeapon { get { return _weaponController != null; } }
+        public bool HasWeapon
+        {
+            get { return _weaponController != null; }
+        }
 
         protected virtual void Awake()
         {

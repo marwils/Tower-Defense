@@ -22,7 +22,12 @@ public class CursorMovement : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        _selectionInstance = Instantiate(_selectionPrefab, transform.position, _selectionPrefab.transform.rotation, transform);
+        _selectionInstance = Instantiate(
+            _selectionPrefab,
+            transform.position,
+            _selectionPrefab.transform.rotation,
+            transform
+        );
 
         TryRegisterEvents();
     }
@@ -38,7 +43,9 @@ public class CursorMovement : MonoBehaviour
 
             Vector3 hitPoint = hit.point;
 
-            float x, y, z;
+            float x,
+                y,
+                z;
 
             if (IsTransformRotated(hit.collider.transform))
             {

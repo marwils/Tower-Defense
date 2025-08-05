@@ -1,7 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace MarwilsTD.LevelSystem
 {
@@ -27,7 +27,8 @@ namespace MarwilsTD.LevelSystem
 
         public void DrawRouteContent(Rect position, RouteConfiguration route)
         {
-            if (route == null) return;
+            if (route == null)
+                return;
 
             var currentY = position.y;
 
@@ -146,11 +147,16 @@ namespace MarwilsTD.LevelSystem
             bool isTargetPointValid = !string.IsNullOrEmpty(route?.TargetPointId);
 
             List<string> errors = new();
-            if (!isRouteValid) errors.Add("✗ Route is not assigned");
-            if (!isSpawnPointValid) errors.Add("✗ Spawn Point is not assigned");
-            if (!isTargetPointValid) errors.Add("✗ Target Point is not assigned");
+            if (!isRouteValid)
+                errors.Add("✗ Route is not assigned");
+            if (!isSpawnPointValid)
+                errors.Add("✗ Spawn Point is not assigned");
+            if (!isTargetPointValid)
+                errors.Add("✗ Target Point is not assigned");
 
-            float height = EditorStyles.boldLabel.CalcHeight(new GUIContent(string.Join("\n", errors)), position.width) + EditorGUIUtility.standardVerticalSpacing;
+            float height =
+                EditorStyles.boldLabel.CalcHeight(new GUIContent(string.Join("\n", errors)), position.width)
+                + EditorGUIUtility.standardVerticalSpacing;
 
             var statusRect = new Rect(position.x, currentY, position.width, height);
 
@@ -170,21 +176,23 @@ namespace MarwilsTD.LevelSystem
         private string[] GetAvailableSpawnPointNames()
         {
             var spawnPoints = UnityEngine.Object.FindObjectsByType<SpawnPoint>(FindObjectsSortMode.None);
-            return spawnPoints.Where(sp => !string.IsNullOrEmpty(sp.gameObject.name))
-                              .Select(sp => sp.gameObject.name)
-                              .Distinct()
-                              .OrderBy(id => id)
-                              .ToArray();
+            return spawnPoints
+                .Where(sp => !string.IsNullOrEmpty(sp.gameObject.name))
+                .Select(sp => sp.gameObject.name)
+                .Distinct()
+                .OrderBy(id => id)
+                .ToArray();
         }
 
         private string[] GetAvailableTargetPointNames()
         {
             var targetPoints = UnityEngine.Object.FindObjectsByType<TargetPoint>(FindObjectsSortMode.None);
-            return targetPoints.Where(tp => !string.IsNullOrEmpty(tp.gameObject.name))
-                               .Select(tp => tp.gameObject.name)
-                               .Distinct()
-                               .OrderBy(id => id)
-                               .ToArray();
+            return targetPoints
+                .Where(tp => !string.IsNullOrEmpty(tp.gameObject.name))
+                .Select(tp => tp.gameObject.name)
+                .Distinct()
+                .OrderBy(id => id)
+                .ToArray();
         }
 
         private void UpdateLevelSceneContext(SerializedProperty anyPropertyFromRoute)
@@ -201,7 +209,8 @@ namespace MarwilsTD.LevelSystem
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             var route = property.objectReferenceValue as RouteConfiguration;
-            if (route == null) return EditorGUIUtility.singleLineHeight;
+            if (route == null)
+                return EditorGUIUtility.singleLineHeight;
 
             bool isRouteValid = route != null;
             bool isSpawnPointValid = !string.IsNullOrEmpty(route?.SpawnPointId);
@@ -215,9 +224,12 @@ namespace MarwilsTD.LevelSystem
 
             // Validation Status
             List<string> errors = new();
-            if (!isRouteValid) errors.Add("✗ Route is not assigned");
-            if (!isSpawnPointValid) errors.Add("✗ Spawn Point is not assigned");
-            if (!isTargetPointValid) errors.Add("✗ Target Point is not assigned");
+            if (!isRouteValid)
+                errors.Add("✗ Route is not assigned");
+            if (!isSpawnPointValid)
+                errors.Add("✗ Spawn Point is not assigned");
+            if (!isTargetPointValid)
+                errors.Add("✗ Target Point is not assigned");
 
             if (errors.Count > 0)
             {

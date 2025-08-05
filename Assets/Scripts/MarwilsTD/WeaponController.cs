@@ -1,5 +1,4 @@
 using System;
-
 using UnityEngine;
 
 namespace MarwilsTD
@@ -18,7 +17,10 @@ namespace MarwilsTD
 
         [SerializeField]
         private Transform _aimTarget;
-        public Transform AimTarget { get => _aimTarget; }
+        public Transform AimTarget
+        {
+            get => _aimTarget;
+        }
 
         [SerializeField]
         private Transform _firePoint;
@@ -28,7 +30,15 @@ namespace MarwilsTD
         private int _currentAmmo;
 
         private string _targetTag;
-        public string TargetTag { get => _targetTag; set { _targetTag = value; FindTarget(); } }
+        public string TargetTag
+        {
+            get => _targetTag;
+            set
+            {
+                _targetTag = value;
+                FindTarget();
+            }
+        }
 
         protected void FindTarget()
         {

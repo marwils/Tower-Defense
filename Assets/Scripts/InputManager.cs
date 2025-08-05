@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -116,6 +115,7 @@ public class InputManager : MonoBehaviour
     }
 
     private void OnEnable() => _input.Enable();
+
     private void OnDisable() => _input.Disable();
 
     private class LambdaInputListener : IInputListener

@@ -1,5 +1,4 @@
 using System;
-
 using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
@@ -8,7 +7,6 @@ namespace MarwilsTD.LevelSystem
     public abstract class EntityConfiguration : ScriptableObject
     {
         [Header("Damage and Healing")]
-
         [SerializeField]
         protected bool _canTakeDamage;
         public bool CanTakeDamage => _canTakeDamage;
@@ -26,7 +24,6 @@ namespace MarwilsTD.LevelSystem
         public float Shield => _shield;
 
         [Header("Movement")]
-
         [SerializeField]
         protected bool _canMove = false;
         public bool CanMove => _canMove;

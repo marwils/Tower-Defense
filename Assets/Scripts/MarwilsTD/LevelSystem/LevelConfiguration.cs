@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -50,8 +49,8 @@ namespace MarwilsTD.LevelSystem
                 return false;
 
             var currentScene = SceneManager.GetActiveScene();
-            bool isDifferent = !string.IsNullOrEmpty(currentScene.name) &&
-                               currentScene.name != _lastModifiedBySceneName;
+            bool isDifferent =
+                !string.IsNullOrEmpty(currentScene.name) && currentScene.name != _lastModifiedBySceneName;
 
             if (isDifferent)
             {
@@ -90,9 +89,11 @@ namespace MarwilsTD.LevelSystem
 
             var currentScene = SceneManager.GetActiveScene();
 
-            if (!string.IsNullOrEmpty(_lastModifiedBySceneName) &&
-                !string.IsNullOrEmpty(currentScene.name) &&
-                currentScene.name != _lastModifiedBySceneName)
+            if (
+                !string.IsNullOrEmpty(_lastModifiedBySceneName)
+                && !string.IsNullOrEmpty(currentScene.name)
+                && currentScene.name != _lastModifiedBySceneName
+            )
             {
                 _blockSerialization = true;
             }

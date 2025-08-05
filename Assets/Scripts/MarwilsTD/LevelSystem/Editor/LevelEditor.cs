@@ -1,5 +1,4 @@
 using UnityEditor;
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -115,10 +114,10 @@ namespace MarwilsTD.LevelSystem
             warningStyle.normal.textColor = Color.white;
 
             EditorGUILayout.LabelField(
-                $"This Level cannot be modified or saved because it was created in scene " +
-                $"'{level.LastModifiedBySceneName}' but you are currently in scene '{currentScene}'.\n\n" +
-                $"Scene-specific references (Spawn/Target Points) would be invalid. " +
-                $"Please choose an action below to continue:",
+                $"This Level cannot be modified or saved because it was created in scene "
+                    + $"'{level.LastModifiedBySceneName}' but you are currently in scene '{currentScene}'.\n\n"
+                    + $"Scene-specific references (Spawn/Target Points) would be invalid. "
+                    + $"Please choose an action below to continue:",
                 warningStyle
             );
 
@@ -144,8 +143,11 @@ namespace MarwilsTD.LevelSystem
             {
                 if (EditorApplication.isPlaying)
                 {
-                    EditorUtility.DisplayDialog("Cannot Switch Scene",
-                        "Cannot switch scenes while in Play Mode.", "OK");
+                    EditorUtility.DisplayDialog(
+                        "Cannot Switch Scene",
+                        "Cannot switch scenes while in Play Mode.",
+                        "OK"
+                    );
                 }
                 else
                 {
@@ -159,8 +161,11 @@ namespace MarwilsTD.LevelSystem
                     }
                     else
                     {
-                        EditorUtility.DisplayDialog("Scene Not Found",
-                            $"Could not find scene '{level.LastModifiedBySceneName}' in build settings.", "OK");
+                        EditorUtility.DisplayDialog(
+                            "Scene Not Found",
+                            $"Could not find scene '{level.LastModifiedBySceneName}' in build settings.",
+                            "OK"
+                        );
                     }
                 }
             }
@@ -174,7 +179,10 @@ namespace MarwilsTD.LevelSystem
             EditorGUILayout.Space();
 
             GUI.enabled = false;
-            EditorGUILayout.LabelField("All other controls are disabled until scene context is resolved.", EditorStyles.helpBox);
+            EditorGUILayout.LabelField(
+                "All other controls are disabled until scene context is resolved.",
+                EditorStyles.helpBox
+            );
             GUI.enabled = true;
         }
 

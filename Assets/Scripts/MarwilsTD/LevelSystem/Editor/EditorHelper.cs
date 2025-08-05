@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
 using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
@@ -19,18 +18,29 @@ namespace MarwilsTD.LevelSystem
         /// <returns>True if the object is found</returns>
         public static bool ContainsObject(UnityEngine.Object root, UnityEngine.Object searchTarget, int maxDepth = 10)
         {
-            if (root == null || searchTarget == null) return false;
-            if (root == searchTarget) return true;
-            if (maxDepth <= 0) return false;
+            if (root == null || searchTarget == null)
+                return false;
+            if (root == searchTarget)
+                return true;
+            if (maxDepth <= 0)
+                return false;
 
             return ContainsObjectRecursive(root, searchTarget, maxDepth, new HashSet<UnityEngine.Object>());
         }
 
-        private static bool ContainsObjectRecursive(UnityEngine.Object current, UnityEngine.Object searchTarget, int remainingDepth, HashSet<UnityEngine.Object> visited)
+        private static bool ContainsObjectRecursive(
+            UnityEngine.Object current,
+            UnityEngine.Object searchTarget,
+            int remainingDepth,
+            HashSet<UnityEngine.Object> visited
+        )
         {
-            if (current == null || remainingDepth <= 0) return false;
-            if (current == searchTarget) return true;
-            if (!visited.Add(current)) return false;
+            if (current == null || remainingDepth <= 0)
+                return false;
+            if (current == searchTarget)
+                return true;
+            if (!visited.Add(current))
+                return false;
 
             var currentType = current.GetType();
 
@@ -39,14 +49,14 @@ namespace MarwilsTD.LevelSystem
                 try
                 {
                     var value = field.GetValue(current);
-                    if (value == null) continue;
+                    if (value == null)
+                        continue;
 
                     if (value is UnityEngine.Object unityObj)
                     {
                         if (ContainsObjectRecursive(unityObj, searchTarget, remainingDepth - 1, visited))
                             return true;
                     }
-
                     else if (value is IEnumerable enumerable && !(value is string))
                     {
                         foreach (var item in enumerable)
@@ -75,12 +85,16 @@ namespace MarwilsTD.LevelSystem
 
             while (currentType != null && currentType != typeof(UnityEngine.Object))
             {
-                fields.AddRange(currentType.GetFields(
-                    BindingFlags.Instance |
-                    BindingFlags.Public |
-                    BindingFlags.NonPublic |
-                    BindingFlags.DeclaredOnly
-                ).Where(f => !f.IsStatic));
+                fields.AddRange(
+                    currentType
+                        .GetFields(
+                            BindingFlags.Instance
+                                | BindingFlags.Public
+                                | BindingFlags.NonPublic
+                                | BindingFlags.DeclaredOnly
+                        )
+                        .Where(f => !f.IsStatic)
+                );
 
                 currentType = currentType.BaseType;
             }
@@ -113,7 +127,8 @@ namespace MarwilsTD.LevelSystem
         /// <summary>
         /// Finds all assets of a given type that contain a specific object.
         /// </summary>
-        public static IEnumerable<T> FindAssetsContaining<T>(UnityEngine.Object obj) where T : UnityEngine.Object
+        public static IEnumerable<T> FindAssetsContaining<T>(UnityEngine.Object obj)
+            where T : UnityEngine.Object
         {
 #if UNITY_EDITOR
             var assetGuids = UnityEditor.AssetDatabase.FindAssets($"t:{typeof(T).Name}");
@@ -140,9 +155,15 @@ namespace MarwilsTD.LevelSystem
             LogObjectHierarchyRecursive(obj, 0, maxDepth, new HashSet<UnityEngine.Object>());
         }
 
-        private static void LogObjectHierarchyRecursive(UnityEngine.Object obj, int currentDepth, int maxDepth, HashSet<UnityEngine.Object> visited)
+        private static void LogObjectHierarchyRecursive(
+            UnityEngine.Object obj,
+            int currentDepth,
+            int maxDepth,
+            HashSet<UnityEngine.Object> visited
+        )
         {
-            if (obj == null || currentDepth > maxDepth || !visited.Add(obj)) return;
+            if (obj == null || currentDepth > maxDepth || !visited.Add(obj))
+                return;
 
             var indent = new string(' ', currentDepth * 2);
 
@@ -152,7 +173,8 @@ namespace MarwilsTD.LevelSystem
                 try
                 {
                     var value = field.GetValue(obj);
-                    if (value == null) continue;
+                    if (value == null)
+                        continue;
 
                     if (value is UnityEngine.Object unityObj)
                     {

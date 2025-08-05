@@ -1,7 +1,5 @@
 using System.Linq;
-
 using UnityEditor;
-
 using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
@@ -60,11 +58,12 @@ namespace MarwilsTD.LevelSystem
         public static void DrawSpawnPointDropdown(Rect position, SerializedProperty spawnPointIdProp)
         {
             var spawnPoints = Object.FindObjectsByType<SpawnPoint>(FindObjectsSortMode.None);
-            var spawnPointNames = spawnPoints.Where(sp => !string.IsNullOrEmpty(sp.gameObject.name))
-                                             .Select(sp => sp.gameObject.name)
-                                             .Distinct()
-                                             .OrderBy(name => name)
-                                             .ToArray();
+            var spawnPointNames = spawnPoints
+                .Where(sp => !string.IsNullOrEmpty(sp.gameObject.name))
+                .Select(sp => sp.gameObject.name)
+                .Distinct()
+                .OrderBy(name => name)
+                .ToArray();
 
             var currentId = spawnPointIdProp.stringValue;
             var currentIndex = System.Array.IndexOf(spawnPointNames, currentId);
@@ -93,11 +92,12 @@ namespace MarwilsTD.LevelSystem
         public static void DrawSpawnPointDropdownLayout(SerializedProperty spawnPointIdProp)
         {
             var spawnPoints = Object.FindObjectsByType<SpawnPoint>(FindObjectsSortMode.None);
-            var spawnPointNames = spawnPoints.Where(sp => !string.IsNullOrEmpty(sp.gameObject.name))
-                                             .Select(sp => sp.gameObject.name)
-                                             .Distinct()
-                                             .OrderBy(name => name)
-                                             .ToArray();
+            var spawnPointNames = spawnPoints
+                .Where(sp => !string.IsNullOrEmpty(sp.gameObject.name))
+                .Select(sp => sp.gameObject.name)
+                .Distinct()
+                .OrderBy(name => name)
+                .ToArray();
 
             var currentId = spawnPointIdProp.stringValue;
             var currentIndex = System.Array.IndexOf(spawnPointNames, currentId);
@@ -130,11 +130,12 @@ namespace MarwilsTD.LevelSystem
         public static void DrawTargetPointDropdown(Rect position, SerializedProperty targetPointIdProp)
         {
             var targetPoints = Object.FindObjectsByType<TargetPoint>(FindObjectsSortMode.None);
-            var targetPointNames = targetPoints.Where(tp => !string.IsNullOrEmpty(tp.gameObject.name))
-                                               .Select(tp => tp.gameObject.name)
-                                               .Distinct()
-                                               .OrderBy(name => name)
-                                               .ToArray();
+            var targetPointNames = targetPoints
+                .Where(tp => !string.IsNullOrEmpty(tp.gameObject.name))
+                .Select(tp => tp.gameObject.name)
+                .Distinct()
+                .OrderBy(name => name)
+                .ToArray();
 
             var currentId = targetPointIdProp.stringValue;
             var currentIndex = System.Array.IndexOf(targetPointNames, currentId);
@@ -163,11 +164,12 @@ namespace MarwilsTD.LevelSystem
         public static void DrawTargetPointDropdownLayout(SerializedProperty targetPointIdProp)
         {
             var targetPoints = Object.FindObjectsByType<TargetPoint>(FindObjectsSortMode.None);
-            var targetPointNames = targetPoints.Where(tp => !string.IsNullOrEmpty(tp.gameObject.name))
-                                               .Select(tp => tp.gameObject.name)
-                                               .Distinct()
-                                               .OrderBy(name => name)
-                                               .ToArray();
+            var targetPointNames = targetPoints
+                .Where(tp => !string.IsNullOrEmpty(tp.gameObject.name))
+                .Select(tp => tp.gameObject.name)
+                .Distinct()
+                .OrderBy(name => name)
+                .ToArray();
 
             var currentId = targetPointIdProp.stringValue;
             var currentIndex = System.Array.IndexOf(targetPointNames, currentId);

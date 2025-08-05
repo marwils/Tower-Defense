@@ -1,5 +1,5 @@
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 namespace MarwilsTD.LevelSystem
 {
@@ -28,7 +28,8 @@ namespace MarwilsTD.LevelSystem
                 var spawnerSO = new SerializedObject(spawner);
                 spawnerSO.Update();
 
-                float currentY = position.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                float currentY =
+                    position.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 
                 var enemiesProp = spawnerSO.FindProperty("_enemies");
                 var shuffleSpawnOrderProp = spawnerSO.FindProperty("_shuffleSpawnOrder");
@@ -37,9 +38,15 @@ namespace MarwilsTD.LevelSystem
 
                 if (enemiesProp != null)
                 {
-                    var enemiesRect = new Rect(position.x, currentY, position.width, EditorGUI.GetPropertyHeight(enemiesProp, true));
+                    var enemiesRect = new Rect(
+                        position.x,
+                        currentY,
+                        position.width,
+                        EditorGUI.GetPropertyHeight(enemiesProp, true)
+                    );
                     EditorGUI.PropertyField(enemiesRect, enemiesProp, new GUIContent("Enemies"), true);
-                    currentY += EditorGUI.GetPropertyHeight(enemiesProp, true) + EditorGUIUtility.standardVerticalSpacing;
+                    currentY +=
+                        EditorGUI.GetPropertyHeight(enemiesProp, true) + EditorGUIUtility.standardVerticalSpacing;
                 }
 
                 if (shuffleSpawnOrderProp != null)
@@ -51,14 +58,24 @@ namespace MarwilsTD.LevelSystem
 
                 if (spawnAmountProp != null)
                 {
-                    var spawnAmountRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
+                    var spawnAmountRect = new Rect(
+                        position.x,
+                        currentY,
+                        position.width,
+                        EditorGUIUtility.singleLineHeight
+                    );
                     EditorGUI.PropertyField(spawnAmountRect, spawnAmountProp, new GUIContent("Spawn Amount"));
                     currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                 }
 
                 if (intervalProp != null)
                 {
-                    var intervalRect = new Rect(position.x, currentY, position.width, EditorGUIUtility.singleLineHeight);
+                    var intervalRect = new Rect(
+                        position.x,
+                        currentY,
+                        position.width,
+                        EditorGUIUtility.singleLineHeight
+                    );
                     EditorGUI.PropertyField(intervalRect, intervalProp, new GUIContent("Interval in seconds"));
                     currentY += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                 }

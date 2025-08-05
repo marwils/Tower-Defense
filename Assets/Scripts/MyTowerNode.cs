@@ -1,22 +1,25 @@
 using MarwilsTD;
-
 using UnityEngine;
 
 public class MyTowerNode : TowerNode
 {
     [Header("My Tower Node")]
-
     [SerializeField]
     [Tooltip("Defines on which height the next tower node will be placed.")]
     private float _height = 1.0f;
-    public float TotalHeight { get { return GetTotalHeight(); } }
+    public float TotalHeight
+    {
+        get { return GetTotalHeight(); }
+    }
 
     [SerializeField]
     [Tooltip("Defines the offset on the Y-axis for the tower node's position (upon another tower node).")]
     private float _yOffset;
 
     [SerializeField]
-    [Tooltip("If true, the current tower node will be set to inactive when upgraded. This is useful for root nodes that should not be visible after an upgrade.")]
+    [Tooltip(
+        "If true, the current tower node will be set to inactive when upgraded. This is useful for root nodes that should not be visible after an upgrade."
+    )]
     private bool _replaceCurrentNodeOnUpgrade = false;
 
     public void SetY(float y)
@@ -84,6 +87,9 @@ public class MyTowerNode : TowerNode
         }
 
         var height = _yOffset + GetTotalHeight();
-        Gizmos.DrawWireCube(transform.position + Vector3.up * _yOffset + Vector3.up * height / 2, new Vector3(1, height, 1));
+        Gizmos.DrawWireCube(
+            transform.position + Vector3.up * _yOffset + Vector3.up * height / 2,
+            new Vector3(1, height, 1)
+        );
     }
 }

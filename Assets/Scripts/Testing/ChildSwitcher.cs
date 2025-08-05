@@ -1,5 +1,4 @@
 using System;
-
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,8 +17,19 @@ namespace Testing
         [SerializeField]
         private bool _activateOnStart = true;
 
-        private static readonly Key[] NumpadKeys = { Key.Numpad0, Key.Numpad1, Key.Numpad2, Key.Numpad3, Key.Numpad4,
-                   Key.Numpad5, Key.Numpad6, Key.Numpad7, Key.Numpad8, Key.Numpad9 };
+        private static readonly Key[] NumpadKeys =
+        {
+            Key.Numpad0,
+            Key.Numpad1,
+            Key.Numpad2,
+            Key.Numpad3,
+            Key.Numpad4,
+            Key.Numpad5,
+            Key.Numpad6,
+            Key.Numpad7,
+            Key.Numpad8,
+            Key.Numpad9,
+        };
 
         private Key _modKey;
 

@@ -2,7 +2,11 @@ using UnityEngine;
 
 public static class TransformHelper
 {
-    public static void SetTransformation(Transform sourceTransformation, Transform targetTransformation, params TransformationType[] types)
+    public static void SetTransformation(
+        Transform sourceTransformation,
+        Transform targetTransformation,
+        params TransformationType[] types
+    )
     {
         if (sourceTransformation == null || targetTransformation == null)
         {
@@ -61,6 +65,6 @@ public static class TransformHelper
     {
         Position,
         Rotation,
-        Scale
+        Scale,
     }
 }

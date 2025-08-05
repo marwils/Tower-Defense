@@ -9,7 +9,6 @@ namespace MarwilsTD
     public class EnemyController : EntityController
     {
         [Header("Enemy Configuration")]
-
         [SerializeField]
         private Transform _destination;
         public Transform Destination => _destination;

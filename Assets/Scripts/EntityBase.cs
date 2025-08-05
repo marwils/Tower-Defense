@@ -1,5 +1,4 @@
 using MarwilsTD.LevelSystem;
-
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,7 +8,6 @@ public abstract class EntityBase : MonoBehaviour
     private EntityConfiguration _configuration;
 
     [Header("Damage and Healing")]
-
     [SerializeField]
     protected bool _canTakeDamage = true;
     public bool CanTakeDamage => _canTakeDamage;
@@ -59,7 +57,8 @@ public abstract class EntityBase : MonoBehaviour
         }
     }
 
-    public T GetSettings<T>() where T : EntityConfiguration
+    public T GetSettings<T>()
+        where T : EntityConfiguration
     {
         return _configuration as T;
     }

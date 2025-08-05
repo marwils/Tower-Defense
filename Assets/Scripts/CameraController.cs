@@ -1,11 +1,9 @@
 using System;
-
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
     [Header("Zoom")]
-
     [SerializeField, Range(0f, 1f)]
     private float _initialZoomAmount = 0.5f;
 
@@ -28,7 +26,6 @@ public class CameraController : MonoBehaviour
     private float _maxPitch = 70f;
 
     [Header("Movement")]
-
     [SerializeField]
     private float _moveSpeed = 10f;
 
@@ -66,14 +63,20 @@ public class CameraController : MonoBehaviour
 
     private void HandleZoomImpulse(float input)
     {
-        if (Mathf.Approximately(input, 0f)) return;
+        if (Mathf.Approximately(input, 0f))
+            return;
 
         _targetZoomAmount = Mathf.Clamp01(_targetZoomAmount + input * _zoomScrollSensitivity);
     }
 
     private void UpdateZoomSmooth()
     {
-        _currentZoomAmount = Mathf.SmoothDamp(_currentZoomAmount, _targetZoomAmount, ref _zoomVelocity, _zoomSmoothTime);
+        _currentZoomAmount = Mathf.SmoothDamp(
+            _currentZoomAmount,
+            _targetZoomAmount,
+            ref _zoomVelocity,
+            _zoomSmoothTime
+        );
 
         float cameraZ = Mathf.Lerp(_minZoomZ, _maxZoomZ, _currentZoomAmount);
         Vector3 camLocalPos = _cameraTransform.localPosition;
