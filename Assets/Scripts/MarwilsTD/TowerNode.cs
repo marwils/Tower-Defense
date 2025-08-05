@@ -1,12 +1,11 @@
 using System;
 
-using MarwilsTD;
-using MarwilsTD.LevelSystem;
-
 using UnityEngine;
 
 namespace MarwilsTD
 {
+    using LevelSystem;
+
     /// <summary>
     /// Represents a tower node in the game, which can be upgraded or extended.
     /// </summary>

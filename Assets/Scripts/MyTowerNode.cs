@@ -1,5 +1,3 @@
-using System;
-
 using MarwilsTD;
 
 using UnityEngine;
@@ -26,33 +24,35 @@ public class MyTowerNode : TowerNode
         transform.position = new Vector3(transform.position.x, y + _yOffset, transform.position.z);
     }
 
-    protected override void SetUpgradeNode(TowerNode upgradeNode)
+    public bool UpgradeTo(TowerNode upgradeNode)
     {
         base.SetUpgradeNode(upgradeNode);
 
         if (HasUpgrade && upgradeNode is MyTowerNode myTowerNode)
         {
             upgradeNode.gameObject.SetActive(true);
+            myTowerNode.SetY(transform.position.y + _height + _yOffset);
 
             if (_replaceCurrentNodeOnUpgrade)
             {
                 gameObject.SetActive(false);
             }
-
-            myTowerNode.SetY(transform.position.y + _height);
         }
+
+        return HasUpgrade;
     }
 
-    protected override void SetExtensionNode(TowerNode extensionNode)
+    public bool ExtendWith(TowerNode extensionNode)
     {
         base.SetExtensionNode(extensionNode);
 
         if (HasExtension && extensionNode is MyTowerNode myTowerNode)
         {
-            myTowerNode.SetY(transform.position.y + _height);
+            extensionNode.gameObject.SetActive(true);
+            myTowerNode.SetY(transform.position.y + _height + _yOffset);
         }
 
-        extensionNode.gameObject.SetActive(true);
+        return HasExtension;
     }
 
     private float GetTotalHeight()
@@ -60,7 +60,7 @@ public class MyTowerNode : TowerNode
         return GetTotalHeightRecursively(this);
     }
 
-    protected float GetTotalHeightRecursively(MyTowerNode myTowerNode)
+    private float GetTotalHeightRecursively(MyTowerNode myTowerNode)
     {
         float totalHeight = myTowerNode._height;
 
