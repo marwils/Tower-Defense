@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +11,8 @@ namespace Testing
     public class ChildSwitcher : MonoBehaviour
     {
         [SerializeField]
-        private string _modifierKey = "";
+        [Tooltip("Modifier key to activate the action tester. If empty, no modifier key is used.")]
+        private Key _modifierKey = Key.None;
 
         [SerializeField]
         private bool _activateOnStart = true;
@@ -31,30 +31,14 @@ namespace Testing
             Key.Numpad9,
         };
 
-        private Key _modKey;
-
         private void Start()
         {
-            UpdateModifierKey();
             SwitchChild(_activateOnStart ? 0 : -1);
-        }
-
-        private void UpdateModifierKey()
-        {
-            if (_modifierKey != "")
-            {
-                _modKey = Enum.Parse<Key>(_modifierKey, true);
-            }
-            else
-            {
-                Debug.LogWarning($"Invalid modifier key specified. No modifier key will be used in {gameObject.name}.");
-                _modKey = Key.None;
-            }
         }
 
         private void Update()
         {
-            if (_modKey == Key.None || Keyboard.current[_modKey].isPressed)
+            if (_modifierKey == Key.None || Keyboard.current[_modifierKey].isPressed)
             {
                 for (int i = 0; i < NumpadKeys.Length; i++)
                 {

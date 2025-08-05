@@ -405,7 +405,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &123309954
 Transform:
   m_ObjectHideFlags: 0
@@ -436,7 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7d97b959cd8f945b802d1b6cdcea88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _modifierKey: Digit4
+  _modifierKey: 44
   _amount: 0.1
   _vector: {x: 0, y: 1, z: 0}
 --- !u!114 &123309956
@@ -451,7 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a520335e58f2878489dbf2a53fa7a8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _modifierKey: Digit4
+  _modifierKey: 44
   _activateOnStart: 0
 --- !u!4 &135170853 stripped
 Transform:
@@ -1359,7 +1359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a520335e58f2878489dbf2a53fa7a8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _modifierKey: Digit1
+  _modifierKey: 41
   _activateOnStart: 0
 --- !u!114 &467244087
 MonoBehaviour:
@@ -1373,7 +1373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7d97b959cd8f945b802d1b6cdcea88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _modifierKey: Digit1
+  _modifierKey: 41
   _amount: 0.05
   _vector: {x: 0, y: 1, z: 0}
 --- !u!4 &471933080 stripped
@@ -2058,7 +2058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &880411280
 Transform:
   m_ObjectHideFlags: 0
@@ -2089,7 +2089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a520335e58f2878489dbf2a53fa7a8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _modifierKey: Digit3
+  _modifierKey: 43
   _activateOnStart: 0
 --- !u!114 &880411282
 MonoBehaviour:
@@ -2103,7 +2103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7d97b959cd8f945b802d1b6cdcea88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _modifierKey: Digit3
+  _modifierKey: 43
   _amount: 0.1
   _vector: {x: 0, y: 1, z: 0}
 --- !u!4 &885198080 stripped
@@ -3007,7 +3007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a520335e58f2878489dbf2a53fa7a8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _modifierKey: Digit2
+  _modifierKey: 42
   _activateOnStart: 1
 --- !u!1001 &1330997758
 PrefabInstance:
@@ -3237,7 +3237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1379562267
 Transform:
   m_ObjectHideFlags: 0
@@ -3268,7 +3268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7d97b959cd8f945b802d1b6cdcea88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _modifierKey: Digit5
+  _modifierKey: 45
   _amount: 0.1
   _vector: {x: 0, y: 1, z: 0}
 --- !u!114 &1379562269
@@ -3283,7 +3283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a520335e58f2878489dbf2a53fa7a8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _modifierKey: Digit5
+  _modifierKey: 45
   _activateOnStart: 0
 --- !u!4 &1389611510 stripped
 Transform:
