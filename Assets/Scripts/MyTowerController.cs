@@ -1,13 +1,13 @@
 using System;
-
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using MarwilsTD;
-
 using UnityEngine;
 
 public class MyTowerController : TowerController
 {
     [Header("My Tower Controller")]
-
     [SerializeField]
     [Tooltip("Main tower node. This is the root node of the tower.")]
     private MyTowerNode _mainNode;
@@ -23,8 +23,7 @@ public class MyTowerController : TowerController
             return;
         }
 
-        DeactivateUpgradesRecursively(_mainNode);
-        DeactivateExtensionsRecursively(_mainNode);
+        DeactivateUpgradesAndExtensions(_mainNode);
     }
 
     public void ExtendTower()
@@ -43,27 +42,15 @@ public class MyTowerController : TowerController
         _mainNode.CurrentUpgrade = upgradeNode;
     }
 
-    private void DeactivateUpgradesRecursively(MyTowerNode node)
+    private void DeactivateUpgradesAndExtensions(TowerNode node)
     {
-        foreach (MyTowerNode upgradeNode in node.AvailableUpgrades)
-        {
-            if (upgradeNode != null)
-            {
-                DeactivateUpgradesRecursively(upgradeNode);
-                upgradeNode.gameObject.SetActive(false);
-            }
-        }
-    }
+        if (node == null)
+            return;
 
-    private void DeactivateExtensionsRecursively(MyTowerNode node)
-    {
-        foreach (MyTowerNode extensionNode in node.AvailableExtensions)
-        {
-            if (extensionNode != null)
-            {
-                DeactivateExtensionsRecursively(extensionNode);
-                extensionNode.gameObject.SetActive(false);
-            }
-        }
+        IEnumerable<GameObject> upgradesAndExtensionGameObjects = node
+            .AvailableUpgrades.Concat(node.AvailableExtensions)
+            .Select(u => u.gameObject);
+
+        GameObjectHelper.SetActive(upgradesAndExtensionGameObjects, false);
     }
 }
