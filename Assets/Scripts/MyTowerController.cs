@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using MarwilsTD;
@@ -23,7 +22,7 @@ public class MyTowerController : TowerController
             return;
         }
 
-        DeactivateUpgradesAndExtensions(_mainNode);
+        SetUpgradesAndExtensionsActive(false);
     }
 
     public void ExtendTower()
@@ -42,15 +41,15 @@ public class MyTowerController : TowerController
         _mainNode.CurrentUpgrade = upgradeNode;
     }
 
-    private void DeactivateUpgradesAndExtensions(TowerNode node)
+    private void SetUpgradesAndExtensionsActive(bool isActive = true)
     {
-        if (node == null)
+        if (_mainNode == null)
             return;
 
-        IEnumerable<GameObject> upgradesAndExtensionGameObjects = node
-            .AvailableUpgrades.Concat(node.AvailableExtensions)
+        IEnumerable<GameObject> upgradesAndExtensionGameObjects = _mainNode
+            .AvailableUpgrades.Concat(_mainNode.AvailableExtensions)
             .Select(u => u.gameObject);
 
-        GameObjectHelper.SetActive(upgradesAndExtensionGameObjects, false);
+        GameObjectHelper.SetActive(upgradesAndExtensionGameObjects, isActive);
     }
 }
