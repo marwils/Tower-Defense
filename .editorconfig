@@ -5,6 +5,10 @@ root = true
 
 indent_style = space
 indent_size = 4
+insert_final_newline = true
+csharp_new_line_before_open_brace = all
+csharp_new_line_between_query_expression_clauses = true
+max_line_length = 120
 
 charset = utf-8
 
