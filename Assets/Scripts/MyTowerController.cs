@@ -22,7 +22,7 @@ public class MyTowerController : TowerController
             return;
         }
 
-        SetUpgradesAndExtensionsActive(false);
+        SetUpgradesAndExtensionsActiveRecursively(_mainNode, false);
     }
 
     public void ExtendTower()
@@ -41,15 +41,20 @@ public class MyTowerController : TowerController
         _mainNode.CurrentUpgrade = upgradeNode;
     }
 
-    private void SetUpgradesAndExtensionsActive(bool isActive = true)
+    private void SetUpgradesAndExtensionsActiveRecursively(TowerNode node, bool isActive = true)
     {
-        if (_mainNode == null)
+        if (node == null)
             return;
 
-        IEnumerable<GameObject> upgradesAndExtensionGameObjects = _mainNode
-            .AvailableUpgrades.Concat(_mainNode.AvailableExtensions)
-            .Select(u => u.gameObject);
+        TowerNode[] upgradesAndExtensions = node.AvailableUpgrades.Concat(node.AvailableExtensions).ToArray();
 
-        GameObjectHelper.SetActive(upgradesAndExtensionGameObjects, isActive);
+        foreach (var childNode in upgradesAndExtensions)
+        {
+            if (childNode != null)
+            {
+                childNode.gameObject.SetActive(isActive);
+                SetUpgradesAndExtensionsActiveRecursively(childNode, isActive);
+            }
+        }
     }
 }
