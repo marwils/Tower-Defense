@@ -25,6 +25,13 @@ public class MyTowerController : TowerController
         SetUpgradesAndExtensionsActiveRecursively(_mainNode, false);
     }
 
+    private void Start()
+    {
+        // Register to button events
+        //UIButtonRegister.OnUpgradeRequested += UpgradeTower;
+        //UIButtonRegister.OnExtendRequested += ExtendTower;
+    }
+
     public void ExtendTower()
     {
         throw new NotImplementedException();

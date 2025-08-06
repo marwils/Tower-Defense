@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/UIStyle.uss?fileID=7433441132597879392&amp;guid=7cb6cfe42d568274b80fb99badcd0caf&amp;type=3#UIStyle" />
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-self: flex-end; align-items: flex-end;">
+        <ui:VisualElement name="TowerPnl">
+            <ui:Button text="Upgrade to" name="ShowUpgradesBtn" />
+            <ui:Button text="Extend with" name="ShowExtensionsBtn" />
+        </ui:VisualElement>
+        <ui:VisualElement name="UpgradesPnl">
+            <ui:Button text="Upgrade 1" name="Upgrade1Btn" />
+            <ui:Button text="Upgrade 2" name="Upgrade2Btn" />
+        </ui:VisualElement>
+        <ui:VisualElement name="ExtensionsPnl">
+            <ui:Button text="Extension 1" name="Extension1Btn" />
+            <ui:Button text="Extension 2" name="Extension2Btn" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

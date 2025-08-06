@@ -1,0 +1,5 @@
+#TowerPnl, #UpgradesPnl, #ExtensionsPnl {
+    transition-property: opacity, translate;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+}
