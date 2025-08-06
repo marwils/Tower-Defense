@@ -33,14 +33,15 @@ public class MyTowerUI : MonoBehaviour
         _upgradesPanel = element.Q<VisualElement>("UpgradesPnl");
         _extensionsPanel = element.Q<VisualElement>("ExtensionsPnl");
 
-        // HidePanel(_upgradesPanel);
-        // HidePanel(_extensionsPanel);
+        HidePanel(_upgradesPanel);
+        HidePanel(_extensionsPanel);
     }
 
     private void ShowUpgrades()
     {
         HidePanel(_towerPanel);
         CreateUpgradesButtons();
+        CreateBackButton(_upgradesPanel);
         ShowPanel(_upgradesPanel);
     }
 
@@ -48,6 +49,7 @@ public class MyTowerUI : MonoBehaviour
     {
         HidePanel(_towerPanel);
         CreateExtensionsButtons();
+        CreateBackButton(_extensionsPanel);
         ShowPanel(_extensionsPanel);
     }
 
@@ -67,8 +69,6 @@ public class MyTowerUI : MonoBehaviour
                 }
             );
         }
-
-        CreateBackButton(_upgradesPanel);
     }
 
     private void CreateExtensionsButtons()
@@ -87,7 +87,6 @@ public class MyTowerUI : MonoBehaviour
                 }
             );
         }
-        CreateBackButton(_extensionsPanel);
     }
 
     private void CreateBackButton(VisualElement parent)
