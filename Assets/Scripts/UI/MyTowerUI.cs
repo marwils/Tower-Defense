@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -35,6 +37,17 @@ public class MyTowerUI : MonoBehaviour
 
         HidePanel(_upgradesPanel);
         HidePanel(_extensionsPanel);
+
+        // for safety, ensure panels are displayed correctly
+        SetDisplayForPanels(new List<VisualElement> { _towerPanel, _upgradesPanel, _extensionsPanel });
+    }
+
+    private void SetDisplayForPanels(List<VisualElement> visualElements, DisplayStyle displayStyle = DisplayStyle.Flex)
+    {
+        foreach (var element in visualElements)
+        {
+            element.style.display = displayStyle;
+        }
     }
 
     private void ShowUpgrades()
