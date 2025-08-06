@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -69,7 +68,7 @@ public class MyTowerUI : MonoBehaviour
     private void CreateUpgradesButtons()
     {
         _upgradesPanel.Clear();
-        foreach (var upgradeNode in _towerController.MainNode.AvailableUpgrades)
+        foreach (MyTowerNode upgradeNode in _towerController.MainNode.AvailableUpgrades)
         {
             UIButtonRegister.Instance.CreateButton(
                 upgradeNode.Name,
@@ -87,7 +86,7 @@ public class MyTowerUI : MonoBehaviour
     private void CreateExtensionsButtons()
     {
         _extensionsPanel.Clear();
-        foreach (var extensionNode in _towerController.MainNode.AvailableExtensions)
+        foreach (MyTowerNode extensionNode in _towerController.MainNode.AvailableExtensions)
         {
             UIButtonRegister.Instance.CreateButton(
                 extensionNode.Name,

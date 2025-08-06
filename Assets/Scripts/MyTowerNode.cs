@@ -15,28 +15,44 @@ public class MyTowerNode : TowerNode
     [SerializeField]
     [Tooltip("Defines the offset on the Y-axis for the tower node's position (upon another tower node).")]
     private float _yOffset;
+    public float YOffset => _yOffset;
 
     [SerializeField]
     [Tooltip(
         "If true, the current tower node will be set to inactive when upgraded. This is useful for root nodes that should not be visible after an upgrade."
     )]
     private bool _replaceCurrentNodeOnUpgrade = false;
+    public bool ReplaceCurrentNodeOnUpgrade => _replaceCurrentNodeOnUpgrade;
 
     public void SetY(float y)
     {
         transform.position = new Vector3(transform.position.x, y + _yOffset, transform.position.z);
     }
 
-    public bool UpgradeTo(TowerNode upgradeNode)
+    public bool UpgradeTo(MyTowerNode upgradeNode)
     {
-        base.SetUpgradeNode(upgradeNode);
+        if (HasUpgrade)
+        {
+            var currentUpgrade = GetUpgradeNode();
+            if (currentUpgrade is MyTowerNode myCurrentUpgrade)
+            {
+                if (myCurrentUpgrade.ReplaceCurrentNodeOnUpgrade)
+                {
+                    gameObject.SetActive(true);
+                }
+            }
 
-        if (HasUpgrade && upgradeNode is MyTowerNode myTowerNode)
+            currentUpgrade.gameObject.SetActive(false);
+        }
+
+        SetUpgradeNode(upgradeNode);
+
+        if (HasUpgrade)
         {
             upgradeNode.gameObject.SetActive(true);
-            myTowerNode.SetY(transform.position.y + _height + _yOffset);
+            upgradeNode.SetY(transform.position.y + _height + _yOffset);
 
-            if (_replaceCurrentNodeOnUpgrade)
+            if (upgradeNode.ReplaceCurrentNodeOnUpgrade)
             {
                 gameObject.SetActive(false);
             }
@@ -45,14 +61,16 @@ public class MyTowerNode : TowerNode
         return HasUpgrade;
     }
 
-    public bool ExtendWith(TowerNode extensionNode)
+    public bool ExtendWith(MyTowerNode extensionNode)
     {
-        base.SetExtensionNode(extensionNode);
+        GetExtensionNode()?.gameObject.SetActive(false);
 
-        if (HasExtension && extensionNode is MyTowerNode myTowerNode)
+        SetExtensionNode(extensionNode);
+
+        if (HasExtension)
         {
             extensionNode.gameObject.SetActive(true);
-            myTowerNode.SetY(transform.position.y + _height + _yOffset);
+            extensionNode.SetY(transform.position.y + _height + _yOffset);
         }
 
         return HasExtension;

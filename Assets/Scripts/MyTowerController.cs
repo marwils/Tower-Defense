@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using MarwilsTD;
 using UnityEngine;
@@ -25,14 +24,14 @@ public class MyTowerController : TowerController
         SetUpgradesAndExtensionsActiveRecursively(_mainNode, false);
     }
 
-    public void UpgradeTo(TowerNode upgradeNode)
+    public void UpgradeTo(MyTowerNode upgradeNode)
     {
-        _mainNode.CurrentUpgrade = upgradeNode;
+        _mainNode.UpgradeTo(upgradeNode);
     }
 
-    public void ExtendWith(TowerNode extensionNode)
+    public void ExtendWith(MyTowerNode extensionNode)
     {
-        _mainNode.CurrentExtension = extensionNode;
+        _mainNode.ExtendWith(extensionNode);
     }
 
     private void SetUpgradesAndExtensionsActiveRecursively(TowerNode node, bool isActive = true)
