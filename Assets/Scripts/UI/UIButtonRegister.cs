@@ -5,12 +5,28 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(UIDocument))]
 public class UIButtonRegister : MonoBehaviour
 {
+    private static UIButtonRegister _instance;
+
+    public static UIButtonRegister Instance => _instance;
     public static event Action<VisualElement> OnUIInitialized;
     public static event Action OnShowUpgradesRequested;
     public static event Action OnShowExtensionsRequested;
 
     private UIDocument _uiDocument;
+
     private VisualElement _root;
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Debug.LogWarning("Multiple instances of UIButtonRegister detected. Destroying the new instance.");
+            Destroy(gameObject);
+            return;
+        }
+
+        _instance = this;
+    }
 
     void OnEnable()
     {
@@ -25,5 +41,13 @@ public class UIButtonRegister : MonoBehaviour
 
         var extendButton = _root.Q<Button>("ShowExtensionsBtn");
         extendButton.RegisterCallback<ClickEvent>(ev => OnShowExtensionsRequested?.Invoke());
+    }
+
+    public Button CreateButton(string text, string name, VisualElement parent, Action onClick)
+    {
+        var button = new Button(() => onClick?.Invoke()) { text = text, name = name };
+        parent.Add(button);
+
+        return button;
     }
 }

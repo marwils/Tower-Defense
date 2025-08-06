@@ -1,14 +1,27 @@
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[RequireComponent(typeof(MyTowerController))]
 public class MyTowerUI : MonoBehaviour
 {
+    private MyTowerController _towerController;
+
     private VisualElement _towerPanel;
     private VisualElement _upgradesPanel;
     private VisualElement _extensionsPanel;
 
     void Awake()
     {
+        _towerController = GetComponent<MyTowerController>();
+
+        if (_towerController == null)
+        {
+            Debug.LogWarning("MyTowerController component is not found on the GameObject.");
+            Destroy(this);
+            return;
+        }
+
         UIButtonRegister.OnUIInitialized += OnUIInitialized;
         UIButtonRegister.OnShowUpgradesRequested += ShowUpgrades;
         UIButtonRegister.OnShowExtensionsRequested += ShowExtensions;
@@ -20,21 +33,82 @@ public class MyTowerUI : MonoBehaviour
         _upgradesPanel = element.Q<VisualElement>("UpgradesPnl");
         _extensionsPanel = element.Q<VisualElement>("ExtensionsPnl");
 
-        // Verstecke Panels mit Opacity statt Display
-        HidePanel(_upgradesPanel);
-        HidePanel(_extensionsPanel);
+        // HidePanel(_upgradesPanel);
+        // HidePanel(_extensionsPanel);
     }
 
     private void ShowUpgrades()
     {
         HidePanel(_towerPanel);
+        CreateUpgradesButtons();
         ShowPanel(_upgradesPanel);
     }
 
     private void ShowExtensions()
     {
         HidePanel(_towerPanel);
+        CreateExtensionsButtons();
         ShowPanel(_extensionsPanel);
+    }
+
+    private void CreateUpgradesButtons()
+    {
+        _upgradesPanel.Clear();
+        foreach (var upgradeNode in _towerController.MainNode.AvailableUpgrades)
+        {
+            UIButtonRegister.Instance.CreateButton(
+                upgradeNode.Name,
+                GetSafeButtonName(upgradeNode.Name) + "Btn",
+                _upgradesPanel,
+                () =>
+                {
+                    _towerController.UpgradeTo(upgradeNode);
+                    Debug.Log($"Upgrade {upgradeNode.Name} applied to tower {_towerController.name}.");
+                }
+            );
+        }
+
+        CreateBackButton(_upgradesPanel);
+    }
+
+    private void CreateExtensionsButtons()
+    {
+        _extensionsPanel.Clear();
+        foreach (var extensionNode in _towerController.MainNode.AvailableExtensions)
+        {
+            UIButtonRegister.Instance.CreateButton(
+                extensionNode.Name,
+                GetSafeButtonName(extensionNode.Name) + "Btn",
+                _extensionsPanel,
+                () =>
+                {
+                    _towerController.ExtendWith(extensionNode);
+                    Debug.Log($"Extension {extensionNode.Name} applied to tower {_towerController.name}.");
+                }
+            );
+        }
+        CreateBackButton(_extensionsPanel);
+    }
+
+    private void CreateBackButton(VisualElement parent)
+    {
+        UIButtonRegister.Instance.CreateButton(
+            "Back",
+            "BackBtn",
+            parent,
+            () =>
+            {
+                HidePanel(_upgradesPanel);
+                HidePanel(_extensionsPanel);
+                ShowPanel(_towerPanel);
+            }
+        );
+    }
+
+    private static string GetSafeButtonName(string baseName)
+    {
+        var safe = Regex.Replace(baseName, @"[^a-zA-Z0-9_]", "_");
+        return safe + "Btn";
     }
 
     private void ShowPanel(VisualElement panel)
@@ -48,6 +122,6 @@ public class MyTowerUI : MonoBehaviour
     {
         panel.style.opacity = 0f;
         panel.pickingMode = PickingMode.Ignore;
-        panel.style.translate = new Translate(Length.Percent(100), 0); // Nach rechts verschieben
+        panel.style.translate = new Translate(Length.Percent(100), 0);
     }
 }
