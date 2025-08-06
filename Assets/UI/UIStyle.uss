@@ -1,4 +1,9 @@
 #TowerPnl, #UpgradesPnl, #ExtensionsPnl {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
     transition-property: opacity, translate;
     transition-duration: 0.3s;
     transition-timing-function: ease-out;
