@@ -96,6 +96,8 @@ public class MyTowerUI : MonoBehaviour
                 () =>
                 {
                     latestUpgrade.UpgradeTo(upgradeNode);
+                    HidePanel(_upgradesPanel);
+                    ShowPanel(_towerPanel);
                 }
             );
         }
@@ -127,6 +129,8 @@ public class MyTowerUI : MonoBehaviour
                 () =>
                 {
                     latestUpgrade.ExtendWith(extensionNode);
+                    HidePanel(_extensionsPanel);
+                    ShowPanel(_towerPanel);
                 }
             );
         }
