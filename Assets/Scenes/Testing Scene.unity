@@ -2131,8 +2131,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 954043115}
   - {fileID: 288072639}
+  - {fileID: 954043115}
   - {fileID: 378331948}
   m_Father: {fileID: 2065710187}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8053,16 +8053,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 345939501782872242, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: _availableExtensions.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 345939501782872242, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: '_availableExtensions.Array.data[0]'
       value: 
-      objectReference: {fileID: 954043117}
+      objectReference: {fileID: 378331949}
     - target: {fileID: 345939501782872242, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: '_availableExtensions.Array.data[1]'
       value: 
-      objectReference: {fileID: 288072641}
+      objectReference: {fileID: 378331949}
     - target: {fileID: 345939501782872242, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: '_availableExtensions.Array.data[2]'
       value: 
@@ -8124,6 +8124,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2854608068362879334, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: m_Name
+      value: Foundation
+      objectReference: {fileID: 0}
+    - target: {fileID: 2854608068362879334, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -8152,6 +8156,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 378331949}
     - target: {fileID: 4364072068256077645, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: _replaceCurrentNodeOnUpgrade
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364072068256077645, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: _availableExtensions.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -8169,7 +8177,7 @@ PrefabInstance:
       objectReference: {fileID: 378331949}
     - target: {fileID: 5302159472513475010, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: _availableExtensions.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5302159472513475010, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: '_availableExtensions.Array.data[0]'
@@ -8195,6 +8203,10 @@ PrefabInstance:
       propertyPath: '_availableExtensions.Array.data[5]'
       value: 
       objectReference: {fileID: 378331949}
+    - target: {fileID: 5533868271468280052, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: _replaceCurrentNodeOnUpgrade
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5533868271468280052, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: _availableExtensions.Array.size
       value: 0
@@ -8260,6 +8272,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8505995797492526799, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: _replaceCurrentNodeOnUpgrade
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8505995797492526799, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: _availableExtensions.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -8277,12 +8293,12 @@ PrefabInstance:
       objectReference: {fileID: 378331949}
     - target: {fileID: 8766274220915333542, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: _availableExtensions.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8766274220915333542, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: '_availableExtensions.Array.data[0]'
       value: 
-      objectReference: {fileID: 954043117}
+      objectReference: {fileID: 288072641}
     - target: {fileID: 8766274220915333542, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: '_availableExtensions.Array.data[1]'
       value: 

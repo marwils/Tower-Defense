@@ -69,21 +69,25 @@ public class MyTowerUI : MonoBehaviour
 
     private void CreateUpgradesButtons(MyTowerNode node)
     {
-        if (node == null || node.AvailableUpgrades == null || node.AvailableUpgrades.Length == 0)
+        if (node == null)
             return;
 
-        if (node.HasUpgrade)
-        {
-            CreateUpgradesButtons((MyTowerNode)node.CurrentUpgrade);
-        }
+        MyTowerNode latestUpgrade = (MyTowerNode)node.LatestUpgradeNode;
+
+        if (
+            latestUpgrade == null
+            || latestUpgrade.AvailableUpgrades == null
+            || latestUpgrade.AvailableUpgrades.Length == 0
+        )
+            return;
 
         UIButtonRegister.Instance.CreateLabel(
-            $"{node.Name} Upgrades",
-            $"{GetSafeElementName(node.Name)}_UpgradesLbl",
+            $"{latestUpgrade.Name} Upgrades",
+            $"{GetSafeElementName(latestUpgrade.Name)}_UpgradesLbl",
             _upgradesPanel
         );
 
-        foreach (MyTowerNode upgradeNode in node.AvailableUpgrades)
+        foreach (MyTowerNode upgradeNode in latestUpgrade.AvailableUpgrades)
         {
             UIButtonRegister.Instance.CreateButton(
                 upgradeNode.Name,
@@ -91,7 +95,7 @@ public class MyTowerUI : MonoBehaviour
                 _upgradesPanel,
                 () =>
                 {
-                    node.UpgradeTo(upgradeNode);
+                    latestUpgrade.UpgradeTo(upgradeNode);
                 }
             );
         }
@@ -99,21 +103,22 @@ public class MyTowerUI : MonoBehaviour
 
     private void CreateExtensionsButtons(MyTowerNode node)
     {
-        if (node == null || node.AvailableExtensions == null || node.AvailableExtensions.Length == 0)
+        MyTowerNode latestUpgrade = (MyTowerNode)node.LatestUpgradeNode;
+
+        if (
+            latestUpgrade == null
+            || latestUpgrade.AvailableExtensions == null
+            || latestUpgrade.AvailableExtensions.Length == 0
+        )
             return;
 
-        if (node.HasExtension)
-        {
-            CreateExtensionsButtons((MyTowerNode)node.CurrentExtension);
-        }
-
         UIButtonRegister.Instance.CreateLabel(
-            $"{node.Name} Extensions",
-            $"{GetSafeElementName(node.Name)}_ExtensionsLbl",
+            $"{latestUpgrade.Name} Extensions",
+            $"{GetSafeElementName(latestUpgrade.Name)}_ExtensionsLbl",
             _extensionsPanel
         );
 
-        foreach (MyTowerNode extensionNode in node.AvailableExtensions)
+        foreach (MyTowerNode extensionNode in latestUpgrade.AvailableExtensions)
         {
             UIButtonRegister.Instance.CreateButton(
                 extensionNode.Name,
@@ -121,7 +126,7 @@ public class MyTowerUI : MonoBehaviour
                 _extensionsPanel,
                 () =>
                 {
-                    node.ExtendWith(extensionNode);
+                    latestUpgrade.ExtendWith(extensionNode);
                 }
             );
         }

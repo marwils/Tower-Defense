@@ -46,6 +46,12 @@ namespace MarwilsTD
             get { return GetUpgradeNode(); }
             set { SetUpgradeNode(value); }
         }
+
+        public TowerNode LatestUpgradeNode
+        {
+            get { return HasUpgrade ? CurrentUpgrade.LatestUpgradeNode : this; }
+        }
+
         public bool HasUpgrade
         {
             get { return _currentUpgradeIndex != -1; }
