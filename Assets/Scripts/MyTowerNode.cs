@@ -40,6 +40,10 @@ public class MyTowerNode : TowerNode
                 {
                     gameObject.SetActive(true);
                 }
+                else
+                {
+                    upgradeNode.SetY(transform.position.y + _height + _yOffset);
+                }
             }
 
             currentUpgrade.gameObject.SetActive(false);
@@ -50,11 +54,14 @@ public class MyTowerNode : TowerNode
         if (HasUpgrade)
         {
             upgradeNode.gameObject.SetActive(true);
-            upgradeNode.SetY(transform.position.y + _height + _yOffset);
 
             if (upgradeNode.ReplaceCurrentNodeOnUpgrade)
             {
                 gameObject.SetActive(false);
+            }
+            else
+            {
+                upgradeNode.SetY(transform.position.y + _height + _yOffset);
             }
         }
 
