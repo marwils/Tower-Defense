@@ -43,11 +43,15 @@ public class UIButtonRegister : MonoBehaviour
         extendButton.RegisterCallback<ClickEvent>(ev => OnShowExtensionsRequested?.Invoke());
     }
 
-    public Button CreateButton(string text, string name, VisualElement parent, Action onClick)
+    public void CreateButton(string text, string name, VisualElement parent, Action onClick)
     {
         var button = new Button(() => onClick?.Invoke()) { text = text, name = name };
         parent.Add(button);
+    }
 
-        return button;
+    public void CreateLabel(string text, string name, VisualElement parent)
+    {
+        var label = new Label(text) { name = name };
+        parent.Add(label);
     }
 }

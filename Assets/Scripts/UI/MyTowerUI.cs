@@ -52,7 +52,8 @@ public class MyTowerUI : MonoBehaviour
     private void ShowUpgrades()
     {
         HidePanel(_towerPanel);
-        CreateUpgradesButtons();
+        _upgradesPanel.Clear();
+        CreateUpgradesButtons(_towerController.MainNode);
         CreateBackButton(_upgradesPanel);
         ShowPanel(_upgradesPanel);
     }
@@ -60,42 +61,67 @@ public class MyTowerUI : MonoBehaviour
     private void ShowExtensions()
     {
         HidePanel(_towerPanel);
-        CreateExtensionsButtons();
+        _extensionsPanel.Clear();
+        CreateExtensionsButtons(_towerController.MainNode);
         CreateBackButton(_extensionsPanel);
         ShowPanel(_extensionsPanel);
     }
 
-    private void CreateUpgradesButtons()
+    private void CreateUpgradesButtons(MyTowerNode node)
     {
-        _upgradesPanel.Clear();
-        foreach (MyTowerNode upgradeNode in _towerController.MainNode.AvailableUpgrades)
+        if (node == null || node.AvailableUpgrades == null || node.AvailableUpgrades.Length == 0)
+            return;
+
+        if (node.HasUpgrade)
+        {
+            CreateUpgradesButtons((MyTowerNode)node.CurrentUpgrade);
+        }
+
+        UIButtonRegister.Instance.CreateLabel(
+            $"{node.Name} Upgrades",
+            $"{GetSafeElementName(node.Name)}_UpgradesLbl",
+            _upgradesPanel
+        );
+
+        foreach (MyTowerNode upgradeNode in node.AvailableUpgrades)
         {
             UIButtonRegister.Instance.CreateButton(
                 upgradeNode.Name,
-                GetSafeButtonName(upgradeNode.Name) + "Btn",
+                GetSafeElementName(upgradeNode.Name) + "Btn",
                 _upgradesPanel,
                 () =>
                 {
-                    _towerController.UpgradeTo(upgradeNode);
-                    Debug.Log($"Upgrade {upgradeNode.Name} applied to tower {_towerController.name}.");
+                    node.UpgradeTo(upgradeNode);
                 }
             );
         }
     }
 
-    private void CreateExtensionsButtons()
+    private void CreateExtensionsButtons(MyTowerNode node)
     {
-        _extensionsPanel.Clear();
-        foreach (MyTowerNode extensionNode in _towerController.MainNode.AvailableExtensions)
+        if (node == null || node.AvailableExtensions == null || node.AvailableExtensions.Length == 0)
+            return;
+
+        if (node.HasExtension)
+        {
+            CreateExtensionsButtons((MyTowerNode)node.CurrentExtension);
+        }
+
+        UIButtonRegister.Instance.CreateLabel(
+            $"{node.Name} Extensions",
+            $"{GetSafeElementName(node.Name)}_ExtensionsLbl",
+            _extensionsPanel
+        );
+
+        foreach (MyTowerNode extensionNode in node.AvailableExtensions)
         {
             UIButtonRegister.Instance.CreateButton(
                 extensionNode.Name,
-                GetSafeButtonName(extensionNode.Name) + "Btn",
+                GetSafeElementName(extensionNode.Name) + "Btn",
                 _extensionsPanel,
                 () =>
                 {
-                    _towerController.ExtendWith(extensionNode);
-                    Debug.Log($"Extension {extensionNode.Name} applied to tower {_towerController.name}.");
+                    node.ExtendWith(extensionNode);
                 }
             );
         }
@@ -116,7 +142,7 @@ public class MyTowerUI : MonoBehaviour
         );
     }
 
-    private static string GetSafeButtonName(string baseName)
+    private static string GetSafeElementName(string baseName)
     {
         var safe = Regex.Replace(baseName, @"[^a-zA-Z0-9_]", "_");
         return safe + "Btn";
