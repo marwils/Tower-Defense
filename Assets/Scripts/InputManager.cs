@@ -9,7 +9,8 @@ public class InputManager : MonoBehaviour
     public static InputManager Instance { get; private set; }
 
     public event Action OnPointAt;
-    public event Action OnSelect;
+    public event Action<ISelectable> OnSelect;
+    public event Action OnDeselect;
     public event Action<float> OnCameraZoom;
 
     public Vector2 CameraMovementVector => _input.Camera.Move.ReadValue<Vector2>();
@@ -44,12 +45,21 @@ public class InputManager : MonoBehaviour
 
     private void HandleSelect()
     {
+        bool isPointerOverSelectable = false;
         if (RaycastFromScreenPosition(out RaycastHit hit))
         {
+            Debug.Log($"Hit: {hit.collider.gameObject.name}");
             if (hit.collider.TryGetComponent(out ISelectable selectable))
             {
-                OnSelect?.Invoke();
+                isPointerOverSelectable = true;
+                OnSelect?.Invoke(selectable);
             }
+        }
+
+        if (!isPointerOverSelectable)
+        {
+            Debug.Log("Deselecting, no selectable under pointer.");
+            OnDeselect?.Invoke();
         }
     }
 

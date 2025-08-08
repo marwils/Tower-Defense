@@ -15,15 +15,8 @@ public class Selector : MonoBehaviour
         }
     }
 
-    private void HandleSelect()
+    private void HandleSelect(ISelectable selectable)
     {
-        if (InputManager.Instance.RaycastFromScreenPosition(out RaycastHit hit))
-        {
-            if (hit.collider.TryGetComponent(out ISelectable selectable))
-            {
-                selectable.OnSelect();
-                Debug.Log($"Selected: {hit.collider.gameObject.name}");
-            }
-        }
+        selectable.OnSelect();
     }
 }

@@ -23,9 +23,17 @@ public class MyTowerUI : MonoBehaviour
             return;
         }
 
-        UIButtonRegister.OnUIInitialized += OnUIInitialized;
-        UIButtonRegister.OnShowUpgradesRequested += ShowUpgrades;
-        UIButtonRegister.OnShowExtensionsRequested += ShowExtensions;
+        UIElementRegister.OnUIInitialized += OnUIInitialized;
+        UIElementRegister.OnShowUpgradesRequested += ShowUpgrades;
+        UIElementRegister.OnShowExtensionsRequested += ShowExtensions;
+
+        _towerController.OnSelected += ShowTowerPanel;
+        InputManager.TryRegister((input) => input.OnDeselect += HideAllPanels);
+    }
+
+    private void ShowTowerPanel()
+    {
+        ShowPanel(_towerPanel);
     }
 
     private void OnUIInitialized(VisualElement element)
@@ -34,8 +42,7 @@ public class MyTowerUI : MonoBehaviour
         _upgradesPanel = element.Q<VisualElement>("UpgradesPnl");
         _extensionsPanel = element.Q<VisualElement>("ExtensionsPnl");
 
-        HidePanel(_upgradesPanel);
-        HidePanel(_extensionsPanel);
+        HideAllPanels();
 
         // for safety, ensure panels are displayed correctly
         SetDisplayForPanels(new List<VisualElement> { _towerPanel, _upgradesPanel, _extensionsPanel });
@@ -51,7 +58,7 @@ public class MyTowerUI : MonoBehaviour
 
     private void ShowUpgrades()
     {
-        HidePanel(_towerPanel);
+        HideAllPanels();
         _upgradesPanel.Clear();
         CreateUpgradesButtons(_towerController.MainNode);
         CreateBackButton(_upgradesPanel);
@@ -60,7 +67,7 @@ public class MyTowerUI : MonoBehaviour
 
     private void ShowExtensions()
     {
-        HidePanel(_towerPanel);
+        HideAllPanels();
         _extensionsPanel.Clear();
         CreateExtensionsButtons(_towerController.MainNode);
         CreateBackButton(_extensionsPanel);
@@ -81,7 +88,7 @@ public class MyTowerUI : MonoBehaviour
         )
             return;
 
-        UIButtonRegister.Instance.CreateLabel(
+        UIElementRegister.Instance.CreateLabel(
             $"{latestUpgrade.Name} Upgrades",
             $"{GetSafeElementName(latestUpgrade.Name)}_UpgradesLbl",
             _upgradesPanel
@@ -89,7 +96,7 @@ public class MyTowerUI : MonoBehaviour
 
         foreach (MyTowerNode upgradeNode in latestUpgrade.AvailableUpgrades)
         {
-            UIButtonRegister.Instance.CreateButton(
+            UIElementRegister.Instance.CreateButton(
                 upgradeNode.Name,
                 GetSafeElementName(upgradeNode.Name) + "Btn",
                 _upgradesPanel,
@@ -114,7 +121,7 @@ public class MyTowerUI : MonoBehaviour
         )
             return;
 
-        UIButtonRegister.Instance.CreateLabel(
+        UIElementRegister.Instance.CreateLabel(
             $"{latestUpgrade.Name} Extensions",
             $"{GetSafeElementName(latestUpgrade.Name)}_ExtensionsLbl",
             _extensionsPanel
@@ -122,7 +129,7 @@ public class MyTowerUI : MonoBehaviour
 
         foreach (MyTowerNode extensionNode in latestUpgrade.AvailableExtensions)
         {
-            UIButtonRegister.Instance.CreateButton(
+            UIElementRegister.Instance.CreateButton(
                 extensionNode.Name,
                 GetSafeElementName(extensionNode.Name) + "Btn",
                 _extensionsPanel,
@@ -138,7 +145,7 @@ public class MyTowerUI : MonoBehaviour
 
     private void CreateBackButton(VisualElement parent)
     {
-        UIButtonRegister.Instance.CreateButton(
+        UIElementRegister.Instance.CreateButton(
             "Back",
             "BackBtn",
             parent,
@@ -159,9 +166,17 @@ public class MyTowerUI : MonoBehaviour
 
     private void ShowPanel(VisualElement panel)
     {
+        Debug.Log($"Showing panel: {panel.name}");
         panel.style.opacity = 1f;
         panel.pickingMode = PickingMode.Position;
         panel.style.translate = new Translate(0, 0);
+    }
+
+    private void HideAllPanels()
+    {
+        HidePanel(_towerPanel);
+        HidePanel(_upgradesPanel);
+        HidePanel(_extensionsPanel);
     }
 
     private void HidePanel(VisualElement panel)

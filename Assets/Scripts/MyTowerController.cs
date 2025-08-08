@@ -1,14 +1,17 @@
+using System;
 using System.Linq;
 using MarwilsTD;
 using UnityEngine;
 
-public class MyTowerController : TowerController
+public class MyTowerController : TowerController, ISelectable
 {
     [Header("My Tower Controller")]
     [SerializeField]
     [Tooltip("Main tower node. This is the root node of the tower.")]
     private MyTowerNode _mainNode;
     public MyTowerNode MainNode => _mainNode;
+
+    public Action OnSelected { get; set; }
 
     protected override void Awake()
     {
@@ -49,5 +52,10 @@ public class MyTowerController : TowerController
                 SetUpgradesAndExtensionsActiveRecursively(childNode, isActive);
             }
         }
+    }
+
+    public void OnSelect()
+    {
+        OnSelected?.Invoke();
     }
 }

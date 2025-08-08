@@ -3,11 +3,11 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UIDocument))]
-public class UIButtonRegister : MonoBehaviour
+public class UIElementRegister : MonoBehaviour
 {
-    private static UIButtonRegister _instance;
+    private static UIElementRegister _instance;
 
-    public static UIButtonRegister Instance => _instance;
+    public static UIElementRegister Instance => _instance;
     public static event Action<VisualElement> OnUIInitialized;
     public static event Action OnShowUpgradesRequested;
     public static event Action OnShowExtensionsRequested;
@@ -28,19 +28,22 @@ public class UIButtonRegister : MonoBehaviour
         _instance = this;
     }
 
+    void Start()
+    {
+        OnUIInitialized?.Invoke(_root);
+    }
+
     void OnEnable()
     {
         _uiDocument = GetComponent<UIDocument>();
         _root = _uiDocument.rootVisualElement;
 
-        OnUIInitialized?.Invoke(_root);
+        RegisterButtonCallbacks();
+    }
 
-        // Register button callbacks
-        var upgradeButton = _root.Q<Button>("ShowUpgradesBtn");
-        upgradeButton.RegisterCallback<ClickEvent>(ev => OnShowUpgradesRequested?.Invoke());
-
-        var extendButton = _root.Q<Button>("ShowExtensionsBtn");
-        extendButton.RegisterCallback<ClickEvent>(ev => OnShowExtensionsRequested?.Invoke());
+    void OnDisable()
+    {
+        UnregisterButtonCallbacks();
     }
 
     public void CreateButton(string text, string name, VisualElement parent, Action onClick)
@@ -53,5 +56,23 @@ public class UIButtonRegister : MonoBehaviour
     {
         var label = new Label(text) { name = name };
         parent.Add(label);
+    }
+
+    private void RegisterButtonCallbacks()
+    {
+        var upgradeButton = _root.Q<Button>("ShowUpgradesBtn");
+        upgradeButton.RegisterCallback<ClickEvent>(ev => OnShowUpgradesRequested?.Invoke());
+
+        var extendButton = _root.Q<Button>("ShowExtensionsBtn");
+        extendButton.RegisterCallback<ClickEvent>(ev => OnShowExtensionsRequested?.Invoke());
+    }
+
+    private void UnregisterButtonCallbacks()
+    {
+        var upgradeButton = _root.Q<Button>("ShowUpgradesBtn");
+        upgradeButton.UnregisterCallback<ClickEvent>(ev => OnShowUpgradesRequested?.Invoke());
+
+        var extendButton = _root.Q<Button>("ShowExtensionsBtn");
+        extendButton.UnregisterCallback<ClickEvent>(ev => OnShowExtensionsRequested?.Invoke());
     }
 }

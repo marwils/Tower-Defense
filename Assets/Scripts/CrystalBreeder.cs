@@ -42,6 +42,8 @@ public class CrystalBreeder : MyTowerNode, ISelectable
     private List<GameObject> _smallCrystalInstances = new();
     private GameObject _largeCrystalInstance;
 
+    public void OnSelect() => CollectCrystals();
+
     protected override void Awake()
     {
         base.Awake();
@@ -75,8 +77,6 @@ public class CrystalBreeder : MyTowerNode, ISelectable
     }
 
     private void Update() => SpinAround();
-
-    public void OnSelect() => CollectCrystals();
 
     private void CollectCrystals()
     {

@@ -1,4 +1,4 @@
-internal interface ISelectable
+public interface ISelectable
 {
     void OnSelect();
 }
