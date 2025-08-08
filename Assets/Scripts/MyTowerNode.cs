@@ -1,3 +1,4 @@
+using System;
 using MarwilsTD;
 using UnityEngine;
 
@@ -23,6 +24,44 @@ public class MyTowerNode : TowerNode
     )]
     private bool _replaceCurrentNodeOnUpgrade = false;
     public bool ReplaceCurrentNodeOnUpgrade => _replaceCurrentNodeOnUpgrade;
+
+    [SerializeField]
+    [Tooltip("The current upgrade of this tower node.")]
+    private MyTowerNode _currentUpgrade;
+
+    [SerializeField]
+    [Tooltip("The current extension of this tower node.")]
+    private MyTowerNode _currentExtension;
+
+    private void Start()
+    {
+        InitializeNodes();
+    }
+
+    private void InitializeNodes()
+    {
+        if (_currentUpgrade != null)
+        {
+            UpgradeTo(_currentUpgrade);
+            if (!HasUpgrade)
+            {
+                Debug.LogWarning(
+                    $"Current upgrade node is not set correctly in <{gameObject.name}>. Upgrade node will not be applied."
+                );
+            }
+        }
+
+        if (_currentExtension != null)
+        {
+            ExtendWith(_currentExtension);
+            if (!HasExtension)
+            {
+                Debug.LogWarning(
+                    $"Current extension node is not set correctly in <{gameObject.name}>. Extension node will not be applied."
+                );
+            }
+        }
+    }
 
     public void SetY(float y)
     {
