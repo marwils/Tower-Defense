@@ -414,15 +414,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123309953}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1330997759}
   - {fileID: 1367996018}
+  - {fileID: 1330997759}
   - {fileID: 498226314}
-  m_Father: {fileID: 1165216342}
+  m_Father: {fileID: 3365495204569486195}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &123309955
 MonoBehaviour:
@@ -1441,13 +1441,52 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6149131183966965021, guid: ad6c120016232c54a822aa61304bee60, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 498226316}
   m_SourcePrefab: {fileID: 100100000, guid: ad6c120016232c54a822aa61304bee60, type: 3}
 --- !u!4 &498226314 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6781799367588222887, guid: ad6c120016232c54a822aa61304bee60, type: 3}
   m_PrefabInstance: {fileID: 498226313}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &498226315 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6149131183966965021, guid: ad6c120016232c54a822aa61304bee60, type: 3}
+  m_PrefabInstance: {fileID: 498226313}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &498226316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498226315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce0f2e1028390c49be8e5b485329c2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _configuration: {fileID: 0}
+  _canTakeDamage: 0
+  _canBeHealed: 0
+  _health: 0
+  _shield: 0
+  _canMove: 0
+  _speed: 0
+  _maxHealth: 0
+  _weaponController: {fileID: 0}
+  _towerSettings: {fileID: 0}
+  _price: 100
+  _availableExtensions: []
+  _availableUpgrades:
+  - {fileID: 623684779}
+  _height: 1
+  _yOffset: 0
+  _replaceCurrentNodeOnUpgrade: 0
+  _currentUpgrade: {fileID: 0}
+  _currentExtension: {fileID: 0}
 --- !u!4 &508236915 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7431954933693112389, guid: 6cfa5976dc9a5d04d9ad2bfdd643a4db, type: 3}
@@ -1651,13 +1690,51 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5458775961657280316, guid: 75e1f34be8833d74782318e9eba153e9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 623684779}
   m_SourcePrefab: {fileID: 100100000, guid: 75e1f34be8833d74782318e9eba153e9, type: 3}
 --- !u!4 &623684777 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4650713716998167942, guid: 75e1f34be8833d74782318e9eba153e9, type: 3}
   m_PrefabInstance: {fileID: 623684776}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &623684778 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5458775961657280316, guid: 75e1f34be8833d74782318e9eba153e9, type: 3}
+  m_PrefabInstance: {fileID: 623684776}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &623684779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623684778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce0f2e1028390c49be8e5b485329c2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _configuration: {fileID: 0}
+  _canTakeDamage: 0
+  _canBeHealed: 0
+  _health: 0
+  _shield: 0
+  _canMove: 0
+  _speed: 0
+  _maxHealth: 0
+  _weaponController: {fileID: 0}
+  _towerSettings: {fileID: 0}
+  _price: 100
+  _availableExtensions: []
+  _availableUpgrades: []
+  _height: 1
+  _yOffset: 0
+  _replaceCurrentNodeOnUpgrade: 0
+  _currentUpgrade: {fileID: 0}
+  _currentExtension: {fileID: 0}
 --- !u!1001 &656616296
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2724,8 +2801,6 @@ Transform:
   - {fileID: 467244085}
   - {fileID: 1327403483}
   - {fileID: 880411280}
-  - {fileID: 123309954}
-  - {fileID: 1379562267}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1168412606 stripped
@@ -3064,13 +3139,52 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4968606616612074994, guid: 67859cea3ab72a14d9615ae78b776877, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1330997761}
   m_SourcePrefab: {fileID: 100100000, guid: 67859cea3ab72a14d9615ae78b776877, type: 3}
 --- !u!4 &1330997759 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5746551102587875144, guid: 67859cea3ab72a14d9615ae78b776877, type: 3}
   m_PrefabInstance: {fileID: 1330997758}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1330997760 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4968606616612074994, guid: 67859cea3ab72a14d9615ae78b776877, type: 3}
+  m_PrefabInstance: {fileID: 1330997758}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1330997761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330997760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce0f2e1028390c49be8e5b485329c2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _configuration: {fileID: 0}
+  _canTakeDamage: 0
+  _canBeHealed: 0
+  _health: 0
+  _shield: 0
+  _canMove: 0
+  _speed: 0
+  _maxHealth: 0
+  _weaponController: {fileID: 0}
+  _towerSettings: {fileID: 0}
+  _price: 100
+  _availableExtensions: []
+  _availableUpgrades:
+  - {fileID: 1750977620}
+  _height: 1
+  _yOffset: 0
+  _replaceCurrentNodeOnUpgrade: 0
+  _currentUpgrade: {fileID: 0}
+  _currentExtension: {fileID: 0}
 --- !u!4 &1331205049 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 825540059089246187, guid: 873e588badd12b9429d6e7dbaf1b9c6d, type: 3}
@@ -3213,13 +3327,52 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8404787915614400462, guid: c6b04a6c041a5fb40a22d1edd7189f1c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1367996020}
   m_SourcePrefab: {fileID: 100100000, guid: c6b04a6c041a5fb40a22d1edd7189f1c, type: 3}
 --- !u!4 &1367996018 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9216650415989421428, guid: c6b04a6c041a5fb40a22d1edd7189f1c, type: 3}
   m_PrefabInstance: {fileID: 1367996017}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1367996019 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8404787915614400462, guid: c6b04a6c041a5fb40a22d1edd7189f1c, type: 3}
+  m_PrefabInstance: {fileID: 1367996017}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1367996020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367996019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce0f2e1028390c49be8e5b485329c2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _configuration: {fileID: 0}
+  _canTakeDamage: 0
+  _canBeHealed: 0
+  _health: 0
+  _shield: 0
+  _canMove: 0
+  _speed: 0
+  _maxHealth: 0
+  _weaponController: {fileID: 0}
+  _towerSettings: {fileID: 0}
+  _price: 100
+  _availableExtensions: []
+  _availableUpgrades:
+  - {fileID: 1736297104}
+  _height: 1
+  _yOffset: 0
+  _replaceCurrentNodeOnUpgrade: 0
+  _currentUpgrade: {fileID: 0}
+  _currentExtension: {fileID: 0}
 --- !u!1 &1379562266
 GameObject:
   m_ObjectHideFlags: 0
@@ -3246,15 +3399,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1379562266}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1750977618}
   - {fileID: 1736297102}
+  - {fileID: 1750977618}
   - {fileID: 623684777}
-  m_Father: {fileID: 1165216342}
+  m_Father: {fileID: 3365495204569486195}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1379562268
 MonoBehaviour:
@@ -3733,13 +3886,51 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7779261473972997838, guid: 104893b107ec7c240bd50f50cf545a9b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1736297104}
   m_SourcePrefab: {fileID: 100100000, guid: 104893b107ec7c240bd50f50cf545a9b, type: 3}
 --- !u!4 &1736297102 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6971200264937837684, guid: 104893b107ec7c240bd50f50cf545a9b, type: 3}
   m_PrefabInstance: {fileID: 1736297101}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1736297103 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7779261473972997838, guid: 104893b107ec7c240bd50f50cf545a9b, type: 3}
+  m_PrefabInstance: {fileID: 1736297101}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1736297104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736297103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce0f2e1028390c49be8e5b485329c2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _configuration: {fileID: 0}
+  _canTakeDamage: 0
+  _canBeHealed: 0
+  _health: 0
+  _shield: 0
+  _canMove: 0
+  _speed: 0
+  _maxHealth: 0
+  _weaponController: {fileID: 0}
+  _towerSettings: {fileID: 0}
+  _price: 100
+  _availableExtensions: []
+  _availableUpgrades: []
+  _height: 1
+  _yOffset: 0
+  _replaceCurrentNodeOnUpgrade: 0
+  _currentUpgrade: {fileID: 0}
+  _currentExtension: {fileID: 0}
 --- !u!4 &1737241701 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4588125087073014116, guid: ae5a46f3a6be44349abcf8693a7a87f7, type: 3}
@@ -3805,13 +3996,51 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2431187889776331675, guid: 863483007117f7a4b9f7a09876e1fd1e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1750977620}
   m_SourcePrefab: {fileID: 100100000, guid: 863483007117f7a4b9f7a09876e1fd1e, type: 3}
 --- !u!4 &1750977618 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3095802727358910753, guid: 863483007117f7a4b9f7a09876e1fd1e, type: 3}
   m_PrefabInstance: {fileID: 1750977617}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1750977619 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2431187889776331675, guid: 863483007117f7a4b9f7a09876e1fd1e, type: 3}
+  m_PrefabInstance: {fileID: 1750977617}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1750977620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750977619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce0f2e1028390c49be8e5b485329c2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _configuration: {fileID: 0}
+  _canTakeDamage: 0
+  _canBeHealed: 0
+  _health: 0
+  _shield: 0
+  _canMove: 0
+  _speed: 0
+  _maxHealth: 0
+  _weaponController: {fileID: 0}
+  _towerSettings: {fileID: 0}
+  _price: 100
+  _availableExtensions: []
+  _availableUpgrades: []
+  _height: 1
+  _yOffset: 0
+  _replaceCurrentNodeOnUpgrade: 0
+  _currentUpgrade: {fileID: 0}
+  _currentExtension: {fileID: 0}
 --- !u!4 &1761311484 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2911637468392046557, guid: 4ab031f941f53ab4b96bee3ae9b81739, type: 3}
@@ -7666,9 +7895,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 183400525195789769, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: m_Name
+      value: Armored Base
+      objectReference: {fileID: 0}
+    - target: {fileID: 1595218847478029847, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: m_Name
+      value: Better Armored Base
+      objectReference: {fileID: 0}
+    - target: {fileID: 2245459916975489694, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: m_Name
+      value: Better Shielded Base
+      objectReference: {fileID: 0}
+    - target: {fileID: 2634100985795128377, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: _availableExtensions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2634100985795128377, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: '_availableExtensions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1367996020}
     - target: {fileID: 2911217670060228805, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: m_Name
       value: Test Tower
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846658037131313612, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: m_Name
+      value: Shielded Base
+      objectReference: {fileID: 0}
+    - target: {fileID: 4898691190909540135, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: _availableExtensions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4898691190909540135, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: '_availableExtensions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1330997761}
+    - target: {fileID: 6330957834135834041, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: m_Name
+      value: Armored Extension
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882507004214042250, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: _availableExtensions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882507004214042250, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: '_availableExtensions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 498226316}
+    - target: {fileID: 6902343690883387742, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: m_Name
+      value: Foundation Shooting Extension
       objectReference: {fileID: 0}
     - target: {fileID: 7230702819320216733, guid: 49b006231f668a149b681468d0ab517b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7710,11 +7987,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7936154618027156378, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: m_Name
+      value: Better Foundation
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163127101363277007, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      propertyPath: m_Name
+      value: Shielded Extension
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7230702819320216733, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 123309954}
+    - targetCorrespondingSourceObject: {fileID: 7230702819320216733, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1379562267}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+--- !u!4 &3365495204569486195 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7230702819320216733, guid: 49b006231f668a149b681468d0ab517b, type: 3}
+  m_PrefabInstance: {fileID: 3365495204569486194}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3398730899633566496
 PrefabInstance:
   m_ObjectHideFlags: 0
