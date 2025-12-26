@@ -10,7 +10,6 @@ public class InputManager : MonoBehaviour
 
     public event Action OnPointAt;
     public event Action<ISelectable> OnSelect;
-    public event Action OnDeselect;
     public event Action<float> OnCameraZoom;
 
     public Vector2 CameraMovementVector => _input.Camera.Move.ReadValue<Vector2>();
@@ -45,21 +44,13 @@ public class InputManager : MonoBehaviour
 
     private void HandleSelect()
     {
-        bool isPointerOverSelectable = false;
         if (RaycastFromScreenPosition(out RaycastHit hit))
         {
             Debug.Log($"Hit: {hit.collider.gameObject.name}");
             if (hit.collider.TryGetComponent(out ISelectable selectable))
             {
-                isPointerOverSelectable = true;
                 OnSelect?.Invoke(selectable);
             }
-        }
-
-        if (!isPointerOverSelectable)
-        {
-            Debug.Log("Deselecting, no selectable under pointer.");
-            OnDeselect?.Invoke();
         }
     }
 
@@ -86,11 +77,9 @@ public class InputManager : MonoBehaviour
     {
         int groundLayer = LayerMask.NameToLayer("Ground");
         int mask = ~(1 << groundLayer);
-
         Vector2 screenPosition = GetPointerScreenPosition();
 
         Ray ray = _camera.ScreenPointToRay(screenPosition);
-
         bool result = Physics.Raycast(ray, out RaycastHit hitInfo, 100f, mask);
         hit = hitInfo;
 

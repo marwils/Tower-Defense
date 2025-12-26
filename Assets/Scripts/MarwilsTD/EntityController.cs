@@ -68,7 +68,7 @@ namespace MarwilsTD
         {
             if (_configuration == null)
             {
-                Debug.LogWarning($"Entity configuration not assigned in <{gameObject.name}>.");
+                // Debug.LogWarning($"Entity configuration not assigned in <{gameObject.name}>.");
                 return;
             }
 
