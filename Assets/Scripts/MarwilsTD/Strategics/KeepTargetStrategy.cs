@@ -1,6 +1,6 @@
 using System;
 
-namespace MarwilsTD.LevelSystem
+namespace MarwilsTD.Strategics
 {
     [Serializable]
     public abstract class KeepTargetStrategy

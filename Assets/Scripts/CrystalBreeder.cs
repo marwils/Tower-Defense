@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrystalBreeder : MyTowerNode, ISelectable
+public class CrystalBreeder : MonoBehaviour, ISelectable
 {
     [Header("Crystal Breeding")]
     [SerializeField]
@@ -44,10 +44,8 @@ public class CrystalBreeder : MyTowerNode, ISelectable
 
     public void OnSelect() => CollectCrystals();
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
-
         if (_largeCrystalPrefab == null || _smallCrystalPrefab == null)
         {
             Debug.LogWarning($"Crystal prefabs are not assigned in <{gameObject.name}>.");

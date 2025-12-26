@@ -3,73 +3,67 @@ using UnityEngine;
 
 namespace MarwilsTD
 {
-    using LevelSystem;
+    using MarwilsTD.Strategics;
 
     public class WeaponController : MonoBehaviour
     {
+        [Header("Weapon Configuration")]
         [SerializeField]
-        private WeaponConfiguration _weaponSettings;
-        public WeaponConfiguration WeaponSettings => _weaponSettings;
-
-        [SerializeField]
-        private AmmoConfiguration _ammoSettings;
-        public AmmoConfiguration AmmoSettings => _ammoSettings;
-
-        [SerializeField]
-        private Transform _aimTarget;
-        public Transform AimTarget
+        [Tooltip("The amount of damage the weapon deals")]
+        private float _damage = 10f;
+        public float Damage
         {
-            get => _aimTarget;
+            get { return _damage; }
         }
 
         [SerializeField]
-        private Transform _firePoint;
-        public Transform FirePoint => _firePoint;
+        [Range(0, 100)]
+        [Tooltip("The maximum distance the weapon can shoot (in meters)")]
+        private float _range = 15f;
+        public float Range
+        {
+            get { return _range; }
+        }
 
         [SerializeField]
-        private int _currentAmmo;
-
-        private string _targetTag;
-        public string TargetTag
+        [Range(0, 5)]
+        [Tooltip("How long the weapon should take between shots (in seconds)")]
+        private float _fireRate = 0.5f;
+        public float FireRate
         {
-            get => _targetTag;
-            set
-            {
-                _targetTag = value;
-                FindTarget();
-            }
+            get { return _fireRate; }
         }
 
-        protected void FindTarget()
+        [SerializeField]
+        [Range(0, 10)]
+        [Tooltip("How long the weapon should take to reload (in seconds)")]
+        private float _reloadTime = 2f;
+        public float ReloadTime
         {
-            if (_aimTarget == null)
-            {
-                _aimTarget = GameObject.FindGameObjectWithTag(TargetTag)?.transform;
-                if (_aimTarget == null)
-                {
-                    Debug.LogWarning($"No target found with tag <{TargetTag}> in <{gameObject.name}>.");
-                }
-            }
+            get { return _reloadTime; }
         }
 
-        public void Attack()
+        [SerializeField]
+        [Range(0, 5)]
+        [Tooltip("How long the weapon should take to seek a target (in seconds) (0 = no seeking)")]
+        private float _seekTime = .2f;
+        public float SeekTime
         {
-            throw new NotImplementedException();
+            get { return _seekTime; }
         }
 
-        public void SeekTarget()
-        {
-            throw new NotImplementedException();
-        }
+        [Header("Ammo Configuration")]
+        [SerializeField]
+        private GameObject _ammoPrefab;
+        public GameObject AmmoPrefab => _ammoPrefab;
 
-        public void Reload()
-        {
-            throw new NotImplementedException();
-        }
+        [Header("Targeting Strategics")]
+        [SerializeField]
+        private TargetStrategy _targetStrategy;
+        public TargetStrategy TargetStrategy => _targetStrategy;
 
-        public bool HasAmmo()
-        {
-            return _currentAmmo > 0;
-        }
+        [SerializeField]
+        private KeepTargetStrategy _keepTargetStrategy;
+        public KeepTargetStrategy KeepTargetStrategy => _keepTargetStrategy;
     }
 }

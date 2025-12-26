@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace MarwilsTD.LevelSystem
+namespace MarwilsTD.Strategics
 {
     [Serializable]
     public abstract class TargetStrategy

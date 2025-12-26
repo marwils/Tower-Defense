@@ -50,7 +50,7 @@ namespace MarwilsTD
                 request.EnemyPrefab.transform.rotation
             );
 
-            enemyInstance.SetDestination(request.TargetTransform);
+            enemyInstance.Destination = request.TargetTransform;
 
             Debug.Log(
                 $"SpawnPoint <{name}> spawned enemy: <{request.EnemyPrefab.name}> -> <{request.TargetTransform?.name}>."
