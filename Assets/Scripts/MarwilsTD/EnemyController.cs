@@ -1,10 +1,9 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace MarwilsTD
 {
-    using LevelSystem;
-
     [RequireComponent(typeof(NavMeshAgent))]
     public class EnemyController : EntityController
     {
@@ -16,14 +15,6 @@ namespace MarwilsTD
             get { return _destination; }
             set { SetDestination(value); }
         }
-
-        [SerializeField]
-        private float _currentHealth;
-        public float CurrentHealth => _currentHealth;
-
-        [SerializeField]
-        private float _currentSpeed;
-        public float CurrentSpeed => _currentSpeed;
 
         private NavMeshAgent _agent;
 
@@ -45,6 +36,26 @@ namespace MarwilsTD
             {
                 Debug.LogWarning($"No destination set for the enemy in <{gameObject.name}>.");
             }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            other.TryGetComponent<AmmoController>(out var ammo);
+            if (ammo != null && ammo.Target == gameObject)
+            {
+                TakeDamage(ammo.Damage);
+                ammo.Die();
+                if (!IsAlive)
+                {
+                    Die();
+                }
+            }
+        }
+
+        private void Die()
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }

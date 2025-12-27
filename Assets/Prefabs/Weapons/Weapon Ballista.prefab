@@ -59,5 +59,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2a1855f269aaff94aa82b46e0e62d3ba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6926427742255464962}
   m_SourcePrefab: {fileID: 100100000, guid: 2a1855f269aaff94aa82b46e0e62d3ba, type: 3}
+--- !u!1 &3906480981366045555 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2a1855f269aaff94aa82b46e0e62d3ba, type: 3}
+  m_PrefabInstance: {fileID: 4249130927003354658}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6926427742255464962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3906480981366045555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acd65616d5f2db542b8ff987ec319fe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _range: 5
+  _fireRate: 0.5
+  _rotationDurationPerRevolution: 1
+  _ammoPrefab: {fileID: 5773788538617896907, guid: c3b3890bded49e04ea00b3935d8aa362, type: 3}
+  _shootPoint: {fileID: 0}
+  _targetTag: Enemy

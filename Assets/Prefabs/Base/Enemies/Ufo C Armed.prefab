@@ -137,8 +137,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83bacf1bc217ac4448c7217c1b045a83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemySettings: {fileID: 0}
-  _weapon: {fileID: 0}
+  _canTakeDamage: 1
+  _canBeHealed: 0
+  _health: 100
   _destination: {fileID: 0}
 --- !u!114 &578516962853059665
 MonoBehaviour:

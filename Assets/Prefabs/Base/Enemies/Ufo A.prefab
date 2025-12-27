@@ -137,10 +137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83bacf1bc217ac4448c7217c1b045a83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entitySettings: {fileID: 11400000, guid: e5e301627b66f6c459510be785bc10d6, type: 2}
+  _canTakeDamage: 1
+  _canBeHealed: 0
+  _health: 100
   _destination: {fileID: 0}
-  _currentHealth: 0
-  _currentSpeed: 0
 --- !u!114 &8396024411179921468
 MonoBehaviour:
   m_ObjectHideFlags: 0

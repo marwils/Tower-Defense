@@ -6,11 +6,11 @@ namespace MarwilsTD
     {
         [Header("Damage and Healing")]
         [SerializeField]
-        private bool _canTakeDamage;
+        private bool _canTakeDamage = true;
         public bool CanTakeDamage => _canTakeDamage;
 
         [SerializeField]
-        private bool _canBeHealed;
+        private bool _canBeHealed = false;
         public bool CanBeHealed => _canBeHealed;
 
         [SerializeField]
