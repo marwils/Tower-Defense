@@ -41,21 +41,11 @@ namespace MarwilsTD
         private void OnTriggerEnter(Collider other)
         {
             other.TryGetComponent<AmmoController>(out var ammo);
-            if (ammo != null && ammo.Target == gameObject)
+            if (ammo != null && ammo.TargetTag == gameObject.tag)
             {
                 TakeDamage(ammo.Damage);
-                ammo.Die();
-                if (!IsAlive)
-                {
-                    Die();
-                }
+                ammo.Hit();
             }
-        }
-
-        private void Die()
-        {
-            gameObject.SetActive(false);
-            Destroy(gameObject);
         }
     }
 }

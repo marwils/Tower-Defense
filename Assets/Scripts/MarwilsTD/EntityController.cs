@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 
 namespace MarwilsTD
@@ -20,6 +21,10 @@ namespace MarwilsTD
         {
             get { return _health > 0; }
         }
+        public bool IsDead
+        {
+            get { return _health <= 0; }
+        }
 
         private float _initialHealth;
         public float InitialHealth
@@ -34,9 +39,13 @@ namespace MarwilsTD
 
         public void TakeDamage(float amount)
         {
-            if (_canTakeDamage)
+            if (_canTakeDamage && IsAlive)
             {
                 _health -= amount;
+            }
+            if (IsDead)
+            {
+                Die();
             }
         }
 
@@ -51,6 +60,12 @@ namespace MarwilsTD
                     _health = _initialHealth;
                 }
             }
+        }
+
+        public void Die()
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }

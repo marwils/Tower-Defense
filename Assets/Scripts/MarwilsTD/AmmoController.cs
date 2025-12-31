@@ -16,14 +16,23 @@ namespace MarwilsTD
 
         [SerializeField]
         private float _speed = 5f;
+        public float Speed
+        {
+            get { return _speed; }
+        }
 
         [SerializeField]
         private float _lifetime = 5f;
-
-        private GameObject _target;
-        public GameObject Target
+        public float Lifetime
         {
-            get { return _target; }
+            get { return _lifetime; }
+        }
+
+        [SerializeField]
+        private string _targetTag;
+        public string TargetTag
+        {
+            get { return _targetTag; }
         }
 
         void Update()
@@ -35,13 +44,13 @@ namespace MarwilsTD
             }
         }
 
-        public void Initialize(Vector3 startDirection, GameObject target)
+        public void Initialize(Vector3 startDirection, string targetTag)
         {
             GetComponent<Rigidbody>().AddForce(startDirection * _speed, ForceMode.Impulse);
-            _target = target;
+            _targetTag = targetTag;
         }
 
-        public void Die()
+        public void Hit()
         {
             Destroy(gameObject);
         }
