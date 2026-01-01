@@ -23,20 +23,22 @@ namespace MarwilsTD
 
         [SerializeField]
         private float _lifetime = 5f;
-        public float Lifetime
-        {
-            get { return _lifetime; }
-        }
 
-        [SerializeField]
         private string _targetTag;
         public string TargetTag
         {
             get { return _targetTag; }
         }
 
+        private bool _isFired = false;
+
         void Update()
         {
+            if (!_isFired)
+            {
+                return;
+            }
+
             _lifetime -= Time.deltaTime;
             if (_lifetime <= 0f)
             {
@@ -44,10 +46,11 @@ namespace MarwilsTD
             }
         }
 
-        public void Initialize(Vector3 startDirection, string targetTag)
+        public void Fire(Vector3 startDirection, string targetTag)
         {
             GetComponent<Rigidbody>().AddForce(startDirection * _speed, ForceMode.Impulse);
             _targetTag = targetTag;
+            _isFired = true;
         }
 
         public void Hit()

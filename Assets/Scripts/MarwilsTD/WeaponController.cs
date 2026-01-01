@@ -17,6 +17,14 @@ namespace MarwilsTD
         private float _fireRate = 0.5f;
 
         [SerializeField]
+        [Tooltip(
+            "Time taken to reload ammo (in seconds); if set to any value greater than 0, ammo will be visible at "
+                + "muzzle point after reload; should not be greater than fire rate."
+        )]
+        private float _reloadTime = 0f;
+        public bool RequiresReloading => _reloadTime > 0f;
+
+        [SerializeField]
         [Tooltip("Defines how long the weapon takes to complete one full rotation (in seconds)")]
         private float _rotationDurationPerRevolution = 1f;
 
@@ -49,6 +57,19 @@ namespace MarwilsTD
 
         private Quaternion _initialTiltRotation;
 
+        private bool _ammoLoaded = false;
+
+        private GameObject _ammoInstance;
+
+        public void Start()
+        {
+            if (RequiresReloading)
+            {
+                InstantiateAmmoAtMuzzle();
+                _ammoLoaded = true;
+            }
+        }
+
         public bool HasTargetWithinRange
         {
             get
@@ -66,11 +87,24 @@ namespace MarwilsTD
             if (_coolDown > 0)
             {
                 _coolDown -= Time.deltaTime;
+
+                if (RequiresReloading)
+                {
+                    if (!_ammoLoaded && _coolDown <= _fireRate - _reloadTime)
+                    {
+                        InstantiateAmmoAtMuzzle();
+                    }
+                }
             }
 
             if (HasTargetWithinRange)
             {
                 AimAtTarget();
+
+                if (_ammoLoaded)
+                {
+                    UpdateAmmoPositionAndRotation();
+                }
 
                 if (_aimingProgress >= 1f && _coolDown <= 0f)
                 {
@@ -93,15 +127,36 @@ namespace MarwilsTD
                     return;
                 }
 
-                Transform muzzlePoint = _muzzlePoints[_nextMuzzleIndex];
-                GameObject ammoInstance = Instantiate(_ammoPrefab, muzzlePoint.position, muzzlePoint.rotation);
+                if (!RequiresReloading && !_ammoLoaded)
+                {
+                    InstantiateAmmoAtMuzzle();
+                }
 
-                ammoInstance.GetComponent<AmmoController>()?.Initialize(muzzlePoint.forward, _targetTag);
-
+                _ammoInstance.GetComponent<AmmoController>()?.Fire(_muzzlePoints[_nextMuzzleIndex].forward, _targetTag);
                 _nextMuzzleIndex = (_nextMuzzleIndex + 1) % _muzzlePoints.Length;
+
+                _ammoLoaded = false;
 
                 _coolDown = _fireRate;
             }
+        }
+
+        private void InstantiateAmmoAtMuzzle()
+        {
+            Debug.Log($"WeaponController <{name}>: Reloading ammo at muzzle point.");
+            _ammoInstance = Instantiate(
+                _ammoPrefab,
+                _muzzlePoints[_nextMuzzleIndex].position,
+                _muzzlePoints[_nextMuzzleIndex].rotation
+            );
+            _ammoLoaded = true;
+        }
+
+        private void UpdateAmmoPositionAndRotation()
+        {
+            Debug.Log($"WeaponController <{name}>: Updating ammo position and rotation at muzzle point.");
+            _ammoInstance.transform.position = _muzzlePoints[_nextMuzzleIndex].position;
+            _ammoInstance.transform.rotation = _muzzlePoints[_nextMuzzleIndex].rotation;
         }
 
         /// <summary>
