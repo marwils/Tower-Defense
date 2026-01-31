@@ -41,6 +41,9 @@ namespace MarwilsTD
         )]
         private Transform _tiltTransform;
 
+        [SerializeField]
+        private bool _useAnimator = false;
+
         private Transform _currentTarget;
 
         private bool _isTargetInitialized = false;
@@ -108,7 +111,25 @@ namespace MarwilsTD
 
                 if (_aimingProgress >= 1f && _coolDown <= 0f)
                 {
-                    Shoot();
+                    if (_useAnimator)
+                    {
+                        Animator animator = GetComponent<Animator>();
+                        if (animator != null)
+                        {
+                            animator.SetTrigger("Shoot");
+                        }
+                        else
+                        {
+                            Debug.LogWarning(
+                                $"WeaponController <{name}>: No Animator component found, cannot use animation to shoot."
+                            );
+                            Shoot();
+                        }
+                    }
+                    else
+                    {
+                        Shoot();
+                    }
                 }
             }
             else
