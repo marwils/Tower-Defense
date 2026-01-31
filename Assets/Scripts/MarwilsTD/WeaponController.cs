@@ -64,14 +64,7 @@ namespace MarwilsTD
 
         private GameObject _ammoInstance;
 
-        public void Start()
-        {
-            if (RequiresReloading)
-            {
-                InstantiateAmmoAtMuzzle();
-                _ammoLoaded = true;
-            }
-        }
+        private Animator _animator;
 
         public bool HasTargetWithinRange
         {
@@ -85,8 +78,32 @@ namespace MarwilsTD
             }
         }
 
+        public void OnEnable()
+        {
+            if (RequiresReloading)
+            {
+                InstantiateAmmoAtMuzzle();
+                _ammoLoaded = true;
+            }
+
+            if (_useAnimator)
+            {
+                _animator = GetComponent<Animator>();
+            }
+        }
+
+        public void OnDisable()
+        {
+            if (_ammoInstance != null)
+            {
+                Destroy(_ammoInstance);
+            }
+        }
+
         private void Update()
         {
+            Validate();
+
             if (_coolDown > 0)
             {
                 _coolDown -= Time.deltaTime;
@@ -113,18 +130,7 @@ namespace MarwilsTD
                 {
                     if (_useAnimator)
                     {
-                        Animator animator = GetComponent<Animator>();
-                        if (animator != null)
-                        {
-                            animator.SetTrigger("Shoot");
-                        }
-                        else
-                        {
-                            Debug.LogWarning(
-                                $"WeaponController <{name}>: No Animator component found, cannot use animation to shoot."
-                            );
-                            Shoot();
-                        }
+                        _animator.SetTrigger("Shoot");
                     }
                     else
                     {
@@ -140,31 +146,26 @@ namespace MarwilsTD
 
         protected void Shoot()
         {
-            if (_ammoPrefab != null)
+            if (!RequiresReloading && !_ammoLoaded)
             {
-                if (_muzzlePoints.Length == 0)
-                {
-                    Debug.LogWarning($"WeaponController <{name}>: No muzzle points assigned. Cannot shoot ammo.");
-                    return;
-                }
-
-                if (!RequiresReloading && !_ammoLoaded)
-                {
-                    InstantiateAmmoAtMuzzle();
-                }
-
-                _ammoInstance.GetComponent<AmmoController>()?.Fire(_muzzlePoints[_nextMuzzleIndex].forward, _targetTag);
-                _nextMuzzleIndex = (_nextMuzzleIndex + 1) % _muzzlePoints.Length;
-
-                _ammoLoaded = false;
-
-                _coolDown = _fireRate;
+                InstantiateAmmoAtMuzzle();
             }
+
+            _ammoInstance.GetComponent<AmmoController>()?.Fire(_muzzlePoints[_nextMuzzleIndex].forward, _targetTag);
+            _nextMuzzleIndex = (_nextMuzzleIndex + 1) % _muzzlePoints.Length;
+
+            _ammoLoaded = false;
+
+            _coolDown = _fireRate;
         }
 
         private void InstantiateAmmoAtMuzzle()
         {
-            Debug.Log($"WeaponController <{name}>: Reloading ammo at muzzle point.");
+            if (_ammoInstance != null)
+            {
+                Destroy(_ammoInstance);
+            }
+
             _ammoInstance = Instantiate(
                 _ammoPrefab,
                 _muzzlePoints[_nextMuzzleIndex].position,
@@ -175,7 +176,6 @@ namespace MarwilsTD
 
         private void UpdateAmmoPositionAndRotation()
         {
-            Debug.Log($"WeaponController <{name}>: Updating ammo position and rotation at muzzle point.");
             _ammoInstance.transform.position = _muzzlePoints[_nextMuzzleIndex].position;
             _ammoInstance.transform.rotation = _muzzlePoints[_nextMuzzleIndex].rotation;
         }
@@ -268,6 +268,96 @@ namespace MarwilsTD
             foreach (Transform muzzlePoint in _muzzlePoints)
             {
                 muzzlePoint.rotation = Quaternion.LookRotation(targetLookDirection);
+            }
+        }
+
+        private void Validate()
+        {
+            if (_fireRate <= 0f)
+            {
+                Debug.LogWarning($"WeaponController <{name}>: Fire rate must be greater than 0. Setting to 0.1f.");
+                _fireRate = 0.1f;
+            }
+
+            if (_reloadTime < 0f)
+            {
+                Debug.LogWarning($"WeaponController <{name}>: Reload time cannot be negative. Setting to 0f.");
+                _reloadTime = 0f;
+            }
+
+            if (_reloadTime > _fireRate)
+            {
+                Debug.LogWarning(
+                    $"WeaponController <{name}>: Reload time {_reloadTime} is greater than fire rate {_fireRate}. "
+                        + "Setting reload time to fire rate."
+                );
+                _reloadTime = _fireRate;
+            }
+
+            if (_range <= 0f)
+            {
+                Debug.LogWarning($"WeaponController <{name}>: Range must be greater than 0. Setting to 1f.");
+                _range = 1f;
+            }
+
+            if (_rotationDurationPerRevolution <= 0f)
+            {
+                Debug.LogWarning(
+                    $"WeaponController <{name}>: Rotation duration per revolution must be greater than 0. Setting to 1f."
+                );
+                _rotationDurationPerRevolution = 1f;
+            }
+
+            if (_muzzlePoints.Length == 0)
+            {
+                Debug.LogWarning($"WeaponController <{name}>: No muzzle points assigned. Disabling weapon.");
+                enabled = false;
+            }
+
+            if (string.IsNullOrEmpty(_targetTag))
+            {
+                Debug.LogWarning($"WeaponController <{name}>: Target tag is not set. Disabling weapon.");
+                enabled = false;
+            }
+
+            if (_ammoPrefab == null)
+            {
+                Debug.LogWarning($"WeaponController <{name}>: Ammo prefab is not assigned. Disabling weapon.");
+                enabled = false;
+            }
+
+            if (_ammoLoaded && _ammoInstance == null)
+            {
+                Debug.LogWarning(
+                    $"WeaponController <{name}>: Ammo is marked as loaded but no ammo instance found. "
+                        + "Disabling weapon."
+                );
+                enabled = false;
+            }
+
+            if (_tiltTransform != null)
+            {
+                bool isChild = _tiltTransform.IsChildOf(transform);
+                if (!isChild)
+                {
+                    Debug.LogWarning(
+                        $"WeaponController <{name}>: Tilt transform is not a child of the weapon. "
+                            + "Disabling tilt functionality."
+                    );
+                    _tiltTransform = null;
+                }
+            }
+
+            if (_useAnimator)
+            {
+                if (_animator == null)
+                {
+                    Debug.LogWarning(
+                        $"WeaponController <{name}>: Use Animator is enabled but no Animator component found. "
+                            + "Disabling animator usage."
+                    );
+                    _useAnimator = false;
+                }
             }
         }
 
